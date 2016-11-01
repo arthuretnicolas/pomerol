@@ -76,7 +76,7 @@
 	  _App2.default,
 	  null,
 	  _react2.default.createElement(_Main2.default, null)
-	), document.getElementById("index"));
+	), document.getElementById('index'));
 
 /***/ },
 /* 2 */
@@ -21378,7 +21378,7 @@
 /* 173 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -21409,15 +21409,15 @@
 	  }
 
 	  _createClass(App, [{
-	    key: "render",
+	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
-	        "div",
+	        'div',
 	        { style: { backgroundColor: 'pink' } },
 	        _react2.default.createElement(
-	          "div",
+	          'div',
 	          null,
-	          "Index"
+	          'Index'
 	        ),
 	        this.props.children
 	      );
@@ -21433,7 +21433,7 @@
 /* 174 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -21464,12 +21464,12 @@
 	  }
 
 	  _createClass(Main, [{
-	    key: "render",
+	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
-	        "div",
+	        'div',
 	        { style: { backgroundColor: 'yellow' } },
-	        "Main"
+	        'Main'
 	      );
 	    }
 	  }]);

@@ -7,4 +7,5 @@ import Main from './components/Main'
 ReactDOM.render(
   <App>
     <Main />
-  </App>, document.getElementById("index"))
+  </App>, document.getElementById('index')
+)
