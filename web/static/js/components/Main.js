@@ -1,6 +1,11 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
+import { connect } from 'react-redux'
 
-export default class Main extends Component {
+class Main extends Component {
+  static propTypes = {
+    routing: PropTypes.object.isRequired
+  }
+
   render () {
     return (
       <div style={{ backgroundColor: 'yellow' }}>
@@ -9,3 +14,9 @@ export default class Main extends Component {
     )
   }
 }
+
+const mapStateToProps = ({ routing }) => ({
+  routing
+})
+
+export default connect(mapStateToProps)(Main)
