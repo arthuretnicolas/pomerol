@@ -1,24 +1,16 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 import { Link } from 'react-router'
-import { connect } from 'react-redux'
 
-class Main extends Component {
-  static propTypes = {
-    routing: PropTypes.object.isRequired
-  }
-
+export default class Main extends Component {
   render () {
     return (
-      <div style={{ backgroundColor: 'yellow' }}>
-        Main
-        <Link to='/contacts'>Go to contacts</Link>
+      <div>
+        <div style={{ marginBottom: 15 }}>
+          <Link to='/contacts'>Go to contacts</Link>
+        </div>
+
+        <h1>Main</h1>
       </div>
     )
   }
 }
-
-const mapStateToProps = ({ routing }) => ({
-  routing
-})
-
-export default connect(mapStateToProps)(Main)
