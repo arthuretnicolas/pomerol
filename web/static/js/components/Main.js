@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import { Link } from 'react-router'
 import { connect } from 'react-redux'
 
 class Main extends Component {
@@ -10,6 +11,7 @@ class Main extends Component {
     return (
       <div style={{ backgroundColor: 'yellow' }}>
         Main
+        <Link to='/contacts'>Go to contacts</Link>
       </div>
     )
   }
