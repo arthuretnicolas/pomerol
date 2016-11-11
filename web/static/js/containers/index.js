@@ -12,15 +12,18 @@ export default class App extends Component {
     if (typeof window === 'undefined') {
       initialState = this.props.initial_state
       history = createMemoryHistory()
-      match({ routes, location: this.props.location, history }, (err, redirect, props) => { // eslint-disable-line
+      match({ routes, location: this.props.location, history }, (err, redirect, props) => {
         if (props) {
           router = (
             <RouterContext {...props} />
           )
         }
-        // Since it's a very basic app, we don't handle any errors, however in real app you will have do this.
-        // Please, refer to https://github.com/reactjs/react-router/blob/master/docs/guides/ServerRendering.md
-        // to find more relevant information.
+
+        if (err) {
+          // Since it's a very basic app, we don't handle any errors, however in real app you will have do this.
+          // Please, refer to https://github.com/reactjs/react-router/blob/master/docs/guides/ServerRendering.md
+          // to find more relevant information.
+        }
       })
     } else {
       initialState = window.__INITIAL_STATE__
