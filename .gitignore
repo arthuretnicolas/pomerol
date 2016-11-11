@@ -20,3 +20,5 @@ node_modules/
 priv/static/js/app.js
 
 priv/static/server/js/pomerol.js
+
+npm-debug.log
