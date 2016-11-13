@@ -8,7 +8,8 @@ import CounterActions from '../reducers/CounterRedux'
 type Props = {
   dispatch: () => any,
   increment: () => null,
-  counter: { value: number }
+  attemptIncrement: () => null,
+  counter: { value: number, attempting?: boolean }
 }
 
 class Main extends Component {
@@ -25,13 +26,20 @@ class Main extends Component {
       attemptIncrement
     } = this.props
 
+    const {
+      value,
+      attempting
+    } = counter
+
     return (
       <div>
         <div style={{ marginBottom: 15 }}>
           <Link to='/'>Go home</Link>
         </div>
 
-        <h1>Contacts: {counter.value}</h1>
+        <h1>
+          Contacts: {attempting ? '...' : value}
+        </h1>
 
         <div>
           <h2>Without delay</h2>
@@ -41,8 +49,8 @@ class Main extends Component {
 
         <div>
           <h2>With delay</h2>
-          <button onClick={() => attemptIncrement(1)}>+</button>
-          <button onClick={() => attemptIncrement(-1)}>-</button>
+          <button disabled={attempting} onClick={() => attemptIncrement(1)}>+</button>
+          <button disabled={attempting} onClick={() => attemptIncrement(-1)}>-</button>
         </div>
       </div>
     )

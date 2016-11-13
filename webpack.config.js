@@ -26,9 +26,8 @@ module.exports = {
     loaders: [{
       test: /\.js$/,
       exclude: /node_modules/,
-      loader: 'babel',
+      loader: 'babel-loader',
       query: {
-        plugins: ['transform-decorators-legacy', 'transform-flow-strip-types'],
         presets: ['react', 'es2015', 'stage-2']
       }
     },

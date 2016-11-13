@@ -37,7 +37,7 @@ export default class App extends Component {
     }
 
     const store = configureStore(initialState)
-    // store.runSaga(rootSaga)
+    store.runSaga(rootSaga)
 
     return (
       <Provider store={store}>
