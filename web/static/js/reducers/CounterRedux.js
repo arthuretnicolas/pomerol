@@ -7,7 +7,8 @@ import Immutable from 'seamless-immutable'
 
 const { Types, Creators } = createActions({
   increment: ['amount'],
-  attemptIncrement: ['amount']
+  attemptIncrement: ['amount'],
+  successIncrement: ['amount']
 })
 
 export const CounterTypes = Types
@@ -35,7 +36,8 @@ export const attemptIncrement = (state: Object, { amount }: Object) =>
 
 export const successIncrement = (state: Object, { amount }: Object) =>
   state.merge({
-    value: Math.max(state.value + amount, 0)
+    value: Math.max(state.value + amount, 0),
+    attempting: false
   })
 
 /* ------------- Hookup Reducers To Types ------------- */
