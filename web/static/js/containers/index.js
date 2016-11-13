@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Provider } from 'react-redux'
 import { Router, RouterContext, browserHistory, createMemoryHistory, match } from 'react-router'
+import rootSaga from '../sagas' // eslint-disable-line
 
 import configureStore from '../store'
 import routes from '../routes/'
@@ -36,6 +37,7 @@ export default class App extends Component {
     }
 
     const store = configureStore(initialState)
+    // store.runSaga(rootSaga)
 
     return (
       <Provider store={store}>

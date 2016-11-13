@@ -28,7 +28,7 @@ module.exports = {
       exclude: /node_modules/,
       loader: 'babel',
       query: {
-        plugins: ['transform-decorators-legacy'],
+        plugins: ['transform-decorators-legacy', 'transform-flow-strip-types'],
         presets: ['react', 'es2015', 'stage-2']
       }
     },

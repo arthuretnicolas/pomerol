@@ -1,6 +1,7 @@
 import { createStore, applyMiddleware, compose } from 'redux'
-import thunkMiddleware from 'redux-thunk'
+import createSagaMiddleware, { END } from 'redux-saga'
 import reducers from 'reducers'
+import createLogger from 'redux-logger'
 
 const isFrontend = typeof window === 'object'
 const isDev = process.env.NODE_ENV === 'development'
@@ -10,16 +11,16 @@ const devToolsExt =
     ? window.devToolsExtension()
     : f => f
 
-const middlewares = [thunkMiddleware]
-
-if (isDev && isFrontend) {
-  const createLogger = require('redux-logger')
-  const logger = createLogger()
-  middlewares.push(logger)
-}
-
 export default function configureStore (initialState) {
-  return createStore(
+  const sagaMiddleware = createSagaMiddleware()
+  const middlewares = [sagaMiddleware]
+
+  if (isDev && isFrontend) {
+    const logger = createLogger({ collapsed: true })
+    middlewares.push(logger)
+  }
+
+  const store = createStore(
     reducers,
     initialState,
     compose(
@@ -27,4 +28,9 @@ export default function configureStore (initialState) {
       devToolsExt
     )
   )
+
+  store.runSaga = sagaMiddleware.run
+  store.close = () => store.dispatch(END)
+
+  return store
 }
