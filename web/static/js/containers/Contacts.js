@@ -19,7 +19,11 @@ class Main extends Component {
   }
 
   render () {
-    const { counter, increment } = this.props
+    const {
+      counter,
+      increment,
+      attemptIncrement
+    } = this.props
 
     return (
       <div>
@@ -28,8 +32,18 @@ class Main extends Component {
         </div>
 
         <h1>Contacts: {counter.value}</h1>
-        <button onClick={() => increment(1)}>+</button>
-        <button onClick={() => increment(-1)}>-</button>
+
+        <div>
+          <h2>Without delay</h2>
+          <button onClick={() => increment(1)}>+</button>
+          <button onClick={() => increment(-1)}>-</button>
+        </div>
+
+        <div>
+          <h2>With delay</h2>
+          <button onClick={() => attemptIncrement(1)}>+</button>
+          <button onClick={() => attemptIncrement(-1)}>-</button>
+        </div>
       </div>
     )
   }
@@ -40,7 +54,8 @@ const mapStateToProps = ({ counter }) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  increment: amount => dispatch(CounterActions.counterIncrement(amount))
+  increment: amount => dispatch(CounterActions.increment(amount)),
+  attemptIncrement: amount => dispatch(CounterActions.attemptIncrement(amount))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Main)

@@ -6,7 +6,8 @@ import Immutable from 'seamless-immutable'
 /* ------------- Types and Action Creators ------------- */
 
 const { Types, Creators } = createActions({
-  counterIncrement: ['amount']
+  increment: ['amount'],
+  attemptIncrement: ['amount']
 })
 
 export const CounterTypes = Types
@@ -15,7 +16,8 @@ export default Creators
 /* ------------- Initial State ------------- */
 
 export const INITIAL_STATE = Immutable({
-  value: 0
+  value: 0,
+  attempting: false
 })
 
 /* ------------- Reducers ------------- */
@@ -26,8 +28,20 @@ export const increment = (state: Object, { amount }: Object) =>
     value: Math.max(state.value + amount, 0)
   })
 
+export const attemptIncrement = (state: Object, { amount }: Object) =>
+  state.merge({
+    attempting: true
+  })
+
+export const successIncrement = (state: Object, { amount }: Object) =>
+  state.merge({
+    value: Math.max(state.value + amount, 0)
+  })
+
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
-  [Types.COUNTER_INCREMENT]: increment
+  [Types.INCREMENT]: increment,
+  [Types.ATTEMPT_INCREMENT]: attemptIncrement,
+  [Types.SUCCESS_INCREMENT]: successIncrement
 })

@@ -8,5 +8,6 @@ export default (
   <Route path='/' component={AppContainer}>
     <IndexRoute component={Main} />
     <Route path='/contacts' component={Contacts} />
+    <Route path='*' component={() => <h1>Not found!</h1>} />
   </Route>
 )
