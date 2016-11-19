@@ -53,7 +53,9 @@ export default function configureStore (initialState: Object) {
   store.close = () => store.dispatch(END)
   const startup = () => store.dispatch(StartupActions.startup())
 
-  persistStore(store, config, startup)
+  if (isFrontend) {
+    persistStore(store, config, startup)
+  }
 
   return store
 }
