@@ -1,20 +1,30 @@
-import { takeLatest } from 'redux-saga' // eslint-disable-line
+import { takeLatest } from 'redux-saga'
+import API from '../Services/Api'
+import FixtureAPI from '../Services/FixtureApi'
+import DebugSettings from '../Config/DebugSettings'
 
 /* ------------- Types ------------- */
 
-import { CounterTypes } from '../Reducers/CounterRedux' // eslint-disable-line
+import { StartupTypes } from '../Reducers/StartupRedux'
+import { CounterTypes } from '../Reducers/CounterRedux'
+import { GithubTypes } from '../Reducers/GithubRedux'
 
 /* ------------- Sagas ------------- */
 
+import { startup } from './StartupSaga'
 import { incrementWithDelay } from './CounterSaga'
+import { getUser } from './GithubSaga'
 
 /* ------------- API ------------- */
-// TODO
+
+const api = DebugSettings.useFixtures ? FixtureAPI : API.create()
 
 /* ------------- Connect Types To Sagas ------------- */
-// TODO understand why the 💣 I cannot export a generator (* root)
+
 export default function * root () {
   yield [
-    takeLatest(CounterTypes.ATTEMPT_INCREMENT, incrementWithDelay)
+    takeLatest(StartupTypes.STARTUP, startup),
+    takeLatest(CounterTypes.ATTEMPT_INCREMENT, incrementWithDelay),
+    takeLatest(GithubTypes.FETCH_USER_REQUEST, getUser, api)
   ]
 }

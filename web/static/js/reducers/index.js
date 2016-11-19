@@ -1,7 +1,6 @@
 import { combineReducers } from 'redux'
-import { routerReducer } from 'react-router-redux'
 
 export default combineReducers({
-  routing: routerReducer,
-  counter: require('./CounterRedux').reducer
+  counter: require('./CounterRedux').reducer,
+  github: require('./GithubRedux').reducer
 })

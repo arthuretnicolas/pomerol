@@ -5,7 +5,9 @@
     "fixcode": "standard --fix"
   },
   "dependencies": {
+    "apisauce": "^0.6.0",
     "flow-bin": "^0.34.0",
+    "json-loader": "^0.5.4",
     "phoenix": "file:deps/phoenix",
     "ramda": "^0.22.1",
     "react": "^15.3.2",

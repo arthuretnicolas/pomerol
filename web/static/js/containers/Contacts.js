@@ -1,9 +1,9 @@
 // @flow
 
 import React, { Component } from 'react'
-import { Link } from 'react-router'
 import { connect } from 'react-redux'
 import CounterActions from '../Reducers/CounterRedux'
+import NavigationBar from '../Components/NavigationBar'
 
 type Props = {
   dispatch: () => any,
@@ -12,7 +12,7 @@ type Props = {
   counter: { value: number, attempting?: boolean }
 }
 
-class Main extends Component {
+class Contacts extends Component {
   props: Props
 
   static defaultProps = {
@@ -33,9 +33,7 @@ class Main extends Component {
 
     return (
       <div>
-        <div style={{ marginBottom: 15 }}>
-          <Link to='/'>Go home</Link>
-        </div>
+        <NavigationBar />
 
         <h1>
           Contacts: {attempting ? '...' : value}
@@ -66,4 +64,4 @@ const mapDispatchToProps = dispatch => ({
   attemptIncrement: amount => dispatch(CounterActions.attemptIncrement(amount))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Main)
+export default connect(mapStateToProps, mapDispatchToProps)(Contacts)
