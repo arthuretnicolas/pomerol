@@ -2,7 +2,7 @@ import { takeLatest } from 'redux-saga' // eslint-disable-line
 
 /* ------------- Types ------------- */
 
-import { CounterTypes } from '../reducers/CounterRedux' // eslint-disable-line
+import { CounterTypes } from '../Reducers/CounterRedux' // eslint-disable-line
 
 /* ------------- Sagas ------------- */
 

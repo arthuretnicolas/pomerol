@@ -1,3 +1,5 @@
+// @flow
+
 import React, { Component } from 'react'
 import { Provider } from 'react-redux'
 import { Router, RouterContext, browserHistory, createMemoryHistory, match } from 'react-router'

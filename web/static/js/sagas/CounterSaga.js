@@ -1,6 +1,6 @@
 import { delay } from 'redux-saga'
 import { put } from 'redux-saga/effects'
-import CounterActions from '../reducers/CounterRedux'
+import CounterActions from '../Reducers/CounterRedux'
 
 export function * incrementWithDelay (action) {
   const { amount } = action

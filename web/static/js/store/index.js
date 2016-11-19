@@ -1,8 +1,12 @@
+// @flow
+
 import { createStore, applyMiddleware, compose } from 'redux'
 import createSagaMiddleware, { END } from 'redux-saga'
 import { persistStore, autoRehydrate } from 'redux-persist'
-import reducers from 'reducers'
+import reducers from '../Reducers'
 import createLogger from 'redux-logger'
+import StartupActions from '../Reducers/StartupRedux'
+import ReduxPersist from '../Config/ReduxPersist'
 
 const isFrontend = typeof window === 'object'
 const isDev = process.env.NODE_ENV === 'development'
@@ -14,8 +18,9 @@ const devToolsExt =
 
 const middlewares = []
 const enhancers = []
+const config = ReduxPersist.storeConfig
 
-export default function configureStore (initialState) {
+export default function configureStore (initialState: Object) {
   /* ------------- Saga Middleware ------------- */
 
   const sagaMiddleware = createSagaMiddleware()
@@ -46,8 +51,9 @@ export default function configureStore (initialState) {
 
   store.runSaga = sagaMiddleware.run
   store.close = () => store.dispatch(END)
+  const startup = () => store.dispatch(StartupActions.startup())
 
-  persistStore(store)
+  persistStore(store, config, startup)
 
   return store
 }

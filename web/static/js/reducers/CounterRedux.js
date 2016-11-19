@@ -24,11 +24,10 @@ export const INITIAL_STATE = Immutable({
 /* ------------- Reducers ------------- */
 
 // request the temperature for a city
-export const increment = (state: Object, { amount }: Object) => {
-  return state.merge({
+export const increment = (state: Object, { amount }: Object) =>
+  state.merge({
     value: Math.max(state.value + amount, 0)
   })
-}
 
 export const attemptIncrement = (state: Object, { amount }: Object) =>
   state.merge({

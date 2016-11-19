@@ -7,6 +7,7 @@
   "dependencies": {
     "flow-bin": "^0.34.0",
     "phoenix": "file:deps/phoenix",
+    "ramda": "^0.22.1",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
     "react-redux": "^4.4.5",

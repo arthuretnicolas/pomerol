@@ -3,7 +3,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router'
 import { connect } from 'react-redux'
-import CounterActions from '../reducers/CounterRedux'
+import CounterActions from '../Reducers/CounterRedux'
 
 type Props = {
   dispatch: () => any,
