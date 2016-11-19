@@ -1,8 +1,10 @@
+// @flow
+
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import App from './containers/index'
-import Main from './components/Main'
+import App from './Containers/index'
+import Main from './Components/Main'
 
 ReactDOM.render(
   <App>

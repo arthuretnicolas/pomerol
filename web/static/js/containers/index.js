@@ -3,10 +3,10 @@
 import React, { Component } from 'react'
 import { Provider } from 'react-redux'
 import { Router, RouterContext, browserHistory, createMemoryHistory, match } from 'react-router'
-import rootSaga from '../sagas' // eslint-disable-line
+import rootSaga from '../Sagas'
 
-import configureStore from '../store'
-import routes from '../routes/'
+import configureStore from '../Store'
+import routes from '../Routes'
 
 export default class App extends Component {
   render () {

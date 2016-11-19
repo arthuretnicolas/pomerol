@@ -1,8 +1,10 @@
+// @flow
+
 import React from 'react'
 import { Route, IndexRoute } from 'react-router'
-import AppContainer from 'containers'
-import Main from 'components/Main'
-import Contacts from 'containers/Contacts'
+import AppContainer from '../Containers'
+import Main from '../Components/Main'
+import Contacts from '../Containers/Contacts'
 
 export default (
   <Route path='/' component={AppContainer}>

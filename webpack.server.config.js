@@ -1,6 +1,6 @@
 module.exports = {
   entry: {
-    component: ['./web/static/js/containers/index.js']
+    component: ['./web/static/js/Containers/index.js']
   },
   output: {
     path: './priv/static/server/js',
