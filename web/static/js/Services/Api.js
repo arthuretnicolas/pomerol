@@ -2,6 +2,8 @@
 
 import apisauce from 'apisauce'
 
+const isDev = process.env.NODE_ENV === 'development'
+
 const create = (baseURL: string = 'https://api.github.com/') => {
   const api = apisauce.create({
     baseURL,
@@ -14,10 +16,12 @@ const create = (baseURL: string = 'https://api.github.com/') => {
   //   request.params['APPID'] = '0e44183e8d1018fc92eb3307d885379c'
   // })
 
-  const getUser = (name: string) => api.post('users', { name })
+  const getUser = (name: string) => api.get(`users/${name}`)
 
-  const naviMonitor = response => console.log('hey!  listen! ', response)
-  api.addMonitor(naviMonitor)
+  const naviMonitor = response => console.log('%cAPI response', 'background-color: purple; color: white; font-weight: 500; padding: 5px', response)
+  if (isDev) {
+    api.addMonitor(naviMonitor)
+  }
 
   return {
     getUser

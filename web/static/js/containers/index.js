@@ -10,7 +10,7 @@ import routes from '../Routes'
 
 export default class App extends Component {
   render () {
-    let initialState, history, router
+    let initialState, history, router, store
 
     if (typeof window === 'undefined') {
       initialState = this.props.initial_state
@@ -23,11 +23,22 @@ export default class App extends Component {
         }
 
         if (err) {
+          console.error(err)
           // Since it's a very basic app, we don't handle any errors, however in real app you will have do this.
           // Please, refer to https://github.com/reactjs/react-router/blob/master/docs/guides/ServerRendering.md
           // to find more relevant information.
         }
       })
+
+      store = configureStore(initialState)
+
+      store.runSaga(rootSaga).done.then(() => (
+        <Provider store={store}>
+          {router}
+        </Provider>
+      ))
+
+      return null
     } else {
       initialState = window.__INITIAL_STATE__
       history = browserHistory
@@ -36,16 +47,16 @@ export default class App extends Component {
           {routes}
         </Router>
       )
+
+      store = configureStore(initialState)
+      store.runSaga(rootSaga)
+
+      return (
+        <Provider store={store}>
+          {router}
+        </Provider>
+      )
     }
-
-    const store = configureStore(initialState)
-    store.runSaga(rootSaga)
-
-    return (
-      <Provider store={store}>
-        {router}
-      </Provider>
-    )
   }
 }
 

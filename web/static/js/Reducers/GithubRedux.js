@@ -25,11 +25,14 @@ export const INITIAL_STATE = Immutable({
 /* ------------- Reducers ------------- */
 
 export const userRequest = (state: Object, { name }: Object) =>
-  state.merge({ fetching: true, name })
+  state.merge({ fetching: true })
 
-// TODO: merge correctly
-export const userSuccess = (state: Object, action: Object) =>
-  state.merge({ fetching: false, error: null })
+export const userSuccess = (state: Object, { user }: Object) =>
+  state.merge({
+    fetching: false,
+    error: null,
+    users: state.users.set(user.id, user)
+  })
 
 export const userFailure = (state: Object) =>
   state.merge({ fetching: false, error: true })

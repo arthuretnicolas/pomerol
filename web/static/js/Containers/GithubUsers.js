@@ -4,11 +4,12 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import GithubActions from '../Reducers/GithubRedux'
 import NavigationBar from '../Components/NavigationBar'
+import GithubUser from '../Components/GithubUser'
 
 type Props = {
   dispatch: () => any,
   fetchUser: () => null,
-  githubUsers: Map<Object>
+  githubUsers: Object
 }
 
 class GithubUsers extends Component {
@@ -27,7 +28,8 @@ class GithubUsers extends Component {
     this.setState({ name })
   }
 
-  _onSubmit = () => {
+  _onSubmit = event => {
+    event.preventDefault()
     const { fetchUser } = this.props
     const { name } = this.state
 
@@ -36,7 +38,7 @@ class GithubUsers extends Component {
   }
 
   render () {
-    // const { githubUsers } = this.props
+    const { githubUsers } = this.props
     const { name } = this.state
 
     return (
@@ -58,6 +60,24 @@ class GithubUsers extends Component {
             Fetch user
           </button>
         </form>
+
+        <div style={{ marginTop: 30 }}>
+          {
+            Object.keys(githubUsers).map((key, index) => {
+              const user = githubUsers[key]
+              const year = (new Date(user.created_at)).getFullYear()
+
+              return (
+                <GithubUser
+                  key={index}
+                  name={user.name}
+                  url={user.avatar_url}
+                  year={year}
+                />
+              )
+            })
+          }
+        </div>
       </div>
     )
   }
