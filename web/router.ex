@@ -13,14 +13,20 @@ defmodule Pomerol.Router do
     plug :accepts, ["json"]
   end
 
+  # Other scopes may use custom stacks.
+  scope "/api", Pomerol do
+    pipe_through :api
+    scope "/v1", V1, as: :v1 do
+      post "/signup", UserController, :create
+      post "/signin", SessionController, :create
+      post "/session/refresh", SessionController, :refresh
+    end
+  end
+
   scope "/", Pomerol do
     pipe_through :browser # Use the default browser stack
 
     get "/*path", PageController, :index
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", Pomerol do
-  #   pipe_through :api
-  # end
 end
