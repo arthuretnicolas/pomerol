@@ -19,7 +19,8 @@ export default Creators
 export const INITIAL_STATE = Immutable({
   fetching: null,
   error: null,
-  users: new Map()
+  users: new Map(),
+  ids: []
 })
 
 /* ------------- Reducers ------------- */
@@ -31,7 +32,8 @@ export const userSuccess = (state: Object, { user }: Object) =>
   state.merge({
     fetching: false,
     error: null,
-    users: state.users.set(user.id, user)
+    users: state.users.set(user.id, user),
+    ids: state.ids.filter(id => id !== user.id).concat(user.id)
   })
 
 export const userFailure = (state: Object) =>

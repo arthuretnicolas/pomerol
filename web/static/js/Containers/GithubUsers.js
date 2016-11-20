@@ -7,9 +7,8 @@ import NavigationBar from '../Components/NavigationBar'
 import GithubUser from '../Components/GithubUser'
 
 type Props = {
-  dispatch: () => any,
   fetchUser: () => null,
-  githubUsers: Object
+  github: Object
 }
 
 class GithubUsers extends Component {
@@ -38,7 +37,8 @@ class GithubUsers extends Component {
   }
 
   render () {
-    const { githubUsers } = this.props
+    const { github } = this.props
+    const { users, ids } = github
     const { name } = this.state
 
     return (
@@ -63,13 +63,14 @@ class GithubUsers extends Component {
 
         <div style={{ marginTop: 30 }}>
           {
-            Object.keys(githubUsers).map((key, index) => {
-              const user = githubUsers[key]
+            // slice prevents reverse from mutating ids
+            ids.asMutable().slice().reverse().map((id: string) => {
+              const user = users[id]
               const year = (new Date(user.created_at)).getFullYear()
 
               return (
                 <GithubUser
-                  key={index}
+                  key={id}
                   name={user.name}
                   url={user.avatar_url}
                   year={year}
@@ -84,7 +85,7 @@ class GithubUsers extends Component {
 }
 
 const mapStateToProps = ({ github }) => ({
-  githubUsers: github.users
+  github
 })
 
 const mapDispatchToProps = dispatch => ({
