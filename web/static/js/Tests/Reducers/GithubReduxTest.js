@@ -19,6 +19,7 @@ test('fetchUserSuccess', t => {
 
   const state1 = reducer(INITIAL_STATE, Actions.fetchUserSuccess(user1))
   const state2 = reducer(state1, Actions.fetchUserSuccess(user2))
+  const state3 = reducer(state2, Actions.fetchUserSuccess(user1))
 
   t.deepEqual(state1, {
     fetching: false,
@@ -37,6 +38,17 @@ test('fetchUserSuccess', t => {
       [ user2.id ]: user2
     },
     ids: [ user1.id, user2.id ]
+  })
+
+  // check that the last id matches with the last object added
+  t.deepEqual(state3, {
+    fetching: false,
+    error: null,
+    users: {
+      [ user1.id ]: user1,
+      [ user2.id ]: user2
+    },
+    ids: [ user2.id, user1.id ]
   })
 })
 
