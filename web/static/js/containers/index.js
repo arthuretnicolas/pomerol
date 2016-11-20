@@ -10,7 +10,7 @@ import routes from '../Routes'
 
 export default class App extends Component {
   render () {
-    let initialState, history, router, store
+    let initialState, history, router
 
     if (typeof window === 'undefined') {
       initialState = this.props.initial_state
@@ -29,16 +29,6 @@ export default class App extends Component {
           // to find more relevant information.
         }
       })
-
-      store = configureStore(initialState)
-
-      store.runSaga(rootSaga).done.then(() => (
-        <Provider store={store}>
-          {router}
-        </Provider>
-      ))
-
-      return null
     } else {
       initialState = window.__INITIAL_STATE__
       history = browserHistory
@@ -47,16 +37,16 @@ export default class App extends Component {
           {routes}
         </Router>
       )
-
-      store = configureStore(initialState)
-      store.runSaga(rootSaga)
-
-      return (
-        <Provider store={store}>
-          {router}
-        </Provider>
-      )
     }
+
+    const store = configureStore(initialState)
+    store.runSaga(rootSaga)
+
+    return (
+      <Provider store={store}>
+        {router}
+      </Provider>
+    )
   }
 }
 
