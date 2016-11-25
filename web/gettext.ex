@@ -21,4 +21,14 @@ defmodule Pomerol.Gettext do
   See the [Gettext Docs](https://hexdocs.pm/gettext) for detailed usage.
   """
   use Gettext, otp_app: :pomerol
+
+  def supported_locales do
+    known = Gettext.known_locales(Pomerol.Gettext)
+    allowed = config[:locales]
+    Set.intersection(Enum.into(known, HashSet.new), Enum.into(allowed, HashSet.new))
+    |> Set.to_list
+    # known -- (known -- allowed)
+  end
+
+  def config, do: Application.get_env(:pomerol, __MODULE__)
 end

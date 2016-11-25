@@ -17,3 +17,6 @@ config :pomerol, Pomerol.Repo,
   database: "pomerol_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
+
+config :pomerol, Pomerol.Mailer,
+  adapter: Bamboo.TestAdapter

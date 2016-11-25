@@ -19,10 +19,21 @@ defmodule Pomerol.Web do
   def model do
     quote do
       use Ecto.Schema
+      use Timex.Ecto.Timestamps
 
       import Ecto
       import Ecto.Changeset
       import Ecto.Query
+    end
+  end
+
+  def service do
+    quote do
+      import Ecto
+      import Ecto.Query, only: [from: 1, from: 2]
+      alias Ecto.Changeset
+      alias Ecto.Multi
+      alias MediaSample.Repo
     end
   end
 

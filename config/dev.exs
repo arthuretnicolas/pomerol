@@ -53,3 +53,6 @@ config :pomerol, Pomerol.Repo,
   database: "pomerol_dev",
   hostname: "localhost",
   pool_size: 10
+
+config :pomerol, Pomerol.Mailer,
+  adapter: Bamboo.LocalAdapter

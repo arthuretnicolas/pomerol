@@ -17,6 +17,10 @@ config :pomerol, Pomerol.Endpoint,
   pubsub: [name: Pomerol.PubSub,
            adapter: Phoenix.PubSub.PG2]
 
+config :pomerol, Pomerol.Gettext,
+  locales: ~w(fr en),
+  default_locale: "en"
+
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",

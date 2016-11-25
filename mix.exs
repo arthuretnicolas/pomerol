@@ -19,7 +19,7 @@ defmodule Pomerol.Mixfile do
   def application do
     [mod: {Pomerol, []},
      applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :comeonin, :gettext,
-                    :phoenix_ecto, :postgrex, :std_json_io]]
+                    :phoenix_ecto, :postgrex, :std_json_io, :bamboo, :timex, :timex_ecto]]
   end
 
   # Specifies which paths to compile per environment.
@@ -40,7 +40,10 @@ defmodule Pomerol.Mixfile do
      {:cowboy, "~> 1.0"},
      {:std_json_io, "~> 0.1", override: true},
      {:comeonin, "~> 2.5"},
-     {:guardian, "~> 0.13.0"}]
+     {:guardian, "~> 0.13.0"},
+     {:bamboo, "~> 0.7"},
+     {:timex, "~> 3.0"},
+     {:timex_ecto, "~> 3.0"}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.
