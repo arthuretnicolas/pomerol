@@ -1,5 +1,10 @@
-/*
-.example {
-  color: red;
-}
-*/
+// normalize
+@import "./normalize";
+
+// variables
+@import "./variables.scss";
+
+// Landing
+@import "../js/Components/Landing/Styles/Landing.scss";
+@import "../js/Components/Landing/Styles/Hero.scss";
+@import "../js/Components/Landing/Styles/Navbar.scss";

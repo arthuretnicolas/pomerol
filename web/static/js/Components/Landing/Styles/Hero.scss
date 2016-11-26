@@ -1,0 +1,32 @@
+.Landing-Hero {
+  min-height: 90vh;
+  display: flex;
+  flex-direction: column;
+
+  .masthead {
+    padding: $base-padding;
+    flex-grow: 1;
+    background-image: url('https://d13yacurqjgara.cloudfront.net/users/870290/screenshots/3062845/untitled-1_1x.png');
+    background-repeat: no-repeat;
+    background-position: 150% 50%;
+    background-size: contain;
+  }
+
+  .title {
+    max-width: 500px;
+    font-size: 46px;
+    font-weight: 700;
+  }
+
+  .value-proposition {
+    max-width: 350px;
+    line-height: 1.5;
+  }
+
+  @media (min-width: $break-point-desktop) {
+    .masthead {
+      width: $break-point-desktop;
+      margin: 0 auto;
+    }
+  }
+}

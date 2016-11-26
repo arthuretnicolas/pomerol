@@ -1,0 +1,9 @@
+.Landing-Navbar {
+  display: flex;
+  justify-content: flex-end;
+  padding: $base-padding $double-padding;
+
+  .signup {
+    margin-right: $base-padding;
+  }
+}
