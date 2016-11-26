@@ -3,7 +3,7 @@ defmodule Pomerol.User do
   import Pomerol.ValidationHelpers
   import Comeonin.Bcrypt, only: [hashpwsalt: 1]
 
-  @derive {Poison.Encoder, only: [:id, :first_name, :last_name, :email]}
+  @derive {Poison.Encoder, only: [:id, :first_name, :last_name, :email, :locale]}
 
   schema "users" do
     field :first_name, :string
@@ -11,16 +11,23 @@ defmodule Pomerol.User do
     field :email, :string
     field :locale, :string
     field :password, :string, virtual: true
+    field :organization_name, :string, virtual: true
     field :encrypted_password, :string
 
     field :password_reset_token, :string
     field :password_reset_timestamp, Timex.Ecto.DateTime
 
+    has_many :owned_organizations, Pomerol.Organization
+    has_many :user_organizations, Pomerol.UserOrganization
+    has_many :organizations, through: [:user_organizations, :organization]
+
+    belongs_to :country, Pomerol.Country
+
     timestamps
   end
 
-  @required_fields ~w(first_name last_name email password locale)
-  @optional_fields ~w(encrypted_password)
+  @required_fields ~w(first_name last_name email password organization_name country_id locale)a
+  @optional_fields ~w(encrypted_password)a
 
   @doc """
   Builds a changeset for registering the user.
@@ -28,6 +35,8 @@ defmodule Pomerol.User do
   def signup_changeset(user, params \\ %{}) do
     user
     |> cast(params, @required_fields, @optional_fields)
+    |> foreign_key_constraint(:country_id)
+    |> cast_assoc(:country, user.country_id)
     |> update_change(:email, &String.downcase/1)
     |> validate_email_format(:email)
     |> unique_constraint(:email, message: "Email already taken")

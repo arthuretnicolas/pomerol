@@ -19,7 +19,7 @@ defmodule Pomerol.Mixfile do
   def application do
     [mod: {Pomerol, []},
      applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :comeonin, :gettext,
-                    :phoenix_ecto, :postgrex, :std_json_io, :bamboo, :timex, :timex_ecto]]
+                    :phoenix_ecto, :postgrex, :std_json_io, :bamboo, :timex, :timex_ecto, :translator]]
   end
 
   # Specifies which paths to compile per environment.
@@ -43,7 +43,8 @@ defmodule Pomerol.Mixfile do
      {:guardian, "~> 0.13.0"},
      {:bamboo, "~> 0.7"},
      {:timex, "~> 3.0"},
-     {:timex_ecto, "~> 3.0"}]
+     {:timex_ecto, "~> 3.0"},
+     {:translator, github: "kenta-aktsk/translator"}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.

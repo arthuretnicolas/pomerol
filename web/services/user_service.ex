@@ -1,12 +1,24 @@
 defmodule Pomerol.UserService do
   use Pomerol.Web, :service
 
-  alias Pomerol.{Repo, User, Mailer, Email}
+  alias Pomerol.{Repo, User, Organization, UserOrganization, Mailer, Email}
 
   def insert(conn, changeset, params, locale) do
     Multi.new
     |> Multi.insert(:user, changeset)
+    |> Multi.run(:insert_organization, &(insert_organization(params["organization_name"], &1[:user])))
     |> Multi.run(:send_welcome_email, &(send_welcome_email(conn, params, &1[:user])))
+  end
+
+  def insert_organization(organization_name, user) do
+    organization_changeset = %Pomerol.Organization{name: organization_name, user_id: user.id}
+    organization = Repo.insert!(organization_changeset)
+
+    organization
+      |> build_assoc(:user_organizations)
+      |> UserOrganization.changeset(%{user_id: user.id})
+      |> Repo.insert!
+    {:ok, organization}
   end
 
   def password_reset_request(conn, email) do

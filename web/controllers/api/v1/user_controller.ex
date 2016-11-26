@@ -4,7 +4,7 @@ defmodule Pomerol.V1.UserController  do
 
   alias Pomerol.{UserService, Repo, User}
 
-  def create(conn, params = %{"email" => _, "password" => _, "first_name" => _, "last_name" => _}, locale) do
+  def create(conn, params = %{"email" => _, "password" => _, "first_name" => _, "last_name" => _, "organization_name" => _, "country_id" => _}, locale) do
     params =
       params
       |> Map.put("locale", locale)

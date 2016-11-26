@@ -9,3 +9,12 @@ defmodule Pomerol.GuardianSerializer do
   def from_token("User:" <> id), do: { :ok, Repo.get(User, String.to_integer(id)) }
   def from_token(_), do: { :error, "Unknown resource type" }
 end
+
+defmodule Pomerol.GuardianErrorHandler do
+  use Pomerol.Web, :controller
+  def unauthenticated(conn, _params) do
+    conn
+    |> put_status(:unauthorized)
+    |> render(Pomerol.SessionView, "401.json", message: "unauthenticated")
+  end
+end

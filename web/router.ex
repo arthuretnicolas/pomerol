@@ -30,6 +30,9 @@ defmodule Pomerol.Router do
       post "/session/refresh", SessionController, :refresh
       post "/password/request", UserController, :password_reset_request, as: :reset
       post "/password/reset", UserController, :password_reset, as: :reset
+
+      resources "/organizations", OrganizationController, only: [:index]
+      resources "/countries", CountryController, only: [:index]
     end
   end
 
