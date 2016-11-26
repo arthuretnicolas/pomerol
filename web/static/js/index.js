@@ -4,10 +4,10 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 import App from './Containers/index'
-import Main from './Components/Main'
+import Landing from './Components/Landing/Landing'
 
 ReactDOM.render(
   <App>
-    <Main />
+    <Landing />
   </App>, document.getElementById('index')
 )
