@@ -17,9 +17,8 @@ defmodule Pomerol.User do
     field :password_reset_token, :string
     field :password_reset_timestamp, Timex.Ecto.DateTime
 
-    has_many :owned_organizations, Pomerol.Organization
-    has_many :user_organizations, Pomerol.UserOrganization
-    has_many :organizations, through: [:user_organizations, :organization]
+    has_many :organization_memberships, Pomerol.OrganizationMembership, foreign_key: :member_id
+    has_many :organizations, through: [:organization_memberships, :organization]
 
     belongs_to :country, Pomerol.Country
 

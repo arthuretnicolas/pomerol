@@ -7,7 +7,7 @@ defmodule Pomerol.Repo.Migrations.AddOrganizationMembership do
       add :organization_id, references(:organizations, on_delete: :nothing), null: false
       add :member_id, references(:users, on_delete: :nothing), null: false
 
-      timestamps()
+      timestamps
     end
 
     create index :organization_memberships, [:member_id, :organization_id], unique: true

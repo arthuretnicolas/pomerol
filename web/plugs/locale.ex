@@ -10,7 +10,7 @@ defmodule Pomerol.Plug.Locale do
   defp handle_locale(conn, %Pomerol.User{locale: nil}), do: handle_locale(conn, nil)
 
   defp handle_locale(conn, %Pomerol.User{locale: loc}) do
-    assign_locale(loc, conn)
+    assign_locale(conn, loc)
   end
 
   defp handle_locale(conn, nil) do

@@ -1,16 +1,16 @@
 defmodule Pomerol.OrganizationView do
   use Pomerol.Web, :view
-  # alias Pomerol.Organization
 
-  def render("index.json", %{owned_organizations: owned_organizations, invited_organizations: invited_organizations}) do
-    %{owned_organizations: owned_organizations, invited_organizations: invited_organizations}
+  def render("index.json", %{organizations: organizations}) do
+    %{
+      organizations: render_many(organizations, __MODULE__, "show.json")
+    }
   end
 
   def render("show.json", %{organization: organization}) do
     %{
       id: organization.id,
-      name: organization.name,
-      user_id: organization.user_id
+      name: organization.name
     }
   end
 

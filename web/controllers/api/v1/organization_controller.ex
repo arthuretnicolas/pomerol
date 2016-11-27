@@ -1,25 +1,17 @@
 defmodule Pomerol.V1.OrganizationController do
   use Pomerol.Web, :controller
-
-  plug Guardian.Plug.EnsureAuthenticated, [handler: Pomerol.GuardianErrorHandler] when action in [:index]
-  alias Pomerol.{Repo, Organization}
+  alias Pomerol.{Repo, Organization, OrganizationMembership}
 
   def index(conn, _params) do
-    current_user = Guardian.Plug.current_resource(conn)
+    current_user = conn.assigns |> Map.get(:current_user)
 
-    owned_organizations = current_user
-      |> assoc(:owned_organizations)
-      |> Organization.preload_all
-      |> Repo.all
-
-    invited_organizations = current_user
+    organizations = current_user
       |> assoc(:organizations)
-      |> Organization.not_owned_by(current_user.id)
       |> Organization.preload_all
       |> Repo.all
 
     conn
-    |> render(Pomerol.OrganizationView, "index.json", owned_organizations: owned_organizations, invited_organizations: invited_organizations)
+    |> render(Pomerol.OrganizationView, "index.json", organizations: organizations)
   end
 
 end

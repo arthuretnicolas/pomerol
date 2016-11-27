@@ -13,27 +13,39 @@ defmodule Pomerol.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
-    plug Plug.PutAPIHeaders
     plug Plug.Locale
   end
 
-  pipeline :api_auth do
+  pipeline :bearer_auth do
     plug Guardian.Plug.VerifyHeader, realm: "Bearer"
     plug Guardian.Plug.LoadResource
   end
 
+  pipeline :ensure_auth do
+    plug Guardian.Plug.EnsureAuthenticated
+  end
+
+  pipeline :current_user do
+    plug Pomerol.Plug.CurrentUser
+  end
+
   scope "/api", Pomerol do
-    pipe_through [:api, :api_auth]
+
+    pipe_through [:api, :bearer_auth, :current_user]
     scope "/v1", V1, as: :v1 do
       post "/signup", UserController, :create
       post "/signin", SessionController, :create
-      post "/session/refresh", SessionController, :refresh
       post "/password/request", UserController, :password_reset_request, as: :reset
       post "/password/reset", UserController, :password_reset, as: :reset
-
-      resources "/organizations", OrganizationController, only: [:index]
       resources "/countries", CountryController, only: [:index]
     end
+
+    pipe_through [:api, :bearer_auth, :ensure_auth]
+    scope "/v1", V1, as: :v1 do
+      post "/session/refresh", SessionController, :refresh
+      resources "/organizations", OrganizationController, only: [:index]
+    end
+
   end
 
   scope "/", Pomerol do
