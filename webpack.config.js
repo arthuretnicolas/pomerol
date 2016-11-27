@@ -2,6 +2,7 @@ const env = process.env.MIX_ENV === 'prod' ? 'production' : 'development'
 const Webpack = require('webpack')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
+const Autoprefixer = require('autoprefixer')
 
 const plugins = {
   production: [
@@ -33,7 +34,7 @@ module.exports = {
     },
     {
       test: /\.scss$/,
-      loaders: ['style', 'css', 'sass']
+      loader: ExtractTextPlugin.extract('style', 'css?localIdentName=[hash:base64]!sass')
     },
     {
       test: /\.png$/,
@@ -79,6 +80,11 @@ module.exports = {
       ].join('&')
     }]
   },
+  postcss: [
+    Autoprefixer({
+      browsers: ['last 2 versions']
+    })
+  ],
   resolve: {
     extensions: ['', '.js', '.scss', '.css'],
     modulesDirectories: ['node_modules', __dirname + '/web/static/js'], // eslint-disable-line
