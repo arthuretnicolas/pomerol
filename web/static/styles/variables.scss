@@ -13,7 +13,11 @@ $color-placeholder: lighten($color-primary, 42%);
 $color-danger: #F40033;
 $background-dark: darken($color-primary, 25%);
 
-$break-point-desktop: 1000px;
+$break-point-desktop: 1120px;
+$break-point-tablet: 840px;
+$break-point-phone: 520px;
+
+$max-width-desktop: 1008px;
 
 $border-radius-button: 2px;
 

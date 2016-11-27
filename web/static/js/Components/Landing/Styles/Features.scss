@@ -3,6 +3,7 @@
   flex-direction: column;
   justify-content: space-between;
   padding: $base-padding $double-padding;
+  align-self: center;
 
   .feature {
     padding-bottom: $double-padding;
@@ -20,12 +21,17 @@
   }
 
   @media (min-width: $break-point-desktop) {
-    width: $break-point-desktop;
-    margin: 0 auto;
+    width: $max-width-desktop;
+    display: flex;
+    align-self: center;
+  }
+
+  @media (min-width: $break-point-tablet) {
+    align-self: center;
     flex-direction: row;
 
     .feature {
-      padding-right: $base-padding;
+      padding-right: $double-padding;
     }
   }
 }

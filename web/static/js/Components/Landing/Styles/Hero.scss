@@ -3,13 +3,16 @@
   display: flex;
   flex-direction: column;
 
+  background-image: url('https://d13yacurqjgara.cloudfront.net/users/870290/screenshots/3062845/untitled-1_1x.png');
+  background-repeat: no-repeat;
+  background-position: 30vw 70%;
+  background-size: contain;
+
   .masthead {
-    padding: $base-padding;
+    display: flex;
+    flex-direction: column;
+    padding: $base-padding $double-padding;
     flex-grow: 1;
-    background-image: url('https://d13yacurqjgara.cloudfront.net/users/870290/screenshots/3062845/untitled-1_1x.png');
-    background-repeat: no-repeat;
-    background-position: 20vw 50%;
-    background-size: contain;
   }
 
   .title {
@@ -28,8 +31,8 @@
 
   @media (min-width: $break-point-desktop) {
     .masthead {
-      width: $break-point-desktop;
-      margin: 0 auto;
+      width: $max-width-desktop;
+      align-self: center;
     }
   }
 }

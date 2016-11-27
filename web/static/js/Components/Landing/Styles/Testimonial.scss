@@ -1,4 +1,6 @@
 .Landing-Testimonial {
+  display: flex;
+  justify-content: center;
   padding: $double-padding;
   padding-top: $triple-padding;
   background-color: $color-frost;
@@ -26,19 +28,28 @@
   .description {
     line-height: $line-height-spaced;
     padding-bottom: $base-padding;
+    text-align: center;
   }
 
   @media (min-width: $break-point-desktop) {
     padding: 2 * $double-padding $double-padding;
 
     .container {
-      width: $break-point-desktop;
-      margin: 0 auto;
+      width: $max-width-desktop;  
+    }
+  }
+
+  @media (min-width: $break-point-tablet) {
+    .container {
       flex-direction: row;
     }
 
     .name, .picture {
       margin-right: $double-padding;
+    }
+
+    .description {
+      text-align: left;
     }
   }
 }
