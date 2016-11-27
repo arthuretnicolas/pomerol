@@ -2,24 +2,43 @@ defmodule Pomerol.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :pomerol,
-     version: "0.0.1",
-     elixir: "~> 1.2",
-     elixirc_paths: elixirc_paths(Mix.env),
-     compilers: [:phoenix, :gettext] ++ Mix.compilers,
-     build_embedded: Mix.env == :prod,
-     start_permanent: Mix.env == :prod,
-     aliases: aliases(),
-     deps: deps()]
+    [
+      app: :pomerol,
+      version: "0.0.1",
+      elixir: "~> 1.2",
+      elixirc_paths: elixirc_paths(Mix.env),
+      compilers: [:phoenix, :gettext] ++ Mix.compilers,
+      build_embedded: Mix.env == :prod,
+      start_permanent: Mix.env == :prod,
+      aliases: aliases(),
+      deps: deps(),
+      test_coverage: [tool: ExCoveralls]
+    ]
   end
 
   # Configuration for the OTP application.
   #
   # Type `mix help compile.app` for more information.
   def application do
-    [mod: {Pomerol, []},
-     applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :comeonin, :gettext,
-                    :phoenix_ecto, :postgrex, :std_json_io, :bamboo, :timex, :timex_ecto, :translator]]
+    [
+      mod: {Pomerol, []},
+      applications: [
+        :bamboo,
+        :comeonin,
+        :cowboy,
+        :gettext,
+        :logger,
+        :phoenix,
+        :phoenix_ecto,
+        :phoenix_html,
+        :phoenix_pubsub,
+        :postgrex,
+        :std_json_io,
+        :timex,
+        :timex_ecto,
+        :translator
+      ]
+    ]
   end
 
   # Specifies which paths to compile per environment.
@@ -30,21 +49,26 @@ defmodule Pomerol.Mixfile do
   #
   # Type `mix help deps` for examples and options.
   defp deps do
-    [{:phoenix, "~> 1.2.1"},
-     {:phoenix_pubsub, "~> 1.0"},
-     {:phoenix_ecto, "~> 3.0"},
-     {:postgrex, ">= 0.0.0"},
-     {:phoenix_html, "~> 2.6"},
-     {:phoenix_live_reload, "~> 1.0", only: :dev},
-     {:gettext, "~> 0.11"},
-     {:cowboy, "~> 1.0"},
-     {:std_json_io, "~> 0.1", override: true},
-     {:comeonin, "~> 2.5"},
-     {:guardian, "~> 0.13.0"},
-     {:bamboo, "~> 0.7"},
-     {:timex, "~> 3.0"},
-     {:timex_ecto, "~> 3.0"},
-     {:translator, github: "kenta-aktsk/translator"}]
+    [
+      {:bamboo, "~> 0.7"},
+      {:comeonin, "~> 2.5"},
+      {:cowboy, "~> 1.0"},
+      {:credo, "~> 0.5", only: [:dev, :test]}, # Code style suggestions
+      {:excoveralls, "~> 0.5", only: :test}, # Test coverage
+      {:gettext, "~> 0.11"},
+      {:guardian, "~> 0.13.0"},
+      {:phoenix, "~> 1.2.1"},
+      {:phoenix_ecto, "~> 3.0"},
+      {:phoenix_html, "~> 2.6"},
+      {:phoenix_live_reload, "~> 1.0", only: :dev},
+      {:phoenix_pubsub, "~> 1.0"},
+      {:postgrex, ">= 0.0.0"},
+      {:poison, "~> 3.0", override: true},
+      {:std_json_io, "~> 0.1", override: true},
+      {:timex, "~> 3.0"},
+      {:timex_ecto, "~> 3.0"},
+      {:translator, github: "kenta-aktsk/translator"}
+    ]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.

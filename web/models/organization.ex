@@ -2,14 +2,13 @@ defmodule Pomerol.Organization do
   use Pomerol.Web, :model
 
   alias __MODULE__
-  alias Pomerol.{UserOrganization, User}
+  alias Pomerol.{OrganizationMembership, User}
 
   schema "organizations" do
     field :name, :string
 
-    belongs_to :user, User
-    has_many :user_organizations, UserOrganization
-    has_many :members, through: [:user_organizations, :user]
+    has_many :organization_memberships, OrganizationMembership
+    has_many :members, through: [:organization_memberships, :member]
 
     timestamps
   end

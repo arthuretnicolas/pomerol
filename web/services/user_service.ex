@@ -1,7 +1,7 @@
 defmodule Pomerol.UserService do
   use Pomerol.Web, :service
 
-  alias Pomerol.{Repo, User, Organization, UserOrganization, Mailer, Email}
+  alias Pomerol.{Repo, User, Organization, OrganizationMembership, Mailer, Email}
 
   def insert(conn, changeset, params, locale) do
     Multi.new
@@ -11,12 +11,12 @@ defmodule Pomerol.UserService do
   end
 
   def insert_organization(organization_name, user) do
-    organization_changeset = %Pomerol.Organization{name: organization_name, user_id: user.id}
+    organization_changeset = %Pomerol.Organization{name: organization_name}
     organization = Repo.insert!(organization_changeset)
 
     organization
-      |> build_assoc(:user_organizations)
-      |> UserOrganization.changeset(%{user_id: user.id})
+      |> build_assoc(:organization_memberships)
+      |> OrganizationMembership.create_changeset(%{member_id: user.id, role: "owner"})
       |> Repo.insert!
     {:ok, organization}
   end
