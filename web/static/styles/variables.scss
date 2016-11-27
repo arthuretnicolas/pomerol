@@ -1,0 +1,33 @@
+$base-padding: 15px;
+$double-padding: $base-padding * 2;
+$triple-padding: $base-padding * 3;
+
+$vertical-padding-button: 10px;
+$horizontal-padding-button: 15px;
+
+$color-primary: #176FD4;
+$color-success: rgb(0, 199, 6);
+$color-snow: #fff;
+$color-frost: lighten($color-primary, 50%);
+$color-placeholder: lighten($color-primary, 42%);
+$color-danger: #F40033;
+$background-dark: darken($color-primary, 25%);
+
+$break-point-desktop: 1120px;
+$break-point-tablet: 840px;
+$break-point-phone: 520px;
+
+$max-width-desktop: 1008px;
+
+$border-radius-button: 2px;
+
+$font-size-body: 15px;
+$font-size-large: 17px;
+$font-size-header: 46px;
+
+$button-hover-darken: 4%;
+
+$line-height-spaced: 1.5;
+
+$semi-bold: 600;
+$bold: 700;

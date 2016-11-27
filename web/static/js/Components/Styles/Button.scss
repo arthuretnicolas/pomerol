@@ -1,0 +1,38 @@
+.Button {
+  box-shadow: none;
+  border: none;
+  padding: $vertical-padding-button $horizontal-padding-button;
+  border-radius: $border-radius-button;
+  color: $color-snow;
+  transition: ease-in-out 150ms;
+  font-weight: $semi-bold;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &.success {
+    background-color: $color-success;
+
+    &:hover, &:focus {
+      background-color: darken($color-success, $button-hover-darken);
+    }
+  }
+
+  &.primary {
+    background-color: $color-primary;
+
+    &:hover, &:focus {
+      background-color: darken($color-primary, $button-hover-darken);
+    }
+  }
+
+  &.medium {
+    padding: 1.4 * $vertical-padding-button 1.4 * $horizontal-padding-button;
+  }
+
+  &.large {
+    font-size: $font-size-large;
+    padding: 1.7 * $vertical-padding-button 2.3 * $horizontal-padding-button;
+  }
+}

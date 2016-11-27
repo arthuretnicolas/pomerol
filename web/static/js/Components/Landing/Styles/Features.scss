@@ -1,0 +1,37 @@
+.Landing-Features {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: $base-padding $double-padding;
+  align-self: center;
+
+  .feature {
+    padding-bottom: $double-padding;
+  }
+
+  .title {
+    font-weight: 700;
+    font-size: 26px;
+    padding-bottom: $base-padding;
+  }
+
+  .text {
+    line-height: $line-height-spaced;
+    padding-bottom: $base-padding;
+  }
+
+  @media (min-width: $break-point-desktop) {
+    width: $max-width-desktop;
+    display: flex;
+    align-self: center;
+  }
+
+  @media (min-width: $break-point-tablet) {
+    align-self: center;
+    flex-direction: row;
+
+    .feature {
+      padding-right: $double-padding;
+    }
+  }
+}
