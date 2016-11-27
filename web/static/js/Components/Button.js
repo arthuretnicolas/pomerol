@@ -25,7 +25,7 @@ const ButtonContainer = ({ to = '', children }) => {
   }
 
   return (
-    <Link to={to}>
+    <Link to={to} className='Button-no-decoration'>
       {children}
     </Link>
   )

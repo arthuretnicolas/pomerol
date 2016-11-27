@@ -7,12 +7,12 @@ import Button from '../Button'
 const Navbar = () => (
   <div className='Landing-Navbar'>
     <div className='signup'>
-      <Button to='signup' theme='success'>
+      <Button to='signup' theme='primary'>
         Sign up
       </Button>
     </div>
 
-    <Link to='/login'>
+    <Link to='/login' className='link'>
       Login
     </Link>
   </div>

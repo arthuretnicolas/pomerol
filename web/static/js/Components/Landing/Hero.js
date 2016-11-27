@@ -3,6 +3,7 @@
 import React from 'react'
 import Navbar from './Navbar'
 import Button from '../Button'
+import { Link } from 'react-router'
 
 const Hero = () => (
   <div className='Landing-Hero'>
@@ -20,6 +21,10 @@ const Hero = () => (
       <Button to='/signup' theme='large primary'>
         Sign Up Free
       </Button>
+
+      <div className='more'>
+        Want to learn more? <Link to='/features'>Check out our features</Link>
+      </div>
     </div>
   </div>
 )

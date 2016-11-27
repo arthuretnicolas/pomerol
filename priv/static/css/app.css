@@ -416,29 +416,34 @@ body {
   display: flex;
   flex-direction: column; }
 
+.Button-no-decoration {
+  text-decoration: none;
+  display: flex; }
+
 .Button {
   box-shadow: none;
   border: none;
-  padding: 10px 15px;
-  border-radius: 2px;
+  padding: 8px 12px;
+  border-radius: 3px;
   color: #fff;
-  transition: ease-in-out 150ms;
-  font-weight: 600; }
+  font-weight: 600;
+  font-size: 14px;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.15); }
   .Button:hover {
     cursor: pointer; }
   .Button.success {
-    background-color: #00c706; }
+    background: #00c706;
+    background-image: -webkit-linear-gradient(#00c206, #00bd06); }
     .Button.success:hover, .Button.success:focus {
-      background-color: #00b305; }
+      background: #00ae05; }
   .Button.primary {
-    background-color: #176FD4; }
+    background: #176FD4;
+    background-image: -webkit-linear-gradient(#176dcf, #166acb); }
     .Button.primary:hover, .Button.primary:focus {
-      background-color: #1565c2; }
-  .Button.medium {
-    padding: 14px 21px; }
+      background: #1563bd; }
   .Button.large {
-    font-size: 17px;
-    padding: 17px 34.5px; }
+    font-size: 15px;
+    padding: 12px 30px; }
 
 .Landing-Landing {
   display: flex;
@@ -467,6 +472,9 @@ body {
     max-width: 350px;
     line-height: 1.5;
     padding: 30px 0; }
+  .Landing-Hero .more {
+    margin-top: 30px;
+    font-size: 14px; }
   @media (min-width: 1120px) {
     .Landing-Hero .masthead {
       width: 1008px;
@@ -479,6 +487,8 @@ body {
   align-items: center; }
   .Landing-Navbar .signup {
     margin-right: 15px; }
+  .Landing-Navbar .link {
+    font-size: 14px; }
 
 .Landing-Features {
   display: flex;

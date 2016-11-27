@@ -29,6 +29,11 @@
     padding: $double-padding 0;
   }
 
+  .more {
+    margin-top: $double-padding;
+    font-size: $font-size-small;
+  }
+
   @media (min-width: $break-point-desktop) {
     .masthead {
       width: $max-width-desktop;

@@ -1,38 +1,47 @@
+// out of scope
+
+.Button-no-decoration {
+  text-decoration: none;
+  display: flex;
+}
+
 .Button {
   box-shadow: none;
   border: none;
   padding: $vertical-padding-button $horizontal-padding-button;
   border-radius: $border-radius-button;
   color: $color-snow;
-  transition: ease-in-out 150ms;
+  // transition: all 0.2s ease;
   font-weight: $semi-bold;
+  font-size: $font-size-small;
+
+  // to be tested
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.15);
 
   &:hover {
     cursor: pointer;
   }
 
   &.success {
-    background-color: $color-success;
+    background: $color-success;
+    background-image: -webkit-linear-gradient(darken($color-success, 1%), darken($color-success, 2%));
 
     &:hover, &:focus {
-      background-color: darken($color-success, $button-hover-darken);
+      background: darken($color-success, $button-hover-darken);
     }
   }
 
   &.primary {
-    background-color: $color-primary;
+    background: $color-primary;
+    background-image: -webkit-linear-gradient(darken($color-primary, 1%), darken($color-primary, 2%));
 
     &:hover, &:focus {
-      background-color: darken($color-primary, $button-hover-darken);
+      background: darken($color-primary, $button-hover-darken);
     }
   }
 
-  &.medium {
-    padding: 1.4 * $vertical-padding-button 1.4 * $horizontal-padding-button;
-  }
-
   &.large {
-    font-size: $font-size-large;
-    padding: 1.7 * $vertical-padding-button 2.3 * $horizontal-padding-button;
+    font-size: $font-size-body;
+    padding: 1.5 * $vertical-padding-button 2.5 * $horizontal-padding-button;
   }
 }
