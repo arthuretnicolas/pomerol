@@ -4,11 +4,19 @@ import React from 'react'
 import { Link } from 'react-router'
 
 type Props = {
-  children: Object,
-  onPress: () => void,
+  children?: Object,
+  onClick: () => void,
   theme?: string,
   style?: Object,
-  to?: string
+  to?: string,
+  onClick?: () => void,
+  disabled?: boolean
+}
+
+const _onClick = (disabled, onClick) => {
+  if (!disabled && typeof onClick === 'function') {
+    onClick()
+  }
 }
 
 const ButtonContainer = ({ to = '', children }) => {
@@ -23,11 +31,11 @@ const ButtonContainer = ({ to = '', children }) => {
   )
 }
 
-const Button = ({ theme = '', style, children, onPress, to = '' }: Props) => (
+const Button = ({ theme = '', style, children, onClick, to = '', disabled }: Props) => (
   <ButtonContainer to={to}>
-    <button onPress={onPress} className={`Button ${theme}`}>
+    <span onClick={() => _onClick(disabled, onClick)} className={`Button ${theme}`}>
       {children}
-    </button>
+    </span>
   </ButtonContainer>
 )
 
