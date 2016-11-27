@@ -2,9 +2,10 @@
 
 import React from 'react'
 import Navbar from './Navbar'
+import Button from '../Button'
 
 const Hero = () => (
-  <div className='Landing-Hero root'>
+  <div className='Landing-Hero'>
     <Navbar />
 
     <div className='masthead'>
@@ -16,9 +17,9 @@ const Hero = () => (
         Join more than 14 million people who use Pomerol to grow their businesses on their terms.
       </p>
 
-      <button>
+      <Button to='/signup' theme='large primary'>
         Sign Up Free
-      </button>
+      </Button>
     </div>
   </div>
 )

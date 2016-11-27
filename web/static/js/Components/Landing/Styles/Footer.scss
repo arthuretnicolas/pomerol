@@ -1,0 +1,41 @@
+.Landing-Footer {
+  background-color: $background-dark;
+  padding: $base-padding $double-padding;
+
+  .container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .header {
+    color: #fff;
+    font-weight: $bold;
+    font-size: $font-size-large;
+    line-height: $line-height-spaced;
+  }
+
+  .value-proposition {
+    color: #fff;
+    font-size: $font-size-large;
+    font-style: italic;
+  }
+
+  .container-button {
+    margin-left: $base-padding;
+  }
+
+  @media (min-width: $break-point-desktop) {
+    .masthead {
+      width: $break-point-desktop;
+      margin: 0 auto;
+    }
+  }
+
+  @media (min-width: $break-point-desktop) {
+    .container {
+      justify-content: flex-end;
+    }
+  }
+}

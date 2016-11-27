@@ -1,7 +1,8 @@
 .Landing-Navbar {
   display: flex;
   justify-content: flex-end;
-  padding: $base-padding $double-padding;
+  padding: $double-padding $triple-padding;
+  align-items: center;
 
   .signup {
     margin-right: $base-padding;

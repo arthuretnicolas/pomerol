@@ -1,5 +1,5 @@
 .Landing-Hero {
-  min-height: 90vh;
+  min-height: 75vh;
   display: flex;
   flex-direction: column;
 
@@ -8,19 +8,22 @@
     flex-grow: 1;
     background-image: url('https://d13yacurqjgara.cloudfront.net/users/870290/screenshots/3062845/untitled-1_1x.png');
     background-repeat: no-repeat;
-    background-position: 150% 50%;
+    background-position: 20vw 50%;
     background-size: contain;
   }
 
   .title {
     max-width: 500px;
-    font-size: 46px;
+    font-size: $font-size-header;
     font-weight: 700;
   }
 
   .value-proposition {
+    font-size: $font-size-large;
+    line-height: $line-height-spaced;
     max-width: 350px;
     line-height: 1.5;
+    padding: $double-padding 0;
   }
 
   @media (min-width: $break-point-desktop) {
