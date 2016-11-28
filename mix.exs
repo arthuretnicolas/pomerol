@@ -51,12 +51,14 @@ defmodule Pomerol.Mixfile do
   defp deps do
     [
       {:bamboo, "~> 0.7"},
+      {:canary, "~> 1.1.0"}, # Authorization
       {:comeonin, "~> 2.5"},
       {:cowboy, "~> 1.0"},
       {:credo, "~> 0.5", only: [:dev, :test]}, # Code style suggestions
       {:excoveralls, "~> 0.5", only: :test}, # Test coverage
+      {:ex_machina, "~> 1.0", only: :test}, # test factories
       {:gettext, "~> 0.11"},
-      {:guardian, "~> 0.13.0"},
+      {:guardian, "~> 0.13.0"}, # Authentication (JWT)
       {:phoenix, "~> 1.2.1"},
       {:phoenix_ecto, "~> 3.0"},
       {:phoenix_html, "~> 2.6"},

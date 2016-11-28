@@ -40,8 +40,10 @@ defmodule Pomerol.Router do
       resources "/countries", CountryController, only: [:index]
     end
 
-    pipe_through [:api, :bearer_auth, :ensure_auth]
+    pipe_through [:api, :bearer_auth, :ensure_auth, :current_user]
     scope "/v1", V1, as: :v1 do
+      get "/user", UserController, :current_user
+      resources "/users", UserController, only: [:update]
       post "/session/refresh", SessionController, :refresh
       resources "/organizations", OrganizationController, only: [:index]
     end

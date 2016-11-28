@@ -3,11 +3,11 @@ defmodule Pomerol.OrganizationView do
 
   def render("index.json", %{organizations: organizations}) do
     %{
-      organizations: render_many(organizations, __MODULE__, "show.json")
+      organizations: render_many(organizations, __MODULE__, "organization.json")
     }
   end
 
-  def render("show.json", %{organization: organization}) do
+  def render("organization.json", %{organization: organization}) do
     %{
       id: organization.id,
       name: organization.name

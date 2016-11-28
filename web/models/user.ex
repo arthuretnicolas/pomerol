@@ -13,6 +13,7 @@ defmodule Pomerol.User do
     field :password, :string, virtual: true
     field :organization_name, :string, virtual: true
     field :encrypted_password, :string
+    field :admin, :boolean, default: false
 
     field :password_reset_token, :string
     field :password_reset_timestamp, Timex.Ecto.DateTime
@@ -42,6 +43,12 @@ defmodule Pomerol.User do
     |> validate_length(:password, min: 5, max: 128)
     |> validate_inclusion(:locale, ["en", "fr"])
     |> generate_encrypted_password
+  end
+
+  def update_changeset(user, params \\ %{}) do
+    user
+    |> cast(params, [:first_name, :last_name, :locale])
+    |> validate_inclusion(:locale, ["en", "fr"])
   end
 
   def password_reset_request_changeset(user, params \\ %{}) do
@@ -84,6 +91,13 @@ defmodule Pomerol.User do
     |> :crypto.strong_rand_bytes
     |> Base.url_encode64
     |> binary_part(0, 50)
+  end
+
+  def preload_all(query, locale) do
+    from query, preload: [
+      [:organizations],
+      country: [ translation: ^Pomerol.CountryTranslation.translation_query(locale) ]
+    ]
   end
 
 end

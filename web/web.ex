@@ -47,6 +47,9 @@ defmodule Pomerol.Web do
 
       import Pomerol.Router.Helpers
       import Pomerol.Gettext
+
+      import Canary.Plugs
+      import Pomerol.AuthenticationHelpers, only: [load_and_authorize_changeset: 2]
     end
   end
 

@@ -2,7 +2,9 @@ defmodule Pomerol.V1.UserController  do
   use Pomerol.Web, :controller
   use Pomerol.LocalizedController
 
-  alias Pomerol.{UserService, Repo, User}
+  alias Pomerol.{UserService, Repo, User, Country}
+
+  plug :load_and_authorize_resource, model: User, only: [:update]
 
   def create(conn, params = %{"email" => _, "password" => _, "first_name" => _, "last_name" => _, "organization_name" => _, "country_id" => _}, locale) do
     params =
@@ -26,12 +28,37 @@ defmodule Pomerol.V1.UserController  do
     end
   end
 
+  def update(conn, user_params, locale) do
+    user = conn.assigns[:current_user]
+    user
+    |> User.update_changeset(user_params)
+    |> Repo.update
+    |> case do
+      {:ok, user} ->
+        conn
+        |> put_status(:ok)
+        |> render(Pomerol.SessionView, "show.json", jwt: "jwt", user: user)
+      {:error, changeset} ->
+        conn
+        |> put_status(:bad_request)
+        |> json("ko")
+    end
+  end
+
+  def current_user(conn, _, locale) do
+    current_user = conn.assigns[:current_user]
+    user = User |> User.preload_all(locale) |> Repo.get!(current_user.id)
+    conn
+    |> put_status(:ok)
+    |> render(Pomerol.UserView, "show.json", user: user)
+  end
+
   def password_reset_request(conn, %{"email" => email}, locale) do
     case UserService.password_reset_request(conn, email) do
       {:ok, user} ->
         send_resp(conn, :no_content, "")
       {:error, _reason} ->
-        send_resp(conn, :bad_request, "user does not exist")
+        send_resp(conn, :bad_request, gettext("user does not exist"))
     end
   end
 

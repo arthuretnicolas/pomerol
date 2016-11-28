@@ -14,4 +14,17 @@ defmodule Pomerol.ErrorView do
   def template_not_found(_template, assigns) do
     render "500.html", assigns
   end
+
+  def render("404.json", %{message: message}) do
+    %{
+      errors: [
+        %{
+          id: "NOTFOUND",
+          title: "404 Not Found",
+          detail: message,
+          status: 404,
+        }
+      ]
+    }
+  end
 end

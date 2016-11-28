@@ -1,11 +1,10 @@
-defmodule Pomerol.ConnCase do
+defmodule Pomerol.PolicyCase do
   @moduledoc """
   This module defines the test case to be used by
-  tests that require setting up a connection.
+  policy tests.
 
-  Such tests rely on `Phoenix.ConnTest` and also
-  import other functionality to make it easier
-  to build and query models.
+  You may define functions here to be used as helpers in
+  your model tests. See `errors_on/2`'s definition as reference.
 
   Finally, if the test case interacts with the database,
   it cannot be async. For this reason, every test runs
@@ -17,19 +16,8 @@ defmodule Pomerol.ConnCase do
 
   using do
     quote do
-      # Import conveniences for testing with connections
-      use Phoenix.ConnTest
-
-      alias Pomerol.Repo
-      import Ecto
-      import Ecto.Changeset
-      import Ecto.Query
-
-      import Pomerol.Router.Helpers
       import Pomerol.Factories
-
-      # The default endpoint for testing
-      @endpoint Pomerol.Endpoint
+      import Pomerol.PolicyCase
     end
   end
 
@@ -40,6 +28,6 @@ defmodule Pomerol.ConnCase do
       Ecto.Adapters.SQL.Sandbox.mode(Pomerol.Repo, {:shared, self()})
     end
 
-    {:ok, conn: Phoenix.ConnTest.build_conn()}
+    :ok
   end
 end

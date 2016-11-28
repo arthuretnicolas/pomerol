@@ -6,13 +6,21 @@ defmodule Pomerol.UserView do
   end
 
   def render("show.json", %{user: user}) do
-    %{data: render_one(user, Pomerol.UserView, "user.json")}
+    %{
+      user: render_one(user, Pomerol.UserView, "user.json"),
+      organizations: render_many(user.organizations, Pomerol.OrganizationView, "organization.json")
+    }
   end
 
   def render("user.json", %{user: user}) do
-    %{id: user.id,
+    %{
+      id: user.id,
+      first_name: user.first_name,
+      last_name: user.last_name,
+      locale: user.locale,
       email: user.email,
-      encrypted_password: user.encrypted_password}
+      country: render_one(user.country, Pomerol.CountryView, "country.json")
+    }
   end
 
   def render("error.json", %{changeset: changeset}) do

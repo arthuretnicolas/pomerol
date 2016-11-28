@@ -36,6 +36,10 @@ config :guardian, Guardian,
   serializer: Pomerol.GuardianSerializer,
   permissions: %{default: [:read, :write]}
 
+config :canary, repo: Pomerol.Repo
+config :canary, unauthorized_handler: {Pomerol.AuthenticationHelpers, :handle_unauthorized}
+config :canary, not_found_handler: {Pomerol.AuthenticationHelpers, :handle_not_found}
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env}.exs"
