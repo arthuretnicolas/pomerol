@@ -1,12 +1,12 @@
 defmodule Pomerol.V1.UserController  do
   use Pomerol.Web, :controller
-  use Pomerol.LocalizedController
 
   alias Pomerol.{UserService, Repo, User, Country}
 
   plug :load_and_authorize_resource, model: User, only: [:update]
 
-  def create(conn, params = %{"email" => _, "password" => _, "first_name" => _, "last_name" => _, "organization_name" => _, "country_id" => _}, locale) do
+  def create(conn, params = %{"email" => _, "password" => _, "first_name" => _, "last_name" => _, "organization_name" => _, "country_id" => _}) do
+    locale = conn.assigns[:locale]
     params =
       params
       |> Map.put("locale", locale)
@@ -28,7 +28,7 @@ defmodule Pomerol.V1.UserController  do
     end
   end
 
-  def update(conn, user_params, locale) do
+  def update(conn, user_params) do
     user = conn.assigns[:current_user]
     user
     |> User.update_changeset(user_params)
@@ -45,15 +45,16 @@ defmodule Pomerol.V1.UserController  do
     end
   end
 
-  def current_user(conn, _, locale) do
+  def current_user(conn, _) do
     current_user = conn.assigns[:current_user]
+    locale = conn.assigns[:locale]
     user = User |> User.preload_all(locale) |> Repo.get!(current_user.id)
     conn
     |> put_status(:ok)
     |> render(Pomerol.UserView, "show.json", user: user)
   end
 
-  def password_reset_request(conn, %{"email" => email}, locale) do
+  def password_reset_request(conn, %{"email" => email}) do
     case UserService.password_reset_request(conn, email) do
       {:ok, user} ->
         send_resp(conn, :no_content, "")
@@ -62,7 +63,7 @@ defmodule Pomerol.V1.UserController  do
     end
   end
 
-  def password_reset(conn, %{"token" => token, "password" => password}, locale) do
+  def password_reset(conn, %{"token" => token, "password" => password}) do
     case UserService.password_reset(conn, token, password) do
       {:ok, user} ->
         {:ok, jwt, _claims} = Guardian.encode_and_sign(user, :token)
