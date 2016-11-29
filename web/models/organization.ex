@@ -4,6 +4,9 @@ defmodule Pomerol.Organization do
 
   schema "organizations" do
     field :name, :string
+    field :address, :string
+    field :website, :string
+    field :phone, :string
 
     belongs_to :country, Country
     has_many :organization_memberships, OrganizationMembership
