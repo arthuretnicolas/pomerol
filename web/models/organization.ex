@@ -1,10 +1,11 @@
 defmodule Pomerol.Organization do
   use Pomerol.Web, :model
-  alias Pomerol.{OrganizationMembership}
+  alias Pomerol.{Country, OrganizationMembership}
 
   schema "organizations" do
     field :name, :string
 
+    belongs_to :country, Country
     has_many :organization_memberships, OrganizationMembership
     has_many :members, through: [:organization_memberships, :member]
 
@@ -17,6 +18,13 @@ defmodule Pomerol.Organization do
   def changeset(model, params \\ %{}) do
     model
     |> cast(params, @required_fields, @optional_fields)
+  end
+
+  def create_changeset(organization, params \\ %{}) do
+    organization
+    |> cast(params, [:name, :country_id])
+    |> validate_required([:name, :country_id])
+    |> foreign_key_constraint(:country_id)
   end
 
   def preload_all(query) do

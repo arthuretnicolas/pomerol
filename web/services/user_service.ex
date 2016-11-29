@@ -11,7 +11,7 @@ defmodule Pomerol.UserService do
   end
 
   def insert_organization(organization_name, user) do
-    organization_changeset = %Pomerol.Organization{name: organization_name}
+    organization_changeset = Organization.create_changeset(%Organization{}, %{name: organization_name, country_id: user.country_id})
     organization = Repo.insert!(organization_changeset)
 
     organization

@@ -8,6 +8,7 @@ defmodule Pomerol.Country do
 
     has_one :translation, Pomerol.CountryTranslation
     has_many :users, Pomerol.User
+    has_many :organizations, Pomerol.Organization
 
     timestamps
   end
