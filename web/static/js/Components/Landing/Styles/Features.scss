@@ -2,7 +2,8 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: $base-padding $double-padding;
+  padding: 1.5 * $triple-padding $double-padding;
+  padding-bottom: 1.5 * $triple-padding - $base-padding;
   align-self: center;
 
   .feature {
@@ -10,7 +11,7 @@
   }
 
   .title {
-    font-weight: 700;
+    font-weight: 300;
     font-size: 26px;
     padding-bottom: $base-padding;
   }
