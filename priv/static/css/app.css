@@ -450,13 +450,15 @@ body {
   flex-direction: column; }
 
 .Landing-Hero {
-  min-height: 75vh;
+  min-height: calc(100vh - 200px);
   display: flex;
   flex-direction: column;
-  background-image: url("https://d13yacurqjgara.cloudfront.net/users/870290/screenshots/3062845/untitled-1_1x.png");
-  background-repeat: no-repeat;
-  background-position: 30vw 70%;
-  background-size: contain; }
+  background-color: #e3eefc; }
+  .Landing-Hero .overlay {
+    display: flex;
+    flex-direction: column;
+    background-image: -webkit-linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2));
+    min-height: calc(100vh - 200px); }
   .Landing-Hero .masthead {
     display: flex;
     flex-direction: column;
@@ -465,7 +467,7 @@ body {
   .Landing-Hero .title {
     max-width: 500px;
     font-size: 46px;
-    font-weight: 700; }
+    font-weight: 300; }
   .Landing-Hero .value-proposition {
     font-size: 17px;
     line-height: 1.5;
@@ -479,6 +481,18 @@ body {
     .Landing-Hero .masthead {
       width: 1008px;
       align-self: center; } }
+  @media (min-width: 840px) {
+    .Landing-Hero {
+      background-image: url("https://cfl.dropboxstatic.com/static/images/business/homepage/background--db-vfl4SbjZf.jpg");
+      background-size: contain;
+      background-position: 100% 0%;
+      background-repeat: no-repeat; } }
+  @media (max-width: 839px) {
+    .Landing-Hero {
+      background-image: -webkit-linear-gradient(#e3eefc, #fff);
+      min-height: 0; }
+      .Landing-Hero .masthead {
+        align-self: center; } }
 
 .Landing-Navbar {
   display: flex;
@@ -494,12 +508,13 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 15px 30px;
+  padding: 67.5px 30px;
+  padding-bottom: 52.5px;
   align-self: center; }
   .Landing-Features .feature {
     padding-bottom: 30px; }
   .Landing-Features .title {
-    font-weight: 700;
+    font-weight: 300;
     font-size: 26px;
     padding-bottom: 15px; }
   .Landing-Features .text {
