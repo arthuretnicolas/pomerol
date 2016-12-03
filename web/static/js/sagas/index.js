@@ -8,12 +8,14 @@ import DebugSettings from '../Config/DebugSettings'
 import { StartupTypes } from '../Reducers/StartupRedux'
 import { CounterTypes } from '../Reducers/CounterRedux'
 import { GithubTypes } from '../Reducers/GithubRedux'
+import { LoginTypes } from '../Reducers/LoginRedux'
 
 /* ------------- Sagas ------------- */
 
 import { startup } from './StartupSaga'
 import { incrementWithDelay } from './CounterSaga'
 import { getUser } from './GithubSaga'
+import { login } from './LoginSaga'
 
 /* ------------- API ------------- */
 
@@ -25,6 +27,7 @@ export default function * root () {
   yield [
     takeLatest(StartupTypes.STARTUP, startup),
     takeLatest(CounterTypes.ATTEMPT_INCREMENT, incrementWithDelay),
-    takeLatest(GithubTypes.FETCH_USER_REQUEST, getUser, api)
+    takeLatest(GithubTypes.FETCH_USER_REQUEST, getUser, api),
+    takeLatest(LoginTypes.LOGIN_ATTEMPT, login, api)
   ]
 }

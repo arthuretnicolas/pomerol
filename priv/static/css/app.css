@@ -411,10 +411,18 @@ a {
 a:not(:hover) {
   text-decoration: none; }
 
+html {
+  min-height: 100vh;
+  display: flex; }
+
 body {
   font-size: 15px;
   display: flex;
-  flex-direction: column; }
+  flex: 1; }
+
+body > #index {
+  display: flex;
+  flex: 1; }
 
 .Button-no-decoration {
   text-decoration: none;
@@ -595,3 +603,24 @@ body {
   @media (min-width: 1120px) {
     .Landing-Footer .container {
       justify-content: flex-end; } }
+
+.Forms-Form {
+  flex-direction: column; }
+
+.Login {
+  display: flex;
+  flex: 1; }
+  .Login .form-container {
+    min-width: 330px; }
+  .Login .illustration {
+    display: none; }
+  @media (min-width: 840px) {
+    .Login .illustration {
+      display: flex;
+      flex-grow: 1;
+      background-color: #c8dff9; }
+    .Login .image-container {
+      display: flex;
+      flex: 1;
+      background-image: url("https://upload.wikimedia.org/wikipedia/commons/8/83/Zebra_Botswana_edit02.jpg");
+      background-size: cover; } }
