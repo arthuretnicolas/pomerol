@@ -2,5 +2,6 @@ import { combineReducers } from 'redux'
 
 export default combineReducers({
   counter: require('./CounterRedux').reducer,
-  github: require('./GithubRedux').reducer
+  github: require('./GithubRedux').reducer,
+  login: require('./LoginRedux').reducer
 })

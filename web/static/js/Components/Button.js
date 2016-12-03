@@ -10,7 +10,8 @@ type Props = {
   style?: Object,
   to?: string,
   onClick?: () => void,
-  disabled?: boolean
+  disabled?: boolean,
+  type?: string
 }
 
 const _onClick = (disabled, onClick) => {
@@ -31,11 +32,16 @@ const ButtonContainer = ({ to = '', children }) => {
   )
 }
 
-const Button = ({ theme = '', style, children, onClick, to = '', disabled }: Props) => (
+const Button = ({ theme = '', style, children, onClick, to = '', type, disabled = false }: Props) => (
   <ButtonContainer to={to}>
-    <span onClick={() => _onClick(disabled, onClick)} className={`Button ${theme}`}>
+    <button
+      type={type || 'button'}
+      onClick={() => _onClick(disabled, onClick)}
+      className={`Button ${theme}`}
+      disabled={disabled}
+    >
       {children}
-    </span>
+    </button>
   </ButtonContainer>
 )
 

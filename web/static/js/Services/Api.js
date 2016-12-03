@@ -4,10 +4,13 @@ import apisauce from 'apisauce'
 
 const isDev = process.env.NODE_ENV === 'development'
 
-const create = (baseURL: string = 'https://api.github.com/') => {
+const create = (baseURL: string = 'http://localhost:4000/api/v1/') => {
   const api = apisauce.create({
     baseURL,
-    headers: { 'Accept': 'application/vnd.github.v3+json' },
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
     timeout: 10000
   })
 
@@ -15,6 +18,12 @@ const create = (baseURL: string = 'https://api.github.com/') => {
   // api.addRequestTransform((request) => {
   //   request.params['APPID'] = '0e44183e8d1018fc92eb3307d885379c'
   // })
+
+  const login = (email: string, password: string) =>
+    api.post('signin', {
+      email,
+      password
+    })
 
   const getUser = (name: string) => api.get(`users/${name}`)
 
@@ -24,7 +33,8 @@ const create = (baseURL: string = 'https://api.github.com/') => {
   }
 
   return {
-    getUser
+    getUser,
+    login
   }
 }
 

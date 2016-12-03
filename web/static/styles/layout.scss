@@ -10,8 +10,18 @@ a:not(:hover) {
   text-decoration: none;
 }
 
+html {
+  min-height: 100vh;
+  display: flex;
+}
+
 body {
   font-size: $font-size-body;
   display: flex;
-  flex-direction: column;
+  flex: 1;
+}
+
+body > #index {
+  display: flex;
+  flex: 1;
 }
