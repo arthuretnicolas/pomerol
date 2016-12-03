@@ -16,7 +16,10 @@ class Contacts extends Component {
   props: Props
 
   static defaultProps = {
-    counter: 0
+    counter: {
+      value: 0,
+      attempting: false
+    }
   }
 
   render () {
