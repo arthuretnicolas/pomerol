@@ -8,6 +8,7 @@ import Contacts from '../Containers/Contacts'
 import GithubUsers from '../Containers/GithubUsers'
 import Signup from '../Containers/Signup'
 import Login from '../Containers/Login'
+import DashboardMain from '../Containers/Dashboard/DashboardMain'
 import ProtectedView from '../Containers/ProtectedView'
 import ProtectedViewFromUser from '../Containers/ProtectedViewFromUser'
 
@@ -23,6 +24,7 @@ export default (
     <Route component={ProtectedView}>
       <Route path='/contacts' component={Contacts} />
       <Route path='/github-users' component={GithubUsers} />
+      <Route path='/dashboard' component={DashboardMain} />
       <Route path='*' component={() => <h1>Not found!</h1>} />
     </Route>
   </Route>

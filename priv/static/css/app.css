@@ -608,6 +608,10 @@ body > #index {
 .Forms-Form {
   flex-direction: column; }
 
+.Dashboard-DashboardMain {
+  display: flex;
+  flex: 1; }
+
 .Login {
   display: flex;
   flex: 1; }
