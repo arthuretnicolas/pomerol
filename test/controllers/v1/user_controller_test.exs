@@ -6,10 +6,7 @@ defmodule Pomerol.V1.UserControllerTest do
   use Bamboo.Test
 
   @valid_attrs %{
-    email: "test@user.com",
-    first_name: "Test",
-    last_name: "User",
-    organization_name: "orgatest"
+    email: "test@user.com"
   }
 
   @invalid_attrs %{
@@ -18,9 +15,7 @@ defmodule Pomerol.V1.UserControllerTest do
 
   describe "signup" do
     test "POST /api/v1/signup when data is valid", %{conn: conn} do
-      country = insert(:country, name: "Australia")
       attrs = Map.put(@valid_attrs, :password, "password")
-      attrs = Map.put(attrs, :country_id, country.id)
 
       conn = post conn, "/api/v1/signup", attrs
 
@@ -31,9 +26,8 @@ defmodule Pomerol.V1.UserControllerTest do
     end
 
     test "POST /api/v1/signup when email already exist", %{conn: conn} do
-      country = insert(:country)
-      user = insert(:user, country: country)
-      conn = post conn, "/api/v1/signup", %{email: user.email, first_name: "fn", last_name: "ln", password: "password", organization_name: "on", country_id: country.id}
+      user = insert(:user)
+      conn = post conn, "/api/v1/signup", %{email: user.email, password: "password"}
       assert conn |> json_response(422)
     end
   end

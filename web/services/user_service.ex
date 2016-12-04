@@ -6,7 +6,7 @@ defmodule Pomerol.UserService do
   def insert(conn, changeset, params, locale) do
     Multi.new
     |> Multi.insert(:user, changeset)
-    |> Multi.run(:insert_organization, &(insert_organization(params["organization_name"], &1[:user])))
+    # |> Multi.run(:insert_organization, &(insert_organization(params["organization_name"], &1[:user])))
     |> Multi.run(:send_welcome_email, &(send_welcome_email(conn, params, &1[:user])))
   end
 

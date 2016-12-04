@@ -5,7 +5,7 @@ defmodule Pomerol.V1.UserController  do
 
   plug :load_and_authorize_resource, model: User, only: [:update]
 
-  def create(conn, params = %{"email" => _, "password" => _, "first_name" => _, "last_name" => _, "organization_name" => _, "country_id" => _}) do
+  def create(conn, params = %{"email" => _, "password" => _}) do
     locale = conn.assigns[:locale]
     params =
       params
@@ -19,7 +19,7 @@ defmodule Pomerol.V1.UserController  do
 
         conn
         |> put_status(:created)
-        |> render(Pomerol.SessionView, "show.json", jwt: jwt, user: user)
+        |> render(Pomerol.SessionView, "show.json", jwt: jwt)
 
       {:error, _failed_operation, failed_value, _changes_so_far} ->
         conn

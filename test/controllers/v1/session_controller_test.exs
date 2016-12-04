@@ -24,7 +24,6 @@ defmodule Pomerol.V1.SessionControllerTest do
 
       response = json_response(conn, 201)
       assert response["jwt"]
-      assert response["user"]["id"] == user.id
     end
 
     test "does not authenticate and renders errors when the password is wrong", %{conn: conn} do
@@ -35,8 +34,7 @@ defmodule Pomerol.V1.SessionControllerTest do
       [error | _] = response["errors"]
       assert error["detail"] == "Your password doesn't match the email #{user.email}."
       assert renders_401_unauthorized?(error)
-      refute response["token"]
-      refute response["user_id"]
+      refute response["jwt"]
     end
 
     test "does not authenticate and renders errors when the user doesn't exist", %{conn: conn} do
@@ -46,8 +44,7 @@ defmodule Pomerol.V1.SessionControllerTest do
       [error | _] = response["errors"]
       assert error["detail"] == "We couldn't find a user with the email notauser@test.com."
       assert renders_401_unauthorized?(error)
-      refute response["token"]
-      refute response["user_id"]
+      refute response["jwt"]
     end
   end
 

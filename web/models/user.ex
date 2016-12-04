@@ -34,9 +34,8 @@ defmodule Pomerol.User do
   """
   def signup_changeset(user, params \\ %{}) do
     user
-    |> cast(params, @required_fields, @optional_fields)
-    |> foreign_key_constraint(:country_id)
-    |> cast_assoc(:country, user.country_id)
+    |> cast(params, [:email, :password, :locale])
+    |> validate_required([:email, :password, :locale])
     |> update_change(:email, &String.downcase/1)
     |> validate_email_format(:email)
     |> unique_constraint(:email, message: "Email already taken")

@@ -11,8 +11,9 @@ defmodule Pomerol.V1.SessionController do
         {:ok, jwt, claims} = user |> Guardian.encode_and_sign(:token)
 
         conn
+        |> Plug.Conn.assign(:current_user, user)
         |> put_status(:created)
-        |> render(Pomerol.SessionView, "show.json", jwt: jwt, user: user)
+        |> render(Pomerol.SessionView, "show.json", jwt: jwt)
 
       {:error, reason} -> handle_unauthenticated(conn, reason)
     end
