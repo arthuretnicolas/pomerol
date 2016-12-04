@@ -42,3 +42,14 @@ test('cancel', t => {
     session: null
   })
 })
+
+test('canel', t => {
+  const stateLogged = reducer(INITIAL_STATE, Actions.loginSuccess(FAKE_SESSION))
+  const state = reducer(stateLogged, Actions.logout())
+
+  t.deepEqual(state, {
+    attempting: false,
+    error: null,
+    session: null
+  })
+})

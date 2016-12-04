@@ -15,7 +15,7 @@ import { LoginTypes } from '../Reducers/LoginRedux'
 import { startup, watcherRehydrate } from './StartupSaga'
 import { incrementWithDelay } from './CounterSaga'
 import { getUser } from './GithubSaga'
-import { login } from './LoginSaga'
+import { login, logout } from './LoginSaga'
 
 /* ------------- API ------------- */
 
@@ -29,6 +29,7 @@ export default function * root () {
     takeLatest('persist/REHYDRATE', watcherRehydrate),
     takeLatest(CounterTypes.ATTEMPT_INCREMENT, incrementWithDelay),
     takeLatest(GithubTypes.FETCH_USER_REQUEST, getUser, api),
-    takeLatest(LoginTypes.LOGIN_ATTEMPT, login, api)
+    takeLatest(LoginTypes.LOGIN_ATTEMPT, login, api),
+    takeLatest(LoginTypes.LOGOUT, logout)
   ]
 }
