@@ -5,6 +5,7 @@ import { browserHistory } from 'react-router'
 import { connect } from 'react-redux'
 
 type Props = {
+  isRehydrated: boolean,
   isAuthenticated: boolean
 }
 
@@ -28,10 +29,13 @@ class ProtectedViewFromUser extends Component {
   }
 
   render () {
-    const { children, isAuthenticated } = this.props
+    const {
+      children,
+      isRehydrated,
+      isAuthenticated
+    } = this.props
 
-    if (isAuthenticated) {
-      this._checkAuth()
+    if (isAuthenticated || !isRehydrated) {
       return null
     }
 
@@ -43,8 +47,9 @@ class ProtectedViewFromUser extends Component {
   }
 }
 
-const mapStateToProps = ({ login }) => ({
-  isAuthenticated: !!login.jwt
+const mapStateToProps = ({ startup, login }) => ({
+  isAuthenticated: !!login.jwt,
+  isAuthenticated: login.session
 })
 
 const mapDispatchToProps = dispatch => ({
