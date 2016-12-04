@@ -44,7 +44,7 @@ class ProtectedViewFromUser extends Component {
 }
 
 const mapStateToProps = ({ login }) => ({
-  isAuthenticated: login.session
+  isAuthenticated: !!login.jwt
 })
 
 const mapDispatchToProps = dispatch => ({
