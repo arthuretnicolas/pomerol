@@ -12,7 +12,7 @@ import { LoginTypes } from '../Reducers/LoginRedux'
 
 /* ------------- Sagas ------------- */
 
-import { startup } from './StartupSaga'
+import { startup, watcherRehydrate } from './StartupSaga'
 import { incrementWithDelay } from './CounterSaga'
 import { getUser } from './GithubSaga'
 import { login } from './LoginSaga'
@@ -26,6 +26,7 @@ const api = DebugSettings.useFixtures ? FixtureAPI : API.create()
 export default function * root () {
   yield [
     takeLatest(StartupTypes.STARTUP, startup),
+    takeLatest('persist/REHYDRATE', watcherRehydrate),
     takeLatest(CounterTypes.ATTEMPT_INCREMENT, incrementWithDelay),
     takeLatest(GithubTypes.FETCH_USER_REQUEST, getUser, api),
     takeLatest(LoginTypes.LOGIN_ATTEMPT, login, api)
