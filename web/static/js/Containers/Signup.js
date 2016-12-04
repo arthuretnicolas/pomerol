@@ -4,6 +4,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 type Props = {
+  logout: () => void
 }
 
 class Signup extends Component {

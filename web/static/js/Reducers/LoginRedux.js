@@ -9,7 +9,8 @@ const { Types, Creators } = createActions({
   loginAttempt: ['email', 'password'],
   loginSuccess: ['token'],
   loginFailure: ['error'],
-  loginCancel: []
+  loginCancel: [],
+  logout: []
 })
 
 export const LoginTypes = Types
@@ -51,11 +52,19 @@ export const cancel = (state: Object, action: Object) =>
     error: 'CANCELLED'
   })
 
+export const logout = (state: Object, action: Object) =>
+  state.merge({
+    attempting: false,
+    error: null,
+    session: null
+  })
+
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.LOGIN_ATTEMPT]: attempt,
   [Types.LOGIN_SUCCESS]: success,
   [Types.LOGIN_FAILURE]: failure,
-  [Types.LOGIN_CANCEL]: cancel
+  [Types.LOGIN_CANCEL]: cancel,
+  [Types.LOGOUT]: logout
 })
