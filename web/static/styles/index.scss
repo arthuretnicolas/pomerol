@@ -3,6 +3,8 @@
 
 // variables
 @import "./variables.scss";
+@import "./colors.scss";
+@import "./metrics.scss";
 
 @import "./layout.scss";
 
@@ -22,8 +24,11 @@
 @import "../js/Components/Forms/Styles/FormLogin.scss";
 @import "../js/Components/Forms/Styles/FormInput.scss";
 
-// Dashboard
+// Dashboard containers
 @import "../js/Containers/Dashboard/Styles/DashboardMain.scss";
+
+// Dashboard components
+@import "../js/Components/Dashboard/Styles/DashboardSidebar.scss";
 
 // Core
 @import "../js/Containers/Styles/Signup.scss";

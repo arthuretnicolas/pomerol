@@ -471,7 +471,7 @@ body > #index {
   .Landing-Hero .masthead {
     display: flex;
     flex-direction: column;
-    padding: 15px 30px;
+    padding: 16px 32px;
     flex-grow: 1; }
   .Landing-Hero .title {
     max-width: 500px;
@@ -482,9 +482,9 @@ body > #index {
     line-height: 1.5;
     max-width: 350px;
     line-height: 1.5;
-    padding: 30px 0; }
+    padding: 32px 0; }
   .Landing-Hero .more {
-    margin-top: 30px;
+    margin-top: 32px;
     font-size: 14px; }
   @media (min-width: 1120px) {
     .Landing-Hero .masthead {
@@ -506,10 +506,10 @@ body > #index {
 .Landing-Navbar {
   display: flex;
   justify-content: flex-end;
-  padding: 30px 45px;
+  padding: 32px 48px;
   align-items: center; }
   .Landing-Navbar .signup {
-    margin-right: 15px; }
+    margin-right: 16px; }
   .Landing-Navbar .link {
     font-size: 14px; }
 
@@ -517,18 +517,18 @@ body > #index {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 67.5px 30px;
-  padding-bottom: 52.5px;
+  padding: 72px 32px;
+  padding-bottom: 56px;
   align-self: center; }
   .Landing-Features .feature {
-    padding-bottom: 30px; }
+    padding-bottom: 32px; }
   .Landing-Features .title {
     font-weight: 300;
     font-size: 26px;
-    padding-bottom: 15px; }
+    padding-bottom: 16px; }
   .Landing-Features .text {
     line-height: 1.5;
-    padding-bottom: 15px; }
+    padding-bottom: 16px; }
   @media (min-width: 1120px) {
     .Landing-Features {
       width: 1008px;
@@ -539,13 +539,13 @@ body > #index {
       align-self: center;
       flex-direction: row; }
       .Landing-Features .feature {
-        padding-right: 30px; } }
+        padding-right: 32px; } }
 
 .Landing-Testimonial {
   display: flex;
   justify-content: center;
-  padding: 30px;
-  padding-top: 45px;
+  padding: 32px;
+  padding-top: 48px;
   background-color: #edf4fd; }
   .Landing-Testimonial .container {
     display: flex;
@@ -555,32 +555,32 @@ body > #index {
     height: 80px;
     min-width: 80px;
     background-color: #c8dff9;
-    margin-bottom: 15px; }
+    margin-bottom: 16px; }
   .Landing-Testimonial .name {
     font-size: 17px;
     font-weight: 600;
     flex-shrink: 0;
-    padding-bottom: 15px; }
+    padding-bottom: 16px; }
   .Landing-Testimonial .description {
     line-height: 1.5;
-    padding-bottom: 15px;
+    padding-bottom: 16px;
     text-align: center; }
   @media (min-width: 1120px) {
     .Landing-Testimonial {
-      padding: 60px 30px; }
+      padding: 64px 32px; }
       .Landing-Testimonial .container {
         width: 1008px; } }
   @media (min-width: 840px) {
     .Landing-Testimonial .container {
       flex-direction: row; }
     .Landing-Testimonial .name, .Landing-Testimonial .picture {
-      margin-right: 30px; }
+      margin-right: 32px; }
     .Landing-Testimonial .description {
       text-align: left; } }
 
 .Landing-Footer {
   background-color: #0b3361;
-  padding: 15px 30px; }
+  padding: 16px 32px; }
   .Landing-Footer .container {
     display: flex;
     flex-direction: row;
@@ -596,7 +596,7 @@ body > #index {
     font-size: 17px;
     font-style: italic; }
   .Landing-Footer .container-button {
-    margin-left: 15px; }
+    margin-left: 16px; }
   @media (min-width: 1120px) {
     .Landing-Footer .masthead {
       width: 1120px;
@@ -610,8 +610,28 @@ body > #index {
 
 .Dashboard-DashboardMain {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   flex: 1; }
+  .Dashboard-DashboardMain .container-content {
+    background-color: #176FD4;
+    flex-grow: 1; }
+
+.Dashboard-DashboardSidebar {
+  background-color: #dfecfc;
+  width: 220px;
+  background-color: #dfecfc;
+  padding: 8px 16px; }
+  .Dashboard-DashboardSidebar .container-category {
+    padding-top: 32px; }
+  .Dashboard-DashboardSidebar .title-category {
+    font-weight: 600; }
+  .Dashboard-DashboardSidebar .option {
+    display: flex;
+    padding-top: 8px;
+    text-decoration: none; }
+  .Dashboard-DashboardSidebar .option-selected {
+    color: #176FD4;
+    font-weight: 600; }
 
 .Login {
   display: flex;

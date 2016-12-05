@@ -1,0 +1,29 @@
+.Dashboard-DashboardSidebar {
+  background-color: $sidebar-background;
+  width: $sidebar-width;
+  background-color: $sidebar-background;
+  padding: $small-padding $base-padding;
+
+  .container-category {
+    padding-top: $double-padding;
+  }
+
+  .title-category {
+    font-weight: $semi-bold;
+  }
+
+  .container-options {
+
+  }
+
+  .option {
+    display: flex;
+    padding-top: $small-padding;
+    text-decoration: none;
+  }
+
+  .option-selected {
+    color: $color-primary;
+    font-weight: $semi-bold;
+  }
+}

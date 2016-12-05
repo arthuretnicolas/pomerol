@@ -1,30 +1,26 @@
 // @flow
 
 import React, { Component } from 'react'
-import LoginActions from '../../Reducers/LoginRedux'
-import Button from '../../Components/Button'
 import { connect } from 'react-redux'
+import DashboardSidebar from '../../Components/Dashboard/DashboardSidebar'
+import { sidebarOptions } from '../../Data/index'
 
 type Props = {
-  logout: () => void
 }
 
 class DashboardMain extends Component {
   props: Props
 
   render () {
-    const { logout } = this.props
-
     return (
       <div className='Dashboard-DashboardMain'>
-        <div className='container'>
-          <div>
-            Dashboard main
-          </div>
+        <DashboardSidebar
+          active={0}
+          data={sidebarOptions}
+        />
 
-          <Button onClick={logout}>
-            Log out
-          </Button>
+        <div className='container-content'>
+          content
         </div>
       </div>
     )
@@ -35,7 +31,6 @@ const mapStateToProps = ({ counter }) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  logout: () => dispatch(LoginActions.logout())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(DashboardMain)

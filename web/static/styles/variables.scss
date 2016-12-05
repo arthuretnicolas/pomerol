@@ -1,17 +1,10 @@
-$base-padding: 15px;
-$double-padding: $base-padding * 2;
-$triple-padding: $base-padding * 3;
+$small-padding: 8px;
+$base-padding: $small-padding * 2;
+$double-padding: $small-padding * 4;
+$triple-padding: $small-padding * 6;
 
 $vertical-padding-button: 8px;
 $horizontal-padding-button: 12px;
-
-$color-primary: #176FD4;
-$color-success: rgb(0, 199, 6);
-$color-snow: #fff;
-$color-frost: lighten($color-primary, 50%);
-$color-placeholder: lighten($color-primary, 42%);
-$color-danger: #F40033;
-$background-dark: darken($color-primary, 25%);
 
 $break-point-desktop: 1120px;
 $break-point-tablet: 840px;
