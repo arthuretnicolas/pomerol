@@ -12,7 +12,7 @@ type Props = {
   counter: { value: number, attempting?: boolean }
 }
 
-class Contacts extends Component {
+class Counters extends Component {
   props: Props
 
   static defaultProps = {
@@ -39,7 +39,7 @@ class Contacts extends Component {
         <NavigationBar />
 
         <h1>
-          Contacts: {attempting ? '...' : value}
+          Counters: {attempting ? '...' : value}
         </h1>
 
         <div>
@@ -67,4 +67,4 @@ const mapDispatchToProps = dispatch => ({
   attemptIncrement: amount => dispatch(CounterActions.attemptIncrement(amount))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Contacts)
+export default connect(mapStateToProps, mapDispatchToProps)(Counters)

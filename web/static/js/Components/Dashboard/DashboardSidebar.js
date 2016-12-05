@@ -4,7 +4,7 @@ import React from 'react'
 import { Link } from 'react-router'
 
 type Props = {
-  active: number,
+  pathname: string,
   data: Array<{
     category: string,
     options: Array<{
@@ -16,7 +16,7 @@ type Props = {
   }>
 }
 
-const renderCategory = ({ category, options }, active, index) => (
+const renderCategory = ({ category, options }, pathname, index) => (
   <div className='container-category' key={index}>
     <div className='title-category'>
       {category}
@@ -26,7 +26,7 @@ const renderCategory = ({ category, options }, active, index) => (
       {
         options.map(opt => (
           <Link
-            className={`option ${opt.id === active ? 'option-selected' : ''}`}
+            className={`option ${opt.link === pathname ? 'option-selected' : ''}`}
             key={opt.id}
             to={opt.link}
           >
@@ -38,10 +38,11 @@ const renderCategory = ({ category, options }, active, index) => (
   </div>
 )
 
-const DashboardSidebar = ({ active, data }: Props) => (
+const DashboardSidebar = ({ pathname, data }: Props) => (
   <div className='Dashboard-DashboardSidebar'>
     {
-      data.map((item, index) => renderCategory(item, active, index))
+      data.map((item, index) =>
+        renderCategory(item, pathname, index))
     }
   </div>
 )
