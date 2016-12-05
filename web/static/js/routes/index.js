@@ -14,7 +14,7 @@ import Signup from '../Containers/Signup'
 import Login from '../Containers/Login'
 
 // Dashboard
-import DashboardContainer from '../Containers/Dashboard/DashboardContainer'
+import DashboardContainer from '../Components/Dashboard/DashboardContainer'
 import DashboardMain from '../Containers/Dashboard/DashboardMain'
 import DashboardQuotes from '../Containers/Dashboard/DashboardQuotes'
 import DashboardContacts from '../Containers/Dashboard/DashboardContacts'

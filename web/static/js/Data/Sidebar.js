@@ -29,19 +29,19 @@ export const sidebarOptions = [
         id: 3,
         label: 'Option 1',
         icon: 'icon-name-1',
-        link: '/dashboard'
+        link: '/dashboard-X'
       },
       {
         id: 4,
         label: 'Option 2',
         icon: 'icon-name-2',
-        link: '/dashboard'
+        link: '/dashboard-Y'
       },
       {
         id: 5,
         label: 'Option 3',
         icon: 'icon-name-3',
-        link: '/dashboard'
+        link: '/dashboard-Z'
       }
     ]
   }
