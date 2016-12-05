@@ -6,13 +6,13 @@ import { connect } from 'react-redux'
 type Props = {
 }
 
-class DashboardMain extends Component {
+class DashboardContacts extends Component {
   props: Props
 
   render () {
     return (
       <div className='container-content'>
-        Main
+        Contacts
       </div>
     )
   }
@@ -24,4 +24,4 @@ const mapStateToProps = ({ counter }) => ({
 const mapDispatchToProps = dispatch => ({
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(DashboardMain)
+export default connect(mapStateToProps, mapDispatchToProps)(DashboardContacts)

@@ -608,17 +608,22 @@ body > #index {
 .Forms-Form {
   flex-direction: column; }
 
+.Dashboard-DashboardContainer {
+  display: flex;
+  flex-direction: row;
+  flex: 1; }
+  .Dashboard-DashboardContainer .container-content {
+    background-color: #176FD4;
+    flex-grow: 1; }
+
 .Dashboard-DashboardMain {
   display: flex;
   flex-direction: row;
   flex: 1; }
-  .Dashboard-DashboardMain .container-content {
-    background-color: #176FD4;
-    flex-grow: 1; }
 
 .Dashboard-DashboardSidebar {
   background-color: #dfecfc;
-  width: 220px;
+  width: 200px;
   background-color: #dfecfc;
   padding: 8px 16px; }
   .Dashboard-DashboardSidebar .container-category {

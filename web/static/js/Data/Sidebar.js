@@ -6,7 +6,7 @@ export const sidebarOptions = [
         id: 0,
         label: 'Dashboard',
         icon: 'icon-name-1',
-        link: '/'
+        link: '/dashboard'
       },
       {
         id: 1,
@@ -29,19 +29,19 @@ export const sidebarOptions = [
         id: 3,
         label: 'Option 1',
         icon: 'icon-name-1',
-        link: '/'
+        link: '/dashboard'
       },
       {
         id: 4,
         label: 'Option 2',
         icon: 'icon-name-2',
-        link: '/quotes'
+        link: '/dashboard'
       },
       {
         id: 5,
         label: 'Option 3',
         icon: 'icon-name-3',
-        link: '/contacts'
+        link: '/dashboard'
       }
     ]
   }

@@ -16,8 +16,8 @@ const _navigationItems = [
     link: '/'
   },
   {
-    name: 'Contacts',
-    link: '/contacts'
+    name: 'Counters',
+    link: '/counters'
   },
   {
     name: 'Github Users',
