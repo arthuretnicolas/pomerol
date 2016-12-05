@@ -21,6 +21,8 @@ defmodule Pomerol.User do
     has_many :organization_memberships, Pomerol.OrganizationMembership, foreign_key: :member_id
     has_many :organizations, through: [:organization_memberships, :organization]
 
+    has_many :authorizations, Pomerol.Authorization
+
     belongs_to :country, Pomerol.Country
 
     timestamps
@@ -28,6 +30,11 @@ defmodule Pomerol.User do
 
   @required_fields ~w(first_name last_name email password organization_name country_id locale)a
   @optional_fields ~w(encrypted_password)a
+
+  def changeset(user, params \\ %{}) do
+    user
+    |> cast(params, [:first_name, :email, :locale, :last_name])
+  end
 
   @doc """
   Builds a changeset for registering the user.
@@ -46,8 +53,10 @@ defmodule Pomerol.User do
 
   def update_changeset(user, params \\ %{}) do
     user
-    |> cast(params, [:first_name, :last_name, :locale])
+    |> cast(params, [:first_name, :last_name, :locale, :country_id])
     |> validate_inclusion(:locale, ["en", "fr"])
+    |> foreign_key_constraint(:country_id)
+    |> assoc_constraint(:country)
   end
 
   def password_reset_request_changeset(user, params \\ %{}) do
