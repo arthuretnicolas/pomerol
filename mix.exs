@@ -25,6 +25,7 @@ defmodule Pomerol.Mixfile do
       applications: [
         :bamboo,
         :comeonin,
+        :corsica,
         :cowboy,
         :gettext,
         :logger,
@@ -36,7 +37,9 @@ defmodule Pomerol.Mixfile do
         :std_json_io,
         :timex,
         :timex_ecto,
-        :translator
+        :translator,
+        :ueberauth,
+        :ueberauth_google
       ]
     ]
   end
@@ -53,6 +56,7 @@ defmodule Pomerol.Mixfile do
       {:bamboo, "~> 0.7"},
       {:canary, "~> 1.1.0"}, # Authorization
       {:comeonin, "~> 2.5"},
+      {:corsica, "~> 0.5"},
       {:cowboy, "~> 1.0"},
       {:credo, "~> 0.5", only: [:dev, :test]}, # Code style suggestions
       {:excoveralls, "~> 0.5", only: :test}, # Test coverage
@@ -69,7 +73,9 @@ defmodule Pomerol.Mixfile do
       {:std_json_io, "~> 0.1", override: true},
       {:timex, "~> 3.0"},
       {:timex_ecto, "~> 3.0"},
-      {:translator, github: "kenta-aktsk/translator"}
+      {:translator, github: "kenta-aktsk/translator"},
+      {:ueberauth, "~> 0.4"},
+      {:ueberauth_google, "~> 0.4"}
     ]
   end
 

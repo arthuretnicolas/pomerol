@@ -40,6 +40,15 @@ config :canary, repo: Pomerol.Repo
 config :canary, unauthorized_handler: {Pomerol.AuthenticationHelpers, :handle_unauthorized}
 config :canary, not_found_handler: {Pomerol.AuthenticationHelpers, :handle_not_found}
 
+config :ueberauth, Ueberauth,
+  providers: [
+    # google: {Ueberauth.Strategy.Google, []}
+    google: {Ueberauth.Strategy.Google, [
+      callback_methods: ["POST"],
+      callback_path: "/api/v1/auth/google/callback",
+      callback_url: "http://localhost:8080" # Where my Brunch app is running
+    ]}
+  ]
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env}.exs"
