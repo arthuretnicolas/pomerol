@@ -42,7 +42,6 @@ config :canary, not_found_handler: {Pomerol.AuthenticationHelpers, :handle_not_f
 
 config :ueberauth, Ueberauth,
   providers: [
-    # google: {Ueberauth.Strategy.Google, []}
     google: {Ueberauth.Strategy.Google, [
       callback_methods: ["POST"],
       callback_path: "/api/v1/auth/google/callback",
