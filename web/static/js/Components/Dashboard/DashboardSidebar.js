@@ -1,10 +1,9 @@
 // @flow
 
 import React from 'react'
-import { Link } from 'react-router'
+import { browserHistory, Link } from 'react-router'
 
 type Props = {
-  pathname: string,
   data: Array<{
     category: string,
     options: Array<{
@@ -16,33 +15,37 @@ type Props = {
   }>
 }
 
-const renderCategory = ({ category, options }, pathname, index) => (
-  <div className='container-category' key={index}>
-    <div className='title-category'>
-      {category}
-    </div>
+const renderCategory = ({ category, options }, index) => {
+  const pathname = browserHistory.getCurrentLocation().pathname // e.g: '/dashboard'
 
-    <div className='container-options'>
-      {
-        options.map(opt => (
-          <Link
-            className={`option ${opt.link === pathname ? 'option-selected' : ''}`}
-            key={opt.id}
-            to={opt.link}
-          >
-            {opt.label}
-          </Link>
-        ))
-      }
-    </div>
-  </div>
-)
+  return (
+    <div className='container-category' key={index}>
+      <div className='title-category'>
+        {category}
+      </div>
 
-const DashboardSidebar = ({ pathname, data }: Props) => (
+      <div className='container-options'>
+        {
+          options.map(opt => (
+            <Link
+              className={`option ${opt.link === pathname ? 'option-selected' : ''}`}
+              key={opt.id}
+              to={opt.link}
+            >
+              {opt.label}
+            </Link>
+          ))
+        }
+      </div>
+    </div>
+  )
+}
+
+const DashboardSidebar = ({ data }: Props) => (
   <div className='Dashboard-DashboardSidebar'>
     {
       data.map((item, index) =>
-        renderCategory(item, pathname, index))
+        renderCategory(item, index))
     }
   </div>
 )

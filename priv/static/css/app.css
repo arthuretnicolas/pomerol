@@ -608,18 +608,15 @@ body > #index {
 .Forms-Form {
   flex-direction: column; }
 
-.Dashboard-DashboardContainer {
-  display: flex;
-  flex-direction: row;
-  flex: 1; }
-  .Dashboard-DashboardContainer .container-content {
-    background-color: #176FD4;
-    flex-grow: 1; }
-
 .Dashboard-DashboardMain {
   display: flex;
   flex-direction: row;
   flex: 1; }
+
+.Dashboard-DashboardContainer {
+  display: flex;
+  flex: 1;
+  background-color: #edf4fd; }
 
 .Dashboard-DashboardSidebar {
   background-color: #dfecfc;
