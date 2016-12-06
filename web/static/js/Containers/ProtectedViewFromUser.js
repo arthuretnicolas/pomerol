@@ -24,7 +24,7 @@ class ProtectedViewFromUser extends Component {
     const { isAuthenticated } = this.props
 
     if (isAuthenticated) {
-      browserHistory.push('/github-users')
+      browserHistory.push('/dashboard')
     }
   }
 
