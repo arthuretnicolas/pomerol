@@ -8,7 +8,7 @@ type Props = {
   year: number
 }
 
-const GithubUser = ({ url, name, year }: Props) => (
+const GithubUser = ({ url, name = 'No Name', year }: Props) => (
   <div style={{
     display: 'flex',
     flexDirection: 'row',
@@ -25,7 +25,7 @@ const GithubUser = ({ url, name, year }: Props) => (
     </div>
 
     <div style={{ marginLeft: 15 }}>
-      {name || 'No name'}
+      {name}
     </div>
 
     <div>

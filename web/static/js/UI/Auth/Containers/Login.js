@@ -2,8 +2,8 @@
 
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import FormLogin from '../Components/Forms/FormLogin'
-import LoginActions from '../Reducers/LoginRedux'
+import FormLogin from '../../Forms/Components/FormLogin'
+import LoginActions from '../../../Reducers/LoginRedux'
 // import NavigationBar from '../Components/NavigationBar'
 
 type Props = {

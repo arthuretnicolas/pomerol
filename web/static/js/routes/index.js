@@ -2,25 +2,28 @@
 
 import React from 'react'
 import { Route, IndexRoute } from 'react-router'
-import AppContainer from '../Containers'
-import Landing from '../Components/Landing/Landing'
-import Counters from '../Containers/Counters'
-import GithubUsers from '../Containers/GithubUsers'
+
+// Shared
+import Counters from '../UI/Shared/Containers/Counters'
+import GithubUsers from '../UI/Shared/Containers/GithubUsers'
+
+// Landing
+import Landing from '../UI/Landing/Components/Landing'
 
 // Auth
-import ProtectedViewFromUser from '../Containers/ProtectedViewFromUser'
-import ProtectedView from '../Containers/ProtectedView'
-import Signup from '../Containers/Signup'
-import Login from '../Containers/Login'
+import ProtectedViewFromUser from '../UI/Auth/Containers/ProtectedViewFromUser'
+import ProtectedView from '../UI/Auth/Containers/ProtectedView'
+import Signup from '../UI/Auth/Containers/Signup'
+import Login from '../UI/Auth/Containers/Login'
 
 // Dashboard
-import DashboardContainer from '../Components/Dashboard/DashboardContainer'
-import DashboardMain from '../Containers/Dashboard/DashboardMain'
-import DashboardQuotes from '../Containers/Dashboard/DashboardQuotes'
-import DashboardContacts from '../Containers/Dashboard/DashboardContacts'
+import DashboardContainer from '../UI/Dashboard/Components/DashboardContainer'
+import DashboardMain from '../UI/Dashboard/Containers/DashboardMain'
+import DashboardQuotes from '../UI/Dashboard/Containers/DashboardQuotes'
+import DashboardContacts from '../UI/Dashboard/Containers/DashboardContacts'
 
 export default (
-  <Route path='/' component={AppContainer}>
+  <Route path='/'>
     <IndexRoute component={Landing} />
     <Route path='/counters' component={Counters} />
     <Route path='/github-users' component={GithubUsers} />

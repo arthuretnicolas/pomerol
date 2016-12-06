@@ -1,8 +1,8 @@
 // @flow
 
 import React from 'react'
-import DashboardSidebar from '../../Components/Dashboard/DashboardSidebar'
-import { sidebarOptions } from '../../Data/index'
+import DashboardSidebar from '../../Dashboard/Components/DashboardSidebar'
+import { sidebarOptions } from '../../../Data/index'
 
 type Props = {
   children: React.Element<*>

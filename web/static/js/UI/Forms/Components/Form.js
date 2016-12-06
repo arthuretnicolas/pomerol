@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react'
-import Button from '../Button'
+import Button from '../../Shared/Components/Button'
 import { Link } from 'react-router'
 
 type Props = {

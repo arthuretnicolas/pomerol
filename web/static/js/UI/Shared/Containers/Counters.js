@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import CounterActions from '../Reducers/CounterRedux'
+import CounterActions from '../../../Reducers/CounterRedux'
 import NavigationBar from '../Components/NavigationBar'
 
 type Props = {

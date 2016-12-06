@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { Link } from 'react-router'
-import Button from '../Button'
+import Button from '../../Shared/Components/Button'
 
 const Navbar = () => (
   <div className='Landing-Navbar'>

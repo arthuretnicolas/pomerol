@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import GithubActions from '../Reducers/GithubRedux'
+import GithubActions from '../../../Reducers/GithubRedux'
 import NavigationBar from '../Components/NavigationBar'
 import GithubUser from '../Components/GithubUser'
 

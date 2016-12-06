@@ -3,8 +3,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import App from './Containers/index'
-import Landing from './Components/Landing/Landing'
+import App from './UI/index'
+import Landing from './UI/Landing/Components/Landing'
 
 ReactDOM.render(
   <App>

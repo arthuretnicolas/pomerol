@@ -8,29 +8,27 @@
 
 @import "./layout.scss";
 
-// Components
-@import "../js/Components/Styles/Button.scss";
+// Shared
+@import "../js/UI/Shared/Components/Styles/Button.scss";
 
 // Landing
-@import "../js/Components/Landing/Styles/Landing.scss";
-@import "../js/Components/Landing/Styles/Hero.scss";
-@import "../js/Components/Landing/Styles/Navbar.scss";
-@import "../js/Components/Landing/Styles/Features.scss";
-@import "../js/Components/Landing/Styles/Testimonial.scss";
-@import "../js/Components/Landing/Styles/Footer.scss";
+@import "../js/UI/Landing/Components/Styles/Landing.scss";
+@import "../js/UI/Landing/Components/Styles/Hero.scss";
+@import "../js/UI/Landing/Components/Styles/Navbar.scss";
+@import "../js/UI/Landing/Components/Styles/Features.scss";
+@import "../js/UI/Landing/Components/Styles/Testimonial.scss";
+@import "../js/UI/Landing/Components/Styles/Footer.scss";
 
 // Forms
-@import "../js/Components/Forms/Styles/Form.scss";
-@import "../js/Components/Forms/Styles/FormLogin.scss";
-@import "../js/Components/Forms/Styles/FormInput.scss";
+@import "../js/UI/Forms/Components/Styles/Form.scss";
+@import "../js/UI/Forms/Components/Styles/FormLogin.scss";
+@import "../js/UI/Forms/Components/Styles/FormInput.scss";
 
-// Dashboard containers
-@import "../js/Containers/Dashboard/Styles/DashboardMain.scss";
+// Dashboard
+@import "../js/UI/Dashboard/Containers/Styles/DashboardMain.scss";
+@import "../js/UI/Dashboard/Components/Styles/DashboardContainer.scss";
+@import "../js/UI/Dashboard/Components/Styles/DashboardSidebar.scss";
 
-// Dashboard components
-@import "../js/Components/Dashboard/Styles/DashboardContainer.scss";
-@import "../js/Components/Dashboard/Styles/DashboardSidebar.scss";
-
-// Core
-@import "../js/Containers/Styles/Signup.scss";
-@import "../js/Containers/Styles/Login.scss";
+// Auth
+@import "../js/UI/Auth/Containers/Styles/Signup.scss";
+@import "../js/UI/Auth/Containers/Styles/Login.scss";

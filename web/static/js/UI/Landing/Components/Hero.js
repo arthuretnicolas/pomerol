@@ -2,7 +2,7 @@
 
 import React from 'react'
 import Navbar from './Navbar'
-import Button from '../Button'
+import Button from '../../Shared/Components/Button'
 import { Link } from 'react-router'
 
 const Hero = () => (
