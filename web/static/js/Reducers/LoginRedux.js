@@ -21,7 +21,7 @@ export default Creators
 export const INITIAL_STATE = Immutable({
   attempting: false,
   error: null,
-  jwt: null
+  jwt: ''
 })
 
 /* ------------- Reducers ------------- */
@@ -43,7 +43,7 @@ export const failure = (state: Object, { error }: Object) =>
   state.merge({
     attempting: false,
     error,
-    jwt: null
+    jwt: ''
   })
 
 export const cancel = (state: Object, action: Object) =>
@@ -56,7 +56,7 @@ export const logout = (state: Object, action: Object) =>
   state.merge({
     attempting: false,
     error: null,
-    session: null
+    jwt: ''
   })
 
 /* ------------- Hookup Reducers To Types ------------- */
