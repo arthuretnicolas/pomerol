@@ -15,6 +15,7 @@ type Props = {
 const FormInput = ({ type, disabled, name, placeholder, required, onChange, value }: Props) => (
   <div className='Forms-FormInput'>
     <input
+      className='input'
       type={type}
       disabled={disabled}
       name={name}

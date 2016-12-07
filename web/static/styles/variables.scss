@@ -1,4 +1,5 @@
 $small-padding: 8px;
+$tiny-padding: $small-padding / 2;
 $base-padding: $small-padding * 2;
 $double-padding: $small-padding * 4;
 $triple-padding: $small-padding * 6;
@@ -13,6 +14,7 @@ $break-point-phone: 520px;
 $max-width-desktop: 1008px;
 
 $border-radius-button: 3px;
+$border-radius-input: 3px;
 
 $font-size-small: 14px;
 $font-size-body: 15px;
@@ -21,7 +23,8 @@ $font-size-header: 46px;
 
 $button-hover-darken: 5%;
 
-$line-height-spaced: 1.5;
+$line-height-spaced: 1.41;
+$line-height-input: 1.82;
 
 $semi-bold: 600;
 $bold: 700;

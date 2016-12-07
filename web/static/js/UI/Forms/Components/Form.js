@@ -20,14 +20,14 @@ type Props = {
 const Form = ({ header, text, buttonSubmit, children, attempting }: Props) => (
   <div className='Forms-Form'>
     {
-      header && <h1>
+      header && <h1 className='header'>
         {header}
       </h1>
     }
 
     {
       text && <div>
-        {text.label}
+        {text.label}&nbsp;
         {
           !!text.linkLabel && !!text.to && <Link to={text.to}>
             {text.linkLabel}

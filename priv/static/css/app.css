@@ -402,6 +402,9 @@ template {
 [hidden] {
   display: none; }
 
+h1, h2, h3, h4, h5 {
+  font-weight: 600; }
+
 h1, h2, h3, h4, h5, p {
   margin: 0; }
 
@@ -418,7 +421,10 @@ html {
 body {
   font-size: 15px;
   display: flex;
-  flex: 1; }
+  flex: 1;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  color: #333; }
 
 body > #index {
   display: flex;
@@ -479,7 +485,7 @@ body > #index {
     font-weight: 300; }
   .Landing-Hero .value-proposition {
     font-size: 17px;
-    line-height: 1.5;
+    line-height: 1.41;
     max-width: 350px;
     line-height: 1.5;
     padding: 32px 0; }
@@ -527,7 +533,7 @@ body > #index {
     font-size: 26px;
     padding-bottom: 16px; }
   .Landing-Features .text {
-    line-height: 1.5;
+    line-height: 1.41;
     padding-bottom: 16px; }
   @media (min-width: 1120px) {
     .Landing-Features {
@@ -562,7 +568,7 @@ body > #index {
     flex-shrink: 0;
     padding-bottom: 16px; }
   .Landing-Testimonial .description {
-    line-height: 1.5;
+    line-height: 1.41;
     padding-bottom: 16px;
     text-align: center; }
   @media (min-width: 1120px) {
@@ -590,7 +596,7 @@ body > #index {
     color: #fff;
     font-weight: 700;
     font-size: 17px;
-    line-height: 1.5; }
+    line-height: 1.41; }
   .Landing-Footer .value-proposition {
     color: #fff;
     font-size: 17px;
@@ -607,6 +613,23 @@ body > #index {
 
 .Forms-Form {
   flex-direction: column; }
+  .Forms-Form .header {
+    padding-bottom: 8px; }
+  .Forms-Form .input-container {
+    padding-top: 16px;
+    padding-bottom: 16px; }
+
+.Forms-FormInput {
+  display: flex;
+  padding-top: 4px;
+  padding-bottom: 4px; }
+  .Forms-FormInput .input {
+    display: flex;
+    flex: 1;
+    padding: 4px 8px;
+    line-height: 1.82;
+    border-radius: 3px;
+    border: 1px solid #ccc; }
 
 .Dashboard-DashboardMain {
   display: flex;
@@ -639,6 +662,7 @@ body > #index {
   display: flex;
   flex: 1; }
   .Login .form-container {
+    padding: 16px;
     min-width: 330px; }
   .Login .illustration {
     display: none; }

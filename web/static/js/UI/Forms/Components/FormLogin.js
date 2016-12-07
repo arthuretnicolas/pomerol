@@ -55,11 +55,13 @@ export default class FormLogin extends Component {
               <FormInput
                 value={email}
                 type='email'
+                placeholder='Your email'
                 onChange={event => onChange('email', event && event.target.value)}
               />
               <FormInput
                 value={password}
                 type='password'
+                placeholder='Your password'
                 onChange={event => onChange('password', event && event.target.value)}
               />
             </div>

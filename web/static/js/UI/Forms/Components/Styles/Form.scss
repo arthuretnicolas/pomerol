@@ -1,3 +1,12 @@
 .Forms-Form {
   flex-direction: column;
+
+  .header {
+    padding-bottom: $small-padding;
+  }
+
+  .input-container {
+    padding-top: $base-padding;
+    padding-bottom: $base-padding;
+  }
 }

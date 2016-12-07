@@ -1,3 +1,7 @@
+h1, h2, h3, h4, h5 {
+  font-weight: $semi-bold;
+}
+
 h1, h2, h3, h4, h5, p {
   margin: 0;
 }
@@ -19,6 +23,9 @@ body {
   font-size: $font-size-body;
   display: flex;
   flex: 1;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  color: $gray-dark;
 }
 
 body > #index {
