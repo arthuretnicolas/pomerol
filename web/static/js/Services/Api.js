@@ -25,6 +25,12 @@ const create = (baseURL: string = 'http://localhost:4000/api/v1/') => {
       password
     })
 
+  const signup = (email: string, password: string) =>
+    api.post('signup', {
+      email,
+      password
+    })
+
   const getUser = (name: string) => api.get(`users/${name}`)
 
   const naviMonitor = response => console.log('%cAPI response', 'background-color: purple; color: white; font-weight: 500; padding: 5px', response)
@@ -34,7 +40,8 @@ const create = (baseURL: string = 'http://localhost:4000/api/v1/') => {
 
   return {
     getUser,
-    login
+    login,
+    signup
   }
 }
 

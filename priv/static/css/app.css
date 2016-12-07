@@ -658,6 +658,9 @@ body > #index {
     color: #176FD4;
     font-weight: 600; }
 
+.Signup {
+  padding: 16px; }
+
 .Login {
   display: flex;
   flex: 1; }

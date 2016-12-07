@@ -21,6 +21,7 @@ import DashboardContainer from '../UI/Dashboard/Components/DashboardContainer'
 import DashboardMain from '../UI/Dashboard/Containers/DashboardMain'
 import DashboardQuotes from '../UI/Dashboard/Containers/DashboardQuotes'
 import DashboardContacts from '../UI/Dashboard/Containers/DashboardContacts'
+import DashboardSettings from '../UI/Dashboard/Containers/DashboardSettings'
 
 export default (
   <Route path='/'>
@@ -41,6 +42,7 @@ export default (
         <Route path='/dashboard' component={DashboardMain} />
         <Route path='/quotes' component={DashboardQuotes} />
         <Route path='/contacts' component={DashboardContacts} />
+        <Route path='/settings' component={DashboardSettings} />
       </Route>
 
       <Route path='*' component={() => <h1>Not found!</h1>} />

@@ -9,6 +9,7 @@ import { StartupTypes } from '../Reducers/StartupRedux'
 import { CounterTypes } from '../Reducers/CounterRedux'
 import { GithubTypes } from '../Reducers/GithubRedux'
 import { LoginTypes } from '../Reducers/LoginRedux'
+import { SignupTypes } from '../Reducers/SignupRedux'
 
 /* ------------- Sagas ------------- */
 
@@ -16,6 +17,7 @@ import { startup, watcherRehydrate } from './StartupSaga'
 import { incrementWithDelay } from './CounterSaga'
 import { getUser } from './GithubSaga'
 import { login, logout } from './LoginSaga'
+import { signup } from './SignupSaga'
 
 /* ------------- API ------------- */
 
@@ -30,6 +32,7 @@ export default function * root () {
     takeLatest(CounterTypes.ATTEMPT_INCREMENT, incrementWithDelay),
     takeLatest(GithubTypes.FETCH_USER_REQUEST, getUser, api),
     takeLatest(LoginTypes.LOGIN_ATTEMPT, login, api),
-    takeLatest(LoginTypes.LOGOUT, logout)
+    takeLatest(LoginTypes.LOGOUT, logout),
+    takeLatest(SignupTypes.SIGNUP_ATTEMPT, signup, api)
   ]
 }

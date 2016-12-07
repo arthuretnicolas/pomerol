@@ -14,7 +14,7 @@ type Props = {
   attempting: boolean
 }
 
-export default class FormLogin extends Component {
+export default class FormSignup extends Component {
   props: Props
 
   _onSubmit = (event: Event) => { // eslint-disable-line
@@ -38,17 +38,17 @@ export default class FormLogin extends Component {
 
     return (
       <form
-        className='Form-FormLogin'
+        className='Form-FormSignup'
         onSubmit={this._onSubmit}
       >
         <Form
-          header='Login in'
+          header='Get started with a free account'
           text={{
-            label: 'Need a MailChimp account?',
-            linkLabel: 'Create an account',
-            to: 'signup'
+            label: 'Already have a MailChimp account?',
+            linkLabel: 'Log in',
+            to: 'login'
           }}
-          buttonSubmit='Log in'
+          buttonSubmit='Sign up'
           attempting={attempting}
           children={
             <div>

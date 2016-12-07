@@ -27,9 +27,9 @@ export const sidebarOptions = [
     options: [
       {
         id: 3,
-        label: 'Option 1',
+        label: 'Settings',
         icon: 'icon-name-1',
-        link: '/dashboard-X'
+        link: '/settings'
       },
       {
         id: 4,
