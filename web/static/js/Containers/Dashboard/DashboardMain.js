@@ -11,7 +11,7 @@ class DashboardMain extends Component {
 
   render () {
     return (
-      <div className='container-content'>
+      <div className='Dashboard-DashboardMain'>
         Main
       </div>
     )

@@ -1,0 +1,24 @@
+.Shared-TagSidebar {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  background-color: #fff;
+
+  .option {
+    display: flex;
+    padding: $small-padding $base-padding;
+    text-decoration: none;
+    border-left: 2px solid transparent;
+    cursor: pointer;
+    transition: border 0.1s ease;
+
+    &:hover {
+      border-color: $color-primary;
+    }
+
+    &.option-selected {
+      border-color: $color-primary;
+      cursor: default;
+    }
+  }
+}

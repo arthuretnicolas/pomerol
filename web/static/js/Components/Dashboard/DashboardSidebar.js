@@ -7,7 +7,7 @@ type Props = {
   data: Array<{
     category: string,
     options: Array<{
-      id: number,
+      id: number | string,
       label: string,
       icon: string,
       link: string

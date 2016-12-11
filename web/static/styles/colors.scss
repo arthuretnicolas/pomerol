@@ -2,6 +2,7 @@ $gray-dark: #333;
 $gray-light: #ccc;
 
 $color-primary: #176FD4;
+
 $color-success: rgb(0, 199, 6);
 $color-snow: #fff;
 $color-frost: lighten($color-primary, 50%);
@@ -12,3 +13,5 @@ $background-dark: darken($color-primary, 25%);
 
 // dashboard
 $sidebar-background: lighten($color-primary, 47%);
+
+$color-body: #333;

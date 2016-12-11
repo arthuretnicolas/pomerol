@@ -1,0 +1,15 @@
+.Dashboard-DashboardContacts {
+  display: flex;
+  flex: 1;
+
+  .container-sidebar {
+    display: flex;
+    flex: 1;
+    max-width: $sidebar-tags-width;
+  }
+
+  .container-content {
+    display: flex;
+    flex: 1;
+  }
+}
