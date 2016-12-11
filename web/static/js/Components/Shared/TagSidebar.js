@@ -2,21 +2,18 @@
 
 import React from 'react'
 
-type Props = {
-  data: Array<{
-    id: number,
-    label: string
-  }>,
-  selected: number | string,
-  onClick: number => void
-}
-
-type optionAllType = {
+type optionType = {
   id: number,
   label: string
 }
 
-const optionAll: optionAllType = {
+type Props = {
+  data: Array<optionType>,
+  selected: number | string,
+  onClick: number => void
+}
+
+const optionAll: optionType = {
   id: -1,
   label: 'All'
 }
