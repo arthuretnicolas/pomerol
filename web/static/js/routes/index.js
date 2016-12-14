@@ -26,8 +26,6 @@ import DashboardSettings from '../UI/Dashboard/Containers/DashboardSettings'
 export default (
   <Route path='/'>
     <IndexRoute component={Landing} />
-    <Route path='/counters' component={Counters} />
-    <Route path='/github-users' component={GithubUsers} />
 
     <Route component={ProtectedViewFromUser}>
       <Route path='/signup' component={Signup} />
