@@ -10,6 +10,7 @@
 
 // Shared
 @import "../js/UI/Shared/Components/Styles/Button.scss";
+@import "../js/UI/Shared/Components/Styles/TagSidebar.scss";
 
 // Landing
 @import "../js/UI/Landing/Components/Styles/Landing.scss";
@@ -25,7 +26,9 @@
 @import "../js/UI/Forms/Components/Styles/FormInput.scss";
 
 // Dashboard
+@import "../js/UI/Dashboard/Containers/Styles/DashboardContainer.scss";
 @import "../js/UI/Dashboard/Containers/Styles/DashboardMain.scss";
+@import "../js/UI/Dashboard/Containers/Styles/DashboardContacts.scss";
 @import "../js/UI/Dashboard/Components/Styles/DashboardContainer.scss";
 @import "../js/UI/Dashboard/Components/Styles/DashboardSidebar.scss";
 

@@ -17,6 +17,9 @@ html {
   -webkit-text-size-adjust: 100%;
   /* 3 */ }
 
+* {
+  box-sizing: border-box; }
+
 /* Sections
    ========================================================================== */
 /**
@@ -459,6 +462,24 @@ body > #index {
     font-size: 15px;
     padding: 12px 30px; }
 
+.Shared-TagSidebar {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  background-color: #fff; }
+  .Shared-TagSidebar .option {
+    display: flex;
+    padding: 8px 16px;
+    text-decoration: none;
+    border-left: 2px solid transparent;
+    cursor: pointer;
+    transition: border 0.1s ease; }
+    .Shared-TagSidebar .option:hover {
+      border-color: #176FD4; }
+    .Shared-TagSidebar .option.option-selected {
+      border-color: #176FD4;
+      cursor: default; }
+
 .Landing-Landing {
   display: flex;
   flex: 1;
@@ -631,10 +652,25 @@ body > #index {
     border-radius: 3px;
     border: 1px solid #ccc; }
 
+.Dashboard-DashboardContainer .container-content {
+  display: flex;
+  flex: 1; }
+
 .Dashboard-DashboardMain {
   display: flex;
   flex-direction: row;
   flex: 1; }
+
+.Dashboard-DashboardContacts {
+  display: flex;
+  flex: 1; }
+  .Dashboard-DashboardContacts .container-sidebar {
+    display: flex;
+    flex: 1;
+    max-width: 180px; }
+  .Dashboard-DashboardContacts .container-content {
+    display: flex;
+    flex: 1; }
 
 .Dashboard-DashboardContainer {
   display: flex;
@@ -643,7 +679,7 @@ body > #index {
 
 .Dashboard-DashboardSidebar {
   background-color: #dfecfc;
-  width: 200px;
+  width: 180px;
   background-color: #dfecfc;
   padding: 8px 16px; }
   .Dashboard-DashboardSidebar .container-category {
