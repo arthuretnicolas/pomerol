@@ -16,13 +16,11 @@ class ProtectedView extends Component {
     this._checkAuth()
   }
 
-  componentWillReceiveProps () {
-    this._checkAuth()
+  componentWillReceiveProps (nextProps) {
+    this._checkAuth(nextProps.isAuthenticated)
   }
 
-  _checkAuth = () => {
-    const { isAuthenticated } = this.props
-
+  _checkAuth = (isAuthenticated: boolean = this.props.isAuthenticated) => {
     if (!isAuthenticated && browserHistory) {
       browserHistory.push('/login')
     }
