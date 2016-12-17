@@ -685,6 +685,11 @@ body > #index {
     display: flex;
     flex: 1; }
 
+.Dashboard-DashboardSettings {
+  display: flex;
+  flex: 1;
+  flex-direction: column; }
+
 .Dashboard-DashboardContainer {
   display: flex;
   flex: 1;

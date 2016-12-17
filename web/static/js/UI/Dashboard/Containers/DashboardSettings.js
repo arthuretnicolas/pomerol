@@ -16,12 +16,16 @@ class DashboardSettings extends Component {
     const { logout } = this.props
 
     return (
-      <div className='container-content'>
-        Settings
+      <div className='Dashboard-DashboardSettings'>
+        <div className='container'>
+          <div>
+            Settings
+          </div>
 
-        <Button onClick={logout}>
-          Log out
-        </Button>
+          <Button onClick={logout}>
+            Log out
+          </Button>
+        </div>
       </div>
     )
   }

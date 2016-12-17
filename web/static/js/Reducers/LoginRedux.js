@@ -21,12 +21,18 @@ export default Creators
 
 /* ------------- Initial State ------------- */
 
+// exported only for tests
+export const emptySession = {
+  user: {},
+  organizations: []
+}
+
 export const INITIAL_STATE = Immutable({
   attempting: false,
   error: null,
   jwt: '',
   attemptingSession: false,
-  session: {},
+  session: emptySession,
   errorSession: null
 })
 
@@ -69,7 +75,7 @@ export const logout = (state: Object, action: Object) =>
     attempting: false,
     error: null,
     jwt: '',
-    session: {},
+    session: emptySession,
     errorSession: null
   })
 
@@ -94,7 +100,7 @@ export const fetchSessionSuccess = (state: Object, { session }: SessionType) =>
 export const fetchSessionFailure = (state: Object, { error }: Object) =>
   state.merge({
     attemptingSession: false,
-    session: {},
+    session: emptySession,
     errorSession: error
   })
 

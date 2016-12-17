@@ -29,6 +29,8 @@ class ProtectedView extends Component {
   render () {
     const { children, isAuthenticated } = this.props
 
+    console.log('isAuthenticated', isAuthenticated)
+
     if (!isAuthenticated) {
       return <EmptyStateDashboard />
     }
@@ -42,7 +44,7 @@ class ProtectedView extends Component {
 }
 
 const mapStateToProps = ({ login }) => ({
-  isAuthenticated: !!login.jwt
+  isAuthenticated: !!login.session.user.id
 })
 
 const mapDispatchToProps = dispatch => ({

@@ -8,8 +8,11 @@ export function * signup (api, action) {
   const { data } = response
 
   if (response.ok) {
-    yield put(SignupActions.signupSuccess(data))
+    const { jwt } = data
+
+    yield put(SignupActions.signupSuccess())
     yield put(LoginActions.loginSuccess(data))
+    yield put(LoginActions.fetchSessionAttempt(jwt))
   } else {
     yield put(SignupActions.signupFailure())
   }
