@@ -40,7 +40,7 @@ test('cancel', t => {
   })
 })
 
-test('cancel', t => {
+test('logout', t => {
   const stateLogged = reducer(INITIAL_STATE, Actions.loginSuccess('joe@yopmail.com', 'yala1234'))
   const state = reducer(stateLogged, Actions.logout())
 
