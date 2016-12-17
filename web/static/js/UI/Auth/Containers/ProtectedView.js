@@ -3,6 +3,7 @@
 import React, { Component } from 'react'
 import { browserHistory } from 'react-router'
 import { connect } from 'react-redux'
+import EmptyStateDashboard from '../../Shared/Components/EmptyStateDashboard'
 
 type Props = {
   isAuthenticated: boolean
@@ -31,7 +32,7 @@ class ProtectedView extends Component {
     const { children, isAuthenticated } = this.props
 
     if (!isAuthenticated) {
-      return null
+      return <EmptyStateDashboard />
     }
 
     return (

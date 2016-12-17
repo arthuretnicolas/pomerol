@@ -1,0 +1,17 @@
+.Shared-EmptyStateDashboard {
+  display: flex;
+  flex: 1;
+  background-color: $color-frost;
+
+  .sidebar {
+    background-color: $sidebar-background;
+    width: $sidebar-width;
+    padding: $small-padding $base-padding;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+  }
+}

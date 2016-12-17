@@ -26,6 +26,7 @@ const TagSidebar = ({ data, selected, onClick }: Props) => (
         .sort((opt1, opt2) => opt1.id - opt2.id)
         .map((option, index) => (
           <div
+            key={index}
             className={`option ${selected === option.id ? 'option-selected' : ''}`}
             onClick={() => onClick(option.id)}
           >

@@ -1,25 +1,22 @@
 import test from 'ava'
 import Actions, { reducer, INITIAL_STATE } from '../../Reducers/LoginRedux'
 
-const FAKE_SESSION = {
-  userId: 123,
-  jwt: 'NFziefoniozef'
-}
+const FAKE_JWT = 'NFziefoniozef'
 const FAKE_ERROR = 'SERVER_DOWN'
 
 test('attempt', t => {
-  const state = reducer(INITIAL_STATE, Actions.loginAttempt('Joe@yopmail.com', 'yala1234'))
+  const state = reducer(INITIAL_STATE, Actions.loginAttempt('joe@yopmail.com', 'yala1234'))
 
   t.true(state.attempting)
 })
 
 test('success', t => {
-  const state = reducer(INITIAL_STATE, Actions.loginSuccess(FAKE_SESSION))
+  const state = reducer(INITIAL_STATE, Actions.loginSuccess({ jwt: FAKE_JWT }))
 
   t.deepEqual(state, {
     attempting: false,
     error: null,
-    session: FAKE_SESSION
+    jwt: FAKE_JWT
   })
 })
 
@@ -29,7 +26,7 @@ test('failure', t => {
   t.deepEqual(state, {
     attempting: false,
     error: FAKE_ERROR,
-    session: null
+    jwt: ''
   })
 })
 
@@ -39,17 +36,17 @@ test('cancel', t => {
   t.deepEqual(state, {
     attempting: false,
     error: 'CANCELLED',
-    session: null
+    jwt: ''
   })
 })
 
-test('canel', t => {
-  const stateLogged = reducer(INITIAL_STATE, Actions.loginSuccess(FAKE_SESSION))
+test('cancel', t => {
+  const stateLogged = reducer(INITIAL_STATE, Actions.loginSuccess('joe@yopmail.com', 'yala1234'))
   const state = reducer(stateLogged, Actions.logout())
 
   t.deepEqual(state, {
     attempting: false,
     error: null,
-    session: null
+    jwt: ''
   })
 })
