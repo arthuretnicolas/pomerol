@@ -31,6 +31,13 @@ const create = (baseURL: string = 'http://localhost:4000/api/v1/') => {
       password
     })
 
+  const fetchSession = (jwt: string) =>
+    api.get('user', {}, {
+      headers: {
+        'Authorization': `Bearer ${jwt}`
+      }
+    })
+
   const getUser = (name: string) => api.get(`users/${name}`)
 
   const naviMonitor = response => console.log('%cAPI response', 'background-color: purple; color: white; font-weight: 500; padding: 5px', response)
@@ -41,7 +48,8 @@ const create = (baseURL: string = 'http://localhost:4000/api/v1/') => {
   return {
     getUser,
     login,
-    signup
+    signup,
+    fetchSession
   }
 }
 

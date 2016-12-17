@@ -6,11 +6,14 @@ import Immutable from 'seamless-immutable'
 /* ------------- Types and Action Creators ------------- */
 
 const { Types, Creators } = createActions({
-  loginAttempt: ['email', 'password'],
-  loginSuccess: ['token'],
-  loginFailure: ['error'],
+  loginAttempt: [ 'email', 'password' ],
+  loginSuccess: [ 'token' ],
+  loginFailure: [ 'error' ],
   loginCancel: [],
-  logout: []
+  logout: [],
+  fetchSessionSuccess: [ 'session' ],
+  fetchSessionFailure: [ 'error' ],
+  fetchSessionAttempt: [ 'jwt' ]
 })
 
 export const LoginTypes = Types
@@ -21,7 +24,10 @@ export default Creators
 export const INITIAL_STATE = Immutable({
   attempting: false,
   error: null,
-  jwt: ''
+  jwt: '',
+  attemptingSession: false,
+  session: {},
+  errorSession: null
 })
 
 /* ------------- Reducers ------------- */
@@ -32,7 +38,12 @@ export const attempt = (state: Object, { email, password }: { email: string, pas
     attempting: true
   })
 
-export const success = (state: Object, { token }: { token: { jwt: string } }) =>
+type TokenType = {
+  token: {
+    jwt: string
+  }
+}
+export const success = (state: Object, { token }: TokenType) =>
   state.merge({
     attempting: false,
     error: null,
@@ -49,14 +60,42 @@ export const failure = (state: Object, { error }: Object) =>
 export const cancel = (state: Object, action: Object) =>
   state.merge({
     attempting: false,
-    error: 'CANCELLED'
+    error: 'CANCELLED',
+    jwt: ''
   })
 
 export const logout = (state: Object, action: Object) =>
   state.merge({
     attempting: false,
     error: null,
-    jwt: ''
+    jwt: '',
+    session: {},
+    errorSession: null
+  })
+
+export const fetchSessionAttempt = (state: Object, action: Object) =>
+  state.merge({
+    attemptingSession: true
+  })
+
+type SessionType = {
+  session: {
+    user: Object,
+    organizations: Object
+  }
+}
+export const fetchSessionSuccess = (state: Object, { session }: SessionType) =>
+  state.merge({
+    attemptingSession: false,
+    session,
+    error: null
+  })
+
+export const fetchSessionFailure = (state: Object, { error }: Object) =>
+  state.merge({
+    attemptingSession: false,
+    session: {},
+    errorSession: error
   })
 
 /* ------------- Hookup Reducers To Types ------------- */
@@ -66,5 +105,8 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.LOGIN_SUCCESS]: success,
   [Types.LOGIN_FAILURE]: failure,
   [Types.LOGIN_CANCEL]: cancel,
-  [Types.LOGOUT]: logout
+  [Types.LOGOUT]: logout,
+  [Types.FETCH_SESSION_ATTEMPT]: fetchSessionAttempt,
+  [Types.FETCH_SESSION_SUCCESS]: fetchSessionSuccess,
+  [Types.FETCH_SESSION_FAILURE]: fetchSessionFailure
 })
