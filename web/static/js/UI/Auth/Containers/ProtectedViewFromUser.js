@@ -34,6 +34,8 @@ class ProtectedViewFromUser extends Component {
       isAuthenticated
     } = this.props
 
+    console.log('isAuthenticated222', isAuthenticated, this.props.login)
+
     if (isAuthenticated || !isRehydrated) {
       return <EmptyStateDashboard />
     }
@@ -47,8 +49,9 @@ class ProtectedViewFromUser extends Component {
 }
 
 const mapStateToProps = ({ startup, login }) => ({
-  isAuthenticated: !!login.jwt,
-  isRehydrated: startup.rehydrated
+  isAuthenticated: !!login.session.user.id,
+  isRehydrated: startup.rehydrated,
+  login
 })
 
 const mapDispatchToProps = dispatch => ({

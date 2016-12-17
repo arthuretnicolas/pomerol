@@ -1,5 +1,9 @@
 import test from 'ava'
-import Actions, { reducer, INITIAL_STATE } from '../../Reducers/LoginRedux'
+import Actions, {
+  reducer,
+  INITIAL_STATE,
+  emptySession
+} from '../../Reducers/LoginRedux'
 
 const FAKE_JWT = 'NFziefoniozef'
 const FAKE_ERROR = 'SERVER_DOWN'
@@ -56,7 +60,7 @@ test('logout', t => {
     error: null,
     jwt: '',
     attemptingSession: false,
-    session: {},
+    session: emptySession,
     errorSession: null
   })
 })
@@ -79,6 +83,6 @@ test('fetchSessionFailure', t => {
   const state = reducer(INITIAL_STATE, Actions.fetchSessionFailure(FAKE_ERROR))
 
   t.false(state.attemptingSession)
-  t.deepEqual(state.session, {})
+  t.deepEqual(state.session, emptySession)
   t.deepEqual(state.errorSession, FAKE_ERROR)
 })
