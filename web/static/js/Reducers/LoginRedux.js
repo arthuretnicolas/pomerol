@@ -21,8 +21,7 @@ export default Creators
 export const INITIAL_STATE = Immutable({
   attempting: false,
   error: null,
-  jwt: '',
-  session: null
+  jwt: ''
 })
 
 /* ------------- Reducers ------------- */

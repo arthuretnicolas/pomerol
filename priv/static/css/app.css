@@ -480,6 +480,19 @@ body > #index {
       border-color: #176FD4;
       cursor: default; }
 
+.Shared-EmptyStateDashboard {
+  display: flex;
+  flex: 1;
+  background-color: #edf4fd; }
+  .Shared-EmptyStateDashboard .sidebar {
+    background-color: #dfecfc;
+    width: 180px;
+    padding: 8px 16px; }
+  .Shared-EmptyStateDashboard .content {
+    display: flex;
+    flex-direction: row;
+    flex: 1; }
+
 .Landing-Landing {
   display: flex;
   flex: 1;

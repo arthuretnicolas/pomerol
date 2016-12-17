@@ -16,7 +16,7 @@ type Props = {
 }
 
 const renderCategory = ({ category, options }, index) => {
-  const pathname = browserHistory.getCurrentLocation().pathname // e.g: '/dashboard'
+  const pathname = browserHistory && browserHistory.getCurrentLocation().pathname // e.g: '/dashboard'
 
   return (
     <div className='container-category' key={index}>

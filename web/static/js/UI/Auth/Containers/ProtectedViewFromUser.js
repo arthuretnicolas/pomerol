@@ -3,6 +3,7 @@
 import React, { Component } from 'react'
 import { browserHistory } from 'react-router'
 import { connect } from 'react-redux'
+import EmptyStateDashboard from '../../Shared/Components/EmptyStateDashboard'
 
 type Props = {
   isRehydrated: boolean,
@@ -36,7 +37,7 @@ class ProtectedViewFromUser extends Component {
     } = this.props
 
     if (isAuthenticated || !isRehydrated) {
-      return null
+      return <EmptyStateDashboard />
     }
 
     return (
