@@ -34,8 +34,6 @@ class ProtectedViewFromUser extends Component {
       isAuthenticated
     } = this.props
 
-    console.log('isAuthenticated222', isAuthenticated, this.props.login)
-
     if (isAuthenticated || !isRehydrated) {
       return <EmptyStateDashboard />
     }

@@ -29,8 +29,6 @@ class ProtectedView extends Component {
   render () {
     const { children, isAuthenticated } = this.props
 
-    console.log('isAuthenticated', isAuthenticated)
-
     if (!isAuthenticated) {
       return <EmptyStateDashboard />
     }
