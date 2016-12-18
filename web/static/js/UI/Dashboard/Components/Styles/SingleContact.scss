@@ -15,8 +15,8 @@
   }
 
   .container-avatar {
-    padding-right: $base-padding;
-    padding-left: $base-padding;
+    padding-right: $double-padding;
+    padding-left: $double-padding;
   }
 
   .name {
@@ -28,5 +28,9 @@
   .company {
     color: $gray;
     font-size: $font-size-small;
+  }
+
+  input[type='radio'] {
+    font-size: 28px;
   }
 }

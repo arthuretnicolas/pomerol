@@ -35,8 +35,8 @@ const SingleContact = ({ contact, onClick, selected }: Props) => {
       className={`Dashboard-SingleContact ${selected ? 'selected' : ''}`}
       onClick={() => onClick(id)}
     >
-      <div className='container-checkbox'>
-        <input type='checkbox' checked={selected} />
+      <div>
+        <input type='radio' checked={selected} />
       </div>
 
       <div className='container-avatar'>

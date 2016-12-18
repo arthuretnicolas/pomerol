@@ -740,8 +740,8 @@ body > #index {
   flex-direction: row;
   flex-shrink: 0;
   align-items: center;
-  border-bottom: 2px solid #edf1f5;
-  border-left: 2px solid #edf1f5;
+  border-bottom: 2px solid #f9fafb;
+  border-left: 2px solid #f9fafb;
   padding: 16px 32px;
   cursor: pointer; }
   .Dashboard-SingleContact.selected, .Dashboard-SingleContact:hover, .Dashboard-SingleContact:focus {
@@ -749,8 +749,8 @@ body > #index {
     transition: all 0.2s ease;
     border-left: 2px solid #176FD4; }
   .Dashboard-SingleContact .container-avatar {
-    padding-right: 16px;
-    padding-left: 16px; }
+    padding-right: 32px;
+    padding-left: 32px; }
   .Dashboard-SingleContact .name {
     color: #176FD4;
     font-weight: 600;
@@ -758,6 +758,8 @@ body > #index {
   .Dashboard-SingleContact .company {
     color: #a8b2bb;
     font-size: 14px; }
+  .Dashboard-SingleContact input[type='radio'] {
+    font-size: 28px; }
 
 .Signup {
   padding: 16px; }
