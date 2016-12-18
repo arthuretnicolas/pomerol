@@ -23,4 +23,4 @@ priv/static/server/js/pomerol.js
 
 npm-debug.log
 
-priv/static/css/app.css
+*.css

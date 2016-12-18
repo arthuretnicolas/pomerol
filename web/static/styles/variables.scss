@@ -24,7 +24,8 @@ $font-size-header: 46px;
 $button-hover-darken: 5%;
 
 $line-height-spaced: 1.41;
-$line-height-input: 1.82;
+$line-height-xspaced: 1.82;
+$line-height-input: $line-height-xspaced;
 
 $semi-bold: 600;
 $bold: 700;
