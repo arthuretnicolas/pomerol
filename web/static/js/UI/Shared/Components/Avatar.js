@@ -7,6 +7,10 @@ type Props = {
   initials: string
 }
 
+const arrayCodes =
+  [ 'd', 'g', 'p' ]
+    .map(letter => letter.charCodeAt(0))
+
 function getColorClassName (initials: string = '') {
   const code =
     initials
@@ -14,19 +18,13 @@ function getColorClassName (initials: string = '') {
       .toLowerCase()
       .charCodeAt(0)
 
-  if (code <= 'd'.charCodeAt(0)) {
-    return 'color-1'
+  for (let c of arrayCodes) {
+    if (code <= c) {
+      return `color-${arrayCodes.indexOf(c)}`
+    }
   }
 
-  if (code <= 'g'.charCodeAt(0)) {
-    return 'color-2'
-  }
-
-  if (code <= 'p'.charCodeAt(0)) {
-    return 'color-3'
-  }
-
-  return 'color-4'
+  return ''
 }
 
 const Avatar = ({ dimensions = 45, initials }: Props) => (
