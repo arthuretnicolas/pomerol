@@ -10,7 +10,8 @@ defmodule Pomerol.OrganizationView do
   def render("organization.json", %{organization: organization}) do
     %{
       id: organization.id,
-      name: organization.name
+      name: organization.name,
+      # contacts: render_many(organization.contacts, Pomerol.ContactView, "contact.json")
     }
   end
 

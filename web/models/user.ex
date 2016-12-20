@@ -59,6 +59,14 @@ defmodule Pomerol.User do
     |> assoc_constraint(:country)
   end
 
+  def change_password_changeset(user, params \\ %{}) do
+    user
+    |> cast(params, [:password])
+    |> validate_required([:password])
+    |> validate_length(:password, min: 5, max: 128)
+    |> generate_encrypted_password
+  end
+
   def password_reset_request_changeset(user, params \\ %{}) do
     user
     |> cast(params, [:email])

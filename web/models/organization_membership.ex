@@ -25,6 +25,7 @@ defmodule Pomerol.OrganizationMembership do
     |> assoc_constraint(:member)
     |> assoc_constraint(:organization)
     # |> put_change(:role, "owner")
+    |> validate_inclusion(:role, roles)
   end
 
   @doc """
@@ -37,6 +38,10 @@ defmodule Pomerol.OrganizationMembership do
     |> validate_inclusion(:role, roles)
   end
 
+  # viewer can only access reports
+  # author has access to reports plus the ability to create/edit quotes, templates, contacts but can't send quotes
+  # manager has full access except for billing, user management, and data exports
+  # admin and owner are users with full access
   defp roles do
     ~w{ viewer author manager admin owner }
   end

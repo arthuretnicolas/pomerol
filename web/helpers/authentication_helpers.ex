@@ -49,7 +49,7 @@ defmodule Pomerol.AuthenticationHelpers do
 
   defp init_changeset(conn, model, action) do
     # params = Params.to_attributes(conn.params["data"])
-    params = conn.params["data"]
+    params = conn.params
     resource = get_resource(conn, model, action)
     changeset_method = get_changeset_method(action)
 

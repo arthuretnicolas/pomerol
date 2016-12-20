@@ -21,6 +21,7 @@ defmodule Pomerol.ModelCase do
       import Ecto
       import Ecto.Changeset
       import Ecto.Query
+      import Pomerol.Factories
       import Pomerol.ModelCase
     end
   end

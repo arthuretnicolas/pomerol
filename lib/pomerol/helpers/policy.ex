@@ -6,7 +6,7 @@ defmodule Pomerol.Helpers.Policy do
 
   import Ecto.Query
 
-  alias Pomerol.{Organization, OrganizationMembership, Repo, User}
+  alias Pomerol.{Organization, OrganizationMembership, Repo, User, Contact}
   alias Ecto.Changeset
 
   @doc """
@@ -17,6 +17,7 @@ defmodule Pomerol.Helpers.Policy do
   """
   def get_membership(nil, %User{}), do: nil
   def get_membership(%Changeset{changes: %{organization_id: organization_id}}, %User{id: user_id}), do: do_get_membership(organization_id, user_id)
+  def get_membership(%Contact{organization_id: organization_id}, %User{id: user_id}), do: do_get_membership(organization_id, user_id)
   def get_membership(%Organization{id: organization_id}, %User{id: user_id}), do: do_get_membership(organization_id, user_id)
   defp do_get_membership(organization_id, user_id) do
     OrganizationMembership
@@ -39,6 +40,9 @@ defmodule Pomerol.Helpers.Policy do
   def owner?("owner"), do: true
   def owner?(_), do: false
 
+  def author_or_higher?(role) when role in ["owner", "admin", "manager", "author"], do: true
+  def author_or_higher?(_), do: false
+
   @doc """
   Determines if provided string is equal to one of `["admin", "owner"]`
   """
@@ -48,6 +52,6 @@ defmodule Pomerol.Helpers.Policy do
   @doc """
   Determines if provided string is equal to one of `["contributor", "admin", "owner"]`
   """
-  def contributor_or_higher?(role) when role in ["contributor", "admin", "owner"], do: true
-  def contributor_or_higher?(_), do: false
+  # def contributor_or_higher?(role) when role in ["contributor", "admin", "owner"], do: true
+  # def contributor_or_higher?(_), do: false
 end

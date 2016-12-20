@@ -4,8 +4,8 @@ defmodule Pomerol.Repo.Migrations.AddOrganizationMembership do
   def change do
     create table(:organization_memberships) do
       add :role, :string, null: false
-      add :organization_id, references(:organizations, on_delete: :nothing), null: false
-      add :member_id, references(:users, on_delete: :nothing), null: false
+      add :organization_id, references(:organizations, on_delete: :delete_all), null: false
+      add :member_id, references(:users, on_delete: :delete_all), null: false
 
       timestamps
     end

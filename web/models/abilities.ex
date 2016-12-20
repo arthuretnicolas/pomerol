@@ -2,10 +2,12 @@ defmodule Canary.Abilities do
   alias Pomerol.User
   alias Pomerol.Organization
   alias Pomerol.OrganizationMembership
+  alias Pomerol.Contact
 
   alias Pomerol.UserPolicy
   alias Pomerol.OrganizationPolicy
   alias Pomerol.OrganizationMembershipPolicy
+  alias Pomerol.ContactPolicy
 
   alias Ecto.Changeset
 
@@ -27,6 +29,11 @@ defmodule Canary.Abilities do
     def can?(%User{} = user, :create, %Changeset{data: %OrganizationMembership{}} = changeset), do: OrganizationMembershipPolicy.create?(user, changeset)
     def can?(%User{} = user, :update, %Changeset{data: %OrganizationMembership{}} = changeset), do: OrganizationMembershipPolicy.update?(user, changeset)
     def can?(%User{} = user, :delete, %OrganizationMembership{} = membership), do: OrganizationMembershipPolicy.delete?(user, membership)
+
+    def can?(%User{} = user, :create, %Changeset{data: %Contact{}} = changeset), do: ContactPolicy.create?(user, changeset)
+    def can?(%User{} = user, :show, %Contact{} = contact), do: ContactPolicy.show?(user, contact)
+    def can?(%User{} = user, :create, %Contact{} = contact), do: ContactPolicy.create?(user, contact)
+    def can?(%User{} = user, :update, %Contact{} = contact), do: ContactPolicy.update?(user, contact)
 
   end
 end

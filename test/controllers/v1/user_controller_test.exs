@@ -34,13 +34,40 @@ defmodule Pomerol.V1.UserControllerTest do
 
   describe "password reset request" do
     test "POST /api/v1/password/request when email is found", %{conn: conn} do
-      assert 1 == 1
+      user = insert(:user, email: "original@mail.com")
+      conn = post conn, "/api/v1/password/request", %{email: "original@mail.com"}
+      assert conn |> json_response(200)
+    end
+
+    test "Cannot recover password when user is not found", %{conn: conn} do
+      conn = post conn, "/api/v1/password/request", %{email: "original@mail.com"}
+      assert conn |> json_response(400)
     end
   end
 
   describe "password reset" do
     test "POST /api/v1/password/reset when data is valid", %{conn: conn} do
       assert 1 == 1
+    end
+  end
+
+  describe "change password" do
+    test "PUT /api/v1/account/password when data is valid", %{conn: conn} do
+      user = build(:user, %{password: "password"}) |> set_password("password") |> insert
+
+      conn =
+        conn
+        |> authenticate(user)
+        |> put("/api/v1/account/password", %{old_password: "password", new_password: "new_pass"})
+      assert conn |> json_response(200)
+
+      new_user = Repo.get_by!(Pomerol.User, id: user.id)
+      assert Comeonin.Bcrypt.checkpw("new_pass", new_user.encrypted_password)
+    end
+
+    test "does not change password when user is not logguedin", %{conn: conn} do
+      conn = put conn, "/api/v1/account/password"
+      assert conn |> json_response(401)
     end
   end
 
@@ -55,6 +82,52 @@ defmodule Pomerol.V1.UserControllerTest do
     test "GET /api/v1/user when user is logguedin", %{conn: conn, current_user: current_user} do
       conn = get conn, "/api/v1/user"
       assert conn |> json_response(200)
+    end
+  end
+
+  describe "update" do
+    test "PUT /api/v1/users/:id when user is logguedin", %{conn: conn, current_user: current_user} do
+      user = insert(:user, email: "original@mail.com")
+      attrs = Map.put(@valid_attrs, :password, "password")
+
+      conn =
+        conn
+        |> authenticate(user)
+        |> put("/api/v1/users/#{user.id}", %{first_name: "fn"})
+
+      assert conn |> json_response(200)
+      assert json_response(conn, 200)["first_name"] == "fn"
+    end
+
+    test "does not update when user is not logguedin", %{conn: conn} do
+      user = insert(:user)
+
+      conn =
+        conn
+        |> put("/api/v1/users/#{user.id}", %{first_name: "fn"})
+
+      json =  json_response(conn, 401)
+      assert json["errors"] != %{}
+    end
+
+    test "does not update when authorized as different user", %{conn: conn} do
+      [user, another_user] = insert_pair(:user)
+
+      attrs = Map.put(@valid_attrs, :password, "password")
+
+      path = "/api/v1/users/#{user.id}"
+
+      params = %{
+        first_name: "fn"
+      }
+
+      conn =
+        conn
+        |> authenticate(another_user)
+        |> put(path, params)
+
+      json = json_response(conn, 403)
+      assert json["errors"] != %{}
     end
   end
 end
