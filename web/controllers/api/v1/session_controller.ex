@@ -5,7 +5,7 @@ defmodule Pomerol.V1.SessionController do
   alias Pomerol.Repo
   alias Pomerol.User
 
-  def create(conn, params = %{"email" => _, "password" => _}) do
+  def create(conn, params = %{"email" => email, "password" => password}) do
     case login_by_email_and_pass(params) do
       {:ok, user} ->
         {:ok, jwt, claims} = user |> Guardian.encode_and_sign(:token)
@@ -13,7 +13,7 @@ defmodule Pomerol.V1.SessionController do
         conn
         |> Plug.Conn.assign(:current_user, user)
         |> put_status(:created)
-        |> render(Pomerol.SessionView, "show.json", jwt: jwt)
+        |> render(Pomerol.SessionView, "show.json", jwt: jwt, user_id: user.id)
 
       {:error, reason} -> handle_unauthenticated(conn, reason)
     end
@@ -26,7 +26,7 @@ defmodule Pomerol.V1.SessionController do
             conn
             |> Plug.Conn.assign(:current_user, user)
             |> put_status(:created)
-            |> render(Pomerol.SessionView, "show.json", jwt: new_token, user: user)
+            |> render(Pomerol.SessionView, "show.json", jwt: new_token, user_id: user.id)
     else
       {:error, reason} -> handle_unauthenticated(conn, reason)
     end

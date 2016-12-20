@@ -1,9 +1,10 @@
 defmodule Pomerol.SessionView do
   use Pomerol.Web, :view
 
-  def render("show.json", %{jwt: jwt}) do
+  def render("show.json", %{jwt: jwt, user_id: user_id}) do
     %{
-      jwt: jwt
+      jwt: jwt,
+      user_id: user_id
     }
   end
 

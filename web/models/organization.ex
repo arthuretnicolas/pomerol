@@ -12,6 +12,8 @@ defmodule Pomerol.Organization do
     has_many :organization_memberships, OrganizationMembership
     has_many :members, through: [:organization_memberships, :member]
 
+    has_many :contacts, Pomerol.Contact
+
     timestamps
   end
 
@@ -25,12 +27,12 @@ defmodule Pomerol.Organization do
 
   def create_changeset(organization, params \\ %{}) do
     organization
-    |> cast(params, [:name, :country_id])
+    |> cast(params, [:name, :address, :website, :phone, :country_id])
     |> validate_required([:name, :country_id])
     |> foreign_key_constraint(:country_id)
   end
 
   def preload_all(query) do
-    from b in query, preload: [:members]
+    from b in query, preload: [:members, :contacts]
   end
 end
