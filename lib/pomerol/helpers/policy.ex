@@ -40,6 +40,9 @@ defmodule Pomerol.Helpers.Policy do
   def owner?("owner"), do: true
   def owner?(_), do: false
 
+  def member?(role) when role in ["viewer", "author", "manager", "admin", "owner"], do: true
+  def member?(_), do: false
+
   def author_or_higher?(role) when role in ["owner", "admin", "manager", "author"], do: true
   def author_or_higher?(_), do: false
 

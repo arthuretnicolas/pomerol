@@ -20,13 +20,13 @@ defmodule Pomerol.OrganizationMembershipPolicy do
     new_role = changeset |> get_role
 
     case [user_role, old_role, new_role] do
-      # Non-member, pending and contributors can't do anything
+      # Non-member, viewer and authors can't do anything
       [nil, _, _] -> false
-      ["pending", _, _] -> false
-      ["contributor", _, _] -> false
-      # Admins can only approve pending memberships and nothing else
-      ["admin", "pending", "contributor"] -> true
-      ["admin", _, _] -> false
+      ["viewer", _, _] -> false
+      ["author", _, _] -> false
+      # manager and admin can change every role
+      ["manager", _, _] -> true
+      ["admin", _, _] -> true
       # Owners can do everything expect changing other owners
       ["owner", "owner", _] -> false
       ["owner", _, _] -> true
@@ -35,15 +35,15 @@ defmodule Pomerol.OrganizationMembershipPolicy do
     end
   end
 
-  def delete?(%User{admin: true}, %OrganizationMembership{}), do: true
-  def delete?(%User{} = user, %OrganizationMembership{} = current_membership) do
-    current_membership |> get_user_membership(user) |> do_delete?(current_membership)
-  end
-
-  defp do_delete?(%OrganizationMembership{} = user_m, %OrganizationMembership{} = current_m) when user_m == current_m, do: true
-  defp do_delete?(%OrganizationMembership{role: "owner"}, %OrganizationMembership{}), do: true
-  defp do_delete?(%OrganizationMembership{role: "admin"}, %OrganizationMembership{role: role}) when role in ~w(pending contributor), do: true
-  defp do_delete?(_, _), do: false
+  # def delete?(%User{admin: true}, %OrganizationMembership{}), do: true
+  # def delete?(%User{} = user, %OrganizationMembership{} = current_membership) do
+  #   current_membership |> get_user_membership(user) |> do_delete?(current_membership)
+  # end
+  #
+  # defp do_delete?(%OrganizationMembership{} = user_m, %OrganizationMembership{} = current_m) when user_m == current_m, do: true
+  # defp do_delete?(%OrganizationMembership{role: "owner"}, %OrganizationMembership{}), do: true
+  # defp do_delete?(%OrganizationMembership{role: "admin"}, %OrganizationMembership{role: role}) when role in ~w(pending contributor), do: true
+  # defp do_delete?(_, _), do: false
 
   defp get_user_membership(%OrganizationMembership{member_id: nil}, %User{id: nil}), do: nil
   defp get_user_membership(%OrganizationMembership{member_id: m_id} = membership, %User{id: u_id}) when m_id == u_id, do: membership

@@ -38,6 +38,7 @@ defmodule Pomerol.Router do
 
       post "/signup", UserController, :create
       post "/signin", SessionController, :create
+
       # TODO: needed during dev. remove if unused with react google
       options "/auth/:provider/callback", AuthController, :options
       post "/auth/:provider/callback", AuthController, :callback
@@ -49,12 +50,18 @@ defmodule Pomerol.Router do
     scope "/v1", V1, as: :v1 do
       pipe_through [:api, :bearer_auth, :ensure_auth, :current_user]
 
+      get "/signout", SessionController, :delete
+
       get "/user", UserController, :current_user
       resources "/users", UserController, only: [:update]
       post "/session/refresh", SessionController, :refresh
       put "/account/password", UserController, :change_password
       resources "/contacts", ContactController, only: [:create, :show, :update]
-      resources "/organizations", OrganizationController, only: [:index, :show, :create]
+
+      resources "/organizations", OrganizationController, only: [:index, :show, :create] do
+        resources "/memberships", OrganizationMembershipController, only: [:update]
+      end
+      
     end
 
   end

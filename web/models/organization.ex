@@ -33,6 +33,6 @@ defmodule Pomerol.Organization do
   end
 
   def preload_all(query) do
-    from b in query, preload: [:members, :contacts]
+    from b in query, preload: [:members, :contacts, :organization_memberships]
   end
 end
