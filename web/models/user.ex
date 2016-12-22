@@ -111,7 +111,7 @@ defmodule Pomerol.User do
 
   def preload_all(query, locale) do
     from query, preload: [
-      [:organizations],
+      [:organizations, {:organizations, :members}],
       country: [ translation: ^Pomerol.CountryTranslation.translation_query(locale) ]
     ]
   end
