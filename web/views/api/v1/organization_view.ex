@@ -11,7 +11,18 @@ defmodule Pomerol.OrganizationView do
     %{
       id: organization.id,
       name: organization.name,
-      # contacts: render_many(organization.contacts, Pomerol.ContactView, "contact.json")
+      members: render_many(organization.organization_memberships, __MODULE__, "organization_membership.json", as: :organization_membership)
+    }
+  end
+
+  def render("organization_membership.json", %{organization_membership: organization_membership}) do
+    %{
+      id: organization_membership.id,
+      role: organization_membership.role,
+      email: organization_membership.member.email,
+      first_name: organization_membership.member.first_name,
+      last_name: organization_membership.member.last_name,
+      inserted_at: organization_membership.inserted_at
     }
   end
 

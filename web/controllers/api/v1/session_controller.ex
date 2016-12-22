@@ -50,4 +50,16 @@ defmodule Pomerol.V1.SessionController do
         {:error, "We couldn't find a user with the email #{email}."}
     end
   end
+
+  def delete(conn, _) do
+    {:ok, claims} = Guardian.Plug.claims(conn)
+
+    conn
+    |> Guardian.Plug.current_token
+    |> Guardian.revoke!(claims)
+
+    conn
+    # |> json(:ok)
+    |> render(Pomerol.SessionView, "delete.json")
+  end
 end
