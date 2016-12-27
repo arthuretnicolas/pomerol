@@ -11,11 +11,8 @@
   padding: $vertical-padding-button $horizontal-padding-button;
   border-radius: $border-radius-button;
   color: $color-snow;
-  // transition: all 0.2s ease;
   font-weight: $semi-bold;
   font-size: $font-size-small;
-
-  // to be tested
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.15);
 
   &:hover {
