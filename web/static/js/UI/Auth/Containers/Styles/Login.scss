@@ -3,11 +3,17 @@
   flex: 1;
 
   .form-container {
-    padding: $base-padding;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding: $double-padding;
     min-width: 330px;
+    justify-content: center;
+    padding-bottom: 200px;
   }
 
   .illustration {
+    display: flex;
     display: none;
   }
 
@@ -21,20 +27,23 @@
     border-radius: $border-radius-button;
     color: $color-snow;
     font-weight: $semi-bold;
-    font-size: $font-size-small;
+    font-size: $font-size-large;
     text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.15);
 
     background-color: $color-danger;
+    cursor: pointer;
   }
 
   .container-forgot {
     margin-top: $double-padding;
+    display: flex;
+    justify-content: center;
   }
 
   @media (min-width: $break-point-tablet) {
     .illustration {
       display: flex;
-      flex-grow: 1;
+      flex-grow: 10;
       background-color: $color-placeholder;
     }
 

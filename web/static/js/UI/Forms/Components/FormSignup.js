@@ -50,6 +50,7 @@ export default class FormSignup extends Component {
           }}
           buttonSubmit='Sign up'
           attempting={attempting}
+          fullWidthCta
           children={
             <div>
               <FormInput

@@ -12,7 +12,7 @@
   border-radius: $border-radius-button;
   color: $color-snow;
   font-weight: $semi-bold;
-  font-size: $font-size-small;
+  font-size: $font-size-large;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.15);
 
   &:hover {
@@ -40,5 +40,11 @@
   &.large {
     font-size: $font-size-body;
     padding: 1.5 * $vertical-padding-button 2.5 * $horizontal-padding-button;
+  }
+
+  &.full-width {
+    display: flex;
+    flex: 1;
+    justify-content: center;
   }
 }

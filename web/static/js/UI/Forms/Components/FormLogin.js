@@ -50,6 +50,7 @@ export default class FormLogin extends Component {
           }}
           buttonSubmit='Log in'
           attempting={attempting}
+          fullWidthCta
           children={
             <div>
               <FormInput

@@ -1,13 +1,15 @@
 .Forms-FormInput {
   display: flex;
-  padding-top: $tiny-padding;
-  padding-bottom: $tiny-padding;
+  padding-top: $small-padding;
+  padding-bottom: $small-padding;
 
   .input {
     display: flex;
     flex: 1;
-    padding: $small-padding;
+    padding: 0 $base-padding;
+    min-height: 52px;
     line-height: $line-height-input;
+    font-size: $font-size-large;
     border-radius: $border-radius-button;
     border: 2px solid $color-border-input;
     transition: all .2s ease;
