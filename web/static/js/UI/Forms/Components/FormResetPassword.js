@@ -53,6 +53,8 @@ export default class FormResetPassword extends Component {
                 value={password}
                 type='password'
                 placeholder='Your new password'
+                required
+                minLength={5}
                 onChange={event => onChange('password', event && event.target.value)}
               />
             </div>

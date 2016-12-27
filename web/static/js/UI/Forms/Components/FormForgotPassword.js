@@ -53,6 +53,7 @@ export default class FormForgotPassword extends Component {
                 value={email}
                 type='email'
                 placeholder='Your email'
+                required
                 onChange={event => onChange('email', event && event.target.value)}
               />
             </div>
