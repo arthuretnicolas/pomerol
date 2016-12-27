@@ -53,6 +53,7 @@ const Form = ({
     <div className='container-cta'>
       <Button
         type='submit'
+        theme='primary'
         disabled={attempting}
         fullWidth={fullWidthCta}
       >

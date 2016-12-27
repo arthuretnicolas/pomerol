@@ -8,7 +8,7 @@
 .Button {
   box-shadow: none;
   border: none;
-  padding: $base-padding;
+  padding: $base-padding $double-padding;
   border-radius: $border-radius-button;
   color: $color-snow;
   min-height: $form-min-height;

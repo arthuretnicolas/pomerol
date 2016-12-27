@@ -1,6 +1,7 @@
 .Auth-Login {
   display: flex;
   flex: 1;
+  background-color: $color-primary-lighter;
 
   .form-container {
     display: flex;
@@ -50,7 +51,7 @@
     .image-container {
       display: flex;
       flex: 1;
-      background-image: url('https://upload.wikimedia.org/wikipedia/commons/8/83/Zebra_Botswana_edit02.jpg');
+      background-image: url('https://d13yacurqjgara.cloudfront.net/users/13449/screenshots/1828176/lakeside_sunset.png');
       background-size: cover;
     }
   }
