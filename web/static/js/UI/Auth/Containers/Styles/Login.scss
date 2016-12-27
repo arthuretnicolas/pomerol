@@ -27,6 +27,10 @@
     background-color: $color-danger;
   }
 
+  .container-forgot {
+    margin-top: $double-padding;
+  }
+
   @media (min-width: $break-point-tablet) {
     .illustration {
       display: flex;

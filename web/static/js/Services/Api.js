@@ -31,6 +31,11 @@ const create = (baseURL: string = 'http://localhost:4000/api/v1/') => {
       password
     })
 
+  const requestPassword = (email: string) =>
+    api.post('password/request', {
+      email
+    })
+
   const resetPassword = (token: string, password: string) =>
     api.post('password/reset', {
       token,
@@ -56,6 +61,7 @@ const create = (baseURL: string = 'http://localhost:4000/api/v1/') => {
     login,
     signup,
     fetchSession,
+    requestPassword,
     resetPassword
   }
 }

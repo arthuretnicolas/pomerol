@@ -16,6 +16,7 @@ import ProtectedView from '../UI/Auth/Containers/ProtectedView'
 import Signup from '../UI/Auth/Containers/Signup'
 import Login from '../UI/Auth/Containers/Login'
 import ResetPassword from '../UI/Auth/Containers/ResetPassword'
+import ForgotPassword from '../UI/Auth/Containers/ForgotPassword'
 
 // Dashboard
 import DashboardContainer from '../UI/Dashboard/Components/DashboardContainer'
@@ -32,6 +33,7 @@ export default (
       <Route path='/signup' component={Signup} />
       <Route path='/login(/:origin)' component={Login} />
       <Route path='/reset-password/:token' component={ResetPassword} />
+      <Route path='/forgot-password' component={ForgotPassword} />
     </Route>
 
     <Route component={ProtectedView}>

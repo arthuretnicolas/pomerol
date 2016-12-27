@@ -3,7 +3,7 @@
 import React from 'react'
 import Navbar from './Navbar'
 import Button from '../../Shared/Components/Button'
-import { Link } from 'react-router'
+import Link from '../../Shared/Components/Link'
 
 const Hero = () => (
   <div className='Landing-Hero'>

@@ -32,6 +32,20 @@ export function * fetchSession (api, action) {
   }
 }
 
+export function * requestPassword (api, action) {
+  const { email } = action
+  const response = yield call(api.requestPassword, email)
+
+  if (response.ok) {
+    yield put(LoginActions.requestPasswordSuccess())
+    console.info('Request password successful')
+  } else {
+    const { data } = response
+    yield put(LoginActions.requestPasswordFailure(data))
+    handleErrors(data.errors)
+  }
+}
+
 export function * resetPassword (api, action) {
   const { token, password } = action
   const response = yield call(api.resetPassword, token, password)

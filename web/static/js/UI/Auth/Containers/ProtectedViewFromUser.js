@@ -34,9 +34,8 @@ class ProtectedViewFromUser extends Component {
   _renderPlaceholder = () => {
     const { origin } = this.props.params
 
-    const showLoginPlaceholder =
-      origin !== 'dashboard'
-      // [ 'login', 'signup', 'reset-password' ].includes(this.props.location.pathname.split('/')[1])
+    const showLoginPlaceholder = origin !== 'dashboard'
+    // const showLoginPlaceholder = [ 'login', 'signup', 'reset-password' ].includes(this.props.location.pathname.split('/')[1])
 
     if (showLoginPlaceholder) {
       return (

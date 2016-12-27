@@ -6,9 +6,17 @@
   .input {
     display: flex;
     flex: 1;
-    padding: $tiny-padding $small-padding;
+    padding: $small-padding;
     line-height: $line-height-input;
     border-radius: $border-radius-button;
-    border: 1px solid $color-border-input;
+    border: 2px solid $color-border-input;
+
+    &:hover {
+      border-color: $gray;
+    }
+
+    &:focus, &:active {
+      border-color: $color-primary-semi-light;
+    }
   }
 }

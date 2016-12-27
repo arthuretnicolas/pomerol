@@ -5,8 +5,20 @@
     padding-bottom: $small-padding;
   }
 
-  .input-container {
+  .container-input {
     padding-top: $base-padding;
     padding-bottom: $base-padding;
+  }
+
+  .container-cta {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .container-alternative-cta {
+    display: flex;
+    padding-left: $base-padding;
+    font-size: $font-size-smaller;
   }
 }

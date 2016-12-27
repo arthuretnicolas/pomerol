@@ -26,26 +26,30 @@ const FAKE_PROFILE_OBJ = {
   familyName: 'Panibratov'
 }
 
+// login
+
 test('attempt', t => {
   const state = reducer(INITIAL_STATE, Actions.loginAttempt('joe@yopmail.com', 'yala1234'))
 
   t.true(state.attempting)
 })
 
-test('success', t => {
-  const state = reducer(INITIAL_STATE, Actions.loginSuccess({ jwt: FAKE_JWT }))
-
-  t.false(state.attempting)
-  t.is(state.jwt, FAKE_JWT)
-  t.is(state.error, null)
-})
-
 test('failure', t => {
-  const state = reducer(INITIAL_STATE, Actions.loginFailure(FAKE_ERROR))
+  const stateAttempt = reducer(INITIAL_STATE, Actions.loginAttempt('joe@yopmail.com', 'yala1234'))
+  const state = reducer(stateAttempt, Actions.loginFailure(FAKE_ERROR))
 
   t.false(state.attempting)
   t.is(state.jwt, '')
   t.is(state.error, FAKE_ERROR)
+})
+
+test('success', t => {
+  const stateFailure = reducer(INITIAL_STATE, Actions.loginFailure(FAKE_ERROR))
+  const state = reducer(stateFailure, Actions.loginSuccess({ jwt: FAKE_JWT }))
+
+  t.false(state.attempting)
+  t.is(state.jwt, FAKE_JWT)
+  t.is(state.error, null)
 })
 
 test('cancel', t => {
@@ -65,27 +69,33 @@ test('logout', t => {
   t.is(state.jwt, '')
 })
 
+// fetch session
+
 test('fetchSessionAttempt', t => {
   const state = reducer(INITIAL_STATE, Actions.fetchSessionAttempt())
 
   t.true(state.attemptingSession)
 })
 
+test('fetchSessionFailure', t => {
+  const stateAttempt = reducer(INITIAL_STATE, Actions.fetchSessionAttempt())
+  const state = reducer(stateAttempt, Actions.fetchSessionFailure(FAKE_ERROR))
+
+  t.false(state.attemptingSession)
+  t.deepEqual(state.session, emptySession)
+  t.is(state.errorSession, FAKE_ERROR)
+})
+
 test('fetchSessionSuccess', t => {
-  const state = reducer(INITIAL_STATE, Actions.fetchSessionSuccess(FAKE_SESSION))
+  const stateFailure = reducer(INITIAL_STATE, Actions.fetchSessionFailure(FAKE_ERROR))
+  const state = reducer(stateFailure, Actions.fetchSessionSuccess(FAKE_SESSION))
 
   t.false(state.attemptingSession)
   t.deepEqual(state.session, FAKE_SESSION)
   t.is(state.errorSession, null)
 })
 
-test('fetchSessionFailure', t => {
-  const state = reducer(INITIAL_STATE, Actions.fetchSessionFailure(FAKE_ERROR))
-
-  t.false(state.attemptingSession)
-  t.deepEqual(state.session, emptySession)
-  t.is(state.errorSession, FAKE_ERROR)
-})
+// login with google
 
 test('loginWithGoogleSuccess', t => {
   const state = reducer(INITIAL_STATE, Actions.loginWithGoogleSuccess(FAKE_JWT, FAKE_PROFILE_OBJ))
@@ -99,22 +109,49 @@ test('loginWithGoogleSuccess', t => {
   t.is(state.errorSession, null)
 })
 
+// request password
+
+test('requestPasswordAttempt', t => {
+  const state = reducer(INITIAL_STATE, Actions.requestPasswordAttempt('a@aol.com'))
+
+  t.true(state.attemptingRequest)
+})
+
+test('requestPasswordFailure', t => {
+  const stateAttempt = reducer(INITIAL_STATE, Actions.requestPasswordAttempt('a@aol.com'))
+  const state = reducer(stateAttempt, Actions.requestPasswordFailure(FAKE_ERROR))
+
+  t.false(state.attemptingRequest)
+  t.is(state.errorRequest, FAKE_ERROR)
+})
+
+test('requestPasswordSuccess', t => {
+  const stateFailure = reducer(INITIAL_STATE, Actions.requestPasswordFailure(FAKE_ERROR))
+  const state = reducer(stateFailure, Actions.requestPasswordSuccess('a@aol.com'))
+
+  t.false(state.attemptingRequest)
+  t.is(state.errorRequest, null)
+})
+
+// reset password
 test('resetPasswordAttempt', t => {
   const state = reducer(INITIAL_STATE, Actions.resetPasswordAttempt())
 
   t.true(state.attemptingReset)
 })
 
-test('resetPasswordSuccess', t => {
-  const state = reducer(INITIAL_STATE, Actions.resetPasswordSuccess())
-
-  t.false(state.attemptingReset)
-  t.is(state.errorResetting, null)
-})
-
 test('resetPasswordFailure', t => {
-  const state = reducer(INITIAL_STATE, Actions.resetPasswordFailure(FAKE_ERROR))
+  const stateAttempt = reducer(INITIAL_STATE, Actions.resetPasswordAttempt())
+  const state = reducer(stateAttempt, Actions.resetPasswordFailure(FAKE_ERROR))
 
   t.false(state.attemptingReset)
   t.is(state.errorResetting, FAKE_ERROR)
+})
+
+test('resetPasswordSuccess', t => {
+  const stateFailure = reducer(INITIAL_STATE, Actions.resetPasswordFailure(FAKE_ERROR))
+  const state = reducer(stateFailure, Actions.resetPasswordSuccess())
+
+  t.false(state.attemptingReset)
+  t.is(state.errorResetting, null)
 })

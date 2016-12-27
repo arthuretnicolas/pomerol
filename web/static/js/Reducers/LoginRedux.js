@@ -15,6 +15,9 @@ const { Types, Creators } = createActions({
   fetchSessionFailure: [ 'error' ],
   fetchSessionAttempt: [ 'jwt' ],
   loginWithGoogleSuccess: [ 'jwt', 'profileObj' ],
+  requestPasswordAttempt: [ 'email' ],
+  requestPasswordFailure: [ 'error' ],
+  requestPasswordSuccess: [],
   resetPasswordAttempt: [ 'token', 'password' ],
   resetPasswordSuccess: [],
   resetPasswordFailure: [ 'error' ]
@@ -38,6 +41,8 @@ export const INITIAL_STATE = Immutable({
   attemptingSession: false,
   session: emptySession,
   errorSession: null,
+  attemptingRequest: false,
+  errorRequest: null,
   attemptingReset: false,
   errorResetting: null
 })
@@ -97,7 +102,7 @@ export const fetchSessionSuccess = (state: Object, { session }: SessionType) =>
   state.merge({
     attemptingSession: false,
     session,
-    error: null
+    errorSession: null
   })
 
 export const fetchSessionFailure = (state: Object, { error }: Object) =>
@@ -123,6 +128,23 @@ export const loginWithGoogleSuccess = (state: Object, { jwt, profileObj }: Objec
     session
   })
 }
+
+export const requestPasswordAttempt = (state: Object, { email }: { email: string }) =>
+  state.merge({
+    attemptingRequest: true
+  })
+
+export const requestPasswordFailure = (state: Object, { error }: { error: Object }) =>
+  state.merge({
+    attemptingRequest: false,
+    errorRequest: error
+  })
+
+export const requestPasswordSuccess = (state: Object, action: Object) =>
+  state.merge({
+    attemptingRequest: false,
+    errorRequest: null
+  })
 
 type ResetType = {
   token: string,
@@ -157,6 +179,9 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.FETCH_SESSION_SUCCESS]: fetchSessionSuccess,
   [Types.FETCH_SESSION_FAILURE]: fetchSessionFailure,
   [Types.LOGIN_WITH_GOOGLE_SUCCESS]: loginWithGoogleSuccess,
+  [Types.REQUEST_PASSWORD_ATTEMPT]: requestPasswordAttempt,
+  [Types.REQUEST_PASSWORD_FAILURE]: requestPasswordFailure,
+  [Types.REQUEST_PASSWORD_SUCCESS]: requestPasswordSuccess,
   [Types.RESET_PASSWORD_ATTEMPT]: resetPasswordAttempt,
   [Types.RESET_PASSWORD_SUCCESS]: resetPasswordSuccess,
   [Types.RESET_PASSWORD_FAILURE]: resetPasswordFailure

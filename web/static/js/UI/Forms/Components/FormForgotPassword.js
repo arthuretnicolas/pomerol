@@ -3,17 +3,18 @@
 import React, { Component } from 'react'
 import Form from './Form'
 import FormInput from './FormInput'
+import Link from '../../Shared/Components/Link'
 
 type Props = {
   onChange: (key: string, value: any) => void,
   onSubmit: () => void,
   values: {
-    password: string
+    email: string
   },
   attempting: boolean
 }
 
-export default class FormResetPassword extends Component {
+export default class FormForgotPassword extends Component {
   props: Props
 
   _onSubmit = (event: Event) => { // eslint-disable-line
@@ -31,32 +32,36 @@ export default class FormResetPassword extends Component {
     } = this.props
 
     const {
-      password
+      email
     } = values
 
     return (
       <form
-        className='Form-FormResetPassword'
+        className='Form-FormForgotPassword'
         onSubmit={this._onSubmit}
       >
         <Form
-          header='Reset password'
+          header='Ask for a new password'
+          text={{
+            label: 'Enter your email to reset your password.'
+          }}
           buttonSubmit='Reset password'
           attempting={attempting}
-          children={
+          children={(
             <div>
-              <div>
-                Password must be at least 5 character long
-              </div>
-
               <FormInput
-                value={password}
-                type='password'
-                placeholder='Your new password'
-                onChange={event => onChange('password', event && event.target.value)}
+                value={email}
+                type='email'
+                placeholder='Your email'
+                onChange={event => onChange('email', event && event.target.value)}
               />
             </div>
-          }
+          )}
+          alternativeCta={(
+            <Link to='/login'>
+              Return to login
+            </Link>
+          )}
         />
       </form>
     )

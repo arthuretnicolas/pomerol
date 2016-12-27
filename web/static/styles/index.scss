@@ -14,6 +14,7 @@
 @import "../js/UI/Shared/Components/Styles/EmptyStateDashboard.scss";
 @import "../js/UI/Shared/Components/Styles/EmptyStateAuth.scss";
 @import "../js/UI/Shared/Components/Styles/Avatar.scss";
+@import "../js/UI/Shared/Components/Styles/Link.scss";
 
 // Landing
 @import "../js/UI/Landing/Components/Styles/Landing.scss";
@@ -41,3 +42,4 @@
 @import "../js/UI/Auth/Containers/Styles/Signup.scss";
 @import "../js/UI/Auth/Containers/Styles/Login.scss";
 @import "../js/UI/Auth/Containers/Styles/ResetPassword.scss";
+@import "../js/UI/Auth/Containers/Styles/ForgotPassword.scss";

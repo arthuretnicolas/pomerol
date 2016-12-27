@@ -20,6 +20,7 @@ import {
   login,
   logout,
   fetchSession,
+  requestPassword,
   resetPassword
 } from './LoginSaga'
 import { signup } from './SignupSaga'
@@ -39,6 +40,7 @@ export default function * root () {
     takeLatest(LoginTypes.LOGIN_ATTEMPT, login, api),
     takeLatest(LoginTypes.LOGOUT, logout),
     takeLatest(LoginTypes.FETCH_SESSION_ATTEMPT, fetchSession, api),
+    takeLatest(LoginTypes.REQUEST_PASSWORD_ATTEMPT, requestPassword, api),
     takeLatest(LoginTypes.RESET_PASSWORD_ATTEMPT, resetPassword, api),
     takeLatest(SignupTypes.SIGNUP_ATTEMPT, signup, api)
   ]
