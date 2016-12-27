@@ -44,7 +44,7 @@ export default class FormLogin extends Component {
         <Form
           header='Login in'
           text={{
-            label: 'Need a MailChimp account?',
+            label: 'Need a Pomerol account?',
             linkLabel: 'Create an account',
             to: 'signup'
           }}

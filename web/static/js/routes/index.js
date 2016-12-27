@@ -30,7 +30,7 @@ export default (
 
     <Route component={ProtectedViewFromUser}>
       <Route path='/signup' component={Signup} />
-      <Route path='/login' component={Login} />
+      <Route path='/login(/:origin)' component={Login} />
       <Route path='/reset-password/:token' component={ResetPassword} />
     </Route>
 
