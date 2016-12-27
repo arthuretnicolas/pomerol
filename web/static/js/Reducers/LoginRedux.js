@@ -14,7 +14,10 @@ const { Types, Creators } = createActions({
   fetchSessionSuccess: [ 'session' ],
   fetchSessionFailure: [ 'error' ],
   fetchSessionAttempt: [ 'jwt' ],
-  loginWithGoogleSuccess: [ 'jwt', 'profileObj' ]
+  loginWithGoogleSuccess: [ 'jwt', 'profileObj' ],
+  resetPasswordAttempt: [ 'token', 'password' ],
+  resetPasswordSuccess: [],
+  resetPasswordFailure: [ 'error' ]
 })
 
 export const LoginTypes = Types
@@ -34,7 +37,9 @@ export const INITIAL_STATE = Immutable({
   jwt: '',
   attemptingSession: false,
   session: emptySession,
-  errorSession: null
+  errorSession: null,
+  attemptingReset: false,
+  errorResetting: null
 })
 
 /* ------------- Reducers ------------- */
@@ -73,11 +78,8 @@ export const cancel = (state: Object, action: Object) =>
 
 export const logout = (state: Object, action: Object) =>
   state.merge({
-    attempting: false,
-    error: null,
     jwt: '',
-    session: emptySession,
-    errorSession: null
+    session: emptySession
   })
 
 export const fetchSessionAttempt = (state: Object, action: Object) =>
@@ -122,6 +124,27 @@ export const loginWithGoogleSuccess = (state: Object, { jwt, profileObj }: Objec
   })
 }
 
+type ResetType = {
+  token: string,
+  password: string
+}
+export const resetPasswordAttempt = (state: Object, { token, password }: ResetType) =>
+  state.merge({
+    attemptingReset: true
+  })
+
+export const resetPasswordSuccess = (state: Object, action: Object) =>
+  state.merge({
+    attemptingReset: false,
+    errorResetting: null
+  })
+
+export const resetPasswordFailure = (state: Object, { error }: Object) =>
+  state.merge({
+    attemptingReset: false,
+    errorResetting: error
+  })
+
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
@@ -133,5 +156,8 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.FETCH_SESSION_ATTEMPT]: fetchSessionAttempt,
   [Types.FETCH_SESSION_SUCCESS]: fetchSessionSuccess,
   [Types.FETCH_SESSION_FAILURE]: fetchSessionFailure,
-  [Types.LOGIN_WITH_GOOGLE_SUCCESS]: loginWithGoogleSuccess
+  [Types.LOGIN_WITH_GOOGLE_SUCCESS]: loginWithGoogleSuccess,
+  [Types.RESET_PASSWORD_ATTEMPT]: resetPasswordAttempt,
+  [Types.RESET_PASSWORD_SUCCESS]: resetPasswordSuccess,
+  [Types.RESET_PASSWORD_FAILURE]: resetPasswordFailure
 })

@@ -31,6 +31,12 @@ const create = (baseURL: string = 'http://localhost:4000/api/v1/') => {
       password
     })
 
+  const resetPassword = (token: string, password: string) =>
+    api.post('password/reset', {
+      token,
+      password
+    })
+
   const fetchSession = (jwt: string) =>
     api.get('user', {}, {
       headers: {
@@ -49,7 +55,8 @@ const create = (baseURL: string = 'http://localhost:4000/api/v1/') => {
     getUser,
     login,
     signup,
-    fetchSession
+    fetchSession,
+    resetPassword
   }
 }
 

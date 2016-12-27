@@ -61,14 +61,8 @@ test('logout', t => {
   const stateLoggedWithSession = reducer(stateLogged, Actions.fetchSessionSuccess(FAKE_SESSION))
   const state = reducer(stateLoggedWithSession, Actions.logout())
 
-  t.deepEqual(state, {
-    attempting: false,
-    error: null,
-    jwt: '',
-    attemptingSession: false,
-    session: emptySession,
-    errorSession: null
-  })
+  t.deepEqual(state.session, emptySession)
+  t.is(state.jwt, '')
 })
 
 test('fetchSessionAttempt', t => {
@@ -103,4 +97,24 @@ test('loginWithGoogleSuccess', t => {
   t.is(state.session.user.last_name, FAKE_PROFILE_OBJ.familyName)
   t.is(state.session.user.avatarUrl, FAKE_PROFILE_OBJ.imageUrl)
   t.is(state.errorSession, null)
+})
+
+test('resetPasswordAttempt', t => {
+  const state = reducer(INITIAL_STATE, Actions.resetPasswordAttempt())
+
+  t.true(state.attemptingReset)
+})
+
+test('resetPasswordSuccess', t => {
+  const state = reducer(INITIAL_STATE, Actions.resetPasswordSuccess())
+
+  t.false(state.attemptingReset)
+  t.is(state.errorResetting, null)
+})
+
+test('resetPasswordFailure', t => {
+  const state = reducer(INITIAL_STATE, Actions.resetPasswordFailure(FAKE_ERROR))
+
+  t.false(state.attemptingReset)
+  t.is(state.errorResetting, FAKE_ERROR)
 })

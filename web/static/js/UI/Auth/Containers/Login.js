@@ -41,7 +41,7 @@ class Login extends Component {
     const { email, password } = this.state
 
     return (
-      <div className='Login'>
+      <div className='Auth-Login'>
         <div className='form-container'>
           <FormLogin
             onChange={this._onChange}

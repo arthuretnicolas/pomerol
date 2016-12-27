@@ -31,3 +31,19 @@ export function * fetchSession (api, action) {
     yield put(LoginActions.fetchSessionFailure())
   }
 }
+
+export function * resetPassword (api, action) {
+  const { token, password } = action
+  const response = yield call(api.resetPassword, token, password)
+  const { data } = response
+
+  if (response.ok) {
+    const { jwt } = data
+    yield put(LoginActions.fetchSessionAttempt(jwt))
+    yield put(LoginActions.resetPasswordSuccess())
+    console.info('Reset password successful')
+  } else {
+    yield put(LoginActions.resetPasswordFailure(data))
+    console.warn('Reset password failed')
+  }
+}

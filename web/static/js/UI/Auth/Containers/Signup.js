@@ -29,7 +29,7 @@ class Signup extends Component {
     const { email, password } = this.state
 
     return (
-      <div className='Signup'>
+      <div className='Auth-Signup'>
         <div className='form-container'>
           <FormSignup
             onChange={this._onChange}
