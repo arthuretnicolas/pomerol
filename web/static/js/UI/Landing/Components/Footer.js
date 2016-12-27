@@ -17,7 +17,11 @@ const Footer = () => (
       </div>
 
       <div className='container-button'>
-        <Button theme='primary large' to='signup'>
+        <Button
+          theme='primary'
+          size='small'
+          to='signup'
+        >
           Try Pomerol for free
         </Button>
       </div>

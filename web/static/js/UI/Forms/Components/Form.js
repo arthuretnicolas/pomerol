@@ -36,7 +36,7 @@ const Form = ({
     }
 
     {
-      text && <div>
+      text && <div className='subheader'>
         {text.label}&nbsp;
         {
           !!text.linkLabel && !!text.to && <Link to={text.to}>

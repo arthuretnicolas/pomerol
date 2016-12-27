@@ -18,7 +18,11 @@ const Hero = () => (
         Join more than 14 million people who use Pomerol to grow their businesses on their terms.
       </p>
 
-      <Button to='/signup' theme='large primary'>
+      <Button
+        to='/signup'
+        theme='primary'
+        size='small'
+      >
         Sign Up Free
       </Button>
 

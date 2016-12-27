@@ -23,7 +23,7 @@
     // TODO: make it a mixin (cf Button.scss)
     box-shadow: none;
     border: none;
-    padding: $vertical-padding-button $horizontal-padding-button;
+    padding: $base-padding;
     border-radius: $border-radius-button;
     color: $color-snow;
     font-weight: $semi-bold;

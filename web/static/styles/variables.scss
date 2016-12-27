@@ -4,9 +4,6 @@ $base-padding: $small-padding * 2;
 $double-padding: $small-padding * 4;
 $triple-padding: $small-padding * 6;
 
-$vertical-padding-button: 16px;
-$horizontal-padding-button: 12px;
-
 $break-point-desktop: 1120px;
 $break-point-tablet: 840px;
 $break-point-phone: 520px;
@@ -19,7 +16,7 @@ $border-radius-input: 3px;
 $font-size-smaller: 13px;
 $font-size-small: 14px;
 $font-size-body: 15px;
-$font-size-large: 16px;
+$font-size-large: 17px;
 $font-size-header: 46px;
 
 $button-hover-darken: 5%;
@@ -31,3 +28,8 @@ $line-height-input: $line-height-xspaced;
 $medium: 500;
 $semi-bold: 600;
 $bold: 700;
+
+$letter-spacing-spaced: 0.41px;
+
+$form-min-height: 52px;
+$form-min-height-small: 44px;

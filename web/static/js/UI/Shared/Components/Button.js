@@ -12,7 +12,8 @@ type Props = {
   onClick?: () => void,
   disabled?: boolean,
   type?: string,
-  fullWidth?: boolean
+  fullWidth?: boolean,
+  size?: 'small' | 'normal' | 'large'
 }
 
 const _onClick = (disabled, onClick) => {
@@ -41,13 +42,18 @@ const Button = ({
   to = '',
   type,
   disabled = false,
-  fullWidth
+  fullWidth,
+  size
 }: Props) => (
   <ButtonContainer to={to}>
     <button
       type={type || 'button'}
       onClick={() => _onClick(disabled, onClick)}
-      className={`Button ${theme} ${fullWidth ? 'full-width' : ''}`}
+      className={`
+        Button ${theme}
+        ${fullWidth ? 'full-width' : ''}
+        ${size || ''}
+      `}
       disabled={disabled}
     >
       {children}
