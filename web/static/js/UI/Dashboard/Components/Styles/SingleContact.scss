@@ -1,0 +1,36 @@
+.Dashboard-SingleContact {
+  display: flex;
+  flex-direction: row;
+  flex-shrink: 0;
+  align-items: center;
+  border-bottom: 2px solid $gray-xlight;
+  border-left: 2px solid $gray-xlight;
+  padding: $base-padding $double-padding;
+  cursor: pointer;
+
+  &.selected, &:hover, &:focus {
+    background-color: $color-hover-primary;
+    transition: all 0.2s ease;
+    border-left: 2px solid $color-primary;
+  }
+
+  .container-avatar {
+    padding-right: $double-padding;
+    padding-left: $double-padding;
+  }
+
+  .name {
+    color: $color-primary;
+    font-weight: $semi-bold;
+    line-height: $line-height-xspaced;
+  }
+
+  .company {
+    color: $gray;
+    font-size: $font-size-small;
+  }
+
+  input[type='radio'] {
+    font-size: 28px;
+  }
+}

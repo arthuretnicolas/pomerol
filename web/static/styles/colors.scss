@@ -1,17 +1,24 @@
 $gray-dark: #333;
+$gray: #a8b2bb;
 $gray-light: #ccc;
+$gray-xlight: #f9fafb;
 
 $color-primary: #176FD4;
+$color-primary-light: lighten($color-primary, 42%);
+$color-primary-lighter: lighten($color-primary, 52%);
 
 $color-success: rgb(0, 199, 6);
 $color-snow: #fff;
 $color-frost: lighten($color-primary, 50%);
-$color-placeholder: lighten($color-primary, 42%);
+$color-placeholder: $color-primary-light;
 $color-border-input: $gray-light;
 $color-danger: #F40033;
+$color-warning: #FFA42F;
 $background-dark: darken($color-primary, 25%);
 
 // dashboard
 $sidebar-background: lighten($color-primary, 47%);
 
 $color-body: #333;
+
+$color-hover-primary: $color-primary-lighter;

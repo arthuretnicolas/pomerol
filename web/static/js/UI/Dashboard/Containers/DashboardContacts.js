@@ -2,6 +2,8 @@
 
 import React, { Component } from 'react'
 import TagSidebar from '../../Shared/Components/TagSidebar'
+import SingleContact from '../Components/SingleContact'
+import { contacts } from '../../../Data'
 import { connect } from 'react-redux'
 
 type Props = {
@@ -26,37 +28,54 @@ class DashboardContacts extends Component {
   props: Props
 
   state = {
-    selected: -1
+    selectedTag: -1,
+    selectedContact: 'none'
   }
 
-  _onClick = (selected: number) => {
+  _onClick = (selectedTag: number) => {
     this.setState({
-      selected
+      selectedTag
     })
   }
 
-  render () {
-    const { selected } = this.state
-    const selectedLabel = sidebarOptions.reduce((acc, curr) => {
-      if (curr.id === selected) {
-        return curr.label
-      }
+  _onClickContact = (id: string) => {
+    const selectedContact =
+      this.state.selectedContact === id
+        ? 'none' // unselect
+        : id
 
-      return acc
-    }, 'All')
+    this.setState({ selectedContact })
+  }
+
+  render () {
+    const {
+      selectedTag,
+      selectedContact
+    } = this.state
 
     return (
       <div className='Dashboard-DashboardContacts'>
         <div className='container-sidebar'>
           <TagSidebar
             data={sidebarOptions}
-            selected={selected}
+            selected={selectedTag}
             onClick={this._onClick}
           />
         </div>
 
         <div className='container-content'>
-          Selected: {selectedLabel}
+          <div className='list-contacts'>
+            {
+              contacts.map((contact, index) =>
+                <SingleContact
+                  key={index}
+                  contact={contact}
+                  onClick={this._onClickContact}
+                  selected={selectedContact === contact.id}
+                />
+              )
+            }
+          </div>
         </div>
       </div>
     )

@@ -13,7 +13,8 @@ const { Types, Creators } = createActions({
   logout: [],
   fetchSessionSuccess: [ 'session' ],
   fetchSessionFailure: [ 'error' ],
-  fetchSessionAttempt: [ 'jwt' ]
+  fetchSessionAttempt: [ 'jwt' ],
+  loginWithGoogleSuccess: [ 'jwt', 'profileObj' ]
 })
 
 export const LoginTypes = Types
@@ -104,6 +105,23 @@ export const fetchSessionFailure = (state: Object, { error }: Object) =>
     errorSession: error
   })
 
+export const loginWithGoogleSuccess = (state: Object, { jwt, profileObj }: Object) => {
+  const session = state.session.merge({
+    user: state.session.user.merge({
+      id: profileObj.googleId,
+      email: profileObj.email,
+      first_name: profileObj.givenName,
+      last_name: profileObj.familyName,
+      avatarUrl: state.session.user.avatarUrl || profileObj.imageUrl
+    })
+  })
+
+  return state.merge({
+    jwt,
+    session
+  })
+}
+
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
@@ -114,5 +132,6 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.LOGOUT]: logout,
   [Types.FETCH_SESSION_ATTEMPT]: fetchSessionAttempt,
   [Types.FETCH_SESSION_SUCCESS]: fetchSessionSuccess,
-  [Types.FETCH_SESSION_FAILURE]: fetchSessionFailure
+  [Types.FETCH_SESSION_FAILURE]: fetchSessionFailure,
+  [Types.LOGIN_WITH_GOOGLE_SUCCESS]: loginWithGoogleSuccess
 })

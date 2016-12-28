@@ -11,6 +11,22 @@
     display: none;
   }
 
+  .googleButton {
+    margin-top: $base-padding;
+
+    // TODO: make it a mixin (cf Button.scss)
+    box-shadow: none;
+    border: none;
+    padding: $vertical-padding-button $horizontal-padding-button;
+    border-radius: $border-radius-button;
+    color: $color-snow;
+    font-weight: $semi-bold;
+    font-size: $font-size-small;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.15);
+
+    background-color: $color-danger;
+  }
+
   @media (min-width: $break-point-tablet) {
     .illustration {
       display: flex;

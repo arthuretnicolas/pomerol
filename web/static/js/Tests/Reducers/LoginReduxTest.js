@@ -19,6 +19,12 @@ const FAKE_SESSION = {
     }
   ]
 }
+const FAKE_PROFILE_OBJ = {
+  imageUrl: 'daImageUrl',
+  email: 'a@aol.com',
+  givenName: 'Anton',
+  familyName: 'Panibratov'
+}
 
 test('attempt', t => {
   const state = reducer(INITIAL_STATE, Actions.loginAttempt('joe@yopmail.com', 'yala1234'))
@@ -31,7 +37,7 @@ test('success', t => {
 
   t.false(state.attempting)
   t.is(state.jwt, FAKE_JWT)
-  t.deepEqual(state.error, null)
+  t.is(state.error, null)
 })
 
 test('failure', t => {
@@ -39,7 +45,7 @@ test('failure', t => {
 
   t.false(state.attempting)
   t.is(state.jwt, '')
-  t.deepEqual(state.error, FAKE_ERROR)
+  t.is(state.error, FAKE_ERROR)
 })
 
 test('cancel', t => {
@@ -47,7 +53,7 @@ test('cancel', t => {
 
   t.false(state.attempting)
   t.is(state.jwt, '')
-  t.deepEqual(state.error, 'CANCELLED')
+  t.is(state.error, 'CANCELLED')
 })
 
 test('logout', t => {
@@ -84,5 +90,17 @@ test('fetchSessionFailure', t => {
 
   t.false(state.attemptingSession)
   t.deepEqual(state.session, emptySession)
-  t.deepEqual(state.errorSession, FAKE_ERROR)
+  t.is(state.errorSession, FAKE_ERROR)
+})
+
+test('loginWithGoogleSuccess', t => {
+  const state = reducer(INITIAL_STATE, Actions.loginWithGoogleSuccess(FAKE_JWT, FAKE_PROFILE_OBJ))
+
+  t.false(state.attemptingSession)
+  t.is(state.jwt, FAKE_JWT)
+  // t.is(state.session.user.email, FAKE_PROFILE_OBJ.email)
+  t.is(state.session.user.first_name, FAKE_PROFILE_OBJ.givenName)
+  t.is(state.session.user.last_name, FAKE_PROFILE_OBJ.familyName)
+  t.is(state.session.user.avatarUrl, FAKE_PROFILE_OBJ.imageUrl)
+  t.is(state.errorSession, null)
 })

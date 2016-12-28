@@ -1,6 +1,7 @@
 .Dashboard-DashboardContacts {
   display: flex;
   flex: 1;
+  background-color: #fff;
 
   .container-sidebar {
     display: flex;
@@ -11,5 +12,13 @@
   .container-content {
     display: flex;
     flex: 1;
+  }
+
+  .list-contacts {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    max-height: 100vh;
+    overflow-y: scroll;
   }
 }

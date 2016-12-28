@@ -1,0 +1,22 @@
+.Shared-Avatar {
+  .content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-size: $font-size-body;
+    background-color: $color-primary;
+  }
+
+  .color-0 {
+    background-color: $color-success;
+  }
+
+  .color-1 {
+    background-color: $color-danger;
+  }
+
+  .color-2 {
+    background-color: $color-warning;
+  }
+}
