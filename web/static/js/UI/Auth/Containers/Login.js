@@ -2,6 +2,7 @@
 
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import Link from '../../Shared/Components/Link'
 import FormLogin from '../../Forms/Components/FormLogin'
 import LoginActions from '../../../Reducers/LoginRedux'
 import GoogleLogin from 'react-google-login'
@@ -41,7 +42,7 @@ class Login extends Component {
     const { email, password } = this.state
 
     return (
-      <div className='Login'>
+      <div className='Auth-Login'>
         <div className='form-container'>
           <FormLogin
             onChange={this._onChange}
@@ -60,6 +61,12 @@ class Login extends Component {
             onFailure={this._loginWithGoogleFailure}
             className='googleButton'
           />
+
+          <div className='container-forgot'>
+            <Link to='/forgot-password'>
+              Forgot password?
+            </Link>
+          </div>
         </div>
 
         <div className='illustration'>

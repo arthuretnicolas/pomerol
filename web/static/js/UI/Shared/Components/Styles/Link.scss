@@ -1,0 +1,15 @@
+.Shared-Link {
+  color: $color-primary;
+  text-decoration: none;
+  border-bottom: 1px solid $color-primary;
+  padding-bottom: 2px;
+
+  &:hover, &:focus, &:active {
+    color: $color-primary-medium;
+    border-color: $color-primary-medium;
+  }
+
+  &.no-border {
+    border: none;
+  }
+}

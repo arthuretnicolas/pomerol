@@ -2,7 +2,7 @@
 
 import React from 'react'
 import Button from '../../Shared/Components/Button'
-import { Link } from 'react-router'
+import Link from '../../Shared/Components/Link'
 
 type Props = {
   header?: string,
@@ -14,10 +14,20 @@ type Props = {
   },
   children: React.Element<any>,
   buttonSubmit: string,
-  attempting: boolean
+  attempting: boolean,
+  alternativeCta?: React.Element<any>,
+  fullWidthCta?: boolean
 }
 
-const Form = ({ header, text, buttonSubmit, children, attempting }: Props) => (
+const Form = ({
+  header,
+  text,
+  buttonSubmit,
+  children,
+  attempting,
+  alternativeCta,
+  fullWidthCta
+}: Props) => (
   <div className='Forms-Form'>
     {
       header && <h1 className='header'>
@@ -26,7 +36,7 @@ const Form = ({ header, text, buttonSubmit, children, attempting }: Props) => (
     }
 
     {
-      text && <div>
+      text && <div className='subheader'>
         {text.label}&nbsp;
         {
           !!text.linkLabel && !!text.to && <Link to={text.to}>
@@ -36,13 +46,26 @@ const Form = ({ header, text, buttonSubmit, children, attempting }: Props) => (
       </div>
     }
 
-    <div className='input-container'>
+    <div className='container-input'>
       {children}
     </div>
 
-    <Button type='submit' disabled={attempting}>
-      {buttonSubmit}
-    </Button>
+    <div className='container-cta'>
+      <Button
+        type='submit'
+        theme='primary'
+        disabled={attempting}
+        fullWidth={fullWidthCta}
+      >
+        {buttonSubmit}
+      </Button>
+
+      {
+        alternativeCta && <div className='container-alternative-cta'>
+          {alternativeCta}
+        </div>
+      }
+    </div>
   </div>
 )
 

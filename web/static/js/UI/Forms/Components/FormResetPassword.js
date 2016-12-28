@@ -8,13 +8,12 @@ type Props = {
   onChange: (key: string, value: any) => void,
   onSubmit: () => void,
   values: {
-    email: string,
     password: string
   },
   attempting: boolean
 }
 
-export default class FormLogin extends Component {
+export default class FormResetPassword extends Component {
   props: Props
 
   _onSubmit = (event: Event) => { // eslint-disable-line
@@ -32,39 +31,30 @@ export default class FormLogin extends Component {
     } = this.props
 
     const {
-      email,
       password
     } = values
 
     return (
       <form
-        className='Form-FormLogin'
+        className='Form-FormResetPassword'
         onSubmit={this._onSubmit}
       >
         <Form
-          header='Login in'
-          text={{
-            label: 'Need a Pomerol account?',
-            linkLabel: 'Create an account',
-            to: '/signup'
-          }}
-          buttonSubmit='Log in'
+          header='Reset password'
+          buttonSubmit='Reset password'
           attempting={attempting}
-          fullWidthCta
           children={
             <div>
-              <FormInput
-                value={email}
-                type='email'
-                placeholder='Your email'
-                required
-                onChange={event => onChange('email', event && event.target.value)}
-              />
+              <div>
+                Password must be at least 5 character long
+              </div>
+
               <FormInput
                 value={password}
                 type='password'
-                placeholder='Your password'
+                placeholder='Your new password'
                 required
+                minLength={5}
                 onChange={event => onChange('password', event && event.target.value)}
               />
             </div>

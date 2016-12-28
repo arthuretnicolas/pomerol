@@ -4,8 +4,10 @@ $gray-light: #ccc;
 $gray-xlight: #f9fafb;
 
 $color-primary: #176FD4;
+$color-primary-medium: lighten($color-primary, 14%);
+$color-primary-semi-light: lighten($color-primary, 28%);
 $color-primary-light: lighten($color-primary, 42%);
-$color-primary-lighter: lighten($color-primary, 52%);
+$color-primary-lighter: lighten($color-primary, 53.3%);
 
 $color-success: rgb(0, 199, 6);
 $color-snow: #fff;

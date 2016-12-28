@@ -1,17 +1,9 @@
 h1, h2, h3, h4, h5 {
-  font-weight: $semi-bold;
+  font-weight: $medium;
 }
 
 h1, h2, h3, h4, h5, p {
   margin: 0;
-}
-
-a {
-  color: $color-primary;
-}
-
-a:not(:hover) {
-  text-decoration: none;
 }
 
 html {
@@ -31,4 +23,8 @@ body {
 body > #index {
   display: flex;
   flex: 1;
+}
+
+*:focus {
+  outline: 0;
 }

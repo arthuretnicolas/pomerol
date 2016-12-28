@@ -14,7 +14,13 @@ const { Types, Creators } = createActions({
   fetchSessionSuccess: [ 'session' ],
   fetchSessionFailure: [ 'error' ],
   fetchSessionAttempt: [ 'jwt' ],
-  loginWithGoogleSuccess: [ 'jwt', 'profileObj' ]
+  loginWithGoogleSuccess: [ 'jwt', 'profileObj' ],
+  requestPasswordAttempt: [ 'email' ],
+  requestPasswordFailure: [ 'error' ],
+  requestPasswordSuccess: [],
+  resetPasswordAttempt: [ 'token', 'password' ],
+  resetPasswordSuccess: [],
+  resetPasswordFailure: [ 'error' ]
 })
 
 export const LoginTypes = Types
@@ -34,7 +40,11 @@ export const INITIAL_STATE = Immutable({
   jwt: '',
   attemptingSession: false,
   session: emptySession,
-  errorSession: null
+  errorSession: null,
+  attemptingRequest: false,
+  errorRequest: null,
+  attemptingReset: false,
+  errorResetting: null
 })
 
 /* ------------- Reducers ------------- */
@@ -73,11 +83,8 @@ export const cancel = (state: Object, action: Object) =>
 
 export const logout = (state: Object, action: Object) =>
   state.merge({
-    attempting: false,
-    error: null,
     jwt: '',
-    session: emptySession,
-    errorSession: null
+    session: emptySession
   })
 
 export const fetchSessionAttempt = (state: Object, action: Object) =>
@@ -95,7 +102,7 @@ export const fetchSessionSuccess = (state: Object, { session }: SessionType) =>
   state.merge({
     attemptingSession: false,
     session,
-    error: null
+    errorSession: null
   })
 
 export const fetchSessionFailure = (state: Object, { error }: Object) =>
@@ -122,6 +129,44 @@ export const loginWithGoogleSuccess = (state: Object, { jwt, profileObj }: Objec
   })
 }
 
+export const requestPasswordAttempt = (state: Object, { email }: { email: string }) =>
+  state.merge({
+    attemptingRequest: true
+  })
+
+export const requestPasswordFailure = (state: Object, { error }: { error: Object }) =>
+  state.merge({
+    attemptingRequest: false,
+    errorRequest: error
+  })
+
+export const requestPasswordSuccess = (state: Object, action: Object) =>
+  state.merge({
+    attemptingRequest: false,
+    errorRequest: null
+  })
+
+type ResetType = {
+  token: string,
+  password: string
+}
+export const resetPasswordAttempt = (state: Object, { token, password }: ResetType) =>
+  state.merge({
+    attemptingReset: true
+  })
+
+export const resetPasswordSuccess = (state: Object, action: Object) =>
+  state.merge({
+    attemptingReset: false,
+    errorResetting: null
+  })
+
+export const resetPasswordFailure = (state: Object, { error }: Object) =>
+  state.merge({
+    attemptingReset: false,
+    errorResetting: error
+  })
+
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
@@ -133,5 +178,11 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.FETCH_SESSION_ATTEMPT]: fetchSessionAttempt,
   [Types.FETCH_SESSION_SUCCESS]: fetchSessionSuccess,
   [Types.FETCH_SESSION_FAILURE]: fetchSessionFailure,
-  [Types.LOGIN_WITH_GOOGLE_SUCCESS]: loginWithGoogleSuccess
+  [Types.LOGIN_WITH_GOOGLE_SUCCESS]: loginWithGoogleSuccess,
+  [Types.REQUEST_PASSWORD_ATTEMPT]: requestPasswordAttempt,
+  [Types.REQUEST_PASSWORD_FAILURE]: requestPasswordFailure,
+  [Types.REQUEST_PASSWORD_SUCCESS]: requestPasswordSuccess,
+  [Types.RESET_PASSWORD_ATTEMPT]: resetPasswordAttempt,
+  [Types.RESET_PASSWORD_SUCCESS]: resetPasswordSuccess,
+  [Types.RESET_PASSWORD_FAILURE]: resetPasswordFailure
 })

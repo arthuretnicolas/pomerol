@@ -3,18 +3,18 @@
 import React, { Component } from 'react'
 import Form from './Form'
 import FormInput from './FormInput'
+import Link from '../../Shared/Components/Link'
 
 type Props = {
   onChange: (key: string, value: any) => void,
   onSubmit: () => void,
   values: {
-    email: string,
-    password: string
+    email: string
   },
   attempting: boolean
 }
 
-export default class FormLogin extends Component {
+export default class FormForgotPassword extends Component {
   props: Props
 
   _onSubmit = (event: Event) => { // eslint-disable-line
@@ -32,26 +32,22 @@ export default class FormLogin extends Component {
     } = this.props
 
     const {
-      email,
-      password
+      email
     } = values
 
     return (
       <form
-        className='Form-FormLogin'
+        className='Form-FormForgotPassword'
         onSubmit={this._onSubmit}
       >
         <Form
-          header='Login in'
+          header='Ask for a new password'
           text={{
-            label: 'Need a Pomerol account?',
-            linkLabel: 'Create an account',
-            to: '/signup'
+            label: 'Enter your email to reset your password.'
           }}
-          buttonSubmit='Log in'
+          buttonSubmit='Reset password'
           attempting={attempting}
-          fullWidthCta
-          children={
+          children={(
             <div>
               <FormInput
                 value={email}
@@ -60,15 +56,13 @@ export default class FormLogin extends Component {
                 required
                 onChange={event => onChange('email', event && event.target.value)}
               />
-              <FormInput
-                value={password}
-                type='password'
-                placeholder='Your password'
-                required
-                onChange={event => onChange('password', event && event.target.value)}
-              />
             </div>
-          }
+          )}
+          alternativeCta={(
+            <Link to='/login'>
+              Return to login
+            </Link>
+          )}
         />
       </form>
     )

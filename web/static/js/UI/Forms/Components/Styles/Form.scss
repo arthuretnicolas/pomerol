@@ -2,11 +2,31 @@
   flex-direction: column;
 
   .header {
-    padding-bottom: $small-padding;
+    padding-bottom: $base-padding * 1.5;
+    display: flex;
+    flex: 1;
   }
 
-  .input-container {
+  .subheader {
+    display: flex;
+    flex: 1;
+    padding-bottom: $base-padding;
+  }
+
+  .container-input {
     padding-top: $base-padding;
     padding-bottom: $base-padding;
+  }
+
+  .container-cta {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .container-alternative-cta {
+    display: flex;
+    padding-left: $base-padding;
+    font-size: $font-size-smaller;
   }
 }

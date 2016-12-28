@@ -1,13 +1,20 @@
-.Login {
+.Auth-Login {
   display: flex;
   flex: 1;
+  background-color: $color-primary-lighter;
 
   .form-container {
-    padding: $base-padding;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding: $double-padding;
     min-width: 330px;
+    justify-content: center;
+    padding-bottom: 200px;
   }
 
   .illustration {
+    display: flex;
     display: none;
   }
 
@@ -17,27 +24,34 @@
     // TODO: make it a mixin (cf Button.scss)
     box-shadow: none;
     border: none;
-    padding: $vertical-padding-button $horizontal-padding-button;
+    padding: $base-padding;
     border-radius: $border-radius-button;
     color: $color-snow;
     font-weight: $semi-bold;
-    font-size: $font-size-small;
+    font-size: $font-size-large;
     text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.15);
 
     background-color: $color-danger;
+    cursor: pointer;
+  }
+
+  .container-forgot {
+    margin-top: $double-padding;
+    display: flex;
+    justify-content: center;
   }
 
   @media (min-width: $break-point-tablet) {
     .illustration {
       display: flex;
-      flex-grow: 1;
+      flex-grow: 10;
       background-color: $color-placeholder;
     }
 
     .image-container {
       display: flex;
       flex: 1;
-      background-image: url('https://upload.wikimedia.org/wikipedia/commons/8/83/Zebra_Botswana_edit02.jpg');
+      background-image: url('https://d13yacurqjgara.cloudfront.net/users/13449/screenshots/1828176/lakeside_sunset.png');
       background-size: cover;
     }
   }

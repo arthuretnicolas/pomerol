@@ -7,9 +7,17 @@ type ErrorType = {
   title: string
 }
 
+function getError (error: string | Object) {
+  if (typeof error === 'string') {
+    return error
+  }
+
+  return error.detail
+}
+
 function parseErrors (errors: Array<ErrorType>): string {
   const parsedErrors =
-    errors.map(err => err.detail)
+    errors.map(getError)
       .join(' ')
 
   return parsedErrors

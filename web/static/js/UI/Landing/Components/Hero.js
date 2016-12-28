@@ -3,7 +3,7 @@
 import React from 'react'
 import Navbar from './Navbar'
 import Button from '../../Shared/Components/Button'
-import { Link } from 'react-router'
+import Link from '../../Shared/Components/Link'
 
 const Hero = () => (
   <div className='Landing-Hero'>
@@ -18,7 +18,11 @@ const Hero = () => (
         Join more than 14 million people who use Pomerol to grow their businesses on their terms.
       </p>
 
-      <Button to='/signup' theme='large primary'>
+      <Button
+        to='/signup'
+        theme='primary'
+        size='small'
+      >
         Sign Up Free
       </Button>
 

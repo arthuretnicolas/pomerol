@@ -1,0 +1,27 @@
+.Shared-EmptyStateAuth {
+  display: flex;
+  flex: 1;
+
+  .form-container {
+    filter: blur(6px);
+    padding: $base-padding;
+    min-width: 347px;
+  }
+
+  .header {
+    padding-bottom: $base-padding;
+  }
+
+  .input {
+    display: flex;
+    align-items: center;
+    padding: $base-padding;
+    height: 37px;
+    border: 1px solid $color-border-input;
+    margin-top: $base-padding;
+  }
+
+  .primary {
+    color: $color-primary;
+  }
+}
