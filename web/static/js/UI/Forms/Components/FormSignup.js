@@ -46,7 +46,7 @@ export default class FormSignup extends Component {
           text={{
             label: 'Already have a MailChimp account?',
             linkLabel: 'Log in',
-            to: 'login'
+            to: '/login'
           }}
           buttonSubmit='Sign up'
           attempting={attempting}

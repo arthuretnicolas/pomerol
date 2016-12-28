@@ -46,7 +46,7 @@ export default class FormLogin extends Component {
           text={{
             label: 'Need a Pomerol account?',
             linkLabel: 'Create an account',
-            to: 'signup'
+            to: '/signup'
           }}
           buttonSubmit='Log in'
           attempting={attempting}
