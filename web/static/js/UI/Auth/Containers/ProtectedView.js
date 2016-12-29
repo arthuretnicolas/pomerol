@@ -42,6 +42,10 @@ class ProtectedView extends Component {
     if (!hasCompleteProfile && !isOnboarding) {
       browserHistory.push('/onboarding-one')
     }
+
+    if (hasCompleteProfile && isOnboarding) {
+      browserHistory.push('/dashboard')
+    }
   }
 
   render () {
@@ -51,11 +55,7 @@ class ProtectedView extends Component {
       return <EmptyStateDashboard />
     }
 
-    return (
-      <div style={{ display: 'flex', flex: 1 }}>
-        {children}
-      </div>
-    )
+    return children
   }
 }
 
