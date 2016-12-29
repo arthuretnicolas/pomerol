@@ -17,6 +17,7 @@ import Signup from '../UI/Auth/Containers/Signup'
 import Login from '../UI/Auth/Containers/Login'
 import ResetPassword from '../UI/Auth/Containers/ResetPassword'
 import ForgotPassword from '../UI/Auth/Containers/ForgotPassword'
+import OnboardingOne from '../UI/Auth/Containers/OnboardingOne'
 
 // Dashboard
 import DashboardContainer from '../UI/Dashboard/Components/DashboardContainer'
@@ -37,6 +38,7 @@ export default (
     </Route>
 
     <Route component={ProtectedView}>
+      <Route path='/onboarding-one' component={OnboardingOne} />
       <Route path='/counters' component={Counters} />
       <Route path='/github-users' component={GithubUsers} />
 

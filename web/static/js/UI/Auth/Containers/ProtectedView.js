@@ -4,10 +4,13 @@ import React, { Component } from 'react'
 import { browserHistory } from 'react-router'
 import { connect } from 'react-redux'
 import EmptyStateDashboard from '../../Shared/Components/EmptyStateDashboard'
+import { hasCompleteProfile } from '../../../Helpers'
 
 type Props = {
   isAuthenticated: boolean,
-  children: React<*>
+  children: React<*>,
+  hasCompleteProfile: boolean,
+  location: Object
 }
 
 class ProtectedView extends Component {
@@ -18,12 +21,26 @@ class ProtectedView extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    this._checkAuth(nextProps.isAuthenticated)
+    this._checkAuth(nextProps.isAuthenticated, nextProps.hasCompleteProfile)
   }
 
-  _checkAuth = (isAuthenticated: boolean = this.props.isAuthenticated) => {
-    if (!isAuthenticated && browserHistory) {
+  _checkAuth = (
+    isAuthenticated: boolean = this.props.isAuthenticated,
+    hasCompleteProfile: boolean = this.props.hasCompleteProfile
+  ) => {
+    if (!browserHistory) {
+      return null
+    }
+
+    if (!isAuthenticated) {
       browserHistory.push('/login/dashboard')
+    }
+
+    const isOnboarding =
+      [ 'onboarding-one', 'onboarding-two' ].includes(this.props.location.pathname.split('/')[1])
+
+    if (!hasCompleteProfile && !isOnboarding) {
+      browserHistory.push('/onboarding-one')
     }
   }
 
@@ -43,7 +60,8 @@ class ProtectedView extends Component {
 }
 
 const mapStateToProps = ({ login }) => ({
-  isAuthenticated: !!login.session.user.id
+  isAuthenticated: !!login.session.user,
+  hasCompleteProfile: hasCompleteProfile(login.session.user)
 })
 
 const mapDispatchToProps = dispatch => ({

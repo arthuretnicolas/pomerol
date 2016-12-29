@@ -30,7 +30,7 @@ export default Creators
 
 // exported only for tests
 export const emptySession = {
-  user: {},
+  user: null,
   organizations: []
 }
 
