@@ -32,7 +32,10 @@ defmodule Pomerol.Organization do
     |> foreign_key_constraint(:country_id)
   end
 
-  def preload_all(query) do
-    from b in query, preload: [:members, :contacts, :organization_memberships]
+  def preload_all(query, locale) do
+    from query, preload: [
+      [:members, :contacts, :organization_memberships],
+      country: [ translation: ^Pomerol.CountryTranslation.translation_query(locale) ]
+    ]
   end
 end

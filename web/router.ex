@@ -38,9 +38,6 @@ defmodule Pomerol.Router do
 
       post "/signup", UserController, :create
       post "/signin", SessionController, :create
-
-      # TODO: needed during dev. remove if unused with react google
-      options "/auth/:provider/callback", AuthController, :options
       post "/auth/:provider/callback", AuthController, :callback
       post "/password/request", UserController, :password_reset_request, as: :reset
       post "/password/reset", UserController, :password_reset, as: :reset
@@ -61,7 +58,6 @@ defmodule Pomerol.Router do
       resources "/organizations", OrganizationController, only: [:index, :show, :create] do
         resources "/memberships", OrganizationMembershipController, only: [:update]
       end
-      
     end
 
   end

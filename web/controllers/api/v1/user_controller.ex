@@ -36,7 +36,7 @@ defmodule Pomerol.V1.UserController  do
 
     case Repo.update(changeset) do
       {:ok, user} ->
-        render(conn, Pomerol.UserView, "show.json", user: user)
+        render(conn, Pomerol.UserView, "user.json", user: user)
       {:error, changeset} ->
         conn
         |> put_status(:unprocessable_entity)

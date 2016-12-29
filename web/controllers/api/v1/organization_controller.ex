@@ -17,15 +17,18 @@ defmodule Pomerol.V1.OrganizationController do
   end
 
   def create(conn, params) do
+    locale = conn.assigns[:locale]
     current_user = conn.assigns |> Map.get(:current_user)
+    params =
+      params
+      |> Map.put("user_id", current_user.id)
+
     changeset = Organization.create_changeset(%Organization{}, params)
 
-    case Repo.transaction(OrganizationService.insert(conn, changeset, params)) do
+    case Repo.transaction(OrganizationService.insert(changeset, params)) do
       {:ok, %{organization: organization}} ->
-        organization
-          |> build_assoc(:organization_memberships)
-          |> OrganizationMembership.create_changeset(%{member_id: current_user.id, role: "owner"})
-          |> Repo.insert!
+        # TODO: to improve
+        organization = Organization |> Organization.preload_all(locale) |> Repo.get!(organization.id)
         conn
         |> put_status(:created)
         |> render(Pomerol.OrganizationView, "organization.json", organization: organization)
@@ -41,7 +44,7 @@ defmodule Pomerol.V1.OrganizationController do
     organization = Organization
     |> Repo.get!(id)
     |> Repo.preload(:members)
-    
+
     conn
     |> render(Pomerol.OrganizationView, "organization.json", organization: organization)
   end
