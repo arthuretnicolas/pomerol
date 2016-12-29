@@ -15,6 +15,7 @@
   font-weight: $semi-bold;
   font-size: $font-size-large;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.15);
+  position: relative;
 
   &.small {
     font-size: $font-size-body;
@@ -48,5 +49,6 @@
     display: flex;
     flex: 1;
     justify-content: center;
+    align-items: center;
   }
 }

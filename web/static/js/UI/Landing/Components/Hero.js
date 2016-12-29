@@ -22,9 +22,8 @@ const Hero = () => (
         to='/signup'
         theme='primary'
         size='small'
-      >
-        Sign Up Free
-      </Button>
+        text='Sign Up Free'
+      />
 
       <div className='more'>
         Want to learn more? <Link to='/features'>Check out our features</Link>

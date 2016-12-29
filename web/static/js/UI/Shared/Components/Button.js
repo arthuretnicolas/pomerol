@@ -2,15 +2,18 @@
 
 import React from 'react'
 import { Link } from 'react-router'
+import Spinner from './Spinner'
 
 type Props = {
-  children?: Object,
+  text: string,
+  textLoading?: string,
   onClick: () => void,
   theme?: string,
   style?: Object,
   to?: string,
   onClick?: () => void,
   disabled?: boolean,
+  loading?: boolean,
   type?: string,
   fullWidth?: boolean,
   size?: 'small' | 'normal' | 'large'
@@ -37,11 +40,13 @@ const ButtonContainer = ({ to = '', children }) => {
 const Button = ({
   theme = '',
   style,
-  children,
+  text,
+  textLoading = '',
   onClick,
   to = '',
   type,
   disabled = false,
+  loading = false,
   fullWidth,
   size
 }: Props) => (
@@ -56,7 +61,22 @@ const Button = ({
       `}
       disabled={disabled}
     >
-      {children}
+      {
+        loading && <Spinner style={{
+          display: 'flex',
+          alignItems: 'center',
+          height: 16,
+          paddingRight: 8
+        }} />
+      }
+
+      <div className='container-text'>
+        {
+          loading && textLoading
+            ? textLoading
+            : text
+        }
+      </div>
     </button>
   </ButtonContainer>
 )
