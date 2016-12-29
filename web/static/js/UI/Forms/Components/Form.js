@@ -16,7 +16,8 @@ type Props = {
   buttonSubmit: string,
   attempting: boolean,
   alternativeCta?: React.Element<any>,
-  fullWidthCta?: boolean
+  fullWidthCta?: boolean,
+  textLoading?: string
 }
 
 const Form = ({
@@ -26,7 +27,8 @@ const Form = ({
   children,
   attempting,
   alternativeCta,
-  fullWidthCta
+  fullWidthCta,
+  textLoading
 }: Props) => (
   <div className='Forms-Form'>
     {
@@ -53,12 +55,13 @@ const Form = ({
     <div className='container-cta'>
       <Button
         type='submit'
+        text={buttonSubmit}
         theme='primary'
         disabled={attempting}
+        loading={attempting}
+        textLoading={textLoading}
         fullWidth={fullWidthCta}
-      >
-        {buttonSubmit}
-      </Button>
+      />
 
       {
         alternativeCta && <div className='container-alternative-cta'>

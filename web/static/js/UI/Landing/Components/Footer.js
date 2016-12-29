@@ -21,9 +21,8 @@ const Footer = () => (
           theme='primary'
           size='small'
           to='signup'
-        >
-          Try Pomerol for free
-        </Button>
+          text='Try Pomerol for free'
+        />
       </div>
     </div>
   </div>

@@ -22,9 +22,10 @@ class DashboardSettings extends Component {
             Settings
           </div>
 
-          <Button onClick={logout}>
-            Log out
-          </Button>
+          <Button
+            onClick={logout}
+            text='Log out'
+          />
         </div>
       </div>
     )

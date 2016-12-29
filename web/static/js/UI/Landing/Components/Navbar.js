@@ -11,9 +11,8 @@ const Navbar = () => (
         to='signup'
         theme='primary'
         size='small'
-      >
-        Sign up
-      </Button>
+        text='Sign up'
+      />
     </div>
 
     <Link
