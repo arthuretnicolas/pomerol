@@ -7,14 +7,14 @@ import Immutable from 'seamless-immutable'
 
 const { Types, Creators } = createActions({
   loginAttempt: [ 'email', 'password' ],
-  loginSuccess: [ 'token' ],
+  loginSuccess: [ 'jwt' ],
   loginFailure: [ 'error' ],
   loginCancel: [],
   logout: [],
   fetchSessionSuccess: [ 'session' ],
   fetchSessionFailure: [ 'error' ],
   fetchSessionAttempt: [ 'jwt' ],
-  loginWithGoogleSuccess: [ 'jwt', 'profileObj' ],
+  preloginWithGoogleSuccess: [ 'code' ],
   requestPasswordAttempt: [ 'email' ],
   requestPasswordFailure: [ 'error' ],
   requestPasswordSuccess: [],
@@ -55,16 +55,11 @@ export const attempt = (state: Object, { email, password }: { email: string, pas
     attempting: true
   })
 
-type TokenType = {
-  token: {
-    jwt: string
-  }
-}
-export const success = (state: Object, { token }: TokenType) =>
+export const success = (state: Object, { jwt }: { jwt: string }) =>
   state.merge({
     attempting: false,
     error: null,
-    jwt: token.jwt
+    jwt
   })
 
 export const failure = (state: Object, { error }: Object) =>
@@ -112,22 +107,7 @@ export const fetchSessionFailure = (state: Object, { error }: Object) =>
     errorSession: error
   })
 
-export const loginWithGoogleSuccess = (state: Object, { jwt, profileObj }: Object) => {
-  const session = state.session.merge({
-    user: state.session.user.merge({
-      id: profileObj.googleId,
-      email: profileObj.email,
-      first_name: profileObj.givenName,
-      last_name: profileObj.familyName,
-      avatarUrl: state.session.user.avatarUrl || profileObj.imageUrl
-    })
-  })
-
-  return state.merge({
-    jwt,
-    session
-  })
-}
+export const preloginWithGoogleSuccess = (state: Object, { code }: { code: string }) => state
 
 export const requestPasswordAttempt = (state: Object, { email }: { email: string }) =>
   state.merge({
@@ -178,7 +158,7 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.FETCH_SESSION_ATTEMPT]: fetchSessionAttempt,
   [Types.FETCH_SESSION_SUCCESS]: fetchSessionSuccess,
   [Types.FETCH_SESSION_FAILURE]: fetchSessionFailure,
-  [Types.LOGIN_WITH_GOOGLE_SUCCESS]: loginWithGoogleSuccess,
+  [Types.PRELOGIN_WITH_GOOGLE_SUCCESS]: preloginWithGoogleSuccess,
   [Types.REQUEST_PASSWORD_ATTEMPT]: requestPasswordAttempt,
   [Types.REQUEST_PASSWORD_FAILURE]: requestPasswordFailure,
   [Types.REQUEST_PASSWORD_SUCCESS]: requestPasswordSuccess,

@@ -11,7 +11,7 @@ const create = (baseURL: string = 'http://localhost:4000/api/v1/') => {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
-    timeout: 10000
+    timeout: 10 * 1000
   })
 
   // Force API Key on all requests
@@ -23,6 +23,11 @@ const create = (baseURL: string = 'http://localhost:4000/api/v1/') => {
     api.post('signin', {
       email,
       password
+    })
+
+  const loginWithGoogle = (code: string) =>
+    api.post('auth/google/callback', {
+      code
     })
 
   const signup = (email: string, password: string) =>
@@ -59,6 +64,7 @@ const create = (baseURL: string = 'http://localhost:4000/api/v1/') => {
   return {
     getUser,
     login,
+    loginWithGoogle,
     signup,
     fetchSession,
     requestPassword,
