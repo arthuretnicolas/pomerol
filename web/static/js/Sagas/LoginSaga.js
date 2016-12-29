@@ -9,7 +9,7 @@ export function * login (api, action) {
 
   if (response.ok) {
     const { jwt } = data
-    yield put(LoginActions.loginSuccess(data))
+    yield put(LoginActions.loginSuccess(jwt))
     yield put(LoginActions.fetchSessionAttempt(jwt))
   } else {
     yield put(LoginActions.loginFailure())
@@ -29,6 +29,21 @@ export function * fetchSession (api, action) {
     yield put(LoginActions.fetchSessionSuccess(response.data))
   } else {
     yield put(LoginActions.fetchSessionFailure())
+  }
+}
+
+export function * loginWithGoogle (api, action) {
+  const { code } = action
+  const response = yield call(api.loginWithGoogle, code)
+
+  if (response.ok) {
+    const { jwt } = response.data
+    yield put(LoginActions.loginSuccess(jwt))
+    yield put(LoginActions.fetchSessionAttempt(jwt))
+  } else {
+    const { errors } = response.data
+    yield put(LoginActions.loginFailure())
+    handleErrors(errors)
   }
 }
 

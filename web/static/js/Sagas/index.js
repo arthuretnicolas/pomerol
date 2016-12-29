@@ -18,6 +18,7 @@ import { incrementWithDelay } from './CounterSaga'
 import { getUser } from './GithubSaga'
 import {
   login,
+  loginWithGoogle,
   logout,
   fetchSession,
   requestPassword,
@@ -38,6 +39,7 @@ export default function * root () {
     takeLatest(CounterTypes.ATTEMPT_INCREMENT, incrementWithDelay),
     takeLatest(GithubTypes.FETCH_USER_REQUEST, getUser, api),
     takeLatest(LoginTypes.LOGIN_ATTEMPT, login, api),
+    takeLatest(LoginTypes.PRELOGIN_WITH_GOOGLE_SUCCESS, loginWithGoogle, api),
     takeLatest(LoginTypes.LOGOUT, logout),
     takeLatest(LoginTypes.FETCH_SESSION_ATTEMPT, fetchSession, api),
     takeLatest(LoginTypes.REQUEST_PASSWORD_ATTEMPT, requestPassword, api),

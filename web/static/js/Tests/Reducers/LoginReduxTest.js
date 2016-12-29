@@ -19,12 +19,6 @@ const FAKE_SESSION = {
     }
   ]
 }
-const FAKE_PROFILE_OBJ = {
-  imageUrl: 'daImageUrl',
-  email: 'a@aol.com',
-  givenName: 'Anton',
-  familyName: 'Panibratov'
-}
 
 // login
 
@@ -45,7 +39,7 @@ test('failure', t => {
 
 test('success', t => {
   const stateFailure = reducer(INITIAL_STATE, Actions.loginFailure(FAKE_ERROR))
-  const state = reducer(stateFailure, Actions.loginSuccess({ jwt: FAKE_JWT }))
+  const state = reducer(stateFailure, Actions.loginSuccess(FAKE_JWT))
 
   t.false(state.attempting)
   t.is(state.jwt, FAKE_JWT)
@@ -98,15 +92,7 @@ test('fetchSessionSuccess', t => {
 // login with google
 
 test('loginWithGoogleSuccess', t => {
-  const state = reducer(INITIAL_STATE, Actions.loginWithGoogleSuccess(FAKE_JWT, FAKE_PROFILE_OBJ))
-
-  t.false(state.attemptingSession)
-  t.is(state.jwt, FAKE_JWT)
-  // t.is(state.session.user.email, FAKE_PROFILE_OBJ.email)
-  t.is(state.session.user.first_name, FAKE_PROFILE_OBJ.givenName)
-  t.is(state.session.user.last_name, FAKE_PROFILE_OBJ.familyName)
-  t.is(state.session.user.avatarUrl, FAKE_PROFILE_OBJ.imageUrl)
-  t.is(state.errorSession, null)
+  t.true(true) // nothing to test
 })
 
 // request password

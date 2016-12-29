@@ -9,8 +9,8 @@ import GoogleLogin from 'react-google-login'
 
 type Props = {
   loginAttempt: () => void,
-  loginWithGoogleSuccess: () => void,
-  loginWithGoogleFailure: () => void,
+  preloginWithGoogleSuccess: () => void,
+  preloginWithGoogleFailure: () => void,
   attempting: boolean
 }
 
@@ -28,11 +28,11 @@ class Login extends Component {
     })
   }
 
-  _loginWithGoogleSuccess = response =>
-    this.props.loginWithGoogleSuccess(response.accessToken, response.profileObj)
+  _preloginWithGoogleSuccess = response =>
+    this.props.preloginWithGoogleSuccess(response.code)
 
-  _loginWithGoogleFailure = error =>
-    this.props.loginWithGoogleFailure(error)
+  _preloginWithGoogleFailure = error =>
+    this.props.preloginWithGoogleFailure(error)
 
   render () {
     const {
@@ -57,9 +57,10 @@ class Login extends Component {
           <GoogleLogin
             clientId='217330109544-l6gh6agp436gc77i6gqje4t3ni6lluj6.apps.googleusercontent.com'
             buttonText='Login with Google'
-            onSuccess={this._loginWithGoogleSuccess}
-            onFailure={this._loginWithGoogleFailure}
+            onSuccess={this._preloginWithGoogleSuccess}
+            onFailure={this._preloginWithGoogleFailure}
             className='googleButton'
+            offline
           />
 
           <div className='container-forgot'>
@@ -84,9 +85,9 @@ const mapStateToProps = ({ login }) => ({
 const mapDispatchToProps = dispatch => ({
   loginAttempt: (email: string, password: string) =>
     dispatch(LoginActions.loginAttempt(email, password)),
-  loginWithGoogleSuccess: (jwt: string, profileObj: Object) =>
-    dispatch(LoginActions.loginWithGoogleSuccess(jwt, profileObj)),
-  loginWithGoogleFailure: (error: Object) =>
+  preloginWithGoogleSuccess: (code: string) =>
+    dispatch(LoginActions.preloginWithGoogleSuccess(code)),
+  preloginWithGoogleFailure: (error: Object) =>
     dispatch(LoginActions.failure(error))
 })
 

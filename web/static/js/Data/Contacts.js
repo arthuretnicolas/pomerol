@@ -1,6 +1,6 @@
 export const contacts = [
   {
-    firstName: 'Joel',
+    firstName: 'Walter',
     lastName: 'Sparski',
     phoneNumber: '+478927892',
     website: 'https://trello.com',

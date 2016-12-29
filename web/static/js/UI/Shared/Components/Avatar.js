@@ -7,7 +7,12 @@ type Props = {
   initials: string
 }
 
-function getColorClassName (code) {
+function getColorClassName (initials) {
+  const code =
+    initials
+      .slice(0, 1)
+      .toLowerCase()
+      .charCodeAt(0)
   const arrayCodes =
     [ 'd', 'g', 'p' ]
       .map(letter => letter.charCodeAt(0))
