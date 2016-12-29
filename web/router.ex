@@ -41,12 +41,12 @@ defmodule Pomerol.Router do
       post "/auth/:provider/callback", AuthController, :callback
       post "/password/request", UserController, :password_reset_request, as: :reset
       post "/password/reset", UserController, :password_reset, as: :reset
-      resources "/countries", CountryController, only: [:index]
     end
 
     scope "/v1", V1, as: :v1 do
       pipe_through [:api, :bearer_auth, :ensure_auth, :current_user]
 
+      resources "/countries", CountryController, only: [:index]
       get "/signout", SessionController, :delete
 
       get "/user", UserController, :current_user
