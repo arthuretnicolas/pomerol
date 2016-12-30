@@ -27,7 +27,15 @@ const Select = ({
 }: Props) => (
   <div className='Forms-Select'>
     <div className='arrow-down'>
-      &#x25BC;
+      <svg
+        viewBox='0 0 18 18'
+        style={{
+          fill: '#333',
+          height: 16,
+          width: 16
+        }}>
+        <path d='M16.291 4.295a1 1 0 1 1 1.414 1.415l-8 7.995a1 1 0 0 1-1.414 0l-8-7.995a1 1 0 1 1 1.414-1.415l7.293 7.29 7.293-7.29z' />
+      </svg>
     </div>
 
     <select
