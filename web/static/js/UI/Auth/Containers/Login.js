@@ -66,7 +66,7 @@ class Login extends Component {
                 buttonText='Login with Google'
                 onSuccess={this._preloginWithGoogleSuccess}
                 onFailure={this._preloginWithGoogleFailure}
-                className={`${attempting ? '' : 'google-button'}`}
+                className='google-button'
                 offline
               >
                 <img
