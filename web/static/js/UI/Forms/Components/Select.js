@@ -13,7 +13,7 @@ type Props = {
     name: string
   }>,
   selected?: number | null,
-  top?: Array<number> | Array<string> | null
+  top?: Array<*>
 }
 
 const Select = ({
@@ -23,32 +23,53 @@ const Select = ({
   onChange,
   options,
   selected,
-  top
+  top = top || []
 }: Props) => (
   <div className='Forms-Select'>
+    <div className='arrow-down'>
+      &#x25BC;
+    </div>
+
     <select
-      className='select'
+      className={`select ${placeholder && !selected ? 'showing-placeholder' : ''}`}
       disabled={disabled}
       required={required}
       placeholder={placeholder}
       onChange={onChange}
       defaultValue={selected || 'value_placeholder'}
     >
-      <optgroup label='suckers'>
-        {
-          placeholder && <option value='value_placeholder' disabled>
-            {placeholder}
-          </option>
-        }
+      {
+        placeholder && <option value='value_placeholder' disabled>
+          {placeholder}
+        </option>
+      }
 
-        {
-          !!options && options.map(opt => (
+      {
+        options
+          .filter(opt => top.includes(opt.id))
+          .map(opt => (
             <option key={opt.id} value={opt.id}>
               {opt.name}
             </option>
           ))
-        }
-      </optgroup>
+      }
+
+      {
+        top &&
+        top.length &&
+        options.filter(opt => !top.includes(opt.id)).length &&
+        <option disabled>──────────</option>
+      }
+
+      {
+        options
+          .filter(opt => !top.includes(opt.id))
+          .map(opt => (
+            <option key={opt.id} value={opt.id}>
+              {opt.name}
+            </option>
+          ))
+      }
     </select>
   </div>
 )
