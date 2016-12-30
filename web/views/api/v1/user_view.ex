@@ -19,6 +19,7 @@ defmodule Pomerol.UserView do
       last_name: user.last_name,
       locale: user.locale,
       email: user.email,
+      current_organization_id: (if user.current_organization, do: user.current_organization.id, else: nil),
       country: render_one(user.country, Pomerol.CountryView, "country.json")
     }
   end

@@ -4,7 +4,7 @@ defmodule Pomerol.V1.UserController  do
 
   alias Pomerol.{UserService, Repo, User, Country}
 
-  plug :load_and_authorize_resource, model: User, only: [:update]
+  plug :load_and_authorize_changeset, model: User, only: [:update]
 
   def create(conn, params = %{"email" => _, "password" => _}) do
     locale = conn.assigns[:locale]
@@ -36,6 +36,7 @@ defmodule Pomerol.V1.UserController  do
 
     case Repo.update(changeset) do
       {:ok, user} ->
+        user = User |> User.preload_all(locale) |> Repo.get!(user.id)
         render(conn, Pomerol.UserView, "user.json", user: user)
       {:error, changeset} ->
         conn

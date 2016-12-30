@@ -17,6 +17,7 @@ defmodule Pomerol.Helpers.Policy do
   """
   def get_membership(nil, %User{}), do: nil
   def get_membership(%Changeset{changes: %{organization_id: organization_id}}, %User{id: user_id}), do: do_get_membership(organization_id, user_id)
+  def get_membership(%Changeset{changes: %{current_organization_id: current_organization_id}}, %User{id: user_id}), do: do_get_membership(current_organization_id, user_id)
   def get_membership(%Contact{organization_id: organization_id}, %User{id: user_id}), do: do_get_membership(organization_id, user_id)
   def get_membership(%Organization{id: organization_id}, %User{id: user_id}), do: do_get_membership(organization_id, user_id)
   defp do_get_membership(organization_id, user_id) do
@@ -57,4 +58,9 @@ defmodule Pomerol.Helpers.Policy do
   """
   # def contributor_or_higher?(role) when role in ["contributor", "admin", "owner"], do: true
   # def contributor_or_higher?(_), do: false
+
+  def get_current_organization(%{current_organization_id: current_organization_id}), do: Organization |> Repo.get(current_organization_id)
+  def get_current_organization(%Changeset{changes: %{current_organization_id: current_organization_id}}), do: Organization |> Repo.get(current_organization_id)
+  def get_current_organization(_), do: nil
+
 end

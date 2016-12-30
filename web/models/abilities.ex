@@ -21,11 +21,8 @@ defmodule Canary.Abilities do
     # The only solution is to have a catch_all match for the resource being nil, which returns true
     def can?(%User{}, _action, nil), do: true
 
-    def can?(%User{} = current_user, :update, %User{} = user), do: UserPolicy.update?(user, current_user)
-
-    def can?(%User{} = user, :create, Organization), do: OrganizationPolicy.create?(user)
-    def can?(%User{} = user, :update, %Organization{} = organization), do: OrganizationPolicy.update?(user, organization)
-    def can?(%User{} = user, :show, %Organization{} = organization), do: OrganizationPolicy.show?(user, organization)
+    def can?(%User{} = user, :update, %Changeset{data: %User{}} = changeset), do: UserPolicy.update?(user, changeset)
+    # def can?(%User{} = current_user, :update, %User{} = user), do: UserPolicy.update?(user, current_user)
 
     def can?(%User{} = user, :create, %Changeset{data: %OrganizationMembership{}} = changeset), do: OrganizationMembershipPolicy.create?(user, changeset)
     def can?(%User{} = user, :update, %Changeset{data: %OrganizationMembership{}} = changeset), do: OrganizationMembershipPolicy.update?(user, changeset)

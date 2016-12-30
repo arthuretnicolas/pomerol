@@ -24,6 +24,7 @@ defmodule Pomerol.User do
     has_many :authorizations, Pomerol.Authorization
 
     belongs_to :country, Pomerol.Country
+    belongs_to :current_organization, Pomerol.Organization
 
     timestamps
   end
@@ -53,10 +54,12 @@ defmodule Pomerol.User do
 
   def update_changeset(user, params \\ %{}) do
     user
-    |> cast(params, [:first_name, :last_name, :locale, :country_id])
+    |> cast(params, [:first_name, :last_name, :locale, :country_id, :current_organization_id])
     |> validate_inclusion(:locale, ["en", "fr"])
     |> foreign_key_constraint(:country_id)
     |> assoc_constraint(:country)
+    |> foreign_key_constraint(:current_organization_id)
+    |> assoc_constraint(:current_organization)
   end
 
   def change_password_changeset(user, params \\ %{}) do
@@ -111,7 +114,7 @@ defmodule Pomerol.User do
 
   def preload_all(query, locale) do
     from query, preload: [
-      [:organizations, {:organizations, :members}, {:organizations, country: [ translation: ^Pomerol.CountryTranslation.translation_query(locale) ]}],
+      [:organizations, :current_organization, {:organizations, :members}, {:organizations, country: [ translation: ^Pomerol.CountryTranslation.translation_query(locale) ]}],
       country: [ translation: ^Pomerol.CountryTranslation.translation_query(locale) ]
     ]
   end
