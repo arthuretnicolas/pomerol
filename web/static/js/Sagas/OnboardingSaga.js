@@ -4,7 +4,8 @@ import { handleErrors } from '../Helpers'
 import { jwtSelector } from '../Services/Selectors'
 
 export function * fetchCountries (api, action) {
-  const jwt = select(jwtSelector)
+  const jwt = yield select(jwtSelector)
+
   const response = yield call(api.fetchCountries, jwt)
   const { data } = response
 

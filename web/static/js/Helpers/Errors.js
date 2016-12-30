@@ -7,19 +7,17 @@ type ErrorType = {
   title: string
 }
 
-function getError (error: string | Object) {
+function getError (error: string | Object): string {
   if (typeof error === 'string') {
     return error
   }
 
-  return error.detail
+  const errorString = error.detail || error.email
+
+  return errorString
 }
 
 function parseErrors (errors: Array<ErrorType>): string {
-  if (!Array.isArray((errors))) {
-    return false
-  }
-
   const parsedErrors =
     errors.map(getError)
       .join(' ')
@@ -28,11 +26,13 @@ function parseErrors (errors: Array<ErrorType>): string {
 }
 
 export function handleErrors (errors: Array<ErrorType>): void {
-  const parsedErrors = parseErrors(errors)
+  if (Array.isArray((errors))) {
+    const parsedErrors = parseErrors(errors)
 
-  if (parsedErrors !== '') {
-    // TODO use modals instead
-    // http://stackoverflow.com/questions/35623656/how-can-i-display-a-modal-dialog-in-redux-that-performs-asynchronous-actions/35641680
-    alert(parsedErrors) // eslint-disable-line
+    if (parsedErrors !== '') {
+      // TODO use modals instead
+      // http://stackoverflow.com/questions/35623656/how-can-i-display-a-modal-dialog-in-redux-that-performs-asynchronous-actions/35641680
+      alert(parsedErrors) // eslint-disable-line
+    }
   }
 }

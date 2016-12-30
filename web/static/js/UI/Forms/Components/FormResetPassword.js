@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react'
 import Form from './Form'
-import FormInput from './FormInput'
+import Input from './Input'
 
 type Props = {
   onChange: (key: string, value: any) => void,
@@ -50,7 +50,7 @@ export default class FormResetPassword extends Component {
                 Password must be at least 5 character long
               </div>
 
-              <FormInput
+              <Input
                 value={password}
                 type='password'
                 placeholder='Your new password'

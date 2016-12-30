@@ -3,9 +3,22 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import FormOnboardingOne from '../../Forms/Components/FormOnboardingOne'
+import OnboardingActions from '../../../Reducers/OnboardingRedux'
 
+type CountriesType = {
+  top_country_ids: Array<number>,
+  countries: Array<{
+    name: string,
+    id: number
+  }>
+}
 type Props = {
-  user: Object
+  jwt: string,
+  fetchCountriesAttempt: () => void,
+  onboarding: {
+    attemptingCountries: boolean | null,
+    countries: CountriesType | null
+  }
 }
 
 class OnboardingOne extends Component {
@@ -14,7 +27,23 @@ class OnboardingOne extends Component {
   state = {
     firstName: '',
     lastName: '',
-    countryId: ''
+    countryId: null
+  }
+
+  componentWillMount () {
+    const {
+      onboarding,
+      fetchCountriesAttempt,
+      jwt
+    } = this.props
+
+    const shouldFetchCountries =
+      onboarding.countries === null &&
+      !onboarding.attemptingCountries
+
+    if (shouldFetchCountries) {
+      fetchCountriesAttempt(jwt)
+    }
   }
 
   _onChange = (key, value: string) => {
@@ -35,7 +64,10 @@ class OnboardingOne extends Component {
   }
 
   render () {
-    // const { attemptingRequest } = this.props
+    const {
+      onboarding
+      // attemptingRequest
+    } = this.props
     const {
       firstName,
       lastName,
@@ -49,7 +81,8 @@ class OnboardingOne extends Component {
             onChange={this._onChange}
             onSubmit={this._submit}
             values={{ firstName, lastName, countryId }}
-            // attempting={attemptingRequest}
+            attempting={false}
+            countries={onboarding.countries}
           />
         </div>
       </div>
@@ -57,11 +90,13 @@ class OnboardingOne extends Component {
   }
 }
 
-const mapStateToProps = ({ login }) => ({
-  use: login.session.user
+const mapStateToProps = ({ login, onboarding }) => ({
+  jwt: login.jwt,
+  onboarding
 })
 
 const mapDispatchToProps = dispatch => ({
+  fetchCountriesAttempt: (jwt: string) => dispatch(OnboardingActions.fetchCountriesAttempt(jwt))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(OnboardingOne)

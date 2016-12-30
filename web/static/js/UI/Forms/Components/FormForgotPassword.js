@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react'
 import Form from './Form'
-import FormInput from './FormInput'
+import Input from './Input'
 import Link from '../../Shared/Components/Link'
 
 type Props = {
@@ -50,7 +50,7 @@ export default class FormForgotPassword extends Component {
           attempting={attempting}
           children={(
             <div>
-              <FormInput
+              <Input
                 value={email}
                 type='email'
                 placeholder='Your email'

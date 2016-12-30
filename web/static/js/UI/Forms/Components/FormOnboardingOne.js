@@ -2,17 +2,26 @@
 
 import React, { Component } from 'react'
 import Form from './Form'
-import FormInput from './FormInput'
+import Input from './Input'
+import Select from './Select'
 
+type CountriesType = {
+  top_country_ids: Array<number>,
+  countries: Array<{
+    name: string,
+    id: number
+  }>
+}
 type Props = {
   onChange: (key: string, value: any) => void,
   onSubmit: () => void,
   values: {
     firstName: string,
     lastName: string,
-    countryId: number
+    countryId: number | null
   },
-  attempting: boolean
+  attempting: boolean,
+  countries: CountriesType | null
 }
 
 export default class FormOnboardingOne extends Component {
@@ -29,7 +38,8 @@ export default class FormOnboardingOne extends Component {
     const {
       onChange,
       values,
-      attempting
+      attempting,
+      countries
     } = this.props
 
     const {
@@ -54,27 +64,30 @@ export default class FormOnboardingOne extends Component {
           fullWidthCta
           children={
             <div>
-              <FormInput
+              <Input
                 value={firstName}
                 type='text'
                 placeholder='Your first name'
                 required
                 onChange={event => onChange('firstName', event && event.target.value)}
               />
-              <FormInput
+              <Input
                 value={lastName}
                 type='text'
                 placeholder='Your last name'
                 required
                 onChange={event => onChange('lastName', event && event.target.value)}
               />
-              <FormInput
-                value={countryId}
-                type='text'
-                placeholder='Your country id (to be changed)'
-                required
-                onChange={event => onChange('countryId', event && event.target.value)}
-              />
+              {
+                !!countries && <Select
+                  selected={countryId}
+                  placeholder='Your country'
+                  required
+                  onChange={event => onChange('countryId', event && event.target.value)}
+                  top={countries.top_country_ids}
+                  options={countries.countries}
+                />
+              }
             </div>
           }
         />

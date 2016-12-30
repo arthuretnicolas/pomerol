@@ -6,7 +6,7 @@ import Immutable from 'seamless-immutable'
 /* ------------- Types and Action Creators ------------- */
 
 const { Types, Creators } = createActions({
-  fetchCountriesAttempt: [],
+  fetchCountriesAttempt: [ 'jwt' ],
   fetchCountriesFailure: [],
   fetchCountriesSuccess: [ 'countries' ]
 })
@@ -17,19 +17,27 @@ export default Creators
 /* ------------- Initial State ------------- */
 
 export const INITIAL_STATE = Immutable({
-  countries: null
+  countries: null,
+  attemptingCountries: null
 })
 
 /* ------------- Reducers ------------- */
 
 // request the temperature for a city
-export const fetchCountriesAttempt = (state: Object, action: Object) => state
+export const fetchCountriesAttempt = (state: Object, action: Object) =>
+  state.merge({
+    attemptingCountries: true
+  })
 
-export const fetchCountriesFailure = (state: Object, action: Object) => state
+export const fetchCountriesFailure = (state: Object, action: Object) =>
+  state.merge({
+    attemptingCountries: false
+  })
 
 export const fetchCountriesSuccess = (state: Object, { countries }: { countries: Object }) =>
   state.merge({
-    countries
+    countries,
+    attemptingCountries: false
   })
 
 /* ------------- Hookup Reducers To Types ------------- */

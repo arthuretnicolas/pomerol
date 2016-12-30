@@ -1,12 +1,12 @@
-.Forms-FormInput {
+.Forms-Select {
   display: flex;
   padding-bottom: $base-padding;
 
-  .input {
+  .select {
     display: flex;
     flex: 1;
-    padding: 0 $base-padding;
-    min-height: $form-min-height;
+    background-color: #fff;
+    height: $form-min-height;
     line-height: $line-height-input;
     font-size: $font-size-large;
     letter-spacing: $letter-spacing-spaced;
@@ -21,5 +21,9 @@
     &:focus, &:active {
       border-color: $color-primary-semi-light;
     }
+  }
+
+  optgroup {
+    padding: 0 $base-padding;
   }
 }

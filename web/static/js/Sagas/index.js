@@ -10,6 +10,7 @@ import { CounterTypes } from '../Reducers/CounterRedux'
 import { GithubTypes } from '../Reducers/GithubRedux'
 import { LoginTypes } from '../Reducers/LoginRedux'
 import { SignupTypes } from '../Reducers/SignupRedux'
+import { OnboardingTypes } from '../Reducers/OnboardingRedux'
 
 /* ------------- Sagas ------------- */
 
@@ -25,6 +26,7 @@ import {
   resetPassword
 } from './LoginSaga'
 import { signup } from './SignupSaga'
+import { fetchCountries } from './OnboardingSaga'
 
 /* ------------- API ------------- */
 
@@ -42,6 +44,7 @@ export default function * root () {
     takeLatest(LoginTypes.PRELOGIN_WITH_GOOGLE_SUCCESS, loginWithGoogle, api),
     takeLatest(LoginTypes.LOGOUT, logout),
     takeLatest(LoginTypes.FETCH_SESSION_ATTEMPT, fetchSession, api),
+    takeLatest(OnboardingTypes.FETCH_COUNTRIES_ATTEMPT, fetchCountries, api),
     takeLatest(LoginTypes.REQUEST_PASSWORD_ATTEMPT, requestPassword, api),
     takeLatest(LoginTypes.RESET_PASSWORD_ATTEMPT, resetPassword, api),
     takeLatest(SignupTypes.SIGNUP_ATTEMPT, signup, api)
