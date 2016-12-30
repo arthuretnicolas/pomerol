@@ -65,7 +65,7 @@ class OnboardingOne extends Component {
     updateUserAttempt({
       first_name: firstName,
       last_name: lastName,
-      country: countryId
+      country_id: countryId
     })
   }
 
