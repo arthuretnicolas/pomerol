@@ -16,6 +16,10 @@ function getError (error: string | Object) {
 }
 
 function parseErrors (errors: Array<ErrorType>): string {
+  if (!Array.isArray((errors))) {
+    return false
+  }
+
   const parsedErrors =
     errors.map(getError)
       .join(' ')
