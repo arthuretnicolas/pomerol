@@ -1,25 +1,14 @@
-// @flow
-
-type ErrorType = {
-  detail: string,
-  id: string,
-  status: number,
-  title: string
-}
-
-function getError (error: string | Object) {
+function getError (error: string | Object): string {
   if (typeof error === 'string') {
     return error
   }
 
-  return error.detail
+  const errorString = error.detail || error.email
+
+  return errorString
 }
 
-function parseErrors (errors: Array<ErrorType>): string {
-  if (!Array.isArray((errors))) {
-    return false
-  }
-
+function parseErrors (errors: Object): string {
   const parsedErrors =
     errors.map(getError)
       .join(' ')
@@ -27,8 +16,8 @@ function parseErrors (errors: Array<ErrorType>): string {
   return parsedErrors
 }
 
-export function handleErrors (errors: Array<ErrorType>): void {
-  const parsedErrors = parseErrors(errors)
+export function handleErrors (data: Object): void {
+  const parsedErrors = parseErrors(data.errors || data.error)
 
   if (parsedErrors !== '') {
     // TODO use modals instead

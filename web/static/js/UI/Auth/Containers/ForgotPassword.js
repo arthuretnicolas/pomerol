@@ -26,7 +26,6 @@ class ForgotPassword extends Component {
   _requestPassword = () => {
     const { requestPasswordAttempt } = this.props
     const { email } = this.state
-    console.log(email, requestPasswordAttempt)
 
     requestPasswordAttempt(email)
   }

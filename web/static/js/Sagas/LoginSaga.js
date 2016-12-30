@@ -1,6 +1,7 @@
-import { call, put } from 'redux-saga/effects'
+import { call, put, select } from 'redux-saga/effects'
 import LoginActions from '../Reducers/LoginRedux'
 import { handleErrors } from '../Helpers'
+import { jwtSelector, userIdSelector } from '../Services/Selectors'
 
 export function * login (api, action) {
   const { email, password } = action
@@ -13,7 +14,7 @@ export function * login (api, action) {
     yield put(LoginActions.fetchSessionAttempt(jwt))
   } else {
     yield put(LoginActions.loginFailure())
-    handleErrors(data.errors)
+    handleErrors(data)
   }
 }
 
@@ -35,15 +36,15 @@ export function * fetchSession (api, action) {
 export function * loginWithGoogle (api, action) {
   const { code } = action
   const response = yield call(api.loginWithGoogle, code)
+  const { data } = response
 
   if (response.ok) {
-    const { jwt } = response.data
+    const { jwt } = data
     yield put(LoginActions.loginSuccess(jwt))
     yield put(LoginActions.fetchSessionAttempt(jwt))
   } else {
-    const { errors } = response.data
     yield put(LoginActions.loginFailure())
-    handleErrors(errors)
+    handleErrors(data)
   }
 }
 
@@ -53,11 +54,10 @@ export function * requestPassword (api, action) {
 
   if (response.ok) {
     yield put(LoginActions.requestPasswordSuccess())
-    console.info('Request password successful')
   } else {
     const { data } = response
     yield put(LoginActions.requestPasswordFailure(data))
-    handleErrors(data.errors)
+    handleErrors(data)
   }
 }
 
@@ -70,9 +70,25 @@ export function * resetPassword (api, action) {
     const { jwt } = data
     yield put(LoginActions.fetchSessionAttempt(jwt))
     yield put(LoginActions.resetPasswordSuccess())
-    console.info('Reset password successful')
   } else {
     yield put(LoginActions.resetPasswordFailure(data))
     console.warn('Reset password failed')
+  }
+}
+
+export function * updateUser (api, action) {
+  const { userInfos } = action
+  const jwt = yield select(jwtSelector)
+  const userId = yield select(userIdSelector)
+
+  const response = yield call(api.updateUser, jwt, userId, userInfos)
+  const { data } = response
+
+  if (response.ok) {
+    yield put(LoginActions.updateUserSuccess(data))
+  } else {
+    yield put(LoginActions.updateUserFailure(data))
+    handleErrors(data)
+    console.warn('Update user failed')
   }
 }

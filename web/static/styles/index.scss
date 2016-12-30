@@ -28,7 +28,8 @@
 // Forms
 @import "../js/UI/Forms/Components/Styles/Form.scss";
 @import "../js/UI/Forms/Components/Styles/FormLogin.scss";
-@import "../js/UI/Forms/Components/Styles/FormInput.scss";
+@import "../js/UI/Forms/Components/Styles/Input.scss";
+@import "../js/UI/Forms/Components/Styles/Select.scss";
 
 // Dashboard
 @import "../js/UI/Dashboard/Containers/Styles/DashboardContainer.scss";
@@ -44,3 +45,4 @@
 @import "../js/UI/Auth/Containers/Styles/Login.scss";
 @import "../js/UI/Auth/Containers/Styles/ResetPassword.scss";
 @import "../js/UI/Auth/Containers/Styles/ForgotPassword.scss";
+@import "../js/UI/Auth/Containers/Styles/OnboardingOne.scss";

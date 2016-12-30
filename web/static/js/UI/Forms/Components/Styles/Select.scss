@@ -1,0 +1,48 @@
+.Forms-Select {
+  display: flex;
+  margin-bottom: $base-padding;
+  position: relative;
+
+  .select {
+    display: flex;
+    flex: 1;
+    background-color: #fff;
+    height: $form-min-height;
+    line-height: $line-height-input;
+    font-size: $font-size-large;
+    letter-spacing: $letter-spacing-spaced;
+    border-radius: $border-radius-button;
+    border: 2px solid $color-border-input;
+    transition: all .2s ease;
+
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    padding-left: $base-padding;
+    padding-right: $base-padding;
+
+    &:hover {
+      border-color: $gray;
+    }
+
+    &:focus, &:active {
+      border-color: $color-primary-semi-light;
+    }
+
+    &.showing-placeholder {
+      color: $gray;
+    }
+  }
+
+  .arrow-down {
+    position: absolute;
+    right: $base-padding;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    color: $gray-semi-dark;
+    padding-bottom: 2px;
+    cursor: default;
+    pointer-events: none;
+  }
+}

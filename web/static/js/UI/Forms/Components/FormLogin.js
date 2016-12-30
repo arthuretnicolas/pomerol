@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react'
 import Form from './Form'
-import FormInput from './FormInput'
+import Input from './Input'
 
 type Props = {
   onChange: (key: string, value: any) => void,
@@ -49,19 +49,19 @@ export default class FormLogin extends Component {
             to: '/signup'
           }}
           buttonSubmit='Log in'
-          textLoading='Logging in...'
+          contentLoading='Logging in...'
           attempting={attempting}
           fullWidthCta
           children={
             <div>
-              <FormInput
+              <Input
                 value={email}
                 type='email'
                 placeholder='Your email'
                 required
                 onChange={event => onChange('email', event && event.target.value)}
               />
-              <FormInput
+              <Input
                 value={password}
                 type='password'
                 placeholder='Your password'

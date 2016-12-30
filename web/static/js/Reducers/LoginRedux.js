@@ -11,16 +11,24 @@ const { Types, Creators } = createActions({
   loginFailure: [ 'error' ],
   loginCancel: [],
   logout: [],
+  // ******
   fetchSessionSuccess: [ 'session' ],
   fetchSessionFailure: [ 'error' ],
   fetchSessionAttempt: [ 'jwt' ],
+  // ******
   preloginWithGoogleSuccess: [ 'code' ],
+  // ******
   requestPasswordAttempt: [ 'email' ],
   requestPasswordFailure: [ 'error' ],
   requestPasswordSuccess: [],
+  // ******
   resetPasswordAttempt: [ 'token', 'password' ],
   resetPasswordSuccess: [],
-  resetPasswordFailure: [ 'error' ]
+  resetPasswordFailure: [ 'error' ],
+  // ******
+  updateUserAttempt: [ 'userInfos' ],
+  updateUserFailure: [ 'error' ],
+  updateUserSuccess: [ 'user' ]
 })
 
 export const LoginTypes = Types
@@ -30,7 +38,7 @@ export default Creators
 
 // exported only for tests
 export const emptySession = {
-  user: {},
+  user: null,
   organizations: []
 }
 
@@ -45,7 +53,9 @@ export const INITIAL_STATE = Immutable({
   errorRequest: null,
   attemptingReset: false,
   errorResetting: null,
-  attemptingGoogle: null
+  attemptingGoogle: null,
+  attemptingUpdate: false,
+  errorUpdating: null
 })
 
 /* ------------- Reducers ------------- */
@@ -153,6 +163,26 @@ export const resetPasswordFailure = (state: Object, { error }: Object) =>
     errorResetting: error
   })
 
+export const updateUserAttempt = (state: Object, action: Object) =>
+  state.merge({
+    attemptingUpdate: true
+  })
+
+export const updateUserFailure = (state: Object, { error }: { error: string }) =>
+  state.merge({
+    attemptingUpdate: false,
+    errorUpdating: error
+  })
+
+export const updateUserSuccess = (state: Object, { user }: Object) =>
+  state.merge({
+    attemptingUpdate: false,
+    session: state.session.merge({
+      user
+    }),
+    errorUpdating: null
+  })
+
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
@@ -161,14 +191,22 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.LOGIN_FAILURE]: failure,
   [Types.LOGIN_CANCEL]: cancel,
   [Types.LOGOUT]: logout,
+  // ******
   [Types.FETCH_SESSION_ATTEMPT]: fetchSessionAttempt,
   [Types.FETCH_SESSION_SUCCESS]: fetchSessionSuccess,
   [Types.FETCH_SESSION_FAILURE]: fetchSessionFailure,
+  // ******
   [Types.PRELOGIN_WITH_GOOGLE_SUCCESS]: preloginWithGoogleSuccess,
+  // ******
   [Types.REQUEST_PASSWORD_ATTEMPT]: requestPasswordAttempt,
   [Types.REQUEST_PASSWORD_FAILURE]: requestPasswordFailure,
   [Types.REQUEST_PASSWORD_SUCCESS]: requestPasswordSuccess,
+  // ******
   [Types.RESET_PASSWORD_ATTEMPT]: resetPasswordAttempt,
   [Types.RESET_PASSWORD_SUCCESS]: resetPasswordSuccess,
-  [Types.RESET_PASSWORD_FAILURE]: resetPasswordFailure
+  [Types.RESET_PASSWORD_FAILURE]: resetPasswordFailure,
+  // ******
+  [Types.UPDATE_USER_ATTEMPT]: updateUserAttempt,
+  [Types.UPDATE_USER_SUCCESS]: updateUserSuccess,
+  [Types.UPDATE_USER_FAILURE]: updateUserFailure
 })

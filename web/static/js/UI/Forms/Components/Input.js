@@ -13,7 +13,7 @@ type Props = {
   value?: any
 }
 
-const FormInput = ({
+const Input = ({
   type,
   disabled,
   name,
@@ -23,7 +23,7 @@ const FormInput = ({
   onChange,
   value
 }: Props) => (
-  <div className='Forms-FormInput'>
+  <div className='Forms-Input'>
     <input
       className='input'
       type={type}
@@ -38,4 +38,4 @@ const FormInput = ({
   </div>
 )
 
-export default FormInput
+export default Input
