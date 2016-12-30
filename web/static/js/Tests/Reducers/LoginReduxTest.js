@@ -19,6 +19,16 @@ const FAKE_SESSION = {
     }
   ]
 }
+const FAKE_USER = {
+  id: 1,
+  name: 'JOE',
+  organizations: [
+    {
+      id: 111,
+      name: 'Evil Corp'
+    }
+  ]
+}
 
 // login
 
@@ -143,4 +153,29 @@ test('resetPasswordSuccess', t => {
 
   t.false(state.attemptingReset)
   t.is(state.errorResetting, null)
+})
+
+// update user
+test('updateUserAttempt', t => {
+  const state = reducer(INITIAL_STATE, Actions.updateUserAttempt())
+
+  t.true(state.attemptingUpdate)
+})
+
+test('updateUserFailure', t => {
+  const stateAttempt = reducer(INITIAL_STATE, Actions.updateUserAttempt())
+  const state = reducer(stateAttempt, Actions.updateUserFailure(FAKE_ERROR))
+
+  t.false(state.attemptingUpdate)
+  t.is(state.errorUpdating, FAKE_ERROR)
+})
+
+test('updateUserSuccess', t => {
+  const stateLogged = reducer(INITIAL_STATE, Actions.loginSuccess('joe@yopmail.com', 'yala1234'))
+  const stateLoggedWithSession = reducer(stateLogged, Actions.fetchSessionSuccess(FAKE_SESSION))
+  const state = reducer(stateLoggedWithSession, Actions.updateUserSuccess(FAKE_USER))
+
+  t.false(state.attemptingUpdate)
+  t.is(state.errorUpdating, null)
+  t.deepEqual(state.session.user, FAKE_USER)
 })

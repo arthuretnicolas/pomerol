@@ -4,6 +4,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import FormOnboardingOne from '../../Forms/Components/FormOnboardingOne'
 import OnboardingActions from '../../../Reducers/OnboardingRedux'
+import LoginActions from '../../../Reducers/LoginRedux'
 
 type CountriesType = {
   top_country_ids: Array<number>,
@@ -13,28 +14,29 @@ type CountriesType = {
   }>
 }
 type Props = {
-  jwt: string,
   fetchCountriesAttempt: () => void,
+  updateUserAttempt: () => void,
+  user: Object,
   onboarding: {
     attemptingCountries: boolean | null,
     countries: CountriesType | null
-  }
+  },
+  attemptingUpdate: boolean
 }
 
 class OnboardingOne extends Component {
   props: Props
 
   state = {
-    firstName: '',
-    lastName: '',
-    countryId: null
+    firstName: this.props.user.first_name,
+    lastName: this.props.user.last_name,
+    countryId: this.props.user.countryId
   }
 
   componentWillMount () {
     const {
       onboarding,
-      fetchCountriesAttempt,
-      jwt
+      fetchCountriesAttempt
     } = this.props
 
     const shouldFetchCountries =
@@ -42,31 +44,35 @@ class OnboardingOne extends Component {
       !onboarding.attemptingCountries
 
     if (shouldFetchCountries) {
-      fetchCountriesAttempt(jwt)
+      fetchCountriesAttempt()
     }
   }
 
-  _onChange = (key, value: string) => {
+  _onChange = (key, value: string | number) => {
     this.setState({
       [key]: value
     })
   }
 
   _submit = () => {
-    // const { requestPasswordAttempt } = this.props
+    const { updateUserAttempt } = this.props
     const {
       firstName,
       lastName,
       countryId
     } = this.state
 
-    console.log(firstName, lastName, countryId)
+    updateUserAttempt({
+      first_name: firstName,
+      last_name: lastName,
+      country: countryId
+    })
   }
 
   render () {
     const {
-      onboarding
-      // attemptingRequest
+      onboarding,
+      attemptingUpdate
     } = this.props
     const {
       firstName,
@@ -81,7 +87,7 @@ class OnboardingOne extends Component {
             onChange={this._onChange}
             onSubmit={this._submit}
             values={{ firstName, lastName, countryId }}
-            attempting={false}
+            attempting={attemptingUpdate}
             countries={onboarding.countries}
           />
         </div>
@@ -91,12 +97,14 @@ class OnboardingOne extends Component {
 }
 
 const mapStateToProps = ({ login, onboarding }) => ({
-  jwt: login.jwt,
-  onboarding
+  user: login.session.user,
+  onboarding,
+  attemptingUpdate: login.attemptingUpdate
 })
 
 const mapDispatchToProps = dispatch => ({
-  fetchCountriesAttempt: (jwt: string) => dispatch(OnboardingActions.fetchCountriesAttempt(jwt))
+  fetchCountriesAttempt: () => dispatch(OnboardingActions.fetchCountriesAttempt()),
+  updateUserAttempt: (userInfos: Object) => dispatch(LoginActions.updateUserAttempt(userInfos))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(OnboardingOne)

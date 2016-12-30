@@ -59,20 +59,20 @@ export default class FormOnboardingOne extends Component {
             label: 'Blablabla'
           }}
           buttonSubmit='Next'
-          textLoading='Next...'
+          contentLoading='Next...'
           attempting={attempting}
           fullWidthCta
           children={
             <div>
               <Input
-                value={firstName}
+                value={firstName || ''}
                 type='text'
                 placeholder='Your first name'
                 required
                 onChange={event => onChange('firstName', event && event.target.value)}
               />
               <Input
-                value={lastName}
+                value={lastName || ''}
                 type='text'
                 placeholder='Your last name'
                 required
@@ -83,7 +83,7 @@ export default class FormOnboardingOne extends Component {
                   selected={countryId}
                   placeholder='Your country'
                   required
-                  onChange={event => onChange('countryId', event && event.target.value)}
+                  onChange={event => onChange('countryId', event && parseInt(event.target.value))}
                   top={countries.top_country_ids}
                   options={countries.countries}
                 />

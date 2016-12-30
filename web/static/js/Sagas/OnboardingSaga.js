@@ -12,7 +12,7 @@ export function * fetchCountries (api, action) {
   if (response.ok) {
     yield put(OnboardingActions.fetchCountriesSuccess(data))
   } else {
-    yield put(OnboardingActions.fetchCountriesFailure())
-    handleErrors(data.errors)
+    yield put(OnboardingActions.fetchCountriesFailure('problem...'))
+    handleErrors(data)
   }
 }

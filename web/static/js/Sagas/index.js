@@ -23,7 +23,8 @@ import {
   logout,
   fetchSession,
   requestPassword,
-  resetPassword
+  resetPassword,
+  updateUser
 } from './LoginSaga'
 import { signup } from './SignupSaga'
 import { fetchCountries } from './OnboardingSaga'
@@ -44,6 +45,7 @@ export default function * root () {
     takeLatest(LoginTypes.PRELOGIN_WITH_GOOGLE_SUCCESS, loginWithGoogle, api),
     takeLatest(LoginTypes.LOGOUT, logout),
     takeLatest(LoginTypes.FETCH_SESSION_ATTEMPT, fetchSession, api),
+    takeLatest(LoginTypes.UPDATE_USER_ATTEMPT, updateUser, api),
     takeLatest(OnboardingTypes.FETCH_COUNTRIES_ATTEMPT, fetchCountries, api),
     takeLatest(LoginTypes.REQUEST_PASSWORD_ATTEMPT, requestPassword, api),
     takeLatest(LoginTypes.RESET_PASSWORD_ATTEMPT, resetPassword, api),
