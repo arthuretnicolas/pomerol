@@ -6,6 +6,10 @@
 }
 
 .Button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
   box-shadow: none;
   border: none;
   padding: $base-padding $double-padding;
@@ -15,7 +19,7 @@
   font-weight: $semi-bold;
   font-size: $font-size-large;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.15);
-  position: relative;
+  letter-spacing: $letter-spacing-spaced;
 
   &.small {
     font-size: $font-size-body;
@@ -47,8 +51,8 @@
 
   &.full-width {
     display: flex;
-    flex: 1;
     justify-content: center;
     align-items: center;
+    flex: 1;
   }
 }

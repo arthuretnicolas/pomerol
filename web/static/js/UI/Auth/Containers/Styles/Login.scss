@@ -18,21 +18,25 @@
     display: none;
   }
 
-  .googleButton {
+  .container-google-button {
+    padding: 0;
     margin-top: $base-padding;
+    background-color: #fff;
+    color: $gray-semi-dark;
+    border: 1px solid $gray-light;
+  }
 
-    // TODO: make it a mixin (cf Button.scss)
-    box-shadow: none;
-    border: none;
-    padding: $base-padding;
-    border-radius: $border-radius-button;
-    color: $color-snow;
-    font-weight: $semi-bold;
-    font-size: $font-size-large;
-    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.15);
+  .google-button {
+    display: flex;
+    flex: 1;
+    min-height: 50px;
+    justify-content: center;
+    align-items: center;
+  }
 
-    background-color: $color-danger;
-    cursor: pointer;
+  .logo-google {
+    position: absolute;
+    left: $base-padding;
   }
 
   .container-forgot {

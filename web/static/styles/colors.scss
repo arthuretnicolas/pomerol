@@ -1,6 +1,7 @@
 $gray-dark: #333;
+$gray-semi-dark: #777;
 $gray: #a8b2bb;
-$gray-light: #ccc;
+$gray-light: #d0d0d0;
 $gray-xlight: #f9fafb;
 
 $color-primary: #176FD4;
@@ -21,6 +22,6 @@ $background-dark: darken($color-primary, 25%);
 // dashboard
 $sidebar-background: lighten($color-primary, 47%);
 
-$color-body: #333;
+$color-body: $gray-dark;
 
 $color-hover-primary: $color-primary-lighter;

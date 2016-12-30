@@ -49,7 +49,7 @@ export default class FormSignup extends Component {
             to: '/login'
           }}
           buttonSubmit='Sign up'
-          textLoading='Signing up...'
+          contentLoading='Signing up...'
           attempting={attempting}
           fullWidthCta
           children={

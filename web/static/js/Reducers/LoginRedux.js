@@ -44,7 +44,8 @@ export const INITIAL_STATE = Immutable({
   attemptingRequest: false,
   errorRequest: null,
   attemptingReset: false,
-  errorResetting: null
+  errorResetting: null,
+  attemptingGoogle: null
 })
 
 /* ------------- Reducers ------------- */
@@ -58,6 +59,7 @@ export const attempt = (state: Object, { email, password }: { email: string, pas
 export const success = (state: Object, { jwt }: { jwt: string }) =>
   state.merge({
     attempting: false,
+    attemptingGoogle: false,
     error: null,
     jwt
   })
@@ -66,7 +68,8 @@ export const failure = (state: Object, { error }: Object) =>
   state.merge({
     attempting: false,
     error,
-    jwt: ''
+    jwt: '',
+    attemptingGoogle: false
   })
 
 export const cancel = (state: Object, action: Object) =>
@@ -107,7 +110,10 @@ export const fetchSessionFailure = (state: Object, { error }: Object) =>
     errorSession: error
   })
 
-export const preloginWithGoogleSuccess = (state: Object, { code }: { code: string }) => state
+export const preloginWithGoogleSuccess = (state: Object, { code }: { code: string }) =>
+  state.merge({
+    attemptingGoogle: true
+  })
 
 export const requestPasswordAttempt = (state: Object, { email }: { email: string }) =>
   state.merge({

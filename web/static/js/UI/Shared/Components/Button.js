@@ -5,11 +5,12 @@ import { Link } from 'react-router'
 import Spinner from './Spinner'
 
 type Props = {
-  text: string,
-  textLoading?: string,
+  content: string | React.Element<*>,
+  contentLoading?: string | React.Element<*>,
   onClick: () => void,
   theme?: string,
   style?: Object,
+  className?: string,
   to?: string,
   onClick?: () => void,
   disabled?: boolean,
@@ -40,8 +41,9 @@ const ButtonContainer = ({ to = '', children }) => {
 const Button = ({
   theme = '',
   style,
-  text,
-  textLoading = '',
+  className = '',
+  content,
+  contentLoading = '',
   onClick,
   to = '',
   type,
@@ -58,8 +60,10 @@ const Button = ({
         Button ${theme}
         ${fullWidth ? 'full-width' : ''}
         ${size || ''}
+        ${className}
       `}
       disabled={disabled}
+      style={style}
     >
       {
         loading && <Spinner style={{
@@ -70,13 +74,11 @@ const Button = ({
         }} />
       }
 
-      <div className='container-text'>
-        {
-          loading && textLoading
-            ? textLoading
-            : text
-        }
-      </div>
+      {
+        loading && contentLoading
+          ? contentLoading
+          : content
+      }
     </button>
   </ButtonContainer>
 )

@@ -4,6 +4,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Link from '../../Shared/Components/Link'
 import FormLogin from '../../Forms/Components/FormLogin'
+import Button from '../../Shared/Components/Button'
 import LoginActions from '../../../Reducers/LoginRedux'
 import GoogleLogin from 'react-google-login'
 
@@ -11,7 +12,8 @@ type Props = {
   loginAttempt: () => void,
   preloginWithGoogleSuccess: () => void,
   preloginWithGoogleFailure: () => void,
-  attempting: boolean
+  attempting: boolean,
+  attemptingGoogle: boolean
 }
 
 class Login extends Component {
@@ -37,7 +39,8 @@ class Login extends Component {
   render () {
     const {
       loginAttempt,
-      attempting
+      attempting,
+      attemptingGoogle
     } = this.props
     const { email, password } = this.state
 
@@ -54,13 +57,45 @@ class Login extends Component {
             attempting={attempting}
           />
 
-          <GoogleLogin
-            clientId='217330109544-l6gh6agp436gc77i6gqje4t3ni6lluj6.apps.googleusercontent.com'
-            buttonText='Login with Google'
-            onSuccess={this._preloginWithGoogleSuccess}
-            onFailure={this._preloginWithGoogleFailure}
-            className='googleButton'
-            offline
+          <Button
+            type='submit'
+            content={(
+              <GoogleLogin
+                tag='span'
+                clientId='217330109544-l6gh6agp436gc77i6gqje4t3ni6lluj6.apps.googleusercontent.com'
+                buttonText='Login with Google'
+                onSuccess={this._preloginWithGoogleSuccess}
+                onFailure={this._preloginWithGoogleFailure}
+                className={`${attempting ? '' : 'google-button'}`}
+                offline
+              >
+                <img
+                  src='https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg'
+                  height='24px'
+                  width='24px'
+                  className='logo-google'
+                />
+                Login with Google
+              </GoogleLogin>
+            )}
+            theme='secondary'
+            disabled={attemptingGoogle}
+            loading={attemptingGoogle}
+            contentLoading={(
+              <div style={{
+                display: 'flex',
+                alignItems: 'center'
+              }}>
+                <img
+                  src='https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg'
+                  height='24px'
+                  width='24px'
+                  className='logo-google'
+                />
+                Logging with Google...
+              </div>
+            )}
+            className='container-google-button'
           />
 
           <div className='container-forgot'>
@@ -79,7 +114,8 @@ class Login extends Component {
 }
 
 const mapStateToProps = ({ login }) => ({
-  attempting: login.attempting
+  attempting: login.attempting,
+  attemptingGoogle: login.attemptingGoogle
 })
 
 const mapDispatchToProps = dispatch => ({

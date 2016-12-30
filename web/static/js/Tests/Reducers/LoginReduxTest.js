@@ -33,6 +33,7 @@ test('failure', t => {
   const state = reducer(stateAttempt, Actions.loginFailure(FAKE_ERROR))
 
   t.false(state.attempting)
+  t.false(state.attemptingGoogle)
   t.is(state.jwt, '')
   t.is(state.error, FAKE_ERROR)
 })
@@ -42,6 +43,7 @@ test('success', t => {
   const state = reducer(stateFailure, Actions.loginSuccess(FAKE_JWT))
 
   t.false(state.attempting)
+  t.false(state.attemptingGoogle)
   t.is(state.jwt, FAKE_JWT)
   t.is(state.error, null)
 })
@@ -92,7 +94,8 @@ test('fetchSessionSuccess', t => {
 // login with google
 
 test('loginWithGoogleSuccess', t => {
-  t.true(true) // nothing to test
+  const state = reducer(INITIAL_STATE, Actions.preloginWithGoogleSuccess(FAKE_SESSION))
+  t.true(state.attemptingGoogle)
 })
 
 // request password

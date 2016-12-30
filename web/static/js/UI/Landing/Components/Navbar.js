@@ -11,7 +11,7 @@ const Navbar = () => (
         to='signup'
         theme='primary'
         size='small'
-        text='Sign up'
+        content='Sign up'
       />
     </div>
 

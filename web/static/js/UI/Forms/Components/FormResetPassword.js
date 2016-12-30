@@ -42,7 +42,7 @@ export default class FormResetPassword extends Component {
         <Form
           header='Reset password'
           buttonSubmit='Reset password'
-          textLoading='Resetting password...'
+          contentLoading='Resetting password...'
           attempting={attempting}
           children={
             <div>

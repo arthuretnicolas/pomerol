@@ -46,7 +46,7 @@ export default class FormForgotPassword extends Component {
             label: 'Enter your email to reset your password.'
           }}
           buttonSubmit='Reset password'
-          textLoading='Reset password...'
+          contentLoading='Reset password...'
           attempting={attempting}
           children={(
             <div>

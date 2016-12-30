@@ -1,4 +1,4 @@
-// @flow-weak
+// @flow
 
 import React, { Component } from 'react'
 import { browserHistory } from 'react-router'
@@ -6,7 +6,8 @@ import { connect } from 'react-redux'
 import EmptyStateDashboard from '../../Shared/Components/EmptyStateDashboard'
 
 type Props = {
-  isAuthenticated: boolean
+  isAuthenticated: boolean,
+  children: React<*>
 }
 
 class ProtectedView extends Component {

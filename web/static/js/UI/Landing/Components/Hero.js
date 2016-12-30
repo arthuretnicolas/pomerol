@@ -22,7 +22,7 @@ const Hero = () => (
         to='/signup'
         theme='primary'
         size='small'
-        text='Sign Up Free'
+        content='Sign Up Free'
       />
 
       <div className='more'>

@@ -6,7 +6,6 @@ import Link from '../../Shared/Components/Link'
 
 type Props = {
   header?: string,
-  text?: string,
   text?: {
     label: string,
     linkLabel?: string,
@@ -17,7 +16,7 @@ type Props = {
   attempting: boolean,
   alternativeCta?: React.Element<any>,
   fullWidthCta?: boolean,
-  textLoading?: string
+  contentLoading?: string | React.Element<*>
 }
 
 const Form = ({
@@ -28,7 +27,7 @@ const Form = ({
   attempting,
   alternativeCta,
   fullWidthCta,
-  textLoading
+  contentLoading
 }: Props) => (
   <div className='Forms-Form'>
     {
@@ -55,11 +54,11 @@ const Form = ({
     <div className='container-cta'>
       <Button
         type='submit'
-        text={buttonSubmit}
+        content={buttonSubmit}
         theme='primary'
         disabled={attempting}
         loading={attempting}
-        textLoading={textLoading}
+        contentLoading={contentLoading}
         fullWidth={fullWidthCta}
       />
 

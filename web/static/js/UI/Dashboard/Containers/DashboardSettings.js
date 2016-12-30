@@ -24,7 +24,7 @@ class DashboardSettings extends Component {
 
           <Button
             onClick={logout}
-            text='Log out'
+            content='Log out'
           />
         </div>
       </div>
