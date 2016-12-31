@@ -15,7 +15,8 @@ $spinkit-spinner-color: #fff !default;
   .sk-spinner-pulse {
     width: $spinkit-size;
     height: $spinkit-size;
-    margin: $spinkit-spinner-margin;
+    margin-right: $small-padding;
+    margin-left: $small-padding;
     background-color: $spinkit-spinner-color;
     border-radius: 100%;
     animation: sk-pulseScaleOut 1.0s infinite ease-in-out;

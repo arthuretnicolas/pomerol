@@ -82,10 +82,7 @@ class Login extends Component {
             disabled={attemptingGoogle}
             loading={attemptingGoogle}
             contentLoading={(
-              <div style={{
-                display: 'flex',
-                alignItems: 'center'
-              }}>
+              <div>
                 <img
                   src='https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg'
                   height='24px'

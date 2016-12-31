@@ -68,19 +68,23 @@ const Button = ({
       {
         loading && <Spinner style={{
           display: 'flex',
+          flex: 1,
           alignItems: 'center',
+          justifyContent: 'center',
           height: 16,
           paddingRight: 8
-        }} />
+        }}>
+          {
+            contentLoading || content
+          }
+        </Spinner>
       }
 
-      <div>
-        {
-          loading && contentLoading
-            ? contentLoading
-            : content
-        }
-      </div>
+      {
+        !loading && <div>
+          {content}
+        </div>
+      }
     </button>
   </ButtonContainer>
 )

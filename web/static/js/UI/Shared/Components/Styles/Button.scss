@@ -6,10 +6,6 @@
 }
 
 .Button {
-  display: flex;
-  display: -webkit-box; // for Safari
-  justify-content: center;
-  align-items: center;
   position: relative;
   box-shadow: none;
   border: none;
@@ -51,10 +47,6 @@
   }
 
   &.full-width {
-    display: -webkit-box;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     flex: 1;
   }
 }
