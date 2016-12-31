@@ -37,6 +37,8 @@
   .logo-google {
     position: absolute;
     left: $base-padding;
+    top: 0;
+    height: 100%; // for Safari
   }
 
   .container-forgot {

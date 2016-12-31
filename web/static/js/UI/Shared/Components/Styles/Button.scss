@@ -7,6 +7,7 @@
 
 .Button {
   display: flex;
+  display: -webkit-box; // for Safari
   justify-content: center;
   align-items: center;
   position: relative;
@@ -50,6 +51,7 @@
   }
 
   &.full-width {
+    display: -webkit-box;
     display: flex;
     justify-content: center;
     align-items: center;

@@ -43,7 +43,7 @@ const Button = ({
   style,
   className = '',
   content,
-  contentLoading = '',
+  contentLoading,
   onClick,
   to = '',
   type,
@@ -74,11 +74,13 @@ const Button = ({
         }} />
       }
 
-      {
-        loading && contentLoading
-          ? contentLoading
-          : content
-      }
+      <div>
+        {
+          loading && contentLoading
+            ? contentLoading
+            : content
+        }
+      </div>
     </button>
   </ButtonContainer>
 )
