@@ -46,6 +46,32 @@
     }
   }
 
+  &.plain {
+    background-color: transparent !important;
+    border: none;
+    font-weight: 400;
+  }
+
+  &.plain-success {
+    color: $color-success;
+
+    &:hover, &:focus {
+      color: darken($color-success, $button-hover-darken);
+
+      // beginning of dirty...
+      .Shared-Icon {
+        path, polygon, rect {
+          fill: darken($color-success, $button-hover-darken);
+        }
+
+        circle {
+          stroke: darken($color-success, $button-hover-darken);
+        }
+      }
+      // end of dirty
+    }
+  }
+
   &.full-width {
     flex: 1;
   }

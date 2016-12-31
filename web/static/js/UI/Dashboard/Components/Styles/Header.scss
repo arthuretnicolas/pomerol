@@ -1,0 +1,9 @@
+.Dashboard-Header {
+  display: flex;
+  align-items: center;
+  padding-left: $base-padding;
+  padding-right: $base-padding;
+  min-height: $header-height;
+  font-size: $font-size-large;
+  border-bottom: 2px solid $gray-xlight;
+}

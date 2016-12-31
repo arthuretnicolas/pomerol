@@ -3,6 +3,7 @@
 import React, { Component } from 'react'
 import TagSidebar from '../../Shared/Components/TagSidebar'
 import SingleContact from '../Components/SingleContact'
+import Header from '../Components/Header'
 import { contacts } from '../../../Data'
 import { connect } from 'react-redux'
 
@@ -55,26 +56,36 @@ class DashboardContacts extends Component {
 
     return (
       <div className='Dashboard-DashboardContacts'>
-        <div className='container-sidebar'>
-          <TagSidebar
-            data={sidebarOptions}
-            selected={selectedTag}
-            onClick={this._onClick}
-          />
-        </div>
+        <Header
+          name='Contacts'
+          callToAction={{
+            name: 'Add contact',
+            onClick: () => window.alert('Use a curl to add a contact')
+          }}
+        />
 
-        <div className='container-content'>
-          <div className='list-contacts'>
-            {
-              contacts.map((contact, index) =>
-                <SingleContact
-                  key={index}
-                  contact={contact}
-                  onClick={this._onClickContact}
-                  selected={selectedContact === contact.id}
-                />
-              )
-            }
+        <div className='content'>
+          <div className='container-sidebar'>
+            <TagSidebar
+              data={sidebarOptions}
+              selected={selectedTag}
+              onClick={this._onClick}
+            />
+          </div>
+
+          <div className='container-content'>
+            <div className='list-contacts'>
+              {
+                contacts.map((contact, index) =>
+                  <SingleContact
+                    key={index}
+                    contact={contact}
+                    onClick={this._onClickContact}
+                    selected={selectedContact === contact.id}
+                  />
+                )
+              }
+            </div>
           </div>
         </div>
       </div>

@@ -1,7 +1,14 @@
 .Dashboard-DashboardContacts {
   display: flex;
   flex: 1;
+  flex-direction: column;
   background-color: #fff;
+
+  .content {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+  }
 
   .container-sidebar {
     display: flex;

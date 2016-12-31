@@ -1,0 +1,33 @@
+.Shared-Icon {
+  width: $base-padding * 1.5;
+  height: $base-padding * 1.5;
+
+  path, polygon, rect {
+    fill: $color-body;
+  }
+
+  circle {
+    stroke: $color-body;
+    stroke-width: 1;
+  }
+
+  &.success {
+    path, polygon, rect {
+      fill: $color-success;
+    }
+
+    circle {
+      stroke: $color-success;
+    }
+
+    &:hover {
+      path, polygon, rect {
+        fill: darken($color-success, $button-hover-darken);
+      }
+
+      circle {
+        stroke: darken($color-success, $button-hover-darken);
+      }
+    }
+  }
+}
