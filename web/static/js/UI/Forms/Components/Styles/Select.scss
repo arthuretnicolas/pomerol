@@ -1,9 +1,10 @@
 .Forms-Select {
   display: flex;
+  flex-direction: column;
   margin-bottom: $base-padding;
   position: relative;
 
-  .select {
+  > .select {
     display: flex;
     flex: 1;
     background-color: #fff;
@@ -34,7 +35,7 @@
     }
   }
 
-  .arrow-down {
+  > .arrow-down {
     position: absolute;
     right: $base-padding;
     display: flex;

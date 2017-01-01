@@ -3,6 +3,7 @@
 import React, { Component } from 'react'
 import Form from './Form'
 import Input from './Input'
+import Textarea from './Textarea'
 import Select from './Select'
 
 type CountriesType = {
@@ -16,15 +17,17 @@ type Props = {
   onChange: (key: string, value: any) => void,
   onSubmit: () => void,
   values: {
-    firstName: string,
-    lastName: string,
+    name: string,
+    phoneNumber: string,
+    website: string,
+    address: string,
     countryId: number | null
   },
   attempting: boolean,
   countries: CountriesType | null
 }
 
-export default class FormOnboardingOne extends Component {
+export default class FormOnboardingTwo extends Component {
   props: Props
 
   _onSubmit = (event: Event) => { // eslint-disable-line
@@ -43,18 +46,20 @@ export default class FormOnboardingOne extends Component {
     } = this.props
 
     const {
-      firstName,
-      lastName,
+      name,
+      phoneNumber,
+      website,
+      address,
       countryId
     } = values
 
     return (
       <form
-        className='Form-FormOnboardingOne'
+        className='Form-FormOnboardingTwo'
         onSubmit={this._onSubmit}
       >
         <Form
-          header='Onboarding one'
+          header='Onboarding two'
           text={{
             label: 'Blablabla'
           }}
@@ -65,20 +70,33 @@ export default class FormOnboardingOne extends Component {
           children={
             <div>
               <Input
-                label='First name'
-                value={firstName || ''}
+                label='Organization name'
+                value={name || ''}
                 type='text'
-                placeholder='Your first name'
+                placeholder='Your organization name'
                 required
-                onChange={event => onChange('firstName', event && event.target.value)}
+                onChange={event => onChange('name', event && event.target.value)}
               />
               <Input
-                label='Last name'
-                value={lastName || ''}
+                label='Organization phone number'
+                value={phoneNumber || ''}
                 type='text'
-                placeholder='Your last name'
-                required
-                onChange={event => onChange('lastName', event && event.target.value)}
+                placeholder='Your organization phone number'
+                onChange={event => onChange('phoneNumber', event && event.target.value)}
+              />
+              <Input
+                label='Organization webiste'
+                value={website || ''}
+                type='text'
+                placeholder='Your organization website'
+                onChange={event => onChange('website', event && event.target.value)}
+              />
+              <Textarea
+                label='Organization address'
+                value={address || ''}
+                type='text'
+                placeholder='Your organization address'
+                onChange={event => onChange('address', event && event.target.value)}
               />
               {
                 !!countries && <Select

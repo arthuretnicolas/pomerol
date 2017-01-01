@@ -1,9 +1,10 @@
-.Forms-Input {
+.Forms-Textarea {
   display: flex;
   flex-direction: column;
   margin-bottom: $base-padding;
 
-  > .input {
+  > .textarea {
+    resize: vertical;
     display: flex;
     flex: 1;
     padding: 0 $base-padding;

@@ -18,7 +18,7 @@ class DashboardMain extends Component {
   }
 }
 
-const mapStateToProps = ({ counter }) => ({
+const mapStateToProps = ({ login }) => ({
 })
 
 const mapDispatchToProps = dispatch => ({

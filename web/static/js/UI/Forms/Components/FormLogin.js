@@ -55,6 +55,7 @@ export default class FormLogin extends Component {
           children={
             <div>
               <Input
+                label='Email'
                 value={email}
                 type='email'
                 placeholder='Your email'
@@ -62,6 +63,7 @@ export default class FormLogin extends Component {
                 onChange={event => onChange('email', event && event.target.value)}
               />
               <Input
+                label='Password'
                 value={password}
                 type='password'
                 placeholder='Your password'

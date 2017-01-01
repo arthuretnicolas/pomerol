@@ -51,6 +51,7 @@ export default class FormResetPassword extends Component {
               </div>
 
               <Input
+                label='Password'
                 value={password}
                 type='password'
                 placeholder='Your new password'

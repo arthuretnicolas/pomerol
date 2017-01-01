@@ -1,8 +1,10 @@
 // @flow
 
 import React from 'react'
+import Label from './Label'
 
 type Props = {
+  label: string,
   type?: string,
   disabled?: bool,
   placeholder?: string,
@@ -13,14 +15,18 @@ type Props = {
     name: string
   }>,
   selected?: number | null,
-  top?: Array<*>
+  top?: Array<*>,
+  name?: string
 }
 
 const Select = ({
+  label,
+  string,
   disabled,
   placeholder,
   required,
   onChange,
+  name = Math.random().toFixed(10),
   options,
   selected,
   top = top || []
@@ -38,7 +44,10 @@ const Select = ({
       </svg>
     </div>
 
+    <Label name={name} label={label} />
+
     <select
+      name={name}
       className={`select ${placeholder && !selected ? 'showing-placeholder' : ''}`}
       disabled={disabled}
       required={required}

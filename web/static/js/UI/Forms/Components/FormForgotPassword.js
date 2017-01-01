@@ -51,6 +51,7 @@ export default class FormForgotPassword extends Component {
           children={(
             <div>
               <Input
+                label='Email'
                 value={email}
                 type='email'
                 placeholder='Your email'
