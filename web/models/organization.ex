@@ -10,11 +10,7 @@ defmodule Pomerol.Organization do
     field :website, :string
     field :phone, :string
 
-<<<<<<< HEAD
     field :base64_logo_data, :string, virtual: true
-=======
-    field :base64_icon_data, :string, virtual: true
->>>>>>> 6de14238f5615296c12c58affac3476c853146da
     field :logo, Pomerol.OrganizationLogo.Type
 
     belongs_to :country, Country
