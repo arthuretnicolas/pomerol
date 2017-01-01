@@ -1,8 +1,14 @@
 .Dashboard-DashboardContacts {
   display: flex;
   flex: 1;
-  flex-direction: column;
+  flex-direction: row;
   background-color: #fff;
+
+  .container-main {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+  }
 
   .content {
     display: flex;
@@ -27,5 +33,17 @@
     flex: 1;
     max-height: 100vh;
     overflow-y: scroll;
+  }
+
+  .container-sidebar-details {
+    display: flex;
+    flex: 1;
+    max-width: $sidebar-details-width;
+    transition: all ease-in-out 200ms;
+  }
+
+  .container-sidebar-details:not(.show-details) {
+    flex: 0;
+    width: 0;
   }
 }

@@ -4,10 +4,20 @@ import React from 'react'
 
 type Props = {
   dimensions?: number,
-  initials: string
+  firstName: string,
+  lastName: string,
+  className?: string,
+  style?: Object
 }
 
-function getColorClassName (initials) {
+function getInitials (firstName, lastName) {
+  const initials = `${firstName.slice(0, 1)}${lastName.slice(0, 1)}`
+  return initials
+}
+
+function getColorClassName (firstName, lastName) {
+  const initials = getInitials(firstName, lastName)
+
   const code =
     initials
       .slice(0, 1)
@@ -26,17 +36,23 @@ function getColorClassName (initials) {
   return ''
 }
 
-const Avatar = ({ dimensions = 45, initials }: Props) => (
+const Avatar = ({
+  dimensions = 40,
+  firstName,
+  lastName,
+  className = '',
+  style = {}
+}: Props) => (
   <div className='Shared-Avatar'>
     <div
-      className={`content ${getColorClassName(initials)}`}
+      className={`content ${className} ${getColorClassName(firstName, lastName)}`}
       style={{
         width: dimensions,
         height: dimensions,
         borderRadius: dimensions / 2
       }}
     >
-      {initials}
+      {getInitials(firstName, lastName)}
     </div>
   </div>
 )

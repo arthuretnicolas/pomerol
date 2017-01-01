@@ -1,6 +1,31 @@
+@mixin color($color) {
+  path, polygon, rect {
+    fill: $color;
+  }
+
+  circle {
+    stroke: $color;
+  }
+
+  &:hover {
+    path, polygon, rect {
+      fill: darken($color, $button-hover-darken);
+    }
+
+    circle {
+      stroke: darken($color, $button-hover-darken);
+    }
+  }
+}
+
 .Shared-Icon {
   width: $base-padding * 1.5;
   height: $base-padding * 1.5;
+
+  &.small {
+    width: $base-padding;
+    height: $base-padding;
+  }
 
   path, polygon, rect {
     fill: $color-body;
@@ -12,22 +37,10 @@
   }
 
   &.success {
-    path, polygon, rect {
-      fill: $color-success;
-    }
+    @include color($color-success)
+  }
 
-    circle {
-      stroke: $color-success;
-    }
-
-    &:hover {
-      path, polygon, rect {
-        fill: darken($color-success, $button-hover-darken);
-      }
-
-      circle {
-        stroke: darken($color-success, $button-hover-darken);
-      }
-    }
+  &.primary {
+    @include color($color-primary)
   }
 }

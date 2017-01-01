@@ -20,6 +20,7 @@ const Header = ({ name, callToAction }: Props) => (
 
     {
       callToAction && <Button
+        className='button'
         content={(
           <div style={{
             display: 'flex',

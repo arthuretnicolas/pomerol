@@ -1,0 +1,31 @@
+.Shared-Infos {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: $double-padding;
+
+  .label {
+    color: $gray;
+    text-transform: uppercase;
+    font-weight: $semi-bold;
+    font-size: $font-size-tiny;
+    padding-bottom: $small-padding;
+  }
+
+  .container-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-bottom: $tiny-padding;
+  }
+
+  .item-label {
+    margin-left: $small-padding;
+    font-size: $font-size-small;
+    text-decoration: none;
+    color: $color-primary;
+
+    &.pointer {
+      cursor: pointer;
+    }
+  }
+}

@@ -5,7 +5,7 @@
   align-items: center;
   border-bottom: 2px solid $gray-xlight;
   border-left: 2px solid $gray-xlight;
-  padding: $base-padding $double-padding;
+  padding: $base-padding $base-padding * 1.5;
   cursor: pointer;
 
   &.selected, &:hover, &:focus {
@@ -15,8 +15,8 @@
   }
 
   .container-avatar {
-    padding-right: $double-padding;
-    padding-left: $double-padding;
+    padding-right: $base-padding * 1.5;
+    padding-left: $base-padding * 1.5;
   }
 
   .name {

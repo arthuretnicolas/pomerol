@@ -6,4 +6,9 @@
   min-height: $header-height;
   font-size: $font-size-large;
   border-bottom: 2px solid $gray-xlight;
+
+  .button {
+    padding: 0;
+    margin-left: $base-padding;
+  }
 }
