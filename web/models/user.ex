@@ -1,9 +1,11 @@
 defmodule Pomerol.User do
+  use Arc.Ecto.Schema
   use Pomerol.Web, :model
+  import Pomerol.Services.Base64ImageUploaderService
   import Pomerol.ValidationHelpers
   import Comeonin.Bcrypt, only: [hashpwsalt: 1]
 
-  @derive {Poison.Encoder, only: [:id, :first_name, :last_name, :email, :locale]}
+  # @derive {Poison.Encoder, only: [:id, :first_name, :last_name, :email, :locale]}
 
   schema "users" do
     field :first_name, :string
@@ -14,6 +16,9 @@ defmodule Pomerol.User do
     field :organization_name, :string, virtual: true
     field :encrypted_password, :string
     field :admin, :boolean, default: false
+
+    field :base64_photo_data, :string, virtual: true
+    field :photo, Pomerol.UserPhoto.Type
 
     field :password_reset_token, :string
     field :password_reset_timestamp, Timex.Ecto.DateTime
@@ -54,12 +59,13 @@ defmodule Pomerol.User do
 
   def update_changeset(user, params \\ %{}) do
     user
-    |> cast(params, [:first_name, :last_name, :locale, :country_id, :current_organization_id])
+    |> cast(params, [:first_name, :last_name, :locale, :country_id, :current_organization_id, :base64_photo_data])
     |> validate_inclusion(:locale, ["en", "fr"])
     |> foreign_key_constraint(:country_id)
     |> assoc_constraint(:country)
     |> foreign_key_constraint(:current_organization_id)
     |> assoc_constraint(:current_organization)
+    |> upload_image(:base64_photo_data, :photo)
   end
 
   def change_password_changeset(user, params \\ %{}) do
