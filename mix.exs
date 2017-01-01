@@ -23,16 +23,20 @@ defmodule Pomerol.Mixfile do
     [
       mod: {Pomerol, []},
       applications: [
+        :arc_ecto,
         :bamboo,
         :comeonin,
         :corsica,
         :cowboy,
+        :ex_aws,
         :gettext,
+        :httpoison,
         :logger,
         :phoenix,
         :phoenix_ecto,
         :phoenix_html,
         :phoenix_pubsub,
+        :poison,
         :postgrex,
         :std_json_io,
         :timex,
@@ -53,16 +57,20 @@ defmodule Pomerol.Mixfile do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      {:arc, git: "https://github.com/stavro/arc.git", ref: "354d4d2e1b86bcd6285db3528118fe3f5db36cf5", override: true}, # Photo uploads
+      {:arc_ecto, "~> 0.4.4"},
       {:bamboo, "~> 0.7"},
       {:canary, "~> 1.1.0"}, # Authorization
       {:comeonin, "~> 2.5"},
       {:corsica, "~> 0.5"},
       {:cowboy, "~> 1.0"},
       {:credo, "~> 0.5", only: [:dev, :test]}, # Code style suggestions
+      {:ex_aws, "~> 0.4"}, # Amazon AWS
       {:excoveralls, "~> 0.5", only: :test}, # Test coverage
       {:ex_machina, "~> 1.0", only: :test}, # test factories
       {:gettext, "~> 0.11"},
       {:guardian, "~> 0.13.0"}, # Authentication (JWT)
+      {:hackney, ">= 1.4.4"},
       {:phoenix, "~> 1.2.1"},
       {:phoenix_ecto, "~> 3.0"},
       {:phoenix_html, "~> 2.6"},

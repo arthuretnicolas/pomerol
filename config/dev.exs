@@ -57,6 +57,9 @@ config :pomerol, Pomerol.Repo,
 config :pomerol, Pomerol.Mailer,
   adapter: Bamboo.LocalAdapter
 
-config :ueberauth, Ueberauth.Strategy.Google.OAuth,
-  client_id: "217330109544-l6gh6agp436gc77i6gqje4t3ni6lluj6.apps.googleusercontent.com",
-  client_secret: "ZnlJRbMDka-Upkp7EAaK9l4M"
+config :arc,
+  bucket: "pomerol",
+  virtual_host: false,
+  arc_storage: Arc.Storage.S3
+
+import_config "dev.secrets.exs"

@@ -22,7 +22,8 @@ defmodule Canary.Abilities do
     def can?(%User{}, _action, nil), do: true
 
     def can?(%User{} = user, :update, %Changeset{data: %User{}} = changeset), do: UserPolicy.update?(user, changeset)
-    # def can?(%User{} = current_user, :update, %User{} = user), do: UserPolicy.update?(user, current_user)
+
+    def can?(%User{} = user, :create, Organization), do: OrganizationPolicy.create?(user)
 
     def can?(%User{} = user, :create, %Changeset{data: %OrganizationMembership{}} = changeset), do: OrganizationMembershipPolicy.create?(user, changeset)
     def can?(%User{} = user, :update, %Changeset{data: %OrganizationMembership{}} = changeset), do: OrganizationMembershipPolicy.update?(user, changeset)
