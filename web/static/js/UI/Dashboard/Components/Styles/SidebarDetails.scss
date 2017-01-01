@@ -1,0 +1,60 @@
+.Dashboard-Sidebar-Details {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  border-left: 2px solid $gray-xlight;
+
+  > .header {
+    display: flex;
+    flex-direction: row;
+    height: $header-height;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: $base-padding;
+    padding-right: $base-padding;
+
+    .header-button {
+      padding: 0;
+      margin-left: 0;
+      font-size: $font-size-smaller;
+    }
+  }
+
+  > .card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: $base-padding * 1.5 $base-padding;
+    background-color: $color-primary-medium;
+
+    .card-infos {
+      padding-left: $base-padding;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-avatar {
+      border: 1px solid #fff;
+      background-color: transparent;
+    }
+
+    .card-name {
+      color: #fff;
+      font-size: $font-size-large;
+      font-weight: $medium;
+      line-height: $line-height-spaced;
+    }
+
+    .card-company {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: $font-size-small;
+    }
+  }
+
+  > .content {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    padding: $double-padding $base-padding 0 $base-padding;
+  }
+}

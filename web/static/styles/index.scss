@@ -5,6 +5,7 @@
 @import "./variables.scss";
 @import "./colors.scss";
 @import "./metrics.scss";
+// @import "./svg.scss";
 
 @import "./layout.scss";
 
@@ -16,6 +17,8 @@
 @import "../js/UI/Shared/Components/Styles/Avatar.scss";
 @import "../js/UI/Shared/Components/Styles/Link.scss";
 @import "../js/UI/Shared/Components/Styles/Spinner.scss";
+@import "../js/UI/Shared/Components/Styles/Icon.scss";
+@import "../js/UI/Shared/Components/Styles/Infos.scss";
 
 // Landing
 @import "../js/UI/Landing/Components/Styles/Landing.scss";
@@ -31,7 +34,7 @@
 @import "../js/UI/Forms/Components/Styles/Input.scss";
 @import "../js/UI/Forms/Components/Styles/Select.scss";
 
-// Dashboard
+// // Dashboard
 @import "../js/UI/Dashboard/Containers/Styles/DashboardContainer.scss";
 @import "../js/UI/Dashboard/Containers/Styles/DashboardMain.scss";
 @import "../js/UI/Dashboard/Containers/Styles/DashboardContacts.scss";
@@ -39,6 +42,8 @@
 @import "../js/UI/Dashboard/Components/Styles/DashboardContainer.scss";
 @import "../js/UI/Dashboard/Components/Styles/DashboardSidebar.scss";
 @import "../js/UI/Dashboard/Components/Styles/SingleContact.scss";
+@import "../js/UI/Dashboard/Components/Styles/Header.scss";
+@import "../js/UI/Dashboard/Components/Styles/SidebarDetails.scss";
 
 // // Auth
 @import "../js/UI/Auth/Containers/Styles/Signup.scss";

@@ -28,7 +28,6 @@ const SingleContact = ({ contact, onClick, selected }: Props) => {
     country,
     id
   } = contact
-  const initials = `${firstName.slice(0, 1)}${lastName.slice(0, 1)}`
 
   return (
     <div
@@ -40,7 +39,7 @@ const SingleContact = ({ contact, onClick, selected }: Props) => {
       </div>
 
       <div className='container-avatar'>
-        <Avatar initials={initials} />
+        <Avatar firstName={firstName} lastName={lastName} />
       </div>
 
       <div>

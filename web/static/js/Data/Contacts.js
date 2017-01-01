@@ -4,6 +4,7 @@ export const contacts = [
     lastName: 'Sparski',
     phoneNumber: '+478927892',
     website: 'https://trello.com',
+    email: 'yo1@yopmail.com',
     quoteIds: [
       'ID63786783',
       'ID63423282'
@@ -17,6 +18,7 @@ export const contacts = [
     lastName: 'Masilva',
     phoneNumber: '+428927892',
     website: 'https://github.com',
+    email: 'yo2@yopmail.com',
     quoteIds: [
     ],
     company: 'Carrefour',
@@ -28,6 +30,7 @@ export const contacts = [
     lastName: 'Garbosky',
     phoneNumber: '+4783237892',
     website: 'https://asana.com',
+    email: 'yo3@yopmail.com',
     quoteIds: [
       'ID63786783',
       'ID63423282',
@@ -42,6 +45,7 @@ export const contacts = [
     lastName: 'Chechen',
     phoneNumber: '+478227892',
     website: 'https://invision.com',
+    email: 'yo4@yopmail.com',
     quoteIds: [
       'ID63786783',
       'ID63423282',
@@ -57,6 +61,7 @@ export const contacts = [
     lastName: 'Sparski',
     phoneNumber: '+478927892',
     website: 'https://trello.com',
+    email: 'yo5@yopmail.com',
     quoteIds: [
       'ID63786783',
       'ID63423282'
@@ -70,6 +75,7 @@ export const contacts = [
     lastName: 'Masilva',
     phoneNumber: '+428927892',
     website: 'https://github.com',
+    email: 'yo6@yopmail.com',
     quoteIds: [
     ],
     company: 'Carrefour',
@@ -81,6 +87,7 @@ export const contacts = [
     lastName: 'Garbosky',
     phoneNumber: '+4783237892',
     website: 'https://asana.com',
+    email: 'yo@yopmail.com',
     quoteIds: [
       'ID63786783',
       'ID63423282',
@@ -95,6 +102,7 @@ export const contacts = [
     lastName: 'Chechen',
     phoneNumber: '+478227892',
     website: 'https://invision.com',
+    email: 'yo@yopmail.com',
     quoteIds: [
       'ID63786783',
       'ID63423282',
@@ -110,6 +118,7 @@ export const contacts = [
     lastName: 'Sparski',
     phoneNumber: '+478927892',
     website: 'https://trello.com',
+    email: 'yo@yopmail.com',
     quoteIds: [
       'ID63786783',
       'ID63423282'
@@ -123,6 +132,7 @@ export const contacts = [
     lastName: 'Masilva',
     phoneNumber: '+428927892',
     website: 'https://github.com',
+    email: 'yo@yopmail.com',
     quoteIds: [
     ],
     company: 'Carrefour',
@@ -134,6 +144,7 @@ export const contacts = [
     lastName: 'Garbosky',
     phoneNumber: '+4783237892',
     website: 'https://asana.com',
+    email: 'yo@yopmail.com',
     quoteIds: [
       'ID63786783',
       'ID63423282',
@@ -148,6 +159,7 @@ export const contacts = [
     lastName: 'Chechen',
     phoneNumber: '+478227892',
     website: 'https://invision.com',
+    email: 'yo@yopmail.com',
     quoteIds: [
       'ID63786783',
       'ID63423282',

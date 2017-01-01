@@ -1,4 +1,32 @@
-// out of scope
+@mixin background-color($color) {
+  background: $color;
+  background-image: -webkit-linear-gradient(darken($color, 1%), darken($color, 2%));
+
+  &:hover, &:focus {
+    background: darken($color, $button-hover-darken);
+  }
+}
+
+@mixin color-plain($color) {
+  color: $color;
+
+  &:hover, &:focus {
+    color: darken($color, $button-hover-darken);
+
+    // beginning of dirty...
+    .Shared-Icon {
+      path, polygon, rect {
+        fill: darken($color, $button-hover-darken);
+      }
+
+      circle {
+        stroke: darken($color, $button-hover-darken);
+      }
+    }
+    // end of dirty
+  }
+}
+
 
 .Button-no-decoration {
   text-decoration: none;
@@ -29,21 +57,25 @@
   }
 
   &.success {
-    background: $color-success;
-    background-image: -webkit-linear-gradient(darken($color-success, 1%), darken($color-success, 2%));
-
-    &:hover, &:focus {
-      background: darken($color-success, $button-hover-darken);
-    }
+    @include background-color($color-success)
   }
 
   &.primary {
-    background: $color-primary;
-    background-image: -webkit-linear-gradient(darken($color-primary, 1%), darken($color-primary, 2%));
+    @include background-color($color-primary)
+  }
 
-    &:hover, &:focus {
-      background: darken($color-primary, $button-hover-darken);
-    }
+  &.plain {
+    background-color: transparent !important;
+    border: none;
+    font-weight: 400;
+  }
+
+  &.plain-success {
+    @include color-plain($color-success)
+  }
+
+  &.plain-primary {
+    @include color-plain($color-primary)
   }
 
   &.full-width {

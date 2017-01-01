@@ -43,9 +43,9 @@ export default (
       <Route path='/github-users' component={GithubUsers} />
 
       <Route component={DashboardContainer}>
+        <Route path='/contacts' component={DashboardContacts} />
         <Route path='/dashboard' component={DashboardMain} />
         <Route path='/quotes' component={DashboardQuotes} />
-        <Route path='/contacts' component={DashboardContacts} />
         <Route path='/settings' component={DashboardSettings} />
       </Route>
 
