@@ -1,5 +1,7 @@
 defmodule Pomerol.Organization do
+  use Arc.Ecto.Schema
   use Pomerol.Web, :model
+  import Pomerol.Services.Base64ImageUploaderService
   alias Pomerol.{Country, OrganizationMembership}
 
   schema "organizations" do
@@ -7,6 +9,9 @@ defmodule Pomerol.Organization do
     field :address, :string
     field :website, :string
     field :phone, :string
+
+    field :base64_icon_data, :string, virtual: true
+    field :logo, Pomerol.OrganizationLogo.Type
 
     belongs_to :country, Country
     has_many :organization_memberships, OrganizationMembership
@@ -27,9 +32,10 @@ defmodule Pomerol.Organization do
 
   def create_changeset(organization, params \\ %{}) do
     organization
-    |> cast(params, [:name, :address, :website, :phone, :country_id])
+    |> cast(params, [:name, :address, :website, :phone, :country_id, :base64_icon_data])
     |> validate_required([:name, :country_id])
     |> foreign_key_constraint(:country_id)
+    |> upload_image(:base64_icon_data, :logo)
   end
 
   def preload_all(query, locale) do
