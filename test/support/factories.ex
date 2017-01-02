@@ -17,6 +17,16 @@ defmodule Pomerol.Factories do
     }
   end
 
+  def organization_invite_factory do
+    %Pomerol.OrganizationInvite{
+      user: build(:user),
+      organization: build(:organization),
+      email: sequence(:email, &"email#{&1}"),
+      role: "manager",
+      token: Pomerol.Random.hex()
+    }
+  end
+
   def set_password(user, password) do
     hashed_password = Comeonin.Bcrypt.hashpwsalt(password)
     %{user | encrypted_password: hashed_password}
