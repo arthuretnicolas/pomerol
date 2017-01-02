@@ -36,7 +36,7 @@ defmodule Pomerol.Organization do
     |> cast(params, [:name, :address, :website, :phone, :country_id, :base64_logo_data])
     |> validate_required([:name, :country_id])
     |> prefix_url(:website)
-    |> validate_format(:website, ~r/\A((http|https):\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,}(([0-9]{1,5})?\/.*)?#=\z/ix)
+    # |> validate_format(:website, ~r/\A((http|https):\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,}(([0-9]{1,5})?\/.*)?#=\z/ix)
     |> foreign_key_constraint(:country_id)
     |> upload_image(:base64_logo_data, :logo)
   end
