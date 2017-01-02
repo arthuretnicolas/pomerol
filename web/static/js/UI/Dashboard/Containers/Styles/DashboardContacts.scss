@@ -37,13 +37,11 @@
 
   .container-sidebar-details {
     display: flex;
-    flex: 1;
-    max-width: $sidebar-details-width;
-    transition: all ease-in-out 200ms;
+    flex-basis: $sidebar-details-width;
+    transition: all ease-in-out 100ms;
   }
 
   .container-sidebar-details:not(.show-details) {
-    flex: 0;
-    width: 0;
+    margin-right: -$sidebar-details-width;
   }
 }
