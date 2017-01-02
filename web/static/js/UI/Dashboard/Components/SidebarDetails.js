@@ -104,7 +104,7 @@ const SidebarDetails = ({
           </div>
 
           <div className='card-company'>
-            Client's company
+            Client company
           </div>
         </div>
       </div>

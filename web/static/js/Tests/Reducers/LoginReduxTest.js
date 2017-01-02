@@ -5,12 +5,14 @@ import Actions, {
   emptySession
 } from '../../Reducers/LoginRedux'
 
+const FAKE_ID = 777
 const FAKE_JWT = 'NFziefoniozef'
 const FAKE_ERROR = 'SERVER_DOWN'
 const FAKE_SESSION = {
   user: {
     last_name: 'panibratov',
-    id: 1
+    id: 1,
+    current_organization_id: null
   },
   organizations: [
     {
@@ -28,6 +30,18 @@ const FAKE_USER = {
       name: 'Evil Corp'
     }
   ]
+}
+const FAKE_ORGANIZATIONC_INPUT = {
+  name: 'Big corpo',
+  countryId: 1
+}
+const FAKE_ORGANIZATIONC_OUTPUT = {
+  id: 666,
+  name: 'Big corpo',
+  members: [{
+    role: 'owner',
+    name: 'Joe'
+  }]
 }
 
 // login
@@ -178,4 +192,42 @@ test('updateUserSuccess', t => {
   t.false(state.attemptingUpdate)
   t.is(state.errorUpdating, null)
   t.deepEqual(state.session.user, FAKE_USER)
+})
+
+// create organization
+test('createOrganizationAttempt', t => {
+  const stateLogged = reducer(INITIAL_STATE, Actions.loginSuccess('joe@yopmail.com', 'yala1234'))
+  const stateLoggedWithSession = reducer(stateLogged, Actions.fetchSessionSuccess(FAKE_SESSION))
+  const state = reducer(stateLoggedWithSession, Actions.createOrganizationAttempt(FAKE_ORGANIZATIONC_INPUT))
+
+  t.true(state.attemptingOrganization)
+})
+
+test('createOrganizationFailure', t => {
+  const stateAttempt = reducer(INITIAL_STATE, Actions.createOrganizationAttempt(FAKE_ORGANIZATIONC_INPUT))
+  const state = reducer(stateAttempt, Actions.createOrganizationFailure(FAKE_ERROR))
+
+  t.false(state.attemptingOrganization)
+  t.is(state.errorOrganisation, FAKE_ERROR)
+})
+
+test('createOrganizationSuccess', t => {
+  const stateFailure = reducer(INITIAL_STATE, Actions.createOrganizationFailure(FAKE_ERROR))
+  const stateAttempt = reducer(stateFailure, Actions.createOrganizationAttempt(FAKE_ORGANIZATIONC_INPUT))
+  const state = reducer(stateAttempt, Actions.createOrganizationSuccess(FAKE_ORGANIZATIONC_OUTPUT))
+
+  const listOrganizationIds = state.session.organizations.map(org => org.id)
+
+  t.false(state.attemptingOrganization)
+  t.is(state.errorOrganisation, null)
+  t.true(listOrganizationIds.includes(FAKE_ORGANIZATIONC_OUTPUT.id))
+})
+
+// set current organization
+test('setCurrentOrganization', t => {
+  const stateLogged = reducer(INITIAL_STATE, Actions.loginSuccess('joe@yopmail.com', 'yala1234'))
+  const stateLoggedWithSession = reducer(stateLogged, Actions.fetchSessionSuccess(FAKE_SESSION))
+  const state = reducer(stateLoggedWithSession, Actions.setCurrentOrganization(FAKE_ID))
+
+  t.is(state.session.user && state.session.user.current_organization_id, FAKE_ID)
 })

@@ -1,11 +1,24 @@
 // @flow
 
-export function hasCompleteProfile (user: Object): boolean {
-  const hasCompleteProfile =
+export function getOnboardingCompletedSteps (session: Object): number {
+  const { user, organizations } = session
+  const hasCompleteFirstStep =
     user &&
     user.first_name !== '' &&
     user.last_name !== '' &&
     user.country
 
-  return hasCompleteProfile
+  const hasCompletedSecondStep =
+    organizations &&
+    organizations.length >= 1
+
+  if (!hasCompleteFirstStep) {
+    return 0
+  }
+
+  if (!hasCompletedSecondStep) {
+    return 1
+  }
+
+  return 2
 }

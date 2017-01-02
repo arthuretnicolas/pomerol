@@ -1,9 +1,10 @@
 .Forms-Select {
   display: flex;
+  flex-direction: column;
   margin-bottom: $base-padding;
   position: relative;
 
-  .select {
+  > .select {
     display: flex;
     flex: 1;
     background-color: #fff;
@@ -34,12 +35,12 @@
     }
   }
 
-  .arrow-down {
+  > .arrow-down {
     position: absolute;
     right: $base-padding;
     display: flex;
     align-items: center;
-    height: 100%;
+    height: calc(100% + 25px); // to account for a 25px high label
     color: $gray-semi-dark;
     padding-bottom: 2px;
     cursor: default;

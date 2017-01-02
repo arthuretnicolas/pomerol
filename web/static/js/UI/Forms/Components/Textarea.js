@@ -5,6 +5,7 @@ import Label from './Label'
 
 type Props = {
   label: string,
+  name?: string,
   type?: string,
   disabled?: bool,
   name?: string,
@@ -12,10 +13,12 @@ type Props = {
   required?: bool,
   onChange?: () => void,
   minLength?: number,
-  value?: any
+  value?: any,
+  rows?: number,
+  resize?: boolean
 }
 
-const Input = ({
+const Textarea = ({
   label,
   type,
   disabled,
@@ -24,15 +27,19 @@ const Input = ({
   required,
   minLength,
   onChange,
-  value
+  value,
+  rows = 3,
+  resize = true
 }: Props) => (
-  <div className='Forms-Input'>
+  <div className='Forms-Textarea'>
     <Label name={name} label={label} />
-    <input
-      name={name}
-      className='input'
+
+    <textarea
+      className={`textarea ${resize ? '' : 'no-resize'}`}
       type={type}
       disabled={disabled}
+      name={name}
+      rows={rows}
       required={required}
       minLength={minLength}
       placeholder={placeholder}
@@ -42,4 +49,4 @@ const Input = ({
   </div>
 )
 
-export default Input
+export default Textarea

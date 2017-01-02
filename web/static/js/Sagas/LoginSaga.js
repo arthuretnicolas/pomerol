@@ -92,3 +92,20 @@ export function * updateUser (api, action) {
     console.warn('Update user failed')
   }
 }
+
+export function * createOrganization (api, action) {
+  const { organization } = action
+  const jwt = yield select(jwtSelector)
+
+  const response = yield call(api.createOrganization, jwt, organization)
+  const { data } = response
+
+  if (response.ok) {
+    yield put(LoginActions.createOrganizationSuccess(data))
+    yield put(LoginActions.setCurrentOrganization(data.country.id))
+    window.alert('Your organisation has been created successfully !') // TODO: do something better
+  } else {
+    yield put(LoginActions.createOrganizationFailure(data))
+    handleErrors(data)
+  }
+}

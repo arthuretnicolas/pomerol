@@ -1,7 +1,7 @@
 import { handleErrors } from './Errors'
-import { hasCompleteProfile } from './User'
+import { getOnboardingCompletedSteps } from './User'
 
 export {
   handleErrors,
-  hasCompleteProfile
+  getOnboardingCompletedSteps
 }

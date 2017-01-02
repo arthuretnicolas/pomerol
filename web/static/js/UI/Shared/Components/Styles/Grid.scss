@@ -1,0 +1,27 @@
+.Shared-Grid {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+
+  > .child {
+    display: flex;
+    flex: 1;
+  }
+
+  @media (min-width: $break-point-tablet) {
+    flex-direction: row;
+
+    > .child {
+      padding-left: $small-padding;
+      padding-right: $small-padding;
+    }
+
+    > .child.first {
+      padding-left: 0;
+    }
+
+    > .child.last {
+      padding-right: 0;
+    }
+  }
+}

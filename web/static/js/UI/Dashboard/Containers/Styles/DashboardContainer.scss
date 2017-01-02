@@ -1,4 +1,8 @@
 .Dashboard-DashboardContainer {
+  display: flex;
+  flex: 1;
+  background-color: $color-frost;
+
   .container-content {
     display: flex;
     flex: 1;

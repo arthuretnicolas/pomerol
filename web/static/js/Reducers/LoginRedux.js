@@ -28,7 +28,13 @@ const { Types, Creators } = createActions({
   // ******
   updateUserAttempt: [ 'userInfos' ],
   updateUserFailure: [ 'error' ],
-  updateUserSuccess: [ 'user' ]
+  updateUserSuccess: [ 'user' ],
+  // ******
+  createOrganizationAttempt: [ 'organization' ],
+  createOrganizationFailure: [ 'error' ],
+  createOrganizationSuccess: [ 'organization' ],
+  // ******
+  setCurrentOrganization: [ 'id' ]
 })
 
 export const LoginTypes = Types
@@ -46,16 +52,22 @@ export const INITIAL_STATE = Immutable({
   attempting: false,
   error: null,
   jwt: '',
+  // ******
   attemptingSession: false,
   session: emptySession,
   errorSession: null,
+  // ******
   attemptingRequest: false,
   errorRequest: null,
   attemptingReset: false,
   errorResetting: null,
+  // ******
   attemptingGoogle: null,
   attemptingUpdate: false,
-  errorUpdating: null
+  errorUpdating: null,
+  // ******
+  attemptingOrganization: false,
+  errorOrganisation: null
 })
 
 /* ------------- Reducers ------------- */
@@ -183,6 +195,35 @@ export const updateUserSuccess = (state: Object, { user }: Object) =>
     errorUpdating: null
   })
 
+export const createOrganizationAttempt = (state: Object, { organization }: { organization: Object }) =>
+  state.merge({
+    attemptingOrganization: true
+  })
+
+export const createOrganizationFailure = (state: Object, { error }: { error: string }) =>
+  state.merge({
+    attemptingOrganization: false,
+    errorOrganisation: error
+  })
+
+export const createOrganizationSuccess = (state: Object, { organization }: { organization: Object }) => {
+  const organizations =
+    state.session.organizations
+      .filter(org => org.id !== organization.id)
+      .concat(organization)
+
+  return state.merge({
+    attemptingOrganization: false,
+    errorOrganisation: null,
+    session: state.session.merge({
+      organizations
+    })
+  })
+}
+
+export const setCurrentOrganization = (state: Object, { id }: { id: number }) =>
+  state.setIn([ 'session', 'user', 'current_organization_id' ], id)
+
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
@@ -208,5 +249,11 @@ export const reducer = createReducer(INITIAL_STATE, {
   // ******
   [Types.UPDATE_USER_ATTEMPT]: updateUserAttempt,
   [Types.UPDATE_USER_SUCCESS]: updateUserSuccess,
-  [Types.UPDATE_USER_FAILURE]: updateUserFailure
+  [Types.UPDATE_USER_FAILURE]: updateUserFailure,
+  // ******
+  [Types.CREATE_ORGANIZATION_ATTEMPT]: createOrganizationAttempt,
+  [Types.CREATE_ORGANIZATION_SUCCESS]: createOrganizationSuccess,
+  [Types.CREATE_ORGANIZATION_FAILURE]: createOrganizationFailure,
+  // ******
+  [Types.SET_CURRENT_ORGANIZATION]: setCurrentOrganization
 })
