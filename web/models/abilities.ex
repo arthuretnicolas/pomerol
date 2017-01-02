@@ -2,11 +2,13 @@ defmodule Canary.Abilities do
   alias Pomerol.User
   alias Pomerol.Organization
   alias Pomerol.OrganizationMembership
+  alias Pomerol.OrganizationInvite
   alias Pomerol.Contact
 
   alias Pomerol.UserPolicy
   alias Pomerol.OrganizationPolicy
   alias Pomerol.OrganizationMembershipPolicy
+  alias Pomerol.OrganizationInvitePolicy
   alias Pomerol.ContactPolicy
 
   alias Ecto.Changeset
@@ -23,11 +25,16 @@ defmodule Canary.Abilities do
 
     def can?(%User{} = user, :update, %Changeset{data: %User{}} = changeset), do: UserPolicy.update?(user, changeset)
 
+    def can?(%User{} = user, :show, %Organization{} = organization), do: OrganizationPolicy.show?(user, organization)
     def can?(%User{} = user, :create, Organization), do: OrganizationPolicy.create?(user)
 
     def can?(%User{} = user, :create, %Changeset{data: %OrganizationMembership{}} = changeset), do: OrganizationMembershipPolicy.create?(user, changeset)
     def can?(%User{} = user, :update, %Changeset{data: %OrganizationMembership{}} = changeset), do: OrganizationMembershipPolicy.update?(user, changeset)
     def can?(%User{} = user, :delete, %OrganizationMembership{} = membership), do: OrganizationMembershipPolicy.delete?(user, membership)
+
+    def can?(%User{} = user, :create, %Changeset{data: %OrganizationInvite{}} = changeset), do: OrganizationInvitePolicy.create?(user, changeset)
+    def can?(%User{} = user, :update, %OrganizationInvite{} = organization_invite), do: OrganizationInvitePolicy.update?(user, organization_invite)
+    def can?(%User{} = user, :delete, %OrganizationInvite{} = organization_invite), do: OrganizationInvitePolicy.delete?(user, organization_invite)
 
     def can?(%User{} = user, :create, %Changeset{data: %Contact{}} = changeset), do: ContactPolicy.create?(user, changeset)
     def can?(%User{} = user, :show, %Contact{} = contact), do: ContactPolicy.show?(user, contact)

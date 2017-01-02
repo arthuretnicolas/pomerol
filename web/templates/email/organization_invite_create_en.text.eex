@@ -1,0 +1,13 @@
+You've been invited to join a Pomerol account.
+<%= @sender_name %> a demandé à ce que vous rejoignez <%= @organization_name %>.
+
+<%= if @sender_message do %>
+  <%= @organization_name %> a ajouté:
+  <%= @sender_message %>.
+<% end %>
+
+Démarrez dès maintenant et créez votre compte. Si vous avez déjà un compte connectez-vous.
+
+Cette invitation expirera sous 7 jours. Si vous avez une question, contactez <%= @sender_email %>
+
+Voici le lien --> <%= @url %>/invites/<%= @token %>

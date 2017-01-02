@@ -34,6 +34,7 @@ defmodule Pomerol.OrganizationMembershipPolicy do
       [_, _, _] -> false
     end
   end
+  def update?(%User{}, %Changeset{}), do: false
 
   # def delete?(%User{admin: true}, %OrganizationMembership{}), do: true
   # def delete?(%User{} = user, %OrganizationMembership{} = current_membership) do

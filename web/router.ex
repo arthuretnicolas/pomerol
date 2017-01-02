@@ -41,6 +41,8 @@ defmodule Pomerol.Router do
       post "/auth/:provider/callback", AuthController, :callback
       post "/password/request", UserController, :password_reset_request, as: :reset
       post "/password/reset", UserController, :password_reset, as: :reset
+
+      get "/invites/:token", OrganizationInviteController, :show
     end
 
     scope "/v1", V1, as: :v1 do
@@ -57,6 +59,7 @@ defmodule Pomerol.Router do
 
       resources "/organizations", OrganizationController, only: [:index, :show, :create] do
         resources "/memberships", OrganizationMembershipController, only: [:update]
+        resources "/invites", OrganizationInviteController, only: [:create, :update]
       end
     end
 

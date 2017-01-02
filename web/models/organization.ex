@@ -35,9 +35,20 @@ defmodule Pomerol.Organization do
     organization
     |> cast(params, [:name, :address, :website, :phone, :country_id, :base64_logo_data])
     |> validate_required([:name, :country_id])
+    |> prefix_url(:website)
+    |> validate_format(:website, ~r/\A((http|https):\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,}(([0-9]{1,5})?\/.*)?#=\z/ix)
     |> foreign_key_constraint(:country_id)
     |> upload_image(:base64_logo_data, :logo)
   end
+
+  defp prefix_url(changeset, key) do
+    changeset
+    |> update_change(key, &do_prefix_url/1)
+  end
+  defp do_prefix_url(nil), do: nil
+  defp do_prefix_url("http://" <> rest), do: "http://" <> rest
+  defp do_prefix_url("https://" <> rest), do: "https://" <> rest
+  defp do_prefix_url(value), do: "http://" <> value
 
   def preload_all(query, locale) do
     from query, preload: [

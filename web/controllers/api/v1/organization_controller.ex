@@ -41,9 +41,8 @@ defmodule Pomerol.V1.OrganizationController do
   end
 
   def show(conn, %{"id" => id}) do
-    organization = Organization
-    |> Repo.get!(id)
-    |> Repo.preload(:members)
+    locale = conn.assigns[:locale]
+    organization = Organization |> Organization.preload_all(locale) |> Repo.get!(id)
 
     conn
     |> render(Pomerol.OrganizationView, "organization.json", organization: organization)
