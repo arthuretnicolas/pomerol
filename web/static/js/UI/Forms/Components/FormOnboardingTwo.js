@@ -5,6 +5,7 @@ import Form from './Form'
 import Input from './Input'
 import Textarea from './Textarea'
 import Select from './Select'
+import Grid from '../../Shared/Components/Grid'
 
 type CountriesType = {
   top_country_ids: Array<number>,
@@ -77,20 +78,23 @@ export default class FormOnboardingTwo extends Component {
                 required
                 onChange={event => onChange('name', event && event.target.value)}
               />
-              <Input
-                label='Organization phone number'
-                value={phoneNumber || ''}
-                type='text'
-                placeholder='Your organization phone number'
-                onChange={event => onChange('phoneNumber', event && event.target.value)}
-              />
-              <Input
-                label='Organization website'
-                value={website || ''}
-                type='url'
-                placeholder='Your organization website'
-                onChange={event => onChange('website', event && event.target.value)}
-              />
+
+              <Grid>
+                <Input
+                  label='Organization phone number'
+                  value={phoneNumber || ''}
+                  type='text'
+                  placeholder='07 123 456 789'
+                  onChange={event => onChange('phoneNumber', event && event.target.value)}
+                />
+                <Input
+                  label='Organization website'
+                  value={website || ''}
+                  type='url'
+                  placeholder='https://example.com'
+                  onChange={event => onChange('website', event && event.target.value)}
+                />
+              </Grid>
               <Textarea
                 label='Organization address'
                 value={address || ''}

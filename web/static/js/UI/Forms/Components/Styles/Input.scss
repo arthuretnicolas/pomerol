@@ -1,6 +1,7 @@
 .Forms-Input {
   display: flex;
   flex-direction: column;
+  flex: 1;
   margin-bottom: $base-padding;
 
   > .input {
