@@ -85,9 +85,9 @@ export default class FormOnboardingTwo extends Component {
                 onChange={event => onChange('phoneNumber', event && event.target.value)}
               />
               <Input
-                label='Organization webiste'
+                label='Organization website'
                 value={website || ''}
-                type='text'
+                type='url'
                 placeholder='Your organization website'
                 onChange={event => onChange('website', event && event.target.value)}
               />
@@ -95,6 +95,7 @@ export default class FormOnboardingTwo extends Component {
                 label='Organization address'
                 value={address || ''}
                 type='text'
+                resize={false}
                 placeholder='Your organization address'
                 onChange={event => onChange('address', event && event.target.value)}
               />

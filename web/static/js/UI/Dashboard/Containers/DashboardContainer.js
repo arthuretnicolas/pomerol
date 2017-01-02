@@ -3,6 +3,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import DashboardSidebar from '../../Dashboard/Components/DashboardSidebar'
+import EmptyStateDashboard from '../../Shared/Components/EmptyStateDashboard'
 import { sidebarOptions } from '../../../Data/index'
 import { getOnboardingCompletedSteps } from '../../../Helpers'
 
@@ -13,7 +14,7 @@ type Props = {
 
 const DashboardContainer = ({ children, onboardingCompletedSteps }: Props) => {
   if (onboardingCompletedSteps !== 2) {
-    return null
+    return <EmptyStateDashboard />
   }
 
   return (

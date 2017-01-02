@@ -14,7 +14,8 @@ type Props = {
   onChange?: () => void,
   minLength?: number,
   value?: any,
-  rows?: number
+  rows?: number,
+  resize?: boolean
 }
 
 const Textarea = ({
@@ -27,13 +28,14 @@ const Textarea = ({
   minLength,
   onChange,
   value,
-  rows = 3
+  rows = 3,
+  resize = true
 }: Props) => (
   <div className='Forms-Textarea'>
     <Label name={name} label={label} />
 
     <textarea
-      className='textarea'
+      className={`textarea ${resize ? '' : 'no-resize'}`}
       type={type}
       disabled={disabled}
       name={name}
