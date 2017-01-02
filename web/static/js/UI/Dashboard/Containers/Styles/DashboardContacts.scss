@@ -4,16 +4,21 @@
   flex-direction: row;
   background-color: #fff;
 
-  .container-main {
+  > .container-main {
     display: flex;
     flex: 1;
     flex-direction: column;
-  }
 
-  .content {
-    display: flex;
-    flex-direction: row;
-    flex: 1;
+    .content {
+      display: flex;
+      flex-direction: row;
+      flex: 1;
+    }
+
+    .container-content {
+      display: flex;
+      flex: 1;
+    }
   }
 
   .container-sidebar {
@@ -22,16 +27,11 @@
     max-width: $sidebar-tags-width;
   }
 
-  .container-content {
-    display: flex;
-    flex: 1;
-  }
-
   .list-contacts {
     display: flex;
     flex-direction: column;
     flex: 1;
-    max-height: 100vh;
+    max-height: calc(100vh - #{$header-height});
     overflow-y: scroll;
   }
 

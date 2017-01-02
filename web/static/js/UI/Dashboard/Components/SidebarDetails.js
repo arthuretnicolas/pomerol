@@ -10,6 +10,7 @@ type Props = {
   contact: Object,
   onClose: () => void,
   onEdit: () => void,
+  onClickMember: () => void,
   teamMembers: Array<{
     id: string | number,
     name: string
@@ -19,6 +20,7 @@ const SidebarDetails = ({
   contact,
   onClose,
   onEdit,
+  onClickMember,
   teamMembers
 }: Props) => {
   const {
@@ -145,8 +147,8 @@ const SidebarDetails = ({
           label='Team members'
           fields={teamMembers.map(member => ({
             iconName: 'user',
-            label: member.name,
-            onClick: () => window.alert(`Team member with id ${member.id} was clicked`)
+            label: `${member.firstName} ${member.lastName}`,
+            onClick: () => onClickMember(member.id)
           }))}
         />
       </div>

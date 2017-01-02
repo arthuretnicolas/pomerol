@@ -40,6 +40,12 @@ class DashboardContacts extends Component {
     })
   }
 
+  _onChange = (key: string, value: number) => {
+    this.setState({
+      [key]: value
+    })
+  }
+
   _onClickContact = (id: string) => {
     const selectedContactId =
       this.state.selectedContactId === id
@@ -96,24 +102,16 @@ class DashboardContacts extends Component {
 
         <div className={`container-sidebar-details ${showDetails ? 'show-details' : ''}`}>
           {
-            showDetails && <SidebarDetails
+            showDetails && selectedContact && <SidebarDetails
               contact={selectedContact}
               onClose={() => this._onClickContact('')}
               onEdit={id => { window.alert(`Update user width id: ${id}`) }}
-              teamMembers={[
-                {
-                  id: 1675671,
-                  name: 'John Laine'
-                },
-                {
-                  id: 78167891,
-                  name: 'Emile Lui'
-                },
-                {
-                  id: 2679729,
-                  name: 'Paul Pope'
-                }
-              ]}
+              onClickMember={id => this._onChange('selectedContactId', id)}
+              teamMembers={
+                contacts
+                  .filter(contact => contact.company === selectedContact.company)
+                  .filter(contact => contact.id !== selectedContactId)
+              }
             />
           }
         </div>

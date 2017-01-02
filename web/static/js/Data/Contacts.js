@@ -14,8 +14,8 @@ export const contacts = [
     id: 'zefjnkzefjkfeff27867D'
   },
   {
-    firstName: 'Emilien',
-    lastName: 'Masilva',
+    firstName: 'Pedro',
+    lastName: 'Almodovar',
     phoneNumber: '+428927892',
     website: 'https://github.com',
     email: 'yo2@yopmail.com',
@@ -26,8 +26,8 @@ export const contacts = [
     id: 'zefjnkzefjfg27867D'
   },
   {
-    firstName: 'Lana',
-    lastName: 'Garbosky',
+    firstName: 'Polina',
+    lastName: 'Smirnov',
     phoneNumber: '+4783237892',
     website: 'https://asana.com',
     email: 'yo3@yopmail.com',
@@ -41,8 +41,8 @@ export const contacts = [
     id: 'zefjzeefjkzef27867D'
   },
   {
-    firstName: 'Anton',
-    lastName: 'Chechen',
+    firstName: 'Georg',
+    lastName: 'Siberia',
     phoneNumber: '+478227892',
     website: 'https://invision.com',
     email: 'yo4@yopmail.com',
@@ -58,7 +58,7 @@ export const contacts = [
   },
   {
     firstName: 'Joel',
-    lastName: 'Sparski',
+    lastName: 'Samolsku',
     phoneNumber: '+478927892',
     website: 'https://trello.com',
     email: 'yo5@yopmail.com',
@@ -71,7 +71,7 @@ export const contacts = [
     id: 'zefjnkzefjkG678f27867D'
   },
   {
-    firstName: 'Emilien',
+    firstName: 'Laurent',
     lastName: 'Masilva',
     phoneNumber: '+428927892',
     website: 'https://github.com',
@@ -114,8 +114,8 @@ export const contacts = [
     id: 'zefjnkB6F78kzef27867D'
   },
   {
-    firstName: 'Joel',
-    lastName: 'Sparski',
+    firstName: 'Etienne',
+    lastName: 'Badada',
     phoneNumber: '+478927892',
     website: 'https://trello.com',
     email: 'yo@yopmail.com',
@@ -140,8 +140,8 @@ export const contacts = [
     id: 'BYFEU8G678'
   },
   {
-    firstName: 'Lana',
-    lastName: 'Garbosky',
+    firstName: 'Elena',
+    lastName: 'Samilova',
     phoneNumber: '+4783237892',
     website: 'https://asana.com',
     email: 'yo@yopmail.com',
@@ -155,8 +155,8 @@ export const contacts = [
     id: 'FVYZ78T78'
   },
   {
-    firstName: 'Anton',
-    lastName: 'Chechen',
+    firstName: 'Alban',
+    lastName: 'Laba',
     phoneNumber: '+478227892',
     website: 'https://invision.com',
     email: 'yo@yopmail.com',
