@@ -2,7 +2,7 @@ defmodule Pomerol.Organization do
   use Arc.Ecto.Schema
   use Pomerol.Web, :model
   import Pomerol.Services.Base64ImageUploaderService
-  alias Pomerol.{Country, OrganizationMembership}
+  alias Pomerol.{Country, OrganizationMembership, OrganizationInvite}
 
   schema "organizations" do
     field :name, :string
@@ -18,6 +18,7 @@ defmodule Pomerol.Organization do
     has_many :members, through: [:organization_memberships, :member]
 
     has_many :contacts, Pomerol.Contact
+    has_many :organization_invites, OrganizationInvite
 
     timestamps
   end
@@ -40,7 +41,7 @@ defmodule Pomerol.Organization do
 
   def preload_all(query, locale) do
     from query, preload: [
-      [:members, :contacts, :organization_memberships],
+      [:members, :contacts, :organization_memberships, {:organization_invites, :user}],
       country: [ translation: ^Pomerol.CountryTranslation.translation_query(locale) ]
     ]
   end
