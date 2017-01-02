@@ -53,10 +53,10 @@ const Select = ({
       required={required}
       placeholder={placeholder}
       onChange={onChange}
-      defaultValue={selected || 'value_placeholder'}
+      defaultValue={selected || ''}
     >
       {
-        placeholder && <option value='value_placeholder' disabled>
+        placeholder && <option value='' disabled>
           {placeholder}
         </option>
       }

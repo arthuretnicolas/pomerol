@@ -68,7 +68,7 @@ class OnboardingTwo extends Component {
 
     createOrganizationAttempt({
       name,
-      phone_number: phoneNumber,
+      phone: phoneNumber,
       website,
       address,
       country_id: countryId
