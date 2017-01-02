@@ -15,13 +15,13 @@ type CountriesType = {
 }
 type Props = {
   fetchCountriesAttempt: () => void,
-  updateUserAttempt: () => void,
+  createOrganizationAttempt: () => void,
   user: Object,
   onboarding: {
     attemptingCountries: boolean | null,
     countries: CountriesType | null
   },
-  attemptingUpdate: boolean
+  attemptingOrganization: boolean
 }
 
 class OnboardingTwo extends Component {
@@ -57,7 +57,7 @@ class OnboardingTwo extends Component {
   }
 
   _submit = () => {
-    // const { updateUserAttempt } = this.props
+    const { createOrganizationAttempt } = this.props
     const {
       name,
       phoneNumber,
@@ -66,19 +66,19 @@ class OnboardingTwo extends Component {
       countryId
     } = this.state
 
-    console.log(name, phoneNumber, website, address, countryId)
-
-    // updateUserAttempt({
-    //   first_name: firstName,
-    //   last_name: lastName,
-    //   country_id: countryId
-    // })
+    createOrganizationAttempt({
+      name,
+      phone_number: phoneNumber,
+      website,
+      address,
+      country_id: countryId
+    })
   }
 
   render () {
     const {
       onboarding,
-      attemptingUpdate
+      attemptingOrganization
     } = this.props
     const {
       name,
@@ -95,7 +95,7 @@ class OnboardingTwo extends Component {
             onChange={this._onChange}
             onSubmit={this._submit}
             values={{ name, phoneNumber, website, address, countryId }}
-            attempting={attemptingUpdate}
+            attempting={attemptingOrganization}
             countries={onboarding.countries}
           />
         </div>
@@ -107,12 +107,12 @@ class OnboardingTwo extends Component {
 const mapStateToProps = ({ login, onboarding }) => ({
   user: login.session.user,
   onboarding,
-  attemptingUpdate: login.attemptingUpdate
+  attemptingOrganization: login.attemptingOrganization
 })
 
 const mapDispatchToProps = dispatch => ({
   fetchCountriesAttempt: () => dispatch(OnboardingActions.fetchCountriesAttempt()),
-  updateUserAttempt: (userInfos: Object) => dispatch(LoginActions.updateUserAttempt(userInfos))
+  createOrganizationAttempt: (organization: Object) => dispatch(LoginActions.createOrganizationAttempt(organization))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(OnboardingTwo)

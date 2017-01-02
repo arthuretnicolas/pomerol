@@ -4,7 +4,7 @@ import React from 'react'
 
 type Props = {
   style?: Object,
-  children: React<*>
+  children?: React<*>
 }
 const Spinner = ({ style, children }: Props) => (
   <div

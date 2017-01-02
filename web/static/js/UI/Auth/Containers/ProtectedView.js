@@ -43,7 +43,7 @@ class ProtectedView extends Component {
       if (onboardingCompletedSteps === 0) {
         // should be onboarding on step 1
         browserHistory.push('/onboarding-one')
-      } else {
+      } else if (onboardingCompletedSteps === 1) {
         // should be onboarding on step 2
         browserHistory.push('/onboarding-two')
       }
@@ -86,7 +86,7 @@ class ProtectedView extends Component {
 
 const mapStateToProps = ({ login }) => ({
   isAuthenticated: !!login.session.user,
-  onboardingCompletedSteps: getOnboardingCompletedSteps(login.session.user)
+  onboardingCompletedSteps: getOnboardingCompletedSteps(login.session)
 })
 
 const mapDispatchToProps = dispatch => ({

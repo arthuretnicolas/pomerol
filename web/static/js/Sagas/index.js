@@ -24,7 +24,8 @@ import {
   fetchSession,
   requestPassword,
   resetPassword,
-  updateUser
+  updateUser,
+  createOrganization
 } from './LoginSaga'
 import { signup } from './SignupSaga'
 import { fetchCountries } from './OnboardingSaga'
@@ -46,6 +47,7 @@ export default function * root () {
     takeLatest(LoginTypes.LOGOUT, logout),
     takeLatest(LoginTypes.FETCH_SESSION_ATTEMPT, fetchSession, api),
     takeLatest(LoginTypes.UPDATE_USER_ATTEMPT, updateUser, api),
+    takeLatest(LoginTypes.CREATE_ORGANIZATION_ATTEMPT, createOrganization, api),
     takeLatest(OnboardingTypes.FETCH_COUNTRIES_ATTEMPT, fetchCountries, api),
     takeLatest(LoginTypes.REQUEST_PASSWORD_ATTEMPT, requestPassword, api),
     takeLatest(LoginTypes.RESET_PASSWORD_ATTEMPT, resetPassword, api),

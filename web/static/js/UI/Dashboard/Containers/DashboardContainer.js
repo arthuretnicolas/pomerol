@@ -31,7 +31,7 @@ const DashboardContainer = ({ children, onboardingCompletedSteps }: Props) => {
 }
 
 const mapStateToProps = ({ login }) => ({
-  onboardingCompletedSteps: getOnboardingCompletedSteps(login.session.user)
+  onboardingCompletedSteps: getOnboardingCompletedSteps(login.session)
 })
 
 export default connect(mapStateToProps)(DashboardContainer)

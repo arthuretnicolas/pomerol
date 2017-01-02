@@ -8,16 +8,26 @@ function getError (error: string | Object): string {
   return errorString
 }
 
-function parseErrors (errors: Object): string {
-  const parsedErrors =
-    errors.map(getError)
-      .join(' ')
+function parseErrors (errors: Object | Array): string {
+  if (Array.isArray(errors)) {
+    const parsedErrors =
+      errors.map(getError)
+        .join(' ')
 
-  return parsedErrors
+    return parsedErrors
+  }
+
+  if (typeof errors === 'object') {
+    const firstKey = Object.keys(errors)[0]
+
+    return errors[firstKey] || ''
+  }
+
+  return ''
 }
 
 export function handleErrors (data: Object): void {
-  const parsedErrors = parseErrors(data.errors || data.error)
+  const parsedErrors = parseErrors(data.errors || data.error || [])
 
   if (parsedErrors !== '') {
     // TODO use modals instead
