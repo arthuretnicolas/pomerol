@@ -8,7 +8,16 @@ defmodule Pomerol.UserView do
   def render("show.json", %{user: user}) do
     %{
       user: render_one(user, Pomerol.UserView, "user.json"),
-      organizations: render_many(user.organizations, Pomerol.OrganizationView, "organization_lite.json")
+      organizations: render_many(user.organization_memberships, __MODULE__, "membership.json", as: :organization_membership)
+      # organizations: render_many(user.organizations, Pomerol.OrganizationView, "organization_lite.json")
+    }
+  end
+
+  def render("membership.json", %{organization_membership: organization_membership}) do
+    %{
+      role: organization_membership.role,
+      name: organization_membership.organization.name,
+      id: organization_membership.organization.id
     }
   end
 
