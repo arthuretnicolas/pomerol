@@ -25,7 +25,7 @@ const getSelectMaxWidth = (organizations, selectedOrganizationId) => {
 
   const nbCharacters = organizationShortName(selectedOrganization.name).length
 
-  return nbCharacters * 10
+  return (nbCharacters * 10 + 15)
 }
 
 type Props = {
