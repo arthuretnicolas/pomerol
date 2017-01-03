@@ -5,13 +5,14 @@ import React from 'react'
 type Props = {
   data: Array<string>,
   selected: string,
-  onClick: string => void
+  onClick: string => void,
+  tagAll: string
 }
 
-const TagSidebar = ({ data, selected, onClick }: Props) => (
+const TagSidebar = ({ data, selected, onClick, tagAll }: Props) => (
   <div className='Shared-TagSidebar'>
     {
-      [ 'All' ]
+      [ tagAll ]
         .concat(
           data.sort((opt1, opt2) => opt1.localeCompare(opt2))
         )
