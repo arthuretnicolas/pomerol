@@ -104,7 +104,7 @@ const mapStateToProps = ({ login, onboarding }) => ({
 
 const mapDispatchToProps = dispatch => ({
   fetchCountriesAttempt: () => dispatch(OnboardingActions.fetchCountriesAttempt()),
-  updateUserAttempt: (userInfos: Object) => dispatch(LoginActions.updateUserAttempt(userInfos))
+  updateUserAttempt: (user: Object) => dispatch(LoginActions.updateUserAttempt(user))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(OnboardingOne)

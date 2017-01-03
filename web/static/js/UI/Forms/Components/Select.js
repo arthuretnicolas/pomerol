@@ -4,7 +4,7 @@ import React from 'react'
 import Label from './Label'
 
 type Props = {
-  label: string,
+  label?: string,
   type?: string,
   disabled?: bool,
   placeholder?: string,
@@ -16,7 +16,9 @@ type Props = {
   }>,
   selected?: number | null,
   top?: Array<*>,
-  name?: string
+  name?: string,
+  theme?: 'plain',
+  maxWidthSelect?: number
 }
 
 const Select = ({
@@ -29,9 +31,11 @@ const Select = ({
   name = Math.random().toFixed(10),
   options,
   selected,
-  top = top || []
+  top = top || [],
+  theme = '',
+  maxWidthSelect
 }: Props) => (
-  <div className='Forms-Select'>
+  <div className={`Forms-Select ${theme}`}>
     <div className='arrow-down'>
       <svg
         viewBox='0 0 18 18'
@@ -44,9 +48,14 @@ const Select = ({
       </svg>
     </div>
 
-    <Label name={name} label={label} />
+    {
+      !!label && <Label name={name} label={label} />
+    }
 
     <select
+      style={{
+        maxWidth: maxWidthSelect
+      }}
       name={name}
       className={`select ${placeholder && !selected ? 'showing-placeholder' : ''}`}
       disabled={disabled}

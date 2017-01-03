@@ -26,7 +26,7 @@ const { Types, Creators } = createActions({
   resetPasswordSuccess: [],
   resetPasswordFailure: [ 'error' ],
   // ******
-  updateUserAttempt: [ 'userInfos' ],
+  updateUserAttempt: [ 'user' ],
   updateUserFailure: [ 'error' ],
   updateUserSuccess: [ 'user' ],
   // ******

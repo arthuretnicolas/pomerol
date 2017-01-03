@@ -1,29 +1,27 @@
 .Dashboard-DashboardSidebar {
+  display: flex;
+  flex-direction: column;
   background-color: $sidebar-background;
   width: $sidebar-width;
   background-color: $sidebar-background;
-  padding: $small-padding $base-padding;
 
-  .container-category {
-    padding-top: $double-padding;
-  }
 
-  .title-category {
-    font-weight: $semi-bold;
-  }
-
-  .container-options {
-
-  }
-
-  .option {
+  > .container-organization {
+    height: $header-height;
+    margin-bottom: $base-padding;
     display: flex;
-    padding-top: $small-padding;
-    text-decoration: none;
-  }
-
-  .option-selected {
+    align-items: center;
+    padding-top: $base-padding;
+    padding-left: $base-padding;
+    padding-right: $base-padding;
+    font-size: $font-size-large;
     color: $color-primary;
-    font-weight: $semi-bold;
+
+    > .organization-name {
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+
+    }
   }
 }

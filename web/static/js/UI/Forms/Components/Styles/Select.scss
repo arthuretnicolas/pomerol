@@ -46,4 +46,22 @@
     cursor: default;
     pointer-events: none;
   }
+
+  &.plain {
+    align-items: center;
+    justify-content: center;
+
+    > .select {
+      width: $sidebar-width - $double-padding - 10px;
+      border: none;
+      background-color: transparent;
+      padding: 0;
+      cursor: pointer;
+    }
+
+    > .arrow-down {
+      top: -10px;
+      right: -10px;
+    }
+  }
 }

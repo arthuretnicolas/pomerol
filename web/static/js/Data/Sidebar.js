@@ -1,47 +1,47 @@
 export const sidebarOptions = [
   {
-    category: 'Category 1',
+    category: 'General',
     options: [
       {
         id: 0,
         label: 'Dashboard',
-        icon: 'icon-name-1',
+        iconName: 'dashboard',
         link: '/dashboard'
       },
       {
         id: 1,
         label: 'Quotes',
-        icon: 'icon-name-2',
+        iconName: 'quote',
         link: '/quotes'
       },
       {
         id: 2,
         label: 'Contacts',
-        icon: 'icon-name-3',
+        iconName: 'users',
         link: '/contacts'
       }
     ]
   },
   {
-    category: 'Category 2',
+    category: 'Settings',
     options: [
       {
         id: 3,
-        label: 'Settings',
-        icon: 'icon-name-1',
+        label: 'Account',
+        iconName: 'account',
         link: '/settings'
       },
       {
         id: 4,
-        label: 'Option 2',
-        icon: 'icon-name-2',
-        link: '/dashboard-Y'
+        label: 'Billing',
+        iconName: 'billing',
+        link: '/settings'
       },
       {
         id: 5,
-        label: 'Option 3',
-        icon: 'icon-name-3',
-        link: '/dashboard-Z'
+        label: 'Notifications',
+        iconName: 'notifications',
+        link: '/settings'
       }
     ]
   }

@@ -12,11 +12,13 @@ import { uniq } from 'ramda'
 type Props = {
 }
 
+const tagAll = 'All'
+
 class DashboardContacts extends Component {
   props: Props
 
   state = {
-    selectedTag: 'All',
+    selectedTag: tagAll,
     selectedContactId: ''
   }
 
@@ -55,7 +57,7 @@ class DashboardContacts extends Component {
       )
 
     const filteredContacts =
-      selectedTag === 'All'
+      selectedTag === tagAll
         ? contacts
         : contacts.filter(contact => contact.company === selectedTag)
 
@@ -73,6 +75,8 @@ class DashboardContacts extends Component {
           <div className='content'>
             <div className='container-sidebar'>
               <TagSidebar
+                label='Companies'
+                tagAll={tagAll}
                 data={sidebarOptions}
                 selected={selectedTag}
                 onClick={this._onClick}

@@ -77,11 +77,11 @@ export function * resetPassword (api, action) {
 }
 
 export function * updateUser (api, action) {
-  const { userInfos } = action
+  const { user } = action
   const jwt = yield select(jwtSelector)
   const userId = yield select(userIdSelector)
 
-  const response = yield call(api.updateUser, jwt, userId, userInfos)
+  const response = yield call(api.updateUser, jwt, userId, user)
   const { data } = response
 
   if (response.ok) {

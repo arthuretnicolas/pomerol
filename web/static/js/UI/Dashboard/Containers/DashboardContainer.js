@@ -1,37 +1,63 @@
 // @flow
 
-import React from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import DashboardSidebar from '../../Dashboard/Components/DashboardSidebar'
 import EmptyStateDashboard from '../../Shared/Components/EmptyStateDashboard'
 import { sidebarOptions } from '../../../Data/index'
 import { getOnboardingCompletedSteps } from '../../../Helpers'
+import LoginActions from '../../../Reducers/LoginRedux'
 
 type Props = {
   children: React.Element<*>,
-  onboardingCompletedSteps: number
+  onboardingCompletedSteps: number,
+  organizations: Array<Object>,
+  updateOrganization: () => void,
+  currentOrganizationId: number | null
 }
 
-const DashboardContainer = ({ children, onboardingCompletedSteps }: Props) => {
-  if (onboardingCompletedSteps !== 2) {
-    return <EmptyStateDashboard />
-  }
+class DashboardContainer extends Component {
+  props: Props
 
-  return (
-    <div className='Dashboard-DashboardContainer'>
-      <DashboardSidebar
-        data={sidebarOptions}
-      />
+  render () {
+    const {
+      children,
+      onboardingCompletedSteps,
+      organizations,
+      updateOrganization,
+      currentOrganizationId
+    } = this.props
 
-      <div className='container-content'>
-        {children}
+    if (onboardingCompletedSteps !== 2) {
+      return <EmptyStateDashboard />
+    }
+
+    return (
+      <div className='Dashboard-DashboardContainer'>
+        <DashboardSidebar
+          organizations={organizations}
+          selectedOrganizationId={currentOrganizationId}
+          data={sidebarOptions}
+          onChange={updateOrganization}
+        />
+
+        <div className='container-content'>
+          {children}
+        </div>
       </div>
-    </div>
-  )
+    )
+  }
 }
 
 const mapStateToProps = ({ login }) => ({
-  onboardingCompletedSteps: getOnboardingCompletedSteps(login.session)
+  onboardingCompletedSteps: getOnboardingCompletedSteps(login.session),
+  organizations: login.session.organizations,
+  currentOrganizationId: login.session.user.current_organization_id
 })
 
-export default connect(mapStateToProps)(DashboardContainer)
+const mapDispatchToProps = dispatch => ({
+  updateOrganization: (id: number) =>
+    dispatch(LoginActions.updateUserAttempt({ current_organization_id: id }))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(DashboardContainer)

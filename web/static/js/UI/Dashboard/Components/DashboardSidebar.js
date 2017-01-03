@@ -1,7 +1,32 @@
 // @flow
 
 import React from 'react'
-import { browserHistory, Link } from 'react-router'
+import { browserHistory } from 'react-router'
+import Infos from '../../Shared/Components/Infos'
+import Select from '../../Forms/Components/Select'
+
+const ORGANIZATION_MAX_LETTERS = 15
+
+const organizationShortName = organizationName => {
+  if (organizationName.length <= ORGANIZATION_MAX_LETTERS) {
+    return organizationName
+  }
+
+  const shortName = organizationName.substr(organizationName, ORGANIZATION_MAX_LETTERS - 2).trim()
+  return `${shortName}...`
+}
+
+const getSelectMaxWidth = (organizations, selectedOrganizationId) => {
+  const selectedOrganization = organizations.find(org => org.id === selectedOrganizationId)
+
+  if (typeof selectedOrganization === 'undefined') {
+    return 100
+  }
+
+  const nbCharacters = organizationShortName(selectedOrganization.name).length
+
+  return nbCharacters * 10
+}
 
 type Props = {
   data: Array<{
@@ -9,45 +34,79 @@ type Props = {
     options: Array<{
       id: number,
       label: string,
-      icon: string,
+      iconName: string,
       link: string
     }>
-  }>
+  }>,
+  organizations: Array<Object>,
+  onChange: () => void,
+  selectedOrganizationId: number | null
 }
 
-const renderCategory = ({ category, options }, index) => {
-  const pathname = browserHistory && browserHistory.getCurrentLocation().pathname // e.g: '/dashboard'
-
-  return (
-    <div className='container-category' key={index}>
-      <div className='title-category'>
-        {category}
-      </div>
-
-      <div className='container-options'>
-        {
-          options.map(opt => (
-            <Link
-              className={`option ${opt.link === pathname ? 'option-selected' : ''}`}
-              key={opt.id}
-              to={opt.link}
-            >
-              {opt.label}
-            </Link>
-          ))
-        }
-      </div>
-    </div>
-  )
-}
-
-const DashboardSidebar = ({ data }: Props) => (
-  <div className='Dashboard-DashboardSidebar'>
+const OrganisationPicker = ({
+  organizations,
+  onChange,
+  selectedOrganizationId
+}) => (
+  <div className='container-organization'>
     {
-      data.map((item, index) =>
-        renderCategory(item, index))
+      organizations.length === 1 && <div className='organization-name'>
+        {organizations.length && organizations[0].name}
+      </div>
+    }
+
+    {
+      organizations.length >= 2 && <Select
+        theme='plain'
+        maxWidthSelect={getSelectMaxWidth(organizations, selectedOrganizationId)}
+        selected={selectedOrganizationId}
+        placeholder='Your organization'
+        onChange={event => onChange(event && parseInt(event.target.value))}
+        options={organizations.map(org => ({
+          id: org.id,
+          name: organizationShortName(org.name)
+        }))}
+      />
     }
   </div>
 )
+
+const DashboardSidebar = ({
+  data,
+  organizations,
+  onChange,
+  selectedOrganizationId
+}: Props) => {
+  const pathname = browserHistory && browserHistory.getCurrentLocation().pathname
+
+  return (
+    <div className='Dashboard-DashboardSidebar'>
+      <OrganisationPicker
+        organizations={organizations}
+        selectedOrganizationId={selectedOrganizationId}
+        onChange={onChange}
+      />
+
+      {
+        data.map((item, index) => (
+          <Infos
+            theme='dashboard-sidebar'
+            key={index}
+            label={item.category}
+            fields={
+              item.options.map(({ id, iconName, label, link }) => ({
+                id,
+                iconName: iconName,
+                label: label,
+                link: link,
+                isSelected: link === pathname
+              }))
+            }
+          />
+        ))
+      }
+    </div>
+  )
+}
 
 export default DashboardSidebar
