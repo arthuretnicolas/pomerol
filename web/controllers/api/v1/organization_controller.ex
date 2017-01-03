@@ -22,6 +22,7 @@ defmodule Pomerol.V1.OrganizationController do
     params =
       params
       |> Map.put("user_id", current_user.id)
+      |> Map.put("alias", params["name"])
 
     changeset = Organization.create_changeset(%Organization{}, params)
 

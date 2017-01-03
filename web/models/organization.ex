@@ -6,6 +6,7 @@ defmodule Pomerol.Organization do
 
   schema "organizations" do
     field :name, :string
+    field :alias, :string
     field :address, :string
     field :website, :string
     field :phone, :string
@@ -33,7 +34,7 @@ defmodule Pomerol.Organization do
 
   def create_changeset(organization, params \\ %{}) do
     organization
-    |> cast(params, [:name, :address, :website, :phone, :country_id, :base64_logo_data])
+    |> cast(params, [:name, :address, :website, :phone, :country_id, :base64_logo_data, :alias])
     |> validate_required([:name, :country_id])
     |> prefix_url(:website)
     # |> validate_format(:website, ~r/\A((http|https):\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,}(([0-9]{1,5})?\/.*)?#=\z/ix)

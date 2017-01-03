@@ -17,6 +17,7 @@ defmodule Pomerol.UserView do
     %{
       role: organization_membership.role,
       name: organization_membership.organization.name,
+      alias: organization_membership.organization.alias,
       id: organization_membership.organization.id
     }
   end

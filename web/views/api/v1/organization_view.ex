@@ -11,6 +11,7 @@ defmodule Pomerol.OrganizationView do
     %{
       id: organization.id,
       name: organization.name,
+      alias: organization.alias,
       website: organization.website,
       country: render_one(organization.country, Pomerol.CountryView, "country.json"),
       members: render_many(organization.organization_memberships, __MODULE__, "organization_membership.json", as: :organization_membership),
