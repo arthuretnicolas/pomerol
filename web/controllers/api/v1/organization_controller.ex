@@ -41,11 +41,14 @@ defmodule Pomerol.V1.OrganizationController do
   end
 
   def show(conn, %{"id" => id}) do
+    current_user = conn.assigns |> Map.get(:current_user)
     locale = conn.assigns[:locale]
     organization = Organization |> Organization.preload_all(locale) |> Repo.get!(id)
 
+    current_user_membership = OrganizationMembership |> Repo.get_by(organization_id: organization.id, member_id: current_user.id)
+
     conn
-    |> render(Pomerol.OrganizationView, "organization.json", organization: organization)
+    |> render(Pomerol.OrganizationView, "organization-#{current_user_membership.role}.json", organization: organization)
   end
 
 end

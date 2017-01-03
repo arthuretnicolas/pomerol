@@ -20,6 +20,71 @@ defmodule Pomerol.OrganizationView do
     }
   end
 
+  def render("organization-owner.json", %{organization: organization}) do
+    %{
+      id: organization.id,
+      name: organization.name,
+      website: organization.website,
+      country: render_one(organization.country, Pomerol.CountryView, "country.json"),
+      members: render_many(organization.organization_memberships, __MODULE__, "organization_membership.json", as: :organization_membership),
+      logo_large_url: Pomerol.OrganizationLogo.url({organization.logo, organization}, :large),
+      logo_thumb_url: Pomerol.OrganizationLogo.url({organization.logo, organization}, :thumb),
+      invites: render_many(organization.organization_invites, Pomerol.OrganizationInviteView, "organization_invite.json")
+    }
+  end
+
+  def render("organization-admin.json", %{organization: organization}) do
+    %{
+      id: organization.id,
+      name: organization.name,
+      website: organization.website,
+      country: render_one(organization.country, Pomerol.CountryView, "country.json"),
+      members: render_many(organization.organization_memberships, __MODULE__, "organization_membership.json", as: :organization_membership),
+      logo_large_url: Pomerol.OrganizationLogo.url({organization.logo, organization}, :large),
+      logo_thumb_url: Pomerol.OrganizationLogo.url({organization.logo, organization}, :thumb),
+      invites: render_many(organization.organization_invites, Pomerol.OrganizationInviteView, "organization_invite.json")
+    }
+  end
+
+  def render("organization-manager.json", %{organization: organization}) do
+    %{
+      id: organization.id,
+      name: organization.name,
+      website: organization.website,
+      country: render_one(organization.country, Pomerol.CountryView, "country.json"),
+      members: render_many(organization.organization_memberships, __MODULE__, "organization_membership.json", as: :organization_membership),
+      logo_large_url: Pomerol.OrganizationLogo.url({organization.logo, organization}, :large),
+      logo_thumb_url: Pomerol.OrganizationLogo.url({organization.logo, organization}, :thumb),
+      invites: render_many(organization.organization_invites, Pomerol.OrganizationInviteView, "organization_invite.json")
+    }
+  end
+
+  def render("organization-author.json", %{organization: organization}) do
+    %{
+      id: organization.id,
+      name: organization.name,
+      website: organization.website,
+      country: render_one(organization.country, Pomerol.CountryView, "country.json"),
+      members: render_many(organization.organization_memberships, __MODULE__, "organization_membership.json", as: :organization_membership),
+      logo_large_url: Pomerol.OrganizationLogo.url({organization.logo, organization}, :large),
+      logo_thumb_url: Pomerol.OrganizationLogo.url({organization.logo, organization}, :thumb),
+      invites: render_many(organization.organization_invites, Pomerol.OrganizationInviteView, "organization_invite.json")
+    }
+  end
+
+  def render("organization-viewer.json", %{organization: organization}) do
+    %{
+      id: organization.id,
+      name: organization.name,
+      website: organization.website,
+      country: render_one(organization.country, Pomerol.CountryView, "country.json"),
+      members: render_many(organization.organization_memberships, __MODULE__, "organization_membership.json", as: :organization_membership),
+      logo_large_url: Pomerol.OrganizationLogo.url({organization.logo, organization}, :large),
+      logo_thumb_url: Pomerol.OrganizationLogo.url({organization.logo, organization}, :thumb),
+      invites: render_many(organization.organization_invites, Pomerol.OrganizationInviteView, "organization_invite.json")
+    }
+  end
+
   def render("organization_lite.json", %{organization: organization}) do
     %{
       id: organization.id,
