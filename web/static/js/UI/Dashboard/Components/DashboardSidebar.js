@@ -51,7 +51,7 @@ const OrganisationPicker = ({
   <div className='container-organization'>
     {
       organizations.length === 1 && <div className='organization-name'>
-        {organizations.length && organizations[0].name}
+        {organizations.length && (organizations[0].alias || organizations[0].name)}
       </div>
     }
 
@@ -64,7 +64,7 @@ const OrganisationPicker = ({
         onChange={event => onChange(event && parseInt(event.target.value))}
         options={organizations.map(org => ({
           id: org.id,
-          name: organizationShortName(org.name)
+          name: organizationShortName(org.alias || org.name)
         }))}
       />
     }
