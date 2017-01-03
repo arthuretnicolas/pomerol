@@ -11,7 +11,7 @@ class DashboardQuotes extends Component {
 
   render () {
     return (
-      <div className='container-content'>
+      <div className='Dashboard-DashboardQuotes'>
         Quotes
       </div>
     )

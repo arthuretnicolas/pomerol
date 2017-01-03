@@ -6,11 +6,18 @@ type Props = {
   data: Array<string>,
   selected: string,
   onClick: string => void,
-  tagAll: string
+  tagAll: string,
+  label?: string
 }
 
-const TagSidebar = ({ data, selected, onClick, tagAll }: Props) => (
+const TagSidebar = ({ data, selected, onClick, tagAll, label }: Props) => (
   <div className='Shared-TagSidebar'>
+    {
+      !!label && <div className='label'>
+        {label}
+      </div>
+    }
+
     {
       [ tagAll ]
         .concat(

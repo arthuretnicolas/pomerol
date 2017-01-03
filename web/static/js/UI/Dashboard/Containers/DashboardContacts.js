@@ -86,6 +86,7 @@ class DashboardContacts extends Component {
           <div className='content'>
             <div className='container-sidebar'>
               <TagSidebar
+                label='Companies'
                 tagAll={tagAll}
                 data={sidebarOptions}
                 selected={selectedTag}

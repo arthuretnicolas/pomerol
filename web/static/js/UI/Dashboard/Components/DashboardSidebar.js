@@ -16,11 +16,19 @@ type Props = {
   }>
 }
 
+const OrganisationPicker = () => (
+  <div className='container-organization'>
+    BigCorpo
+  </div>
+)
+
 const DashboardSidebar = ({ data }: Props) => {
   const pathname = browserHistory && browserHistory.getCurrentLocation().pathname
 
   return (
     <div className='Dashboard-DashboardSidebar'>
+      <OrganisationPicker />
+
       {
         data.map((item, index) => (
           <Infos

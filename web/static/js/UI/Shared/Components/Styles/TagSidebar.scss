@@ -4,7 +4,15 @@
   flex-direction: column;
   margin-left: -1px;
 
-  .option {
+  > .label {
+    color: $gray;
+    text-transform: uppercase;
+    font-weight: $semi-bold;
+    font-size: $font-size-tiny;
+    padding: $base-padding;
+  }
+
+  > .option {
     display: flex;
     font-size: $font-size-small;
     padding: $tiny-padding $base-padding;
