@@ -1,4 +1,6 @@
 .Dashboard-DashboardSidebar {
+  display: flex;
+  flex-direction: column;
   background-color: $sidebar-background;
   width: $sidebar-width;
   background-color: $sidebar-background;
@@ -9,8 +11,17 @@
     margin-bottom: $base-padding;
     display: flex;
     align-items: center;
-    padding: $base-padding;
+    padding-top: $base-padding;
+    padding-left: $base-padding;
+    padding-right: $base-padding;
     font-size: $font-size-large;
     color: $color-primary;
+
+    > .organization-name {
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+
+    }
   }
 }
