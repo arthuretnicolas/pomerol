@@ -12,20 +12,13 @@ import { uniq } from 'ramda'
 type Props = {
 }
 
-<<<<<<< HEAD
-=======
 const tagAll = 'All'
 
->>>>>>> Sorted contacts alphabetically and filtered by companies
 class DashboardContacts extends Component {
   props: Props
 
   state = {
-<<<<<<< HEAD
-    selectedTag: 'All',
-=======
     selectedTag: tagAll,
->>>>>>> Sorted contacts alphabetically and filtered by companies
     selectedContactId: ''
   }
 
@@ -64,11 +57,7 @@ class DashboardContacts extends Component {
       )
 
     const filteredContacts =
-<<<<<<< HEAD
-      selectedTag === 'All'
-=======
       selectedTag === tagAll
->>>>>>> Sorted contacts alphabetically and filtered by companies
         ? contacts
         : contacts.filter(contact => contact.company === selectedTag)
 
