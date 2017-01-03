@@ -1,7 +1,8 @@
 // @flow
 
 import React from 'react'
-import { browserHistory, Link } from 'react-router'
+import { browserHistory } from 'react-router'
+import Infos from '../../Shared/Components/Infos'
 
 type Props = {
   data: Array<{
@@ -9,45 +10,37 @@ type Props = {
     options: Array<{
       id: number,
       label: string,
-      icon: string,
+      iconName: string,
       link: string
     }>
   }>
 }
 
-const renderCategory = ({ category, options }, index) => {
-  const pathname = browserHistory && browserHistory.getCurrentLocation().pathname // e.g: '/dashboard'
+const DashboardSidebar = ({ data }: Props) => {
+  const pathname = browserHistory && browserHistory.getCurrentLocation().pathname
 
   return (
-    <div className='container-category' key={index}>
-      <div className='title-category'>
-        {category}
-      </div>
-
-      <div className='container-options'>
-        {
-          options.map(opt => (
-            <Link
-              className={`option ${opt.link === pathname ? 'option-selected' : ''}`}
-              key={opt.id}
-              to={opt.link}
-            >
-              {opt.label}
-            </Link>
-          ))
-        }
-      </div>
+    <div className='Dashboard-DashboardSidebar'>
+      {
+        data.map((item, index) => (
+          <Infos
+            theme='dashboard-sidebar'
+            key={index}
+            label={item.category}
+            fields={
+              item.options.map(({ id, iconName, label, link }) => ({
+                id,
+                iconName: iconName,
+                label: label,
+                link: link,
+                isSelected: link === pathname
+              }))
+            }
+          />
+        ))
+      }
     </div>
   )
 }
-
-const DashboardSidebar = ({ data }: Props) => (
-  <div className='Dashboard-DashboardSidebar'>
-    {
-      data.map((item, index) =>
-        renderCategory(item, index))
-    }
-  </div>
-)
 
 export default DashboardSidebar

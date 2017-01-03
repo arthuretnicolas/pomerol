@@ -23,7 +23,7 @@ const Field = ({ field }) => {
   }
 
   if (link) {
-    const linkIsQuote = link.startsWith('/quotes')
+    const linkIsQuote = link.startsWith('/')
     if (linkIsQuote) {
       return (
         <Link
@@ -64,14 +64,17 @@ type Props = {
     iconName: string,
     label: string,
     link?: string,
-    onClick?: () => void
-  }>
+    onClick?: () => void,
+    isSelected?: boolean
+  }>,
+  theme?: 'sidebar-details' | 'dashboard-sidebar'
 }
 const Infos = ({
   label,
-  fields
+  fields,
+  theme = ''
 }: Props) => (
-  <div className='Shared-Infos'>
+  <div className={`Shared-Infos ${theme}`}>
     <div className='label'>
       {label}
     </div>
@@ -80,12 +83,14 @@ const Infos = ({
       fields.map((field, index) => (
         <div
           key={index}
-          className='container-item'
+          className={`container-item ${field.isSelected ? 'is-selected' : ''}`}
         >
-          <Icon
-            name={field.iconName}
-            className='primary'
-          />
+          <div className='container-icon'>
+            <Icon
+              name={field.iconName}
+              className='primary'
+            />
+          </div>
 
           <Field field={field} />
         </div>

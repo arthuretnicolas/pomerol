@@ -61,8 +61,8 @@ const create = (baseURL: string = 'http://localhost:4000/api/v1/') => {
       }
     })
 
-  const updateUser = (jwt: string, userId: string, userInfos: Object) =>
-    api.put(`users/${userId}`, userInfos, {
+  const updateUser = (jwt: string, userId: string, user: Object) =>
+    api.put(`users/${userId}`, user, {
       headers: {
         'Authorization': `Bearer ${jwt}`
       }

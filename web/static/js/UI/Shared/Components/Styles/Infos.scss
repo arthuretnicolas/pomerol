@@ -3,7 +3,7 @@
   flex-direction: column;
   padding-bottom: $double-padding;
 
-  .label {
+  > .label {
     color: $gray;
     text-transform: uppercase;
     font-weight: $semi-bold;
@@ -11,21 +11,60 @@
     padding-bottom: $small-padding;
   }
 
-  .container-item {
+  > .container-item {
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding-bottom: $tiny-padding;
+    margin-bottom: $tiny-padding;
+
+    > .item-label {
+      margin-left: $small-padding;
+      font-size: $font-size-small;
+      text-decoration: none;
+      color: inherit;
+
+      &.pointer {
+        cursor: pointer;
+      }
+    }
   }
 
-  .item-label {
-    margin-left: $small-padding;
-    font-size: $font-size-small;
-    text-decoration: none;
-    color: $color-primary;
+  &.sidebar-details {
+    > .container-item {
+      > .item-label {
+        color: $color-primary;
+      }
+    }
+  }
 
-    &.pointer {
-      cursor: pointer;
+  &.dashboard-sidebar {
+    > .label {
+      padding-bottom: $base-padding;
+      padding-left: $base-padding;
+      padding-right: $base-padding;
+    }
+
+    > .container-item {
+      margin-bottom: $small-padding * 1.5;
+      transition: border 100ms ease-in-out;
+      border-left: 2px solid transparent;
+
+      > .container-icon {
+        padding-left: $base-padding;
+        padding-right: $base-padding;
+      }
+
+      > .item-label {
+        margin-left: 0;
+      }
+
+      &.is-selected {
+        border-color: $color-primary;
+      }
+
+      &:hover {
+        border-color: $color-primary;
+      }
     }
   }
 }

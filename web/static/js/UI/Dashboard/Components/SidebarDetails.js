@@ -11,10 +11,7 @@ type Props = {
   onClose: () => void,
   onEdit: () => void,
   onClickMember: () => void,
-  teamMembers: Array<{
-    id: string | number,
-    name: string
-  }>
+  teamMembers: Array<Object>
 }
 const SidebarDetails = ({
   contact,
@@ -114,6 +111,7 @@ const SidebarDetails = ({
 
       <div className='content'>
         <Infos
+          theme='sidebar-details'
           label='Contact'
           fields={[
             {
@@ -135,6 +133,7 @@ const SidebarDetails = ({
 
         {
           !!quoteIds.length && <Infos
+            theme='sidebar-details'
             label='Quotes'
             fields={quoteIds.map(quoteId => ({
               iconName: 'quote',
@@ -145,6 +144,7 @@ const SidebarDetails = ({
         }
 
         <Infos
+          theme='sidebar-details'
           label='Team members'
           fields={teamMembers.map(member => ({
             iconName: 'user',
