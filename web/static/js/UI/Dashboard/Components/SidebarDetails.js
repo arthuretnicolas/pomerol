@@ -30,7 +30,8 @@ const SidebarDetails = ({
     id,
     email,
     website,
-    quoteIds
+    quoteIds,
+    company
   } = contact
 
   return (
@@ -106,7 +107,7 @@ const SidebarDetails = ({
           </div>
 
           <div className='card-company'>
-            Client company
+            {company}
           </div>
         </div>
       </div>

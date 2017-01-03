@@ -2,35 +2,26 @@
 
 import React from 'react'
 
-type optionType = {
-  id: number,
-  label: string
-}
-
 type Props = {
-  data: Array<optionType>,
-  selected: number | string,
-  onClick: number => void
-}
-
-const optionAll: optionType = {
-  id: -1,
-  label: 'All'
+  data: Array<string>,
+  selected: string,
+  onClick: string => void
 }
 
 const TagSidebar = ({ data, selected, onClick }: Props) => (
   <div className='Shared-TagSidebar'>
     {
-      data
-        .concat(optionAll)
-        .sort((opt1, opt2) => opt1.id - opt2.id)
+      [ 'All' ]
+        .concat(
+          data.sort((opt1, opt2) => opt1.localeCompare(opt2))
+        )
         .map((option, index) => (
           <div
             key={index}
-            className={`option ${selected === option.id ? 'option-selected' : ''}`}
-            onClick={() => onClick(option.id)}
+            className={`option ${selected === option ? 'option-selected' : ''}`}
+            onClick={() => onClick(option)}
           >
-            {option.label}
+            {option}
           </div>
         ))
     }

@@ -7,34 +7,20 @@ import Header from '../Components/Header'
 import SidebarDetails from '../Components/SidebarDetails'
 import { contacts } from '../../../Data'
 import { connect } from 'react-redux'
+import { uniq } from 'ramda'
 
 type Props = {
 }
-
-const sidebarOptions = [
-  {
-    id: 0,
-    label: 'Europe'
-  },
-  {
-    id: 1,
-    label: 'Asia'
-  },
-  {
-    id: 2,
-    label: 'Africa'
-  }
-]
 
 class DashboardContacts extends Component {
   props: Props
 
   state = {
-    selectedTag: -1,
+    selectedTag: 'All',
     selectedContactId: ''
   }
 
-  _onClick = (selectedTag: number) => {
+  _onClick = (selectedTag: string) => {
     this.setState({
       selectedTag
     })
@@ -63,6 +49,16 @@ class DashboardContacts extends Component {
     const showDetails = selectedContactId !== ''
     const selectedContact = contacts.find(contact => contact.id === selectedContactId)
 
+    const sidebarOptions =
+      uniq(
+        contacts.map(contact => contact.company)
+      )
+
+    const filteredContacts =
+      selectedTag === 'All'
+        ? contacts
+        : contacts.filter(contact => contact.company === selectedTag)
+
     return (
       <div className='Dashboard-DashboardContacts'>
         <div className='container-main'>
@@ -86,14 +82,16 @@ class DashboardContacts extends Component {
             <div className='container-content'>
               <div className='list-contacts'>
                 {
-                  contacts.map((contact, index) =>
-                    <SingleContact
-                      key={index}
-                      contact={contact}
-                      onClick={this._onClickContact}
-                      selected={selectedContactId === contact.id}
-                    />
-                  )
+                  filteredContacts
+                    .sort((contact1, contact2) => contact1.lastName.localeCompare(contact2.lastName))
+                    .map((contact, index) =>
+                      <SingleContact
+                        key={index}
+                        contact={contact}
+                        onClick={this._onClickContact}
+                        selected={selectedContactId === contact.id}
+                      />
+                    )
                 }
               </div>
             </div>
