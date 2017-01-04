@@ -7,10 +7,10 @@ import OnboardingActions from '../../../Reducers/OnboardingRedux'
 import LoginActions from '../../../Reducers/LoginRedux'
 
 type CountriesType = {
-  top_country_ids: Array<number>,
+  top_country_ids: Array<string>,
   countries: Array<{
     name: string,
-    id: number
+    id: string
   }>
 }
 type Props = {

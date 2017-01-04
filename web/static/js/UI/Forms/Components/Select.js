@@ -11,10 +11,10 @@ type Props = {
   required?: bool,
   onChange?: () => void,
   options: Array<{
-    id: number,
+    id: string,
     name: string
   }>,
-  selected?: number | null,
+  selected?: string | null,
   top?: Array<*>,
   name?: string,
   theme?: 'plain',

@@ -8,10 +8,10 @@ import Select from './Select'
 import Grid from '../../Shared/Components/Grid'
 
 type CountriesType = {
-  top_country_ids: Array<number>,
+  top_country_ids: Array<string>,
   countries: Array<{
     name: string,
-    id: number
+    id: string
   }>
 }
 type Props = {
@@ -22,7 +22,7 @@ type Props = {
     phoneNumber: string,
     website: string,
     address: string,
-    countryId: number | null
+    countryId: string | null
   },
   attempting: boolean,
   countries: CountriesType | null
@@ -109,7 +109,7 @@ export default class FormOnboardingTwo extends Component {
                   selected={countryId}
                   placeholder='Your country'
                   required
-                  onChange={event => onChange('countryId', event && parseInt(event.target.value))}
+                  onChange={event => onChange('countryId', event && event.target.value)}
                   top={countries.top_country_ids}
                   options={countries.countries}
                 />

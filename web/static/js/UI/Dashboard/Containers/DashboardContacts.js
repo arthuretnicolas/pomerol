@@ -28,7 +28,7 @@ class DashboardContacts extends Component {
     })
   }
 
-  _onChange = (key: string, value: number) => {
+  _onChange = (key: string, value: string | number) => {
     this.setState({
       [key]: value
     })

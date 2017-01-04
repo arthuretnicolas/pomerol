@@ -6,10 +6,10 @@ import Input from './Input'
 import Select from './Select'
 
 type CountriesType = {
-  top_country_ids: Array<number>,
+  top_country_ids: Array<string>,
   countries: Array<{
     name: string,
-    id: number
+    id: string
   }>
 }
 type Props = {
@@ -18,7 +18,7 @@ type Props = {
   values: {
     firstName: string,
     lastName: string,
-    countryId: number | null
+    countryId: string | null
   },
   attempting: boolean,
   countries: CountriesType | null
@@ -86,7 +86,7 @@ export default class FormOnboardingOne extends Component {
                   selected={countryId}
                   placeholder='Your country'
                   required
-                  onChange={event => onChange('countryId', event && parseInt(event.target.value))}
+                  onChange={event => onChange('countryId', event && event.target.value)}
                   top={countries.top_country_ids}
                   options={countries.countries}
                 />

@@ -13,7 +13,7 @@ type Props = {
   onboardingCompletedSteps: number,
   organizations: Array<Object>,
   updateOrganization: () => void,
-  currentOrganizationId: number | null
+  currentOrganizationId: string | null
 }
 
 class DashboardContainer extends Component {

@@ -32,7 +32,7 @@ type Props = {
   data: Array<{
     category: string,
     options: Array<{
-      id: number,
+      id: string,
       label: string,
       iconName: string,
       link: string
@@ -40,7 +40,7 @@ type Props = {
   }>,
   organizations: Array<Object>,
   onChange: () => void,
-  selectedOrganizationId: number | null
+  selectedOrganizationId: string | null
 }
 
 const OrganisationPicker = ({
@@ -61,7 +61,7 @@ const OrganisationPicker = ({
         maxWidthSelect={getSelectMaxWidth(organizations, selectedOrganizationId)}
         selected={selectedOrganizationId}
         placeholder='Your organization'
-        onChange={event => onChange(event && parseInt(event.target.value))}
+        onChange={event => onChange(event && event.target.value)}
         options={organizations.map(org => ({
           id: org.id,
           name: organizationShortName(org.alias || org.name)

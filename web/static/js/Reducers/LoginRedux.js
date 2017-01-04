@@ -221,7 +221,7 @@ export const createOrganizationSuccess = (state: Object, { organization }: { org
   })
 }
 
-export const setCurrentOrganization = (state: Object, { id }: { id: number }) =>
+export const setCurrentOrganization = (state: Object, { id }: { id: string }) =>
   state.setIn([ 'session', 'user', 'current_organization_id' ], id)
 
 /* ------------- Hookup Reducers To Types ------------- */
