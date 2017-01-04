@@ -5,7 +5,8 @@ defmodule Pomerol.Factories do
 
   def organization_factory do
     %Pomerol.Organization{
-      name: sequence(:name, &"Organization #{&1}")
+      name: sequence(:name, &"Organization #{&1}"),
+      alias: sequence(:name, &"Organization #{&1}")
     }
   end
 

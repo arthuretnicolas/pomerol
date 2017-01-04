@@ -24,6 +24,9 @@ defmodule Pomerol.Web do
       import Ecto
       import Ecto.Changeset
       import Ecto.Query
+
+      @primary_key {:id, :binary_id, autogenerate: true}
+      @foreign_key_type :binary_id
     end
   end
 
@@ -33,7 +36,7 @@ defmodule Pomerol.Web do
       import Ecto.Query, only: [from: 1, from: 2]
       alias Ecto.Changeset
       alias Ecto.Multi
-      alias MediaSample.Repo
+      alias Pomerol.Repo
     end
   end
 

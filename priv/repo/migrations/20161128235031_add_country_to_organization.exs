@@ -3,7 +3,7 @@ defmodule Pomerol.Repo.Migrations.AddCountryToOrganization do
 
   def change do
     alter table :organizations do
-      add :country_id, references(:countries)
+      add :country_id, references(:countries, on_delete: :delete_all, type: :binary_id)
     end
   end
 end

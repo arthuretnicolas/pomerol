@@ -5,6 +5,8 @@ defmodule Pomerol.OrganizationMembership do
 
   use Pomerol.Web, :model
 
+  @primary_key {:id, :binary_id, autogenerate: true}
+  @derive {Phoenix.Param, key: :id}
   schema "organization_memberships" do
     field :role, :string
 

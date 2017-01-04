@@ -1,6 +1,8 @@
 defmodule Pomerol.Contact do
   use Pomerol.Web, :model
 
+  @primary_key {:id, :binary_id, autogenerate: true}
+  @derive {Phoenix.Param, key: :id}
   schema "contacts" do
     field :first_name, :string
     field :last_name, :string

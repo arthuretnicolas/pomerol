@@ -1,6 +1,8 @@
 defmodule Pomerol.Authorization do
   use Pomerol.Web, :model
 
+  @primary_key {:id, :binary_id, autogenerate: true}
+  @derive {Phoenix.Param, key: :id}
   schema "authorizations" do
     field :provider, :string
     field :uid, :string

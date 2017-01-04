@@ -5,7 +5,7 @@ defmodule Pomerol.OrganizationMembershipTest do
   alias Pomerol.OrganizationMembership
 
   describe "create_changeset" do
-    @valid_attrs %{member_id: 1, organization_id: 2, role: "owner"}
+    @valid_attrs %{member_id: "db1c4e82-8032-4525-8263-8337104ba803", organization_id: "198263ee-fb83-4638-9494-68103d0b6b90", role: "owner"}
     @invalid_attrs %{}
 
     test "changeset with valid attributes" do
