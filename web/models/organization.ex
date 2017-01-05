@@ -12,6 +12,10 @@ defmodule Pomerol.Organization do
     field :address, :string
     field :website, :string
     field :phone, :string
+    field :timezone, :string, default: "Etc/UTC"
+    field :currency, :string
+    field :datetime_format, :string
+    field :currency_format, :string
 
     field :base64_logo_data, :string, virtual: true
     field :logo, Pomerol.OrganizationLogo.Type

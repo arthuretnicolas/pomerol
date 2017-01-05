@@ -17,6 +17,7 @@ defmodule Pomerol.User do
     field :organization_name, :string, virtual: true
     field :encrypted_password, :string
     field :admin, :boolean, default: false
+    field :timezone, :string, default: "Etc/UTC"
 
     field :base64_photo_data, :string, virtual: true
     field :photo, Pomerol.UserPhoto.Type
