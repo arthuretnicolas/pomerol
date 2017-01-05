@@ -3,8 +3,6 @@ defmodule Pomerol.Country do
   use Pomerol.PreloadConcern
   alias Pomerol.CountryTranslation
 
-  @primary_key {:id, :binary_id, autogenerate: true}
-  @derive {Phoenix.Param, key: :id}
   schema "countries" do
     field :name, :string
 

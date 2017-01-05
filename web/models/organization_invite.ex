@@ -2,8 +2,6 @@ defmodule Pomerol.OrganizationInvite do
   use Pomerol.Web, :model
   import Pomerol.ValidationHelpers
 
-  @primary_key {:id, :binary_id, autogenerate: true}
-  @derive {Phoenix.Param, key: :id}
   schema "organization_invites" do
     field :email, :string
     field :role, :string

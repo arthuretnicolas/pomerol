@@ -4,8 +4,6 @@ defmodule Pomerol.Organization do
   import Pomerol.Services.Base64ImageUploaderService
   alias Pomerol.{Country, OrganizationMembership, OrganizationInvite, Quote}
 
-  @primary_key {:id, :binary_id, autogenerate: true}
-  @derive {Phoenix.Param, key: :id}
   schema "organizations" do
     field :name, :string
     field :alias, :string

@@ -6,8 +6,6 @@ defmodule Pomerol.User do
   import Comeonin.Bcrypt, only: [hashpwsalt: 1]
 
   # @derive {Poison.Encoder, only: [:id, :first_name, :last_name, :email, :locale]}
-  @primary_key {:id, :binary_id, autogenerate: true}
-  @derive {Phoenix.Param, key: :id}
   schema "users" do
     field :first_name, :string
     field :last_name, :string

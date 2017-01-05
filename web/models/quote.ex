@@ -1,12 +1,13 @@
 defmodule Pomerol.Quote do
   use Pomerol.Web, :model
 
-  @primary_key {:id, :binary_id, autogenerate: true}
-  @derive {Phoenix.Param, key: :id}
   schema "quotes" do
 
     field :title, :string
     belongs_to :organization, Pomerol.Organization
+
+    has_many :quote_contacts, Pomerol.QuoteContact
+    has_many :contacts, through: [:quote_contacts, :contact]
 
     timestamps
   end
