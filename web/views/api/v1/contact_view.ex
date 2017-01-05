@@ -3,7 +3,7 @@ defmodule Pomerol.ContactView do
 
   def render("index.json", %{contacts: contacts}) do
     %{
-      contacts: render_many(contacts, __MODULE__, "contact.json")
+      contacts: render_many(contacts, __MODULE__, "contact.json", as: :contact)
     }
   end
 

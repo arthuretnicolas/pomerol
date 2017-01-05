@@ -2,7 +2,7 @@ defmodule Pomerol.Organization do
   use Arc.Ecto.Schema
   use Pomerol.Web, :model
   import Pomerol.Services.Base64ImageUploaderService
-  alias Pomerol.{Country, OrganizationMembership, OrganizationInvite}
+  alias Pomerol.{Country, OrganizationMembership, OrganizationInvite, Quote}
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @derive {Phoenix.Param, key: :id}
@@ -22,6 +22,8 @@ defmodule Pomerol.Organization do
 
     has_many :contacts, Pomerol.Contact
     has_many :organization_invites, OrganizationInvite
+
+    has_many :quotes, Pomerol.Quote
 
     timestamps
   end
@@ -55,7 +57,7 @@ defmodule Pomerol.Organization do
 
   def preload_all(query, locale) do
     from query, preload: [
-      [:members, :contacts, :organization_memberships, {:organization_invites, :user}],
+      [:members, :contacts, :organization_memberships, {:organization_invites, :user}, :quotes],
       country: [ translation: ^Pomerol.CountryTranslation.translation_query(locale) ]
     ]
   end

@@ -30,6 +30,7 @@ defmodule Pomerol.OrganizationView do
       members: render_many(organization.organization_memberships, __MODULE__, "organization_membership.json", as: :organization_membership),
       logo_large_url: Pomerol.OrganizationLogo.url({organization.logo, organization}, :large),
       logo_thumb_url: Pomerol.OrganizationLogo.url({organization.logo, organization}, :thumb),
+      quotes: render_many(organization.quotes, Pomerol.QuoteView, "quote.json"),
       invites: render_many(organization.organization_invites, Pomerol.OrganizationInviteView, "organization_invite.json")
     }
   end

@@ -32,8 +32,8 @@ defmodule Pomerol.ApiCase do
       import Pomerol.AuthenticationTestHelpers
       import Pomerol.Router.Helpers
       import Pomerol.Factories
-      # import Pomerol.TestHelpers --> TODO : to add to build helpers for testing. for example : assert_result_id
-
+      import Pomerol.TestHelpers
+      
       # The default endpoint for testing
       @endpoint Pomerol.Endpoint
 

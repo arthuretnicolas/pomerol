@@ -3,8 +3,9 @@ defmodule Pomerol.V1.QuoteController  do
 
   alias Pomerol.{Quote}
 
+  plug :load_and_authorize_changeset, model: Quote, only: [:create], preload: [:organization]
+
   def create(conn, params) do
-    # IO.inspect params["organization_id"]
     changeset = Quote.create_changeset(%Quote{}, params)
 
     case Repo.insert(changeset) do

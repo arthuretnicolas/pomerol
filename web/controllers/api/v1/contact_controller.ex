@@ -1,21 +1,23 @@
 defmodule Pomerol.V1.ContactController do
   use Pomerol.Web, :controller
-  alias Pomerol.{Repo, Contact, ContactService}
+  alias Pomerol.{Repo, Contact, ContactService, Organization}
 
   plug :load_and_authorize_resource, model: Contact, only: [:update, :show]
   plug :load_and_authorize_changeset, model: Contact, only: [:create]
+  plug :load_and_authorize_resource, model: Organization, id_name: "organization_id", persisted: true, only: [:index]
 
-  def index(conn, _params) do
+  def index(conn, params) do
     current_user = conn.assigns |> Map.get(:current_user)
+    locale = conn.assigns[:locale]
 
-    organizations = current_user
-      |> assoc(:organizations)
-      # |> assoc(:contacts)
-      |> Organization.preload_all
+    organization = Organization |> Repo.get!(params["organization_id"])
+
+    contacts = organization
+      |> assoc(:contacts)
       |> Repo.all
 
     conn
-    |> render(Pomerol.OrganizationView, "index.json", organizations: organizations)
+    |> render(Pomerol.ContactView, "index.json", contacts: contacts)
   end
 
   def create(conn, params) do
