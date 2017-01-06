@@ -129,5 +129,29 @@ defmodule Pomerol.V1.UserControllerTest do
       json = json_response(conn, 403)
       assert json["errors"] != %{}
     end
+
+    @tag :authenticated
+    test "does not update current_organization_id when user is not member", %{conn: conn, current_user: current_user} do
+      organization = insert(:organization)
+
+      conn =
+        conn
+        |> put("/api/v1/users/#{current_user.id}", %{current_organization_id: organization.id})
+
+      assert conn |> json_response(403)
+    end
+
+    @tag :authenticated
+    test "update current_organization_id when user is member of the org", %{conn: conn, current_user: current_user} do
+      organization = insert(:organization)
+      membership = insert(:organization_membership, organization: organization, member: current_user, role: "owner")
+
+      conn =
+        conn
+        |> put("/api/v1/users/#{current_user.id}", %{current_organization_id: organization.id})
+
+      json = conn |> json_response(200)
+      assert json["current_organization_id"] == organization.id
+    end
   end
 end
