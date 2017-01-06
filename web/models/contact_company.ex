@@ -8,4 +8,10 @@ defmodule Pomerol.ContactCompany do
 
     timestamps
   end
+
+  def changeset(contact, params \\ %{}) do
+    contact
+    |> cast(params, [:name])
+    |> validate_required([:name])
+  end
 end

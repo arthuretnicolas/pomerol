@@ -14,4 +14,15 @@ defmodule Pomerol.ContactAddress do
 
     timestamps
   end
+
+  def changeset(contact, params \\ %{}) do
+    contact
+    |> cast(params, [:city, :contact_id, :country_id, :type])
+    |> validate_required([:city, :type])
+    |> validate_inclusion(:type, address_types)
+  end
+
+  defp address_types do
+    ~w{ primary postal physical }
+  end
 end

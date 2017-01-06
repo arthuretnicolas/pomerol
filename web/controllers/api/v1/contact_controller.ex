@@ -1,6 +1,6 @@
 defmodule Pomerol.V1.ContactController do
   use Pomerol.Web, :controller
-  alias Pomerol.{Repo, Contact, ContactService, Organization}
+  alias Pomerol.{Repo, Contact, Organization}
 
   plug :load_and_authorize_resource, model: Contact, only: [:update, :show]
   plug :load_and_authorize_changeset, model: Contact, only: [:create]
@@ -14,6 +14,7 @@ defmodule Pomerol.V1.ContactController do
 
     contacts = organization
       |> assoc(:contacts)
+      |> Contact.preload_all(locale)
       |> Repo.all
 
     conn
@@ -22,6 +23,7 @@ defmodule Pomerol.V1.ContactController do
 
   def create(conn, params) do
     current_user = conn.assigns |> Map.get(:current_user)
+    locale = conn.assigns[:locale]
 
     params =
       params
@@ -31,6 +33,7 @@ defmodule Pomerol.V1.ContactController do
 
     case Repo.insert(changeset) do
       {:ok, contact} ->
+        contact = Contact |> Contact.preload_all(locale) |> Repo.get!(contact.id)
         conn
         |> put_status(:created)
         |> render(Pomerol.ContactView, "contact.json", contact: contact)
@@ -38,7 +41,7 @@ defmodule Pomerol.V1.ContactController do
       {:error, changeset} ->
         conn
         |> put_status(:unprocessable_entity)
-        |> render(Pomerol.ChangesetView, "error.json", changeset: changeset)
+        |> render(Pomerol.ErrorView, "422.json", changeset: changeset)
     end
   end
 
@@ -49,7 +52,8 @@ defmodule Pomerol.V1.ContactController do
   end
 
   def show(conn, %{"id" => contact_id}) do
-    contact = Repo.get!(Contact, contact_id)
+    locale = conn.assigns[:locale]
+    contact = Contact |> Contact.preload_all(locale) |> Repo.get!(contact_id)
 
     conn
     |> render(Pomerol.ContactView, "contact.json", contact: contact)
