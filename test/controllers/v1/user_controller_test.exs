@@ -106,7 +106,7 @@ defmodule Pomerol.V1.UserControllerTest do
         conn
         |> put("/api/v1/users/#{user.id}", %{first_name: "fn"})
 
-      json =  json_response(conn, 401)
+      json = json_response(conn, 401)
       assert json["errors"] != %{}
     end
 

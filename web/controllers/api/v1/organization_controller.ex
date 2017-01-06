@@ -37,7 +37,7 @@ defmodule Pomerol.V1.OrganizationController do
       {:error, _failed_operation, failed_value, _changes_so_far} ->
         conn
         |> put_status(:unprocessable_entity)
-        |> render(Pomerol.ErrorView, "error.json", changeset: failed_value)
+        |> render(Pomerol.ChangesetView, "error.json", changeset: failed_value)
     end
   end
 
