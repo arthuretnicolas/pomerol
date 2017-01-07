@@ -14,7 +14,7 @@ defmodule Pomerol.Organization do
     field :state, :string
     field :website, :string
     field :phone, :string
-    field :timezone, :string, default: "Etc/UTC"
+    field :timezone, :string
     field :currency_code, :string
     field :datetime_format, :string
     field :currency_format, :string
@@ -23,6 +23,7 @@ defmodule Pomerol.Organization do
     field :base64_logo_data, :string, virtual: true
     field :logo, Pomerol.OrganizationLogo.Type
 
+    field :country_code, :string, virtual: true
     belongs_to :country, Country
     has_many :organization_memberships, OrganizationMembership
     has_many :members, through: [:organization_memberships, :member]
@@ -45,7 +46,8 @@ defmodule Pomerol.Organization do
 
   def create_changeset(organization, params \\ %{}) do
     organization
-    |> cast(params, [:name, :address1, :address2, :city, :zip, :state, :website, :phone, :country_id, :base64_logo_data, :alias, :currency_code])
+    |> cast(params, [:name, :address1, :address2, :city, :zip, :state, :website, :phone, :country_id, :base64_logo_data, :alias, :currency_code, :timezone])
+    |> validate_inclusion(:timezone, Pomerol.SupportedEnums.timezones)
     |> put_change(:alias, params["name"])
     |> validate_required([:name, :country_id, :alias, :currency_code])
     |> validate_length(:alias, min: 1)

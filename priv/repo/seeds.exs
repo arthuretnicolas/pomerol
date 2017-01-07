@@ -12,7 +12,7 @@
 
 alias Pomerol.{Repo, Country, CountryTranslation}
 
-country_changeset = Country.changeset(%Country{}, %{name: "Australia", default_currency_code: "AUD"})
+country_changeset = Country.changeset(%Country{}, %{name: "Australia", default_currency_code: "AUD", country_code: "AUS"})
 country = Repo.insert!(country_changeset)
 ct_changeset_en = CountryTranslation.changeset(%CountryTranslation{},%{name: "Australia", country_id: country.id, locale: "en"})
 Repo.insert!(ct_changeset_en)
