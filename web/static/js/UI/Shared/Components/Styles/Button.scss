@@ -40,7 +40,7 @@
   padding: $base-padding $double-padding;
   border-radius: $border-radius-button;
   color: $color-snow;
-  min-height: $form-min-height;
+  min-height: $min-height;
   font-weight: $semi-bold;
   font-size: $font-size-large;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.15);
@@ -48,7 +48,7 @@
 
   &.small {
     font-size: $font-size-body;
-    min-height: 44px;
+    min-height: $min-height-small;
     padding: $small-padding $base-padding;
   }
 

@@ -12,7 +12,8 @@ type Props = {
   required?: bool,
   onChange?: () => void,
   minLength?: number,
-  value?: any
+  value?: any,
+  size?: 'small' | 'large'
 }
 
 const Input = ({
@@ -24,9 +25,10 @@ const Input = ({
   required,
   minLength,
   onChange,
-  value
+  value,
+  size = ''
 }: Props) => (
-  <div className='Forms-Input'>
+  <div className={`Forms-Input ${size}`}>
     <Label name={name} label={label} />
     <input
       name={name}

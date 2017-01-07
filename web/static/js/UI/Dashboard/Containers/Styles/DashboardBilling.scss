@@ -1,0 +1,15 @@
+.Dashboard-DashboardBilling {
+  display: flex;
+  flex-direction: column;
+  padding: $base-padding;
+
+  > .container {
+    > .title {
+      padding-bottom: $small-padding;
+    }
+
+    > .button-upgrade {
+        margin-top: $small-padding;
+    }
+  }
+}

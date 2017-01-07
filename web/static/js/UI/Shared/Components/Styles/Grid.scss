@@ -11,9 +11,19 @@
   @media (min-width: $break-point-tablet) {
     flex-direction: row;
 
-    > .child {
+    > .child.small {
       padding-left: $small-padding;
       padding-right: $small-padding;
+    }
+
+    > .child.base {
+      padding-left: $base-padding;
+      padding-right: $base-padding;
+    }
+
+    > .child.large {
+      padding-left: $double-padding;
+      padding-right: $double-padding;
     }
 
     > .child.first {

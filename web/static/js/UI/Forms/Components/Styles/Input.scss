@@ -8,7 +8,7 @@
     display: flex;
     flex: 1;
     padding: 0 $base-padding;
-    min-height: $form-min-height;
+    min-height: $min-height;
     box-shadow: none;
     line-height: $line-height-input;
     font-size: $font-size-large;
@@ -23,6 +23,13 @@
 
     &:focus, &:active {
       border-color: $color-primary-semi-light;
+    }
+  }
+
+  &.small {
+    > .input {
+      padding: 0 $small-padding;
+      min-height: $min-height-small;
     }
   }
 }

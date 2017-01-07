@@ -1,0 +1,38 @@
+.Dashboard-DashboardProfile {
+  display: flex;
+  flex-direction: column;
+  padding: $base-padding * 1.5 $triple-padding;
+  flex: 1;
+
+  .label {
+    color: $gray-dark;
+    text-transform: uppercase;
+    font-weight: $semi-bold;
+    font-size: $font-size-small;
+  }
+
+  .column {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    padding-bottom: $triple-padding;
+  }
+
+  .container-photo {
+    display: flex;
+    flex-direction: row;
+    padding-top: $base-padding;
+
+    > .photo {
+      background-color: $gray-xlight;
+      margin-right: $base-padding;
+      border-radius: $border-radius-input;
+    }
+
+    > .container-photo-instructions {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+  }
+}
