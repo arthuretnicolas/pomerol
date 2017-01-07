@@ -11,7 +11,7 @@ defmodule Pomerol.Organization do
     field :website, :string
     field :phone, :string
     field :timezone, :string, default: "Etc/UTC"
-    field :currency, :string
+    field :currency_code, :string
     field :datetime_format, :string
     field :currency_format, :string
 
@@ -41,7 +41,8 @@ defmodule Pomerol.Organization do
   def create_changeset(organization, params \\ %{}) do
     organization
     |> cast(params, [:name, :address, :website, :phone, :country_id, :base64_logo_data, :alias])
-    |> validate_required([:name, :country_id])
+    |> validate_required([:name, :country_id, :alias])
+    |> validate_length(:alias, min: 1)
     |> prefix_url(:website)
     # |> validate_format(:website, ~r/\A((http|https):\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,}(([0-9]{1,5})?\/.*)?#=\z/ix)
     |> foreign_key_constraint(:country_id)
