@@ -5,6 +5,7 @@ defmodule Pomerol.Country do
 
   schema "countries" do
     field :name, :string
+    field :country_code, :string
     field :default_currency_code, :string
 
     has_one :translation, Pomerol.CountryTranslation

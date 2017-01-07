@@ -4,6 +4,8 @@ defmodule Pomerol.User do
   import Pomerol.Services.Base64ImageUploaderService
   import Pomerol.ValidationHelpers
   import Comeonin.Bcrypt, only: [hashpwsalt: 1]
+  import Pomerol.ModelUtil
+  alias Pomerol.CountryService
 
   # @derive {Poison.Encoder, only: [:id, :first_name, :last_name, :email, :locale]}
   schema "users" do
@@ -12,10 +14,10 @@ defmodule Pomerol.User do
     field :email, :string
     field :locale, :string
     field :password, :string, virtual: true
-    field :organization_name, :string, virtual: true
     field :encrypted_password, :string
     field :admin, :boolean, default: false
-    field :timezone, :string, default: "Etc/UTC"
+    field :timezone, :string
+    field :country_code, :string, virtual: true
 
     field :base64_photo_data, :string, virtual: true
     field :photo, Pomerol.UserPhoto.Type
@@ -34,9 +36,6 @@ defmodule Pomerol.User do
     timestamps
   end
 
-  @required_fields ~w(first_name last_name email password organization_name country_id locale)a
-  @optional_fields ~w(encrypted_password)a
-
   def changeset(user, params \\ %{}) do
     user
     |> cast(params, [:first_name, :email, :locale, :last_name])
@@ -53,18 +52,18 @@ defmodule Pomerol.User do
     |> validate_email_format(:email)
     |> unique_constraint(:email, message: "Email already taken")
     |> validate_length(:password, min: 5, max: 128)
-    |> validate_inclusion(:locale, ["en", "fr"])
+    |> validate_inclusion(:locale, Pomerol.Gettext.supported_locales)
     |> generate_encrypted_password
   end
 
   def update_changeset(user, params \\ %{}) do
     user
-    |> cast(params, [:first_name, :last_name, :locale, :country_id, :current_organization_id, :base64_photo_data])
-    |> validate_inclusion(:locale, ["en", "fr"])
-    |> foreign_key_constraint(:country_id)
-    |> assoc_constraint(:country)
+    |> cast(params, [:first_name, :last_name, :locale, :country_code, :current_organization_id, :base64_photo_data])
+    |> validate_inclusion(:locale, Pomerol.Gettext.supported_locales)
     |> foreign_key_constraint(:current_organization_id)
     |> assoc_constraint(:current_organization)
+    |> validate_inclusion(:country_code, Pomerol.SupportedEnums.country_codes)
+    |> map_from(:country_code, to: :country_id, resolver: &(CountryService.by(country_code: &1)))
     |> upload_image(:base64_photo_data, :photo)
   end
 

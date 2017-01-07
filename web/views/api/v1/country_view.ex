@@ -11,7 +11,8 @@ defmodule Pomerol.CountryView do
   def render("country.json", %{country: country}) do
     %{
       id: country.id,
-      name: country.translation.name
+      name: country.translation.name,
+      country_code: country.country_code
     }
   end
 end

@@ -2,7 +2,8 @@ defmodule Pomerol.Organization do
   use Arc.Ecto.Schema
   use Pomerol.Web, :model
   import Pomerol.Services.Base64ImageUploaderService
-  alias Pomerol.{Country, OrganizationMembership, OrganizationInvite, Quote}
+  alias Pomerol.{Country, OrganizationMembership, OrganizationInvite, Quote, CountryService}
+  import Pomerol.ModelUtil
 
   schema "organizations" do
     field :name, :string
@@ -25,6 +26,7 @@ defmodule Pomerol.Organization do
 
     field :country_code, :string, virtual: true
     belongs_to :country, Country
+
     has_many :organization_memberships, OrganizationMembership
     has_many :members, through: [:organization_memberships, :member]
 
@@ -46,14 +48,20 @@ defmodule Pomerol.Organization do
 
   def create_changeset(organization, params \\ %{}) do
     organization
-    |> cast(params, [:name, :address1, :address2, :city, :zip, :state, :website, :phone, :country_id, :base64_logo_data, :alias, :currency_code, :timezone])
-    |> validate_inclusion(:timezone, Pomerol.SupportedEnums.timezones)
-    |> put_change(:alias, params["name"])
-    |> validate_required([:name, :country_id, :alias, :currency_code])
-    |> validate_length(:alias, min: 1)
+    |> cast(params, [:name, :address1, :address2, :city, :zip, :state, :website, :phone, :country_code])
+    |> validate_required([:name, :country_code])
+    |> set_default_value_to(field: :alias, value: params["name"])
+    |> set_default_value_to(field: :currency_code, value: params["currency_code"])
+    |> validate_inclusion(:country_code, Pomerol.SupportedEnums.country_codes)
+    |> map_from(:country_code, to: :country_id, resolver: &(CountryService.by(country_code: &1)))
+    |> validate_length(:name, min: 1)
     |> prefix_url(:website)
-    # |> validate_format(:website, ~r/\A((http|https):\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,}(([0-9]{1,5})?\/.*)?#=\z/ix)
-    |> foreign_key_constraint(:country_id)
+  end
+
+  def update_changeset(organization, params \\ %{}) do
+    organization
+    |> cast(params, [:name, :timezone, :base64_logo_data, :alias])
+    |> validate_inclusion(:timezone, Pomerol.SupportedEnums.timezones)
     |> upload_image(:base64_logo_data, :logo)
   end
 

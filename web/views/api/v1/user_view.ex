@@ -30,7 +30,7 @@ defmodule Pomerol.UserView do
       locale: user.locale,
       email: user.email,
       current_organization_id: (if user.current_organization, do: user.current_organization.id, else: nil),
-      country: render_one(user.country, Pomerol.CountryView, "country.json"),
+      country: (if user.country, do: user.country.country_code, else: nil),
       photo_large_url: Pomerol.UserPhoto.url({user.photo, user}, :large),
       photo_thumb_url: Pomerol.UserPhoto.url({user.photo, user}, :thumb)
     }
