@@ -5,6 +5,7 @@ defmodule Pomerol.Country do
 
   schema "countries" do
     field :name, :string
+    field :default_currency_code, :string
 
     has_one :translation, Pomerol.CountryTranslation
     has_many :users, Pomerol.User
@@ -14,8 +15,8 @@ defmodule Pomerol.Country do
     timestamps
   end
 
-  @required_fields ~w(name)a
-  @optional_fields ~w()a
+  @required_fields ~w()a
+  @optional_fields ~w(name default_currency_code)a
 
   def changeset(country, params \\ %{}) do
     country

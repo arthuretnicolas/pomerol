@@ -47,7 +47,8 @@ defmodule Pomerol.Factories do
 
   def country_factory do
     %Pomerol.Country{
-      name: sequence(:name, &"country#{&1}")
+      name: sequence(:name, &"country#{&1}"),
+      default_currency_code: "XXX"
     }
   end
 
