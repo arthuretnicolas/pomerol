@@ -13,7 +13,7 @@ type Props = {
   onChange?: () => void,
   minLength?: number,
   value?: any,
-  size?: 'small' | 'large'
+  size?: 'small' | 'base' | 'large'
 }
 
 const Input = ({

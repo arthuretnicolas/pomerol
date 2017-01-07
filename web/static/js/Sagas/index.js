@@ -10,7 +10,6 @@ import { CounterTypes } from '../Reducers/CounterRedux'
 import { GithubTypes } from '../Reducers/GithubRedux'
 import { LoginTypes } from '../Reducers/LoginRedux'
 import { SignupTypes } from '../Reducers/SignupRedux'
-import { OnboardingTypes } from '../Reducers/OnboardingRedux'
 
 /* ------------- Sagas ------------- */
 
@@ -28,7 +27,6 @@ import {
   createOrganization
 } from './LoginSaga'
 import { signup } from './SignupSaga'
-import { fetchCountries } from './OnboardingSaga'
 
 /* ------------- API ------------- */
 
@@ -48,7 +46,6 @@ export default function * root () {
     takeLatest(LoginTypes.FETCH_SESSION_ATTEMPT, fetchSession, api),
     takeLatest(LoginTypes.UPDATE_USER_ATTEMPT, updateUser, api),
     takeLatest(LoginTypes.CREATE_ORGANIZATION_ATTEMPT, createOrganization, api),
-    takeLatest(OnboardingTypes.FETCH_COUNTRIES_ATTEMPT, fetchCountries, api),
     takeLatest(LoginTypes.REQUEST_PASSWORD_ATTEMPT, requestPassword, api),
     takeLatest(LoginTypes.RESET_PASSWORD_ATTEMPT, resetPassword, api),
     takeLatest(SignupTypes.SIGNUP_ATTEMPT, signup, api)

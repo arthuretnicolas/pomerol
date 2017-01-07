@@ -3,24 +3,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import FormOnboardingOne from '../../Forms/Components/FormOnboardingOne'
-import OnboardingActions from '../../../Reducers/OnboardingRedux'
 import LoginActions from '../../../Reducers/LoginRedux'
 
-type CountriesType = {
-  top_country_ids: Array<string>,
-  countries: Array<{
-    name: string,
-    id: string
-  }>
-}
 type Props = {
-  fetchCountriesAttempt: () => void,
   updateUserAttempt: () => void,
   user: Object,
-  onboarding: {
-    attemptingCountries: boolean | null,
-    countries: CountriesType | null
-  },
   attemptingUpdate: boolean
 }
 
@@ -31,21 +18,6 @@ class OnboardingOne extends Component {
     firstName: this.props.user.first_name,
     lastName: this.props.user.last_name,
     countryId: this.props.user.countryId
-  }
-
-  componentWillMount () {
-    const {
-      onboarding,
-      fetchCountriesAttempt
-    } = this.props
-
-    const shouldFetchCountries =
-      onboarding.countries === null &&
-      !onboarding.attemptingCountries
-
-    if (shouldFetchCountries) {
-      fetchCountriesAttempt()
-    }
   }
 
   _onChange = (key, value: string | number) => {
@@ -65,13 +37,12 @@ class OnboardingOne extends Component {
     updateUserAttempt({
       first_name: firstName,
       last_name: lastName,
-      country_id: countryId
+      country_code: countryId
     })
   }
 
   render () {
     const {
-      onboarding,
       attemptingUpdate
     } = this.props
     const {
@@ -88,7 +59,6 @@ class OnboardingOne extends Component {
             onSubmit={this._submit}
             values={{ firstName, lastName, countryId }}
             attempting={attemptingUpdate}
-            countries={onboarding.countries}
           />
         </div>
       </div>
@@ -96,14 +66,12 @@ class OnboardingOne extends Component {
   }
 }
 
-const mapStateToProps = ({ login, onboarding }) => ({
+const mapStateToProps = ({ login }) => ({
   user: login.session.user,
-  onboarding,
   attemptingUpdate: login.attemptingUpdate
 })
 
 const mapDispatchToProps = dispatch => ({
-  fetchCountriesAttempt: () => dispatch(OnboardingActions.fetchCountriesAttempt()),
   updateUserAttempt: (user: Object) => dispatch(LoginActions.updateUserAttempt(user))
 })
 

@@ -4,14 +4,16 @@ import React, { Component } from 'react'
 import Form from './Form'
 import Input from './Input'
 import Select from './Select'
+import {
+  countries as listCountries,
+  topCountries
+} from '../../../Data/Countries'
 
-type CountriesType = {
-  top_country_ids: Array<string>,
-  countries: Array<{
-    name: string,
-    id: string
-  }>
+const countries = {
+  top: topCountries,
+  list: listCountries
 }
+
 type Props = {
   onChange: (key: string, value: any) => void,
   onSubmit: () => void,
@@ -20,8 +22,7 @@ type Props = {
     lastName: string,
     countryId: string | null
   },
-  attempting: boolean,
-  countries: CountriesType | null
+  attempting: boolean
 }
 
 export default class FormOnboardingOne extends Component {
@@ -38,8 +39,7 @@ export default class FormOnboardingOne extends Component {
     const {
       onChange,
       values,
-      attempting,
-      countries
+      attempting
     } = this.props
 
     const {
@@ -80,17 +80,15 @@ export default class FormOnboardingOne extends Component {
                 required
                 onChange={event => onChange('lastName', event && event.target.value)}
               />
-              {
-                !!countries && <Select
-                  label='Country'
-                  selected={countryId}
-                  placeholder='Your country'
-                  required
-                  onChange={event => onChange('countryId', event && event.target.value)}
-                  top={countries.top_country_ids}
-                  options={countries.countries}
-                />
-              }
+              <Select
+                label='Country'
+                selected={countryId}
+                placeholder='Your country'
+                required
+                onChange={event => onChange('countryId', event && event.target.value)}
+                top={countries.top}
+                options={countries.list}
+              />
             </div>
           }
         />

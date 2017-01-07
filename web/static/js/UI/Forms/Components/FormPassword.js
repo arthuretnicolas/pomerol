@@ -12,7 +12,8 @@ type Props = {
     newPassword1: string,
     newPassword2: string
   },
-  attempting: boolean
+  attempting: boolean,
+  disabled?: boolean
 }
 
 export default class FormPassword extends Component {
@@ -29,7 +30,8 @@ export default class FormPassword extends Component {
     const {
       onChange,
       values,
-      attempting
+      attempting,
+      disabled
     } = this.props
 
     const {
@@ -48,7 +50,8 @@ export default class FormPassword extends Component {
           buttonSize='small'
           contentLoading='Updating...'
           attempting={attempting}
-          fullWidthCta
+          fullWidthCta={false}
+          disabled={disabled}
           children={
             <div>
               <Input
@@ -65,7 +68,7 @@ export default class FormPassword extends Component {
                 value={newPassword1}
                 type='password'
                 required
-                onChange={event => onChange('password', event && event.target.value)}
+                onChange={event => onChange('newPassword1', event && event.target.value)}
                 size='small'
               />
 
@@ -74,7 +77,7 @@ export default class FormPassword extends Component {
                 value={newPassword2}
                 type='password'
                 required
-                onChange={event => onChange('password', event && event.target.value)}
+                onChange={event => onChange('newPassword2', event && event.target.value)}
                 size='small'
               />
             </div>

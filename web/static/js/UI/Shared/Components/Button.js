@@ -17,7 +17,7 @@ type Props = {
   loading?: boolean,
   type?: string,
   fullWidth?: boolean,
-  size?: 'small' | 'normal' | 'large'
+  size?: 'small' | 'base' | 'large'
 }
 
 const _onClick = (disabled, onClick) => {

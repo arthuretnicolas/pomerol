@@ -3,6 +3,17 @@
 import React, { Component } from 'react'
 import Form from './Form'
 import Input from './Input'
+import Select from './Select'
+import {
+  countries as listCountries,
+  topCountries
+} from '../../../Data/Countries'
+import { languages } from '../../../Data/Languages'
+
+const countries = {
+  top: topCountries,
+  list: listCountries
+}
 
 type Props = {
   onChange: (key: string, value: any) => void,
@@ -10,7 +21,9 @@ type Props = {
   values: {
     firstName: string,
     lastName: string,
-    email: string
+    email: string,
+    countryId: string,
+    languageId: string
   },
   attempting: boolean
 }
@@ -35,7 +48,9 @@ export default class FormUser extends Component {
     const {
       firstName,
       lastName,
-      email
+      email,
+      countryId,
+      languageId
     } = values
 
     return (
@@ -48,7 +63,6 @@ export default class FormUser extends Component {
           buttonSize='small'
           contentLoading='Updating...'
           attempting={attempting}
-          fullWidthCta
           children={
             <div>
               <Input
@@ -76,6 +90,25 @@ export default class FormUser extends Component {
                 placeholder='Your email'
                 required
                 onChange={event => onChange('email', event && event.target.value)}
+                size='small'
+              />
+              <Select
+                label='Country'
+                selected={countryId}
+                placeholder='Select your country'
+                required
+                onChange={event => onChange('countryId', event && event.target.value)}
+                top={countries.top}
+                options={countries.list}
+                size='small'
+              />
+              <Select
+                label='Language'
+                selected={languageId}
+                placeholder='Select your language'
+                required
+                onChange={event => onChange('languageId', event && event.target.value)}
+                options={languages}
                 size='small'
               />
             </div>

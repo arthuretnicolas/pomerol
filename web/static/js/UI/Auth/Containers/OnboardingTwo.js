@@ -3,24 +3,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import FormOnboardingTwo from '../../Forms/Components/FormOnboardingTwo'
-import OnboardingActions from '../../../Reducers/OnboardingRedux'
 import LoginActions from '../../../Reducers/LoginRedux'
 
-type CountriesType = {
-  top_country_ids: Array<string>,
-  countries: Array<{
-    name: string,
-    id: string
-  }>
-}
 type Props = {
-  fetchCountriesAttempt: () => void,
   createOrganizationAttempt: () => void,
   user: Object,
-  onboarding: {
-    attemptingCountries: boolean | null,
-    countries: CountriesType | null
-  },
   attemptingOrganization: boolean
 }
 
@@ -33,21 +20,6 @@ class OnboardingTwo extends Component {
     website: '',
     address: '',
     countryId: this.props.user.countryId
-  }
-
-  componentWillMount () {
-    const {
-      onboarding,
-      fetchCountriesAttempt
-    } = this.props
-
-    const shouldFetchCountries =
-      onboarding.countries === null &&
-      !onboarding.attemptingCountries
-
-    if (shouldFetchCountries) {
-      fetchCountriesAttempt()
-    }
   }
 
   _onChange = (key, value: string | number) => {
@@ -71,13 +43,12 @@ class OnboardingTwo extends Component {
       phone: phoneNumber,
       website,
       address,
-      country_id: countryId
+      country_code: countryId
     })
   }
 
   render () {
     const {
-      onboarding,
       attemptingOrganization
     } = this.props
     const {
@@ -96,7 +67,6 @@ class OnboardingTwo extends Component {
             onSubmit={this._submit}
             values={{ name, phoneNumber, website, address, countryId }}
             attempting={attemptingOrganization}
-            countries={onboarding.countries}
           />
         </div>
       </div>
@@ -104,14 +74,12 @@ class OnboardingTwo extends Component {
   }
 }
 
-const mapStateToProps = ({ login, onboarding }) => ({
+const mapStateToProps = ({ login }) => ({
   user: login.session.user,
-  onboarding,
   attemptingOrganization: login.attemptingOrganization
 })
 
 const mapDispatchToProps = dispatch => ({
-  fetchCountriesAttempt: () => dispatch(OnboardingActions.fetchCountriesAttempt()),
   createOrganizationAttempt: (organization: Object) => dispatch(LoginActions.createOrganizationAttempt(organization))
 })
 

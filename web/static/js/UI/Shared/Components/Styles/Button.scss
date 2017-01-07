@@ -46,6 +46,10 @@
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.15);
   letter-spacing: $letter-spacing-spaced;
 
+  &:disabled {
+    opacity: 0.4;
+  }
+
   &.small {
     font-size: $font-size-body;
     min-height: $min-height-small;

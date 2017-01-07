@@ -64,4 +64,10 @@
       right: 0;
     }
   }
+
+  &.small {
+    > .select {
+      height: $min-height-small;
+    }
+  }
 }
