@@ -18,6 +18,7 @@ defmodule Pomerol.Organization do
     field :currency_code, :string
     field :datetime_format, :string
     field :currency_format, :string
+    field :onboarding, :boolean, default: false
 
     field :base64_logo_data, :string, virtual: true
     field :logo, Pomerol.OrganizationLogo.Type
