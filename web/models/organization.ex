@@ -7,7 +7,11 @@ defmodule Pomerol.Organization do
   schema "organizations" do
     field :name, :string
     field :alias, :string
-    field :address, :string
+    field :address1, :string
+    field :address2, :string
+    field :city, :string
+    field :zip, :string
+    field :state, :string
     field :website, :string
     field :phone, :string
     field :timezone, :string, default: "Etc/UTC"
@@ -40,7 +44,7 @@ defmodule Pomerol.Organization do
 
   def create_changeset(organization, params \\ %{}) do
     organization
-    |> cast(params, [:name, :address, :website, :phone, :country_id, :base64_logo_data, :alias])
+    |> cast(params, [:name, :address1, :address2, :city, :zip, :state, :website, :phone, :country_id, :base64_logo_data, :alias])
     |> validate_required([:name, :country_id, :alias])
     |> validate_length(:alias, min: 1)
     |> prefix_url(:website)
