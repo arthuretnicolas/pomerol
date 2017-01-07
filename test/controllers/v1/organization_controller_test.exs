@@ -10,18 +10,23 @@ defmodule Pomerol.V1.OrganizationControllerTest do
       assert conn |> json_response(401)
     end
 
-    @tag :authenticated
     test "create and renders resource when data is valid", %{conn: conn, current_user: current_user} do
-      country = insert(:country, name: "Australia")
+      country = insert(:country, name: "Australia", default_currency_code: "AUD")
       country_translation = insert(:country_translation, country: country, name: "Australia", locale: "en")
       country_translation = insert(:country_translation, country: country, name: "Australie", locale: "fr")
 
-      conn = post conn, "/api/v1/organizations", %{name: "POMEROL ORG", country_id: country.id}
+      user = insert(:user, country: country)
+
+      conn =
+        conn
+        |> authenticate(user)
+        |> post("/api/v1/organizations", %{name: "POMEROL ORG", country_id: country.id})
 
       json = conn |> json_response(201)
       assert json["name"] == "POMEROL ORG"
       assert json["alias"] == "POMEROL ORG"
       assert json["country"]["id"] == country.id
+      assert json["currency_code"] == "AUD"
     end
 
     @tag :authenticated

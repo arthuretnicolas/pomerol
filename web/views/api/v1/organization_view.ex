@@ -20,6 +20,7 @@ defmodule Pomerol.OrganizationView do
       city: organization.city,
       country: render_one(organization.country, Pomerol.CountryView, "country.json"),
       phone: organization.phone,
+      currency_code: organization.currency_code,
       members: render_many(organization.organization_memberships, __MODULE__, "organization_membership.json", as: :organization_membership),
       logo_large_url: Pomerol.OrganizationLogo.url({organization.logo, organization}, :large),
       logo_thumb_url: Pomerol.OrganizationLogo.url({organization.logo, organization}, :thumb),
