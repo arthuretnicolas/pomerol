@@ -152,5 +152,22 @@ defmodule Pomerol.V1.UserControllerTest do
       json = conn |> json_response(200)
       assert json["current_organization_id"] == organization.id
     end
+
+    @tag :requires_env
+    test "uploads a photo to S3", %{conn: conn} do
+      user = insert(:user)
+      photo_data = "data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs="
+
+      conn =
+        conn
+        |> authenticate(user)
+        |> put("/api/v1/users/#{user.id}", %{base64_photo_data: photo_data})
+
+      data = json_response(conn, 200)
+      large_url = data["photo_large_url"]
+      assert String.contains? large_url, "/users/#{user.id}/large"
+      thumb_url = data["photo_thumb_url"]
+      assert String.contains? thumb_url, "/users/#{user.id}/thumb"
+    end
   end
 end
