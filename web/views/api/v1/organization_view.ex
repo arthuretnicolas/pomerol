@@ -21,6 +21,8 @@ defmodule Pomerol.OrganizationView do
       country: (if organization.country, do: organization.country.country_code, else: nil),
       phone: organization.phone,
       currency_code: organization.currency_code,
+      currency_locale: organization.currency_locale,
+      date_format: organization.date_format,
       onboarding: organization.onboarding,
       timezone: organization.timezone,
       members: render_many(organization.organization_memberships, __MODULE__, "organization_membership.json", as: :organization_membership),

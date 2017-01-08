@@ -7,6 +7,8 @@ defmodule Pomerol.Country do
     field :name, :string
     field :country_code, :string
     field :default_currency_code, :string
+    field :default_date_format, :string
+    field :default_currency_locale, :string
 
     has_one :translation, Pomerol.CountryTranslation
     has_many :users, Pomerol.User

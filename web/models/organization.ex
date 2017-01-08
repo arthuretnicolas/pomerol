@@ -17,8 +17,8 @@ defmodule Pomerol.Organization do
     field :phone, :string
     field :timezone, :string
     field :currency_code, :string
-    field :datetime_format, :string
-    field :currency_format, :string
+    field :date_format, :string
+    field :currency_locale, :string
     field :onboarding, :boolean, default: false
 
     field :base64_logo_data, :string, virtual: true
@@ -70,6 +70,8 @@ defmodule Pomerol.Organization do
         country = CountryService.by(country_code: country_code)
         current_changeset
         |> put_change(:currency_code, country.default_currency_code)
+        |> put_change(:currency_locale, country.default_currency_locale)
+        |> put_change(:date_format, country.default_date_format)
         |> put_change(:country_id, country.id)
       _ ->
         current_changeset
