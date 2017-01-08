@@ -18,7 +18,8 @@ type Props = {
   top?: Array<*>,
   name?: string,
   theme?: 'plain',
-  maxWidthSelect?: number
+  maxWidthSelect?: number,
+  size?: 'small' | 'base' | 'large'
 }
 
 const Select = ({
@@ -33,9 +34,10 @@ const Select = ({
   selected,
   top = top || [],
   theme = '',
-  maxWidthSelect
+  maxWidthSelect,
+  size = ''
 }: Props) => (
-  <div className={`Forms-Select ${theme}`}>
+  <div className={`Forms-Select ${theme} ${size}`}>
     <div className='arrow-down'>
       <svg
         viewBox='0 0 18 18'

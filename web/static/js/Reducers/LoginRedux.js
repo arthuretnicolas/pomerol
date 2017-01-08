@@ -34,7 +34,11 @@ const { Types, Creators } = createActions({
   createOrganizationFailure: [ 'error' ],
   createOrganizationSuccess: [ 'organization' ],
   // ******
-  setCurrentOrganization: [ 'id' ]
+  setCurrentOrganization: [ 'id' ],
+  // ******
+  updatePasswordAttempt: [ 'password', 'newPassword' ],
+  updatePasswordFailure: [ 'error' ],
+  updatePasswordSuccess: []
 })
 
 export const LoginTypes = Types
@@ -67,7 +71,10 @@ export const INITIAL_STATE = Immutable({
   errorUpdating: null,
   // ******
   attemptingOrganization: false,
-  errorOrganisation: null
+  errorOrganisation: null,
+  // ******
+  attemptingUpdatePassword: false,
+  errorUpdatingPassword: null
 })
 
 /* ------------- Reducers ------------- */
@@ -224,6 +231,23 @@ export const createOrganizationSuccess = (state: Object, { organization }: { org
 export const setCurrentOrganization = (state: Object, { id }: { id: string }) =>
   state.setIn([ 'session', 'user', 'current_organization_id' ], id)
 
+export const updatePasswordAttempt = (state: Object, { password, newPassword }: { password: string, newPassword: string }) =>
+  state.merge({
+    attemptingUpdatePassword: true
+  })
+
+export const updatePasswordFailure = (state: Object, { error }: { error: string }) =>
+  state.merge({
+    attemptingUpdatePassword: false,
+    errorUpdatingPassword: error
+  })
+
+export const updatePasswordSuccess = (state: Object, action: Object) =>
+  state.merge({
+    attemptingUpdatePassword: false,
+    errorUpdatingPassword: null
+  })
+
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
@@ -255,5 +279,9 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.CREATE_ORGANIZATION_SUCCESS]: createOrganizationSuccess,
   [Types.CREATE_ORGANIZATION_FAILURE]: createOrganizationFailure,
   // ******
-  [Types.SET_CURRENT_ORGANIZATION]: setCurrentOrganization
+  [Types.SET_CURRENT_ORGANIZATION]: setCurrentOrganization,
+  // ******
+  [Types.UPDATE_PASSWORD_ATTEMPT]: updatePasswordAttempt,
+  [Types.UPDATE_PASSWORD_FAILURE]: updatePasswordFailure,
+  [Types.UPDATE_PASSWORD_SUCCESS]: updatePasswordSuccess
 })

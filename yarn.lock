@@ -4178,6 +4178,10 @@ react-google-login@^2.5.8:
   dependencies:
     "@types/react" "*"
 
+react-image-crop:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/react-image-crop/-/react-image-crop-1.0.4.tgz#9100e3153de69a03ea0722a1d18865f12c2fc779"
+
 react-redux@^4.4.5:
   version "4.4.6"
   resolved "https://registry.yarnpkg.com/react-redux/-/react-redux-4.4.6.tgz#4b9d32985307a11096a2dd61561980044fcc6209"

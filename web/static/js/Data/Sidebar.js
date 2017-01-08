@@ -3,19 +3,16 @@ export const sidebarOptions = [
     category: 'General',
     options: [
       {
-        id: 0,
         label: 'Dashboard',
         iconName: 'dashboard',
         link: '/dashboard'
       },
       {
-        id: 1,
         label: 'Quotes',
         iconName: 'quote',
         link: '/quotes'
       },
       {
-        id: 2,
         label: 'Contacts',
         iconName: 'users',
         link: '/contacts'
@@ -26,23 +23,56 @@ export const sidebarOptions = [
     category: 'Settings',
     options: [
       {
-        id: 3,
-        label: 'Account',
-        iconName: 'account',
+        label: 'Profile',
+        iconName: 'profile',
+        link: '/profile'
+      },
+      {
+        label: 'Organization',
+        iconName: 'suitcase',
         link: '/settings'
       },
       {
-        id: 4,
         label: 'Billing',
         iconName: 'billing',
-        link: '/settings'
-      },
-      {
-        id: 5,
-        label: 'Notifications',
-        iconName: 'notifications',
-        link: '/settings'
+        link: '/billing'
       }
     ]
   }
 ]
+
+// {
+//   category: 'Settings',
+//   options: [
+//     {
+//       label: 'Account',
+//       iconName: 'account',
+//       link: '/settings'
+//     },
+//     {
+//       label: 'Profile',
+//       iconName: 'profile',
+//       link: '/settings'
+//     },
+//     {
+//       label: 'Organization',
+//       iconName: 'suitcase',
+//       link: '/settings'
+//     },
+//     {
+//       label: 'Billing',
+//       iconName: 'billing',
+//       link: '/settings'
+//     },
+//     {
+//       label: 'Notifications',
+//       iconName: 'notifications',
+//       link: '/settings'
+//     },
+//     {
+//       label: 'Integrations',
+//       iconName: 'link',
+//       link: '/settings'
+//     }
+//   ]
+// }

@@ -40,15 +40,19 @@
   padding: $base-padding $double-padding;
   border-radius: $border-radius-button;
   color: $color-snow;
-  min-height: $form-min-height;
+  min-height: $min-height;
   font-weight: $semi-bold;
   font-size: $font-size-large;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.15);
   letter-spacing: $letter-spacing-spaced;
 
+  &:disabled {
+    opacity: 0.4;
+  }
+
   &.small {
     font-size: $font-size-body;
-    min-height: 44px;
+    min-height: $min-height-small;
     padding: $small-padding $base-padding;
   }
 
@@ -70,12 +74,20 @@
     font-weight: 400;
   }
 
+  &.plain-normal {
+    @include color-plain($color-body)
+  }
+
   &.plain-success {
     @include color-plain($color-success)
   }
 
   &.plain-primary {
     @include color-plain($color-primary)
+  }
+
+  &.plain-danger {
+    @include color-plain($color-danger)
   }
 
   &.full-width {

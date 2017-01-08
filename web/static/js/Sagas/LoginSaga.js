@@ -109,3 +109,18 @@ export function * createOrganization (api, action) {
     handleErrors(data)
   }
 }
+
+export function * updatePassword (api, action) {
+  const { password, newPassword } = action
+  const jwt = yield select(jwtSelector)
+
+  const response = yield call(api.updatePassword, jwt, password, newPassword)
+  const { data } = response
+
+  if (response.ok) {
+    yield put(LoginActions.updatePasswordSuccess())
+  } else {
+    yield put(LoginActions.updatePasswordFailure('Error updating password'))
+    handleErrors(data)
+  }
+}

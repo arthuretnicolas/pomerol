@@ -8,6 +8,10 @@ import {
   countries as listCountries,
   topCountries
 } from '../../../Data/Countries'
+import { languages } from '../../../Data/Languages'
+import { getShortString } from '../../../Helpers'
+
+const SELECT_MAX_LETTERS = 25
 
 const countries = {
   top: topCountries,
@@ -20,12 +24,14 @@ type Props = {
   values: {
     firstName: string,
     lastName: string,
-    countryId: string | null
+    email: string,
+    countryId: string,
+    languageId: string
   },
   attempting: boolean
 }
 
-export default class FormOnboardingOne extends Component {
+export default class FormUser extends Component {
   props: Props
 
   _onSubmit = (event: Event) => { // eslint-disable-line
@@ -45,23 +51,21 @@ export default class FormOnboardingOne extends Component {
     const {
       firstName,
       lastName,
-      countryId
+      email,
+      countryId,
+      languageId
     } = values
 
     return (
       <form
-        className='Form-FormOnboardingOne'
+        className='Form-FormUser'
         onSubmit={this._onSubmit}
       >
         <Form
-          header='Onboarding one'
-          text={{
-            label: 'Blablabla'
-          }}
-          buttonSubmit='Next'
-          contentLoading='Next...'
+          buttonSubmit='Update'
+          buttonSize='small'
+          contentLoading='Updating...'
           attempting={attempting}
-          fullWidthCta
           children={
             <div>
               <Input
@@ -71,6 +75,7 @@ export default class FormOnboardingOne extends Component {
                 placeholder='Your first name'
                 required
                 onChange={event => onChange('firstName', event && event.target.value)}
+                size='small'
               />
               <Input
                 label='Last name'
@@ -79,15 +84,41 @@ export default class FormOnboardingOne extends Component {
                 placeholder='Your last name'
                 required
                 onChange={event => onChange('lastName', event && event.target.value)}
+                size='small'
+              />
+              <Input
+                label='Email'
+                value={email}
+                type='email'
+                placeholder='Your email'
+                required
+                onChange={event => onChange('email', event && event.target.value)}
+                size='small'
               />
               <Select
                 label='Country'
                 selected={countryId}
-                placeholder='Your country'
+                placeholder='Select your country'
                 required
                 onChange={event => onChange('countryId', event && event.target.value)}
                 top={countries.top}
-                options={countries.list}
+                options={countries.list.map(({id, name}) => ({
+                  id,
+                  name: getShortString(name, SELECT_MAX_LETTERS)
+                }))}
+                size='small'
+              />
+              <Select
+                label='Language'
+                selected={languageId}
+                placeholder='Select your language'
+                required
+                onChange={event => onChange('languageId', event && event.target.value)}
+                options={languages.map(({id, name}) => ({
+                  id,
+                  name: getShortString(name, SELECT_MAX_LETTERS)
+                }))}
+                size='small'
               />
             </div>
           }

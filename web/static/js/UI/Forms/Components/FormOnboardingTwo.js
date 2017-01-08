@@ -6,14 +6,16 @@ import Input from './Input'
 import Textarea from './Textarea'
 import Select from './Select'
 import Grid from '../../Shared/Components/Grid'
+import {
+  countries as listCountries,
+  topCountries
+} from '../../../Data/Countries'
 
-type CountriesType = {
-  top_country_ids: Array<string>,
-  countries: Array<{
-    name: string,
-    id: string
-  }>
+const countries = {
+  top: topCountries,
+  list: listCountries
 }
+
 type Props = {
   onChange: (key: string, value: any) => void,
   onSubmit: () => void,
@@ -24,8 +26,7 @@ type Props = {
     address: string,
     countryId: string | null
   },
-  attempting: boolean,
-  countries: CountriesType | null
+  attempting: boolean
 }
 
 export default class FormOnboardingTwo extends Component {
@@ -42,8 +43,7 @@ export default class FormOnboardingTwo extends Component {
     const {
       onChange,
       values,
-      attempting,
-      countries
+      attempting
     } = this.props
 
     const {
@@ -103,17 +103,15 @@ export default class FormOnboardingTwo extends Component {
                 placeholder='Your organization address'
                 onChange={event => onChange('address', event && event.target.value)}
               />
-              {
-                !!countries && <Select
-                  label='Country'
-                  selected={countryId}
-                  placeholder='Your country'
-                  required
-                  onChange={event => onChange('countryId', event && event.target.value)}
-                  top={countries.top_country_ids}
-                  options={countries.countries}
-                />
-              }
+              <Select
+                label='Country'
+                selected={countryId}
+                placeholder='Your country'
+                required
+                onChange={event => onChange('countryId', event && event.target.value)}
+                top={countries.top}
+                options={countries.list}
+              />
             </div>
           }
         />

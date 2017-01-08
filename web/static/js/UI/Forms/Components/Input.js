@@ -4,7 +4,7 @@ import React from 'react'
 import Label from './Label'
 
 type Props = {
-  label: string,
+  label?: string,
   type?: string,
   disabled?: bool,
   name?: string,
@@ -12,7 +12,10 @@ type Props = {
   required?: bool,
   onChange?: () => void,
   minLength?: number,
-  value?: any
+  value?: any,
+  size?: 'small' | 'base' | 'large',
+  src?: any,
+  accept?: string
 }
 
 const Input = ({
@@ -24,12 +27,22 @@ const Input = ({
   required,
   minLength,
   onChange,
-  value
+  value,
+  size = '',
+  src = '',
+  accept = ''
 }: Props) => (
-  <div className='Forms-Input'>
-    <Label name={name} label={label} />
+  <div className={`Forms-Input ${size} ${type === 'file' ? 'file' : ''}`}>
+    {
+      !!label && <Label
+        name={name}
+        label={label}
+        className={type === 'file' ? 'label-file' : ''}
+      />
+    }
+
     <input
-      name={name}
+      id={name}
       className='input'
       type={type}
       disabled={disabled}
@@ -38,6 +51,8 @@ const Input = ({
       placeholder={placeholder}
       onChange={(onChange)}
       value={value}
+      src={src}
+      accept={accept}
     />
   </div>
 )

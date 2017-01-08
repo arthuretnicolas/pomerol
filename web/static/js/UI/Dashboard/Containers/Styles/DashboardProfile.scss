@@ -1,0 +1,23 @@
+.Dashboard-DashboardProfile {
+  display: flex;
+  flex-direction: column;
+  padding: $base-padding * 1.5 $triple-padding;
+  flex: 1;
+
+  .title {
+    color: $gray-dark;
+    font-size: $font-size-larger;
+    padding-bottom: $tiny-padding;
+  }
+
+  .column {
+    display: flex;
+    flex-direction: column;
+    max-width: 424px;
+    padding-bottom: $triple-padding;
+
+    &.last {
+      padding-bottom: $double-padding;
+    }
+  }
+}

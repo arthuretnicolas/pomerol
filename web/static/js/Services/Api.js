@@ -47,15 +47,18 @@ const create = (baseURL: string = 'http://localhost:4000/api/v1/') => {
       password
     })
 
-  const fetchSession = (jwt: string) =>
-    api.get('user', {}, {
+  const updatePassword = (jwt: string, password: string, newPassword: string) =>
+    api.put('account/password', {
+      old_password: password,
+      new_password: newPassword
+    }, {
       headers: {
         'Authorization': `Bearer ${jwt}`
       }
     })
 
-  const fetchCountries = (jwt: string) =>
-    api.get('countries', {}, {
+  const fetchSession = (jwt: string) =>
+    api.get('user', {}, {
       headers: {
         'Authorization': `Bearer ${jwt}`
       }
@@ -88,9 +91,9 @@ const create = (baseURL: string = 'http://localhost:4000/api/v1/') => {
     loginWithGoogle,
     signup,
     fetchSession,
-    fetchCountries,
     requestPassword,
     resetPassword,
+    updatePassword,
     updateUser,
     createOrganization
   }
