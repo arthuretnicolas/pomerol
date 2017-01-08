@@ -38,4 +38,38 @@ defmodule Pomerol.V1.OrganizationControllerTest do
       assert json["errors"] != %{}
     end
   end
+
+  describe "update" do
+
+    test "does not update organization when user is not logguedin", %{conn: conn} do
+      organization = insert(:organization)
+      conn = put conn, "/api/v1/organizations/#{organization.id}", @valid_attrs
+      assert conn |> json_response(401)
+    end
+
+    @tag :authenticated
+    test "cannot update an organization when user is not member", %{conn: conn, current_user: current_user} do
+      organization = insert(:organization)
+      conn = put conn, "/api/v1/organizations/#{organization.id}", @valid_attrs
+      assert conn |> json_response(403)
+    end
+
+    @tag :authenticated
+    test "cannot update an organization when user is just viewer", %{conn: conn, current_user: current_user} do
+      organization = insert(:organization)
+      membership = insert(:organization_membership, organization: organization, member: current_user, role: "viewer")
+      conn = put conn, "/api/v1/organizations/#{organization.id}", @valid_attrs
+      assert conn |> json_response(403)
+    end
+
+    @tag :authenticated
+    test "update organization when user is owner and data is valid", %{conn: conn, current_user: current_user} do
+      organization = insert(:organization)
+      membership = insert(:organization_membership, organization: organization, member: current_user, role: "owner")
+      conn = put conn, "/api/v1/organizations/#{organization.id}", %{name: "NEW NAME OF THE ORG"}
+      json = conn |> json_response(200)
+      assert json["name"] == "NEW NAME OF THE ORG"
+    end
+
+  end
 end

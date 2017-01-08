@@ -2,7 +2,7 @@ defmodule Pomerol.V1.OrganizationController do
   use Pomerol.Web, :controller
   alias Pomerol.{Repo, Organization, OrganizationMembership, OrganizationService}
 
-  plug :load_and_authorize_resource, model: Organization, only: [:create, :show]
+  plug :load_and_authorize_resource, model: Organization, only: [:create, :show, :update]
 
   def index(conn, _params) do
     current_user = conn.assigns |> Map.get(:current_user)
@@ -50,6 +50,22 @@ defmodule Pomerol.V1.OrganizationController do
 
     conn
     |> render(Pomerol.OrganizationView, "organization-#{current_user_membership.role}.json", organization: organization)
+  end
+
+  def update(conn, organization_params) do
+    locale = conn.assigns[:locale]
+    organization = Organization |> Organization.preload_all(locale) |> Repo.get!(organization_params["id"])
+    changeset = Organization.update_changeset(organization, organization_params)
+
+    case Repo.update(changeset) do
+      {:ok, organization} ->
+        organization = Organization |> Organization.preload_all(locale) |> Repo.get!(organization.id)
+        render(conn, Pomerol.OrganizationView, "organization.json", organization: organization)
+      {:error, changeset} ->
+        conn
+        |> put_status(:unprocessable_entity)
+        |> render(Pomerol.ErrorView, "422.json", changeset: changeset)
+    end
   end
 
 end
