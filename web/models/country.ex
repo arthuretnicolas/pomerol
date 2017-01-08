@@ -18,8 +18,8 @@ defmodule Pomerol.Country do
     timestamps
   end
 
-  @required_fields ~w()a
-  @optional_fields ~w(name default_currency_code)a
+  @required_fields ~w(name country_code default_currency_code default_date_format default_currency_locale)a
+  @optional_fields ~w(name)a
 
   def changeset(country, params \\ %{}) do
     country

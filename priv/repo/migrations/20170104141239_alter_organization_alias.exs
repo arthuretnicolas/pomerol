@@ -8,13 +8,13 @@ defmodule Pomerol.Repo.Migrations.AlterOrganizationAlias do
     {:ok, _} = Application.ensure_all_started :timex
 
     # Update all organizations aliases with organization.name to ensure not_null condition on alias
-    Organization
-    |> Repo.all
-    |> Enum.each(fn record ->
-      Organization.changeset(record)
-      |> Ecto.Changeset.put_change(:alias, record.name)
-      |> Repo.update!
-    end)
+    # Organization
+    # |> Repo.all
+    # |> Enum.each(fn record ->
+    #   Organization.changeset(record)
+    #   |> Ecto.Changeset.put_change(:alias, record.name)
+    #   |> Repo.update!
+    # end)
 
     alter table(:organizations) do
       modify :alias, :string, null: false
