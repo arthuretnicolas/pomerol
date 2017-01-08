@@ -6,6 +6,8 @@
   > .container-photo {
     width: 256px;
     height: 256px;
+    max-height: 512px;
+    overflow: hidden;
     background-color: $black;
     margin-right: $base-padding;
     margin-bottom: $base-padding;

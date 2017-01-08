@@ -9,22 +9,32 @@ const crop = {
   x: 0,
   y: 0,
   width: 256,
-  aspect: 1,
-  minWidth: 96
+  aspect: 1
 }
 
-const SaveOrCancel = ({ onCancel, onSave }) => (
+const isDev = process.env.NODE_ENV === 'development'
+
+const onComplete = (crop, pixelCrop) => {
+  if (isDev) {
+    console.log('crop:', crop, ' - pixelCrop:', pixelCrop)
+  }
+}
+
+const SaveOrCancel = ({ onCancel, onSave, isAttempting }) => (
   <div className='container-cta'>
     <Button
       onClick={onCancel}
       content='Cancel'
       theme='plain plain-danger'
       size='small'
+      disabled={isAttempting}
     />
 
     <Button
       onClick={onSave}
+      loading={isAttempting}
       content='Save'
+      contentLoading='Saving'
       theme='primary'
       size='small'
     />
@@ -61,6 +71,7 @@ type Props = {
   onSave: () => void,
   onCancel: () => void,
   isCropping: boolean,
+  isAttempting: boolean,
   imageMinSize?: number
 }
 const ImageCropper = ({
@@ -69,16 +80,26 @@ const ImageCropper = ({
   onSave,
   onCancel,
   isCropping,
-  imageMinSize
+  imageMinSize,
+  isAttempting
 }: Props) => (
   <div className='Shared-ImageCropper'>
-    <div className='container-photo'>
+    <div
+      className='container-photo'
+      style={{
+        backgroundColor: isCropping ? '#111' : '#f9fafb'
+      }}
+    >
       {
         isCropping
           ? <ReactCrop
             crossorigin={null}
             crop={crop}
             src={source}
+            minWidth={25 / 100 * 256}
+            maxWidth={256}
+            maxHeight={256}
+            onComplete={onComplete}
           />
           : <div
             className='container-photo'
@@ -98,6 +119,7 @@ const ImageCropper = ({
         ? <SaveOrCancel
           onSave={onSave}
           onCancel={onCancel}
+          isAttempting={isAttempting}
         />
         : <Instructions
           onChange={onChange}

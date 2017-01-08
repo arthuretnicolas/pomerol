@@ -31,10 +31,28 @@ class DashboardProfile extends Component {
     newPassword1: '',
     newPassword2: '',
     photo: this.props.user.photo_large_url || DEFAULT_PHOTO,
-    isCropping: false
+    isCropping: false,
+    isAttemptingPhoto: false,
+    image64: ''
   }
 
+  _reader = new window.FileReader()
+
   _image = new window.Image()
+
+  componentWillReceiveProps (nextProps, nextState) {
+    const { isAttemptingPhoto } = this.state
+    const wasAttemptingUpdateUser =
+      !nextProps.attemptingUpdateUser &&
+      this.props.attemptingUpdateUser
+
+    if (isAttemptingPhoto && wasAttemptingUpdateUser) {
+      this.setState({
+        isAttemptingPhoto: false,
+        isCropping: false
+      })
+    }
+  }
 
   _onChange = (key: string, value: string) => {
     this.setState({
@@ -77,6 +95,7 @@ class DashboardProfile extends Component {
 
   _onChangePhoto = event => {
     const file = event && event.target.files[0]
+    const image = this._image
 
     this._image.onload = () => {
       const isValid =
@@ -93,11 +112,32 @@ class DashboardProfile extends Component {
       }
     }
 
-    this._image.src = window.URL.createObjectURL(file)
+    this._reader.onload = e => {
+      const image64 = e.target.result
+      image.src = window.URL.createObjectURL(file)
+
+      if (this.state.image64 !== image64) {
+        this.setState({
+          image64
+          // photo
+        })
+      }
+    }
+
+    this._reader.readAsDataURL(file)
   }
 
   _onSavePicture = () => {
-    console.log('_onSavePicture')
+    const { updateUserAttempt } = this.props
+    const { image64 } = this.state
+
+    updateUserAttempt({
+      base64_photo_data: image64
+    })
+
+    this.setState({
+      isAttemptingPhoto: true
+    })
   }
 
   _onCancelPicture = () => {
@@ -122,7 +162,8 @@ class DashboardProfile extends Component {
       newPassword1,
       newPassword2,
       photo,
-      isCropping
+      isCropping,
+      isAttemptingPhoto
     } = this.state
 
     const passwordIsDisabled =
@@ -144,6 +185,7 @@ class DashboardProfile extends Component {
             onSave={this._onSavePicture}
             onCancel={this._onCancelPicture}
             imageMinSize={IMAGE_MIN_SIZE}
+            isAttempting={isAttemptingPhoto}
           />
         </div>
 
