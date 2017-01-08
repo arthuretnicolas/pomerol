@@ -24,7 +24,8 @@ import {
   requestPassword,
   resetPassword,
   updateUser,
-  createOrganization
+  createOrganization,
+  updatePassword
 } from './LoginSaga'
 import { signup } from './SignupSaga'
 
@@ -48,6 +49,7 @@ export default function * root () {
     takeLatest(LoginTypes.CREATE_ORGANIZATION_ATTEMPT, createOrganization, api),
     takeLatest(LoginTypes.REQUEST_PASSWORD_ATTEMPT, requestPassword, api),
     takeLatest(LoginTypes.RESET_PASSWORD_ATTEMPT, resetPassword, api),
+    takeLatest(LoginTypes.UPDATE_PASSWORD_ATTEMPT, updatePassword, api),
     takeLatest(SignupTypes.SIGNUP_ATTEMPT, signup, api)
   ]
 }

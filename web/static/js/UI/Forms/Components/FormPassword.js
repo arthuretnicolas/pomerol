@@ -20,8 +20,13 @@ export default class FormPassword extends Component {
   props: Props
 
   _onSubmit = (event: Event) => { // eslint-disable-line
-    const { onSubmit } = this.props
+    const { onSubmit, onChange } = this.props
     event.preventDefault()
+
+    // we clear inputs
+    onChange('password', '')
+    onChange('newPassword1', '')
+    onChange('newPassword2', '')
 
     onSubmit()
   }

@@ -10,7 +10,9 @@ import LoginActions from '../../../Reducers/LoginRedux'
 type Props = {
   user: Object,
   attemptingUpdateUser: boolean,
-  updateUserAttempt: () => void
+  attemptingUpdatePassword: boolean,
+  updateUserAttempt: () => void,
+  updatePasswordAttempt: () => void
 }
 
 class DashboardProfile extends Component {
@@ -20,7 +22,7 @@ class DashboardProfile extends Component {
     firstName: this.props.user.first_name,
     lastName: this.props.user.last_name,
     email: this.props.user.email,
-    countryId: this.props.user.country_code,
+    countryId: this.props.user.country,
     languageId: this.props.user.locale,
     password: '',
     newPassword1: '',
@@ -53,7 +55,7 @@ class DashboardProfile extends Component {
   }
 
   _onSubmitPassword = () => {
-    console.log('_onSubmitPassword')
+    const { updatePasswordAttempt } = this.props
 
     const {
       password,
@@ -62,13 +64,14 @@ class DashboardProfile extends Component {
     } = this.state
 
     if (password && newPassword1 === newPassword2) {
-      // TODO: changePassword
+      updatePasswordAttempt(password, newPassword1)
     }
   }
 
   render () {
     const {
-      attemptingUpdateUser
+      attemptingUpdateUser,
+      attemptingUpdatePassword
     } = this.props
     const {
       firstName,
@@ -142,8 +145,7 @@ class DashboardProfile extends Component {
             onChange={this._onChange}
             onSubmit={this._onSubmitPassword}
             values={{ password, newPassword1, newPassword2 }}
-            // attempting={attemptingOrganization}
-            attempting={false}
+            attempting={attemptingUpdatePassword}
             disabled={passwordIsDisabled}
           />
         </div>
@@ -154,11 +156,15 @@ class DashboardProfile extends Component {
 
 const mapStateToProps = ({ login }) => ({
   user: login.session && login.session.user,
-  attemptingUpdateUser: login.attemptingUpdate
+  attemptingUpdateUser: login.attemptingUpdate,
+  attemptingUpdatePassword: login.attemptingUpdatePassword
 })
 
 const mapDispatchToProps = dispatch => ({
-  updateUserAttempt: (user: Object) => dispatch(LoginActions.updateUserAttempt(user))
+  updateUserAttempt: (user: Object) =>
+    dispatch(LoginActions.updateUserAttempt(user)),
+  updatePasswordAttempt: (password: string, newPassword: string) =>
+    dispatch(LoginActions.updatePasswordAttempt(password, newPassword))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(DashboardProfile)

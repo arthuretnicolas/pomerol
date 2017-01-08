@@ -47,6 +47,16 @@ const create = (baseURL: string = 'http://localhost:4000/api/v1/') => {
       password
     })
 
+  const updatePassword = (jwt: string, password: string, newPassword: string) =>
+    api.put('account/password', {
+      old_password: password,
+      new_password: newPassword
+    }, {
+      headers: {
+        'Authorization': `Bearer ${jwt}`
+      }
+    })
+
   const fetchSession = (jwt: string) =>
     api.get('user', {}, {
       headers: {
@@ -83,6 +93,7 @@ const create = (baseURL: string = 'http://localhost:4000/api/v1/') => {
     fetchSession,
     requestPassword,
     resetPassword,
+    updatePassword,
     updateUser,
     createOrganization
   }

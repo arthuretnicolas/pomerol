@@ -231,3 +231,27 @@ test('setCurrentOrganization', t => {
 
   t.is(state.session.user && state.session.user.current_organization_id, FAKE_ID)
 })
+
+// update password
+test('updatePasswordAttempt', t => {
+  const state = reducer(INITIAL_STATE, Actions.updatePasswordAttempt())
+
+  t.true(state.attemptingUpdatePassword)
+})
+
+test('updatePasswordFailure', t => {
+  const stateAttempt = reducer(INITIAL_STATE, Actions.updatePasswordAttempt())
+  const state = reducer(stateAttempt, Actions.updatePasswordFailure(FAKE_ERROR))
+
+  t.false(state.attemptingUpdatePassword)
+  t.is(state.errorUpdatingPassword, FAKE_ERROR)
+})
+
+test('updatePasswordAttempt', t => {
+  const stateAttempt = reducer(INITIAL_STATE, Actions.updatePasswordAttempt())
+  const stateFailure = reducer(stateAttempt, Actions.updatePasswordFailure())
+  const state = reducer(stateFailure, Actions.updatePasswordSuccess())
+
+  t.false(state.attemptingUpdatePassword)
+  t.is(state.errorUpdatingPassword, null)
+})
