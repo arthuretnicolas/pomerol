@@ -18,17 +18,11 @@ defmodule Pomerol.V1.OrganizationController do
 
   def create(conn, params) do
     locale = conn.assigns[:locale]
-    current_user = conn.assigns |> Map.get(:current_user) |> Repo.preload(:country)
+    current_user = conn.assigns |> Map.get(:current_user)
 
     params =
       params
       |> Map.put("user_id", current_user.id)
-
-    if current_user.country do
-      params =
-        params
-        |> Map.put("currency_code", current_user.country.default_currency_code)
-    end
 
     changeset = Organization.create_changeset(%Organization{}, params)
 

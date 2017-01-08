@@ -51,11 +51,10 @@ defmodule Pomerol.Organization do
     |> cast(params, [:name, :address1, :address2, :city, :zip, :state, :website, :phone, :country_code])
     |> validate_required([:name, :country_code])
     |> set_default_value_to(field: :alias, value: params["name"])
-    |> set_default_value_to(field: :currency_code, value: params["currency_code"])
     |> validate_inclusion(:country_code, Pomerol.SupportedEnums.country_codes)
-    |> map_from(:country_code, to: :country_id, resolver: &(CountryService.by(country_code: &1)))
     |> validate_length(:name, min: 1)
     |> prefix_url(:website)
+    |> put_default_settings
   end
 
   def update_changeset(organization, params \\ %{}) do
@@ -63,6 +62,18 @@ defmodule Pomerol.Organization do
     |> cast(params, [:name, :timezone, :base64_logo_data, :alias])
     |> validate_inclusion(:timezone, Pomerol.SupportedEnums.timezones)
     |> upload_image(:base64_logo_data, :logo)
+  end
+
+  defp put_default_settings(current_changeset) do
+    case current_changeset do
+      %Ecto.Changeset{valid?: true, changes: %{country_code: country_code}} ->
+        country = CountryService.by(country_code: country_code)
+        current_changeset
+        |> put_change(:currency_code, country.default_currency_code)
+        |> put_change(:country_id, country.id)
+      _ ->
+        current_changeset
+    end
   end
 
   defp prefix_url(changeset, key) do
