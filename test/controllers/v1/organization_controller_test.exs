@@ -10,17 +10,13 @@ defmodule Pomerol.V1.OrganizationControllerTest do
       assert conn |> json_response(401)
     end
 
+    @tag :authenticated
     test "create and renders resource when data is valid", %{conn: conn, current_user: current_user} do
-      country = insert(:country, name: "Australia", default_currency_code: "AUD", country_code: "AUS", default_currency_locale: "en_US", default_date_format: "US")
-      country_translation = insert(:country_translation, country: country, name: "Australia", locale: "en")
-      country_translation = insert(:country_translation, country: country, name: "Australie", locale: "fr")
+      # country = insert(:country, name: "Australia", default_currency_code: "AUD", country_code: "AUS", default_currency_locale: "en_US", default_date_format: "US")
+      # country_translation = insert(:country_translation, country: country, name: "Australia", locale: "en")
+      # country_translation = insert(:country_translation, country: country, name: "Australie", locale: "fr")
 
-      user = insert(:user, country: country)
-
-      conn =
-        conn
-        |> authenticate(user)
-        |> post("/api/v1/organizations", %{name: "POMEROL ORG", country_code: "AUS"})
+      conn = post conn, "/api/v1/organizations", %{name: "POMEROL ORG", country_code: "AUS"}
 
       json = conn |> json_response(201)
       assert json["name"] == "POMEROL ORG"
@@ -72,4 +68,31 @@ defmodule Pomerol.V1.OrganizationControllerTest do
     end
 
   end
+
+  describe "show" do
+
+    test "cannot get details of organization when user is not logguedin", %{conn: conn} do
+      organization = insert(:organization)
+      conn = get conn, "/api/v1/organizations/#{organization.id}"
+      json = conn |> json_response(401)
+    end
+
+    @tag :authenticated
+    test "cannot get details of org when user is not member of the org", %{conn: conn, current_user: current_user} do
+      organization = insert(:organization)
+      conn = get conn, "/api/v1/organizations/#{organization.id}"
+      json = conn |> json_response(403)
+    end
+
+    @tag :authenticated
+    test "renders details of the org when user is member", %{conn: conn, current_user: current_user} do
+      organization = insert(:organization)
+      membership = insert(:organization_membership, organization: organization, member: current_user, role: "owner")
+      conn = get conn, "/api/v1/organizations/#{organization.id}"
+      json = conn |> json_response(200)
+      assert json["id"] == organization.id
+    end
+
+  end
+
 end

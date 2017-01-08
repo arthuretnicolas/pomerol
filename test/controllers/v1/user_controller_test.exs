@@ -2,7 +2,6 @@ defmodule Pomerol.V1.UserControllerTest do
   use Pomerol.ApiCase, resource_name: :user
   alias Pomerol.User
   alias Pomerol.Repo
-  alias Pomerol.Country
   use Bamboo.Test
 
   @valid_attrs %{

@@ -4,9 +4,12 @@ defmodule Pomerol.Factories do
   use ExMachina.Ecto, repo: Pomerol.Repo
 
   def organization_factory do
+    country = build(:country)
+    country_translation = build(:country_translation, country: country)
     %Pomerol.Organization{
       name: sequence(:name, &"Organization #{&1}"),
-      alias: sequence(:name, &"Organization #{&1}")
+      alias: sequence(:name, &"Organization #{&1}"),
+      country_id: country.id
     }
   end
 
@@ -48,7 +51,10 @@ defmodule Pomerol.Factories do
   def country_factory do
     %Pomerol.Country{
       name: sequence(:name, &"country#{&1}"),
-      default_currency_code: "XXX"
+      default_currency_code: "XXX",
+      country_code: sequence(:name, &"country#{&1}"),
+      default_currency_locale: "en_US",
+      default_date_format: "US"
     }
   end
 

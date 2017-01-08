@@ -18,5 +18,9 @@ config :pomerol, Pomerol.Repo,
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
 
+# speed up password hashing
+config :comeonin, :bcrypt_log_rounds, 4
+config :comeonin, :pbkdf2_rounds, 1
+
 config :pomerol, Pomerol.Mailer,
   adapter: Bamboo.TestAdapter

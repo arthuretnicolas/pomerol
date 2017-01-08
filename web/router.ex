@@ -57,7 +57,7 @@ defmodule Pomerol.Router do
       put "/account/password", UserController, :change_password
       resources "/contacts", ContactController, only: [:show, :update]
 
-      resources "/organizations", OrganizationController, only: [:index, :show, :create] do
+      resources "/organizations", OrganizationController, only: [:index, :show, :create, :update] do
         resources "/contacts", ContactController, only: [:index, :create]
         resources "/memberships", OrganizationMembershipController, only: [:update]
         resources "/invites", OrganizationInviteController, only: [:create, :update]
