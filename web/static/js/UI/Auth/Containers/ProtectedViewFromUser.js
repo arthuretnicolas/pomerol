@@ -27,7 +27,7 @@ class ProtectedViewFromUser extends Component {
 
   _checkAuth = (isAuthenticated: boolean = this.props.isAuthenticated) => {
     if (isAuthenticated) {
-      browserHistory.push('/profile')
+      browserHistory.push('/dashboard')
     }
   }
 
