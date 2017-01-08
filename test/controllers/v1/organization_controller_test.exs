@@ -11,7 +11,7 @@ defmodule Pomerol.V1.OrganizationControllerTest do
     end
 
     test "create and renders resource when data is valid", %{conn: conn, current_user: current_user} do
-      country = insert(:country, name: "Australia", default_currency_code: "AUD", country_code: "AUS")
+      country = insert(:country, name: "Australia", default_currency_code: "AUD", country_code: "AUS", default_currency_locale: "en_US", default_date_format: "US")
       country_translation = insert(:country_translation, country: country, name: "Australia", locale: "en")
       country_translation = insert(:country_translation, country: country, name: "Australie", locale: "fr")
 
@@ -27,6 +27,8 @@ defmodule Pomerol.V1.OrganizationControllerTest do
       assert json["alias"] == "POMEROL ORG"
       assert json["country"] == "AUS"
       assert json["currency_code"] == "AUD"
+      assert json["currency_locale"] == "en_US"
+      assert json["date_format"] == "US"
     end
 
     @tag :authenticated
