@@ -13,33 +13,11 @@
   .column {
     display: flex;
     flex-direction: column;
-    max-width: 400px;
+    max-width: 424px;
     padding-bottom: $triple-padding;
 
     &.last {
       padding-bottom: $double-padding;
-    }
-  }
-
-  .container-photo {
-    display: flex;
-    flex-direction: row;
-    padding-top: $base-padding;
-
-    > .photo {
-      background-color: $gray-xlight;
-      margin-right: $base-padding;
-      border-radius: $border-radius-input;
-    }
-
-    > .container-photo-instructions {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-
-      > .button {
-        align-self: flex-end;
-      }
     }
   }
 }

@@ -4,8 +4,10 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import FormUser from '../../Forms/Components/FormUser'
 import FormPassword from '../../Forms/Components/FormPassword'
-import Button from '../../Shared/Components/Button'
+import ImageCropper from '../../Shared/Components/ImageCropper'
 import LoginActions from '../../../Reducers/LoginRedux'
+
+const DEFAULT_PHOTO = 'http://www.animaux-cie.com/images/header/girafe.jpg'
 
 type Props = {
   user: Object,
@@ -26,8 +28,12 @@ class DashboardProfile extends Component {
     languageId: this.props.user.locale,
     password: '',
     newPassword1: '',
-    newPassword2: ''
+    newPassword2: '',
+    photo: this.props.user.photo_large_url || DEFAULT_PHOTO,
+    isCropping: false
   }
+
+  _image = new window.Image()
 
   _onChange = (key: string, value: string) => {
     this.setState({
@@ -68,6 +74,38 @@ class DashboardProfile extends Component {
     }
   }
 
+  _onChangePhoto = event => {
+    const file = event && event.target.files[0]
+
+    this._image.onload = () => {
+      const isValid =
+        this._image.naturalWidth >= 300 &&
+        this._image.naturalHeight >= 300
+
+      if (isValid) {
+        this.setState({
+          photo: this._image.src,
+          isCropping: true
+        })
+      } else {
+        window.alert('Photo should be at least 300px × 300px')
+      }
+    }
+
+    this._image.src = window.URL.createObjectURL(file)
+  }
+
+  _onSavePicture = () => {
+    console.log('_onSavePicture')
+  }
+
+  _onCancelPicture = () => {
+    this.setState({
+      photo: this.props.user.photo_large_url || DEFAULT_PHOTO,
+      isCropping: false
+    })
+  }
+
   render () {
     const {
       attemptingUpdateUser,
@@ -81,7 +119,9 @@ class DashboardProfile extends Component {
       languageId,
       password,
       newPassword1,
-      newPassword2
+      newPassword2,
+      photo,
+      isCropping
     } = this.state
 
     const passwordIsDisabled =
@@ -96,31 +136,13 @@ class DashboardProfile extends Component {
             Profile photo
           </div>
 
-          <div className='container-photo'>
-            <img
-              className='photo'
-              width='96px'
-              height='96px'
-              src='https://storage.googleapis.com/material-design/publish/material_v_10/assets/0Bx4BSt6jniD7VG9DQVluOFJ4Tnc/materialdesign_principles_metaphor.png'
-            />
-
-            <div className='container-photo-instructions'>
-              <h4>
-                Upload your photo
-              </h4>
-
-              <div>
-                Photo should be at least 300px × 300px
-              </div>
-
-              <Button
-                className='button'
-                content='Upload Photo'
-                size='small'
-                theme='primary'
-              />
-            </div>
-          </div>
+          <ImageCropper
+            source={photo}
+            onChange={this._onChangePhoto}
+            isCropping={isCropping}
+            onSave={this._onSavePicture}
+            onCancel={this._onCancelPicture}
+          />
         </div>
 
         <div className='column'>

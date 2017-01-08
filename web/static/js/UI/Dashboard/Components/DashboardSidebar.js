@@ -4,17 +4,9 @@ import React from 'react'
 import { browserHistory } from 'react-router'
 import Infos from '../../Shared/Components/Infos'
 import Select from '../../Forms/Components/Select'
+import { getShortString } from '../../../Helpers'
 
 const ORGANIZATION_MAX_LETTERS = 15
-
-const organizationShortName = organizationName => {
-  if (organizationName.length <= ORGANIZATION_MAX_LETTERS) {
-    return organizationName
-  }
-
-  const shortName = organizationName.substr(organizationName, ORGANIZATION_MAX_LETTERS - 2).trim()
-  return `${shortName}...`
-}
 
 const getSelectMaxWidth = (organizations, selectedOrganizationId) => {
   const selectedOrganization = organizations.find(org => org.id === selectedOrganizationId)
@@ -23,7 +15,7 @@ const getSelectMaxWidth = (organizations, selectedOrganizationId) => {
     return 100
   }
 
-  const nbCharacters = organizationShortName(selectedOrganization.name).length
+  const nbCharacters = getShortString(selectedOrganization.name, ORGANIZATION_MAX_LETTERS).length
 
   return (nbCharacters * 10 + 15)
 }
@@ -64,7 +56,7 @@ const OrganisationPicker = ({
         onChange={event => onChange(event && event.target.value)}
         options={organizations.map(org => ({
           id: org.id,
-          name: organizationShortName(org.alias)
+          name: getShortString(org.alias)
         }))}
       />
     }

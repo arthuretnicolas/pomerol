@@ -32,4 +32,13 @@
       min-height: $min-height-small;
     }
   }
+
+  &.file {
+    > .input {
+      padding: 0;
+      border: none;
+      color: transparent;
+      margin-top: $base-padding;
+    }
+  }
 }

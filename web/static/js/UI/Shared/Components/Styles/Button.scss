@@ -74,12 +74,20 @@
     font-weight: 400;
   }
 
+  &.plain-normal {
+    @include color-plain($color-body)
+  }
+
   &.plain-success {
     @include color-plain($color-success)
   }
 
   &.plain-primary {
     @include color-plain($color-primary)
+  }
+
+  &.plain-danger {
+    @include color-plain($color-danger)
   }
 
   &.full-width {

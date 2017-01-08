@@ -9,6 +9,9 @@ import {
   topCountries
 } from '../../../Data/Countries'
 import { languages } from '../../../Data/Languages'
+import { getShortString } from '../../../Helpers'
+
+const SELECT_MAX_LETTERS = 25
 
 const countries = {
   top: topCountries,
@@ -99,7 +102,10 @@ export default class FormUser extends Component {
                 required
                 onChange={event => onChange('countryId', event && event.target.value)}
                 top={countries.top}
-                options={countries.list}
+                options={countries.list.map(({id, name}) => ({
+                  id,
+                  name: getShortString(name, SELECT_MAX_LETTERS)
+                }))}
                 size='small'
               />
               <Select
@@ -108,7 +114,10 @@ export default class FormUser extends Component {
                 placeholder='Select your language'
                 required
                 onChange={event => onChange('languageId', event && event.target.value)}
-                options={languages}
+                options={languages.map(({id, name}) => ({
+                  id,
+                  name: getShortString(name, SELECT_MAX_LETTERS)
+                }))}
                 size='small'
               />
             </div>
