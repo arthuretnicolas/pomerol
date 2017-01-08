@@ -4,13 +4,18 @@ import React from 'react'
 
 type Props = {
   label: string,
-  name: string
+  name: string,
+  className?: string
 }
 const Label = ({
   label,
-  name
+  name,
+  className = ''
 }: Props) => (
-  <label htmlFor={name} className='Forms-Label'>
+  <label
+    htmlFor={name}
+    className={`Forms-Label ${className}`}
+  >
     {label}
   </label>
 )

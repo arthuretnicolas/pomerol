@@ -31,17 +31,20 @@ const SaveOrCancel = ({ onCancel, onSave }) => (
   </div>
 )
 
-const Instructions = ({ onChange }) => (
+const Instructions = ({ onChange, imageMinSize }) => (
   <div className='container-instructions'>
     <h3>
       Upload your photo
     </h3>
 
-    <div>
-      Photo should be at least 300px × 300px
-    </div>
+    {
+      imageMinSize && imageMinSize > 0 && <div>
+        Photo should be at least {imageMinSize}px × {imageMinSize}px
+      </div>
+    }
 
     <Input
+      label='Upload photo'
       className='button'
       accept='image/*'
       type='file'
@@ -57,14 +60,16 @@ type Props = {
   onChange: () => void,
   onSave: () => void,
   onCancel: () => void,
-  isCropping: boolean
+  isCropping: boolean,
+  imageMinSize?: number
 }
 const ImageCropper = ({
   source = '',
   onChange,
   onSave,
   onCancel,
-  isCropping
+  isCropping,
+  imageMinSize
 }: Props) => (
   <div className='Shared-ImageCropper'>
     <div className='container-photo'>
@@ -97,6 +102,7 @@ const ImageCropper = ({
         : <Instructions
           onChange={onChange}
           isCropping={isCropping}
+          imageMinSize={imageMinSize}
         />
     }
   </div>

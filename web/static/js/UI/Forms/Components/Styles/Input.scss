@@ -33,12 +33,28 @@
     }
   }
 
+  // hacky solution to get a stylish button instead of default stuff
   &.file {
     > .input {
-      padding: 0;
-      border: none;
-      color: transparent;
+      display: none;
+    }
+
+    > .label-file {
+      display: flex;
+      align-items: center;
+      align-self: flex-start;
+      cursor: pointer;
       margin-top: $base-padding;
+      background-color: $color-primary;
+      border-radius: $border-radius-button;
+      color: $color-snow;
+      font-weight: $semi-bold;
+      padding: $small-padding $base-padding;
+      font-size: $font-size-body;
+      min-height: $min-height-small;
+      padding: $small-padding $base-padding;
+      text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.15);
+      letter-spacing: $letter-spacing-spaced;
     }
   }
 }

@@ -8,6 +8,7 @@ import ImageCropper from '../../Shared/Components/ImageCropper'
 import LoginActions from '../../../Reducers/LoginRedux'
 
 const DEFAULT_PHOTO = 'http://www.animaux-cie.com/images/header/girafe.jpg'
+const IMAGE_MIN_SIZE = 300
 
 type Props = {
   user: Object,
@@ -79,8 +80,8 @@ class DashboardProfile extends Component {
 
     this._image.onload = () => {
       const isValid =
-        this._image.naturalWidth >= 300 &&
-        this._image.naturalHeight >= 300
+        this._image.naturalWidth >= IMAGE_MIN_SIZE &&
+        this._image.naturalHeight >= IMAGE_MIN_SIZE
 
       if (isValid) {
         this.setState({
@@ -142,6 +143,7 @@ class DashboardProfile extends Component {
             isCropping={isCropping}
             onSave={this._onSavePicture}
             onCancel={this._onCancelPicture}
+            imageMinSize={IMAGE_MIN_SIZE}
           />
         </div>
 

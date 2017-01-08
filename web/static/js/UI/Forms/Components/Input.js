@@ -34,11 +34,15 @@ const Input = ({
 }: Props) => (
   <div className={`Forms-Input ${size} ${type === 'file' ? 'file' : ''}`}>
     {
-      !!label && <Label name={name} label={label} />
+      !!label && <Label
+        name={name}
+        label={label}
+        className={type === 'file' ? 'label-file' : ''}
+      />
     }
 
     <input
-      name={name}
+      id={name}
       className='input'
       type={type}
       disabled={disabled}
