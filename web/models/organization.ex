@@ -32,7 +32,6 @@ defmodule Pomerol.Organization do
 
     has_many :contacts, Pomerol.Contact
     has_many :organization_invites, OrganizationInvite
-
     has_many :quotes, Pomerol.Quote
 
     timestamps
