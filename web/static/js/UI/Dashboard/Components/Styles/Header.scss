@@ -7,8 +7,13 @@
   font-size: $font-size-large;
   border-bottom: 2px solid $gray-xlight;
 
-  .button {
-    padding: 0;
+  > .title {
+    font-family: $font-family-semibold;
+    font-size: $font-size-larger;
+  }
+
+  > .button {
+    padding: 5px 0 0 0;
     margin-left: $base-padding;
   }
 }

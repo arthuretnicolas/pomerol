@@ -14,7 +14,7 @@ type Props = {
 
 const Header = ({ name, callToAction }: Props) => (
   <div className='Dashboard-Header'>
-    <div>
+    <div className='title'>
       {name}
     </div>
 

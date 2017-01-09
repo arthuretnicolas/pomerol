@@ -13,23 +13,20 @@ $max-width-desktop: 1008px;
 $border-radius-button: 3px;
 $border-radius-input: 3px;
 
-$font-size-tiny: 11px;
-$font-size-smaller: 13px;
-$font-size-small: 14px;
-$font-size-body: 15px;
-$font-size-large: 17px;
-$font-size-larger: 23px;
-$font-size-header: 46px;
+$font-size-tiny: 0.9rem;
+$font-size-smaller: 1rem;
+$font-size-small: 1.1rem;
+$font-size-body: 1.2rem;
+$font-size-large: 1.3rem;
+$font-size-larger: 1.7rem;
+$font-size-header: 2.5rem;
+$font-size-main-header: 3.3rem;
 
 $button-hover-darken: 7%;
 
 $line-height-spaced: 1.41;
 $line-height-xspaced: 1.82;
 $line-height-input: $line-height-xspaced;
-
-$medium: 500;
-$semi-bold: 600;
-$bold: 700;
 
 $letter-spacing-spaced: 0.41px;
 

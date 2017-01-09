@@ -43,10 +43,6 @@ const SaveOrCancel = ({ onCancel, onSave, isAttempting }) => (
 
 const Instructions = ({ onChange, imageMinSize }) => (
   <div className='container-instructions'>
-    <h3>
-      Upload your photo
-    </h3>
-
     {
       imageMinSize && imageMinSize > 0 && <div>
         Photo should be at least {imageMinSize}px × {imageMinSize}px

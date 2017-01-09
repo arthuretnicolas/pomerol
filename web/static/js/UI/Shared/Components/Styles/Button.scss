@@ -41,7 +41,7 @@
   border-radius: $border-radius-button;
   color: $color-snow;
   min-height: $min-height;
-  font-weight: $semi-bold;
+  font-family: $font-family-semibold;
   font-size: $font-size-large;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.15);
   letter-spacing: $letter-spacing-spaced;
@@ -71,7 +71,7 @@
   &.plain {
     background-color: transparent !important;
     border: none;
-    font-weight: 400;
+    font-family: $font-family-regular;
   }
 
   &.plain-normal {
