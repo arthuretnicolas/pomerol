@@ -68,7 +68,7 @@ class ProtectedViewFromUser extends Component {
 }
 
 const mapStateToProps = ({ startup, login }) => ({
-  isAuthenticated: !!login.session.user,
+  isAuthenticated: !!(login.session && login.session.user),
   isRehydrated: startup.rehydrated,
   login
 })

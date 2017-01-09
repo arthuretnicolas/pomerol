@@ -85,7 +85,7 @@ class ProtectedView extends Component {
 }
 
 const mapStateToProps = ({ login }) => ({
-  isAuthenticated: !!login.session.user,
+  isAuthenticated: !!(login.session && login.session.user),
   onboardingCompletedSteps: getOnboardingCompletedSteps(login.session)
 })
 
