@@ -21,7 +21,6 @@ const Hero = () => (
       <Button
         to='/signup'
         theme='primary'
-        size='small'
         content='Sign Up Free'
       />
 
