@@ -16,7 +16,18 @@ type Props = {
 class ProtectedView extends Component {
   props: Props
 
+  state = {
+    initialRoad: null
+  }
+
   componentWillMount () {
+    if (this.state.initialRoad === null) {
+      const { pathname } = this.context.router.location
+      this.setState({
+        initialRoad: pathname
+      })
+    }
+
     this._checkAuth()
   }
 
@@ -31,6 +42,8 @@ class ProtectedView extends Component {
     if (!browserHistory) {
       return null
     }
+
+    console.log('🔥🔥🔥🔥🔥🔥🔥', this.state.initialRoad, this.context.router.location.pathname)
 
     if (!isAuthenticated) {
       browserHistory.push('/login')
@@ -68,7 +81,7 @@ class ProtectedView extends Component {
 
       if (onboardingCompletedSteps === 2) {
         // should not be onboarding anymore
-        browserHistory.push('/dashboard')
+        browserHistory.push(this.state.initialRoad)
       }
     }
   }
@@ -82,6 +95,10 @@ class ProtectedView extends Component {
 
     return children
   }
+}
+
+ProtectedView.contextTypes = {
+  router: React.PropTypes.object.isRequired
 }
 
 const mapStateToProps = ({ login }) => ({
