@@ -26,7 +26,7 @@ const rootReducer = (state: Object, action: Object) => {
           attemptingOrganization: false,
           attemptingUpdatePassword: false
         }),
-        signup: initialState.ignup.merge({
+        signup: initialState.signup.merge({
           attempting: false
         })
       })

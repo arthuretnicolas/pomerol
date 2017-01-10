@@ -77,10 +77,6 @@ class ProtectedViewFromUser extends Component {
   }
 }
 
-ProtectedViewFromUser.contextTypes = {
-  router: React.PropTypes.object.isRequired
-}
-
 const mapStateToProps = ({ startup, login }) => ({
   isAuthenticated: !!(login.session && login.session.user),
   isRehydrated: startup.rehydrated,
