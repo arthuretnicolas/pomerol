@@ -71,6 +71,7 @@ defmodule Pomerol.Mixfile do
       {:gettext, "~> 0.11"},
       {:guardian, "~> 0.13.0"}, # Authentication (JWT)
       {:hackney, ">= 1.4.4"},
+      {:httpoison, "~> 0.9.0"},
       {:phoenix, "~> 1.2.1"},
       {:phoenix_ecto, "~> 3.0"},
       {:phoenix_html, "~> 2.6"},
