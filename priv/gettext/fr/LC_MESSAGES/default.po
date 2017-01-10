@@ -1,0 +1,3 @@
+#: web/controllers/api/v1/user_controller.ex:66
+msgid "user does not exist"
+msgstr "cet utilisateur n'existe pas"

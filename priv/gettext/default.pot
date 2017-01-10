@@ -11,6 +11,6 @@ msgid ""
 msgstr ""
 "Language: INSERT LANGUAGE HERE\n"
 
-#: web/controllers/api/v1/user_controller.ex:35
+#: web/controllers/api/v1/user_controller.ex:66
 msgid "user does not exist"
 msgstr ""
