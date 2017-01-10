@@ -8,7 +8,7 @@ defmodule Pomerol.OrganizationMembershipPolicy do
   alias Ecto.Changeset
 
   def create?(%User{admin: true}, %Changeset{}), do: true
-  def create?(%User{id: user_id}, %Changeset{changes: %{member_id: member_id}}), do:  user_id == member_id
+  def create?(%User{id: user_id}, %Changeset{changes: %{member_id: member_id}}), do: user_id == member_id
   def create?(%User{}, %Changeset{}), do: false
 
   def update?(%User{admin: true}, %Changeset{}), do: true

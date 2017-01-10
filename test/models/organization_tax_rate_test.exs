@@ -38,7 +38,7 @@ defmodule Pomerol.OrganizationTaxRateTest do
     end
 
   end
-  #
+
   describe "update_changeset" do
     test "with valid attributes" do
       attrs = %{name: "NAME", tax_rate_percent: 10, default: true}
