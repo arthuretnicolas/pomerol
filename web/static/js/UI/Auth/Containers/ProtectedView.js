@@ -33,7 +33,7 @@ class ProtectedView extends Component {
     }
 
     if (!isAuthenticated) {
-      browserHistory.push('/login/dashboard')
+      browserHistory.push('/login')
     }
 
     const isOnboarding =
