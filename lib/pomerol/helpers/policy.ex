@@ -6,7 +6,7 @@ defmodule Pomerol.Helpers.Policy do
 
   import Ecto.Query
 
-  alias Pomerol.{Organization, OrganizationMembership, OrganizationInvite, Quote, Repo, User, Contact}
+  alias Pomerol.{Organization, OrganizationMembership, OrganizationInvite, OrganizationTaxRate, Quote, Repo, User, Contact}
   alias Ecto.Changeset
 
   @doc """
@@ -19,6 +19,7 @@ defmodule Pomerol.Helpers.Policy do
   def get_membership(%Changeset{changes: %{organization_id: organization_id}}, %User{id: user_id}), do: do_get_membership(organization_id, user_id)
   def get_membership(%Changeset{changes: %{current_organization_id: current_organization_id}}, %User{id: user_id}), do: do_get_membership(current_organization_id, user_id)
   def get_membership(%OrganizationInvite{organization_id: organization_id}, %User{id: user_id}), do: do_get_membership(organization_id, user_id)
+  def get_membership(%OrganizationTaxRate{organization_id: organization_id}, %User{id: user_id}), do: do_get_membership(organization_id, user_id)
   def get_membership(%Contact{organization_id: organization_id}, %User{id: user_id}), do: do_get_membership(organization_id, user_id)
   def get_membership(%Quote{organization_id: organization_id}, %User{id: user_id}), do: do_get_membership(organization_id, user_id)
   def get_membership(%Organization{id: organization_id}, %User{id: user_id}), do: do_get_membership(organization_id, user_id)
