@@ -16,6 +16,10 @@ type Props = {
 class ProtectedView extends Component {
   props: Props
 
+  state = {
+    initialRoad: null
+  }
+
   componentWillMount () {
     this._checkAuth()
   }
@@ -32,12 +36,14 @@ class ProtectedView extends Component {
       return null
     }
 
+    const { pathname } = this.props.location
+
     if (!isAuthenticated) {
-      browserHistory.push('/login/dashboard')
+      return browserHistory.push(`/login${pathname}`)
     }
 
     const isOnboarding =
-      [ 'onboarding-one', 'onboarding-two' ].includes(this.props.location.pathname.split('/')[1])
+      [ 'onboarding-one', 'onboarding-two' ].includes(pathname.split('/')[1])
 
     if (!isOnboarding) {
       if (onboardingCompletedSteps === 0) {

@@ -52,7 +52,7 @@ class DashboardContainer extends Component {
 const mapStateToProps = ({ login }) => ({
   onboardingCompletedSteps: getOnboardingCompletedSteps(login.session),
   organizations: login.session.organizations,
-  currentOrganizationId: login.session.user.current_organization_id
+  currentOrganizationId: login.session.user && login.session.user.current_organization_id
 })
 
 const mapDispatchToProps = dispatch => ({

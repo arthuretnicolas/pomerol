@@ -26,15 +26,25 @@ class ProtectedViewFromUser extends Component {
   }
 
   _checkAuth = (isAuthenticated: boolean = this.props.isAuthenticated) => {
+    const origin = this.props.params.origin || 'dashboard'
+
     if (isAuthenticated) {
-      browserHistory.push('/dashboard')
+      browserHistory.push(`/${origin}`)
     }
   }
 
   _renderPlaceholder = () => {
     const { origin } = this.props.params
 
-    const showLoginPlaceholder = origin !== 'dashboard'
+    const showLoginPlaceholder = ![
+      'contacts',
+      'dashboard',
+      'quotes',
+      'billing',
+      'profile',
+      'settings'
+    ].includes(origin)
+
     // const showLoginPlaceholder = [ 'login', 'signup', 'reset-password' ].includes(this.props.location.pathname.split('/')[1])
 
     if (showLoginPlaceholder) {
