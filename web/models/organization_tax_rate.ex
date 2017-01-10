@@ -33,7 +33,6 @@ defmodule Pomerol.OrganizationTaxRate do
     |> cast(params, [:name, :tax_rate_percent, :default, :archived])
     |> unique_constraint(:name, name: :organization_tax_rates_organization_id_name_index)
     |> validate_inclusion(:tax_rate_percent, 0..100)
-    |> validate_inclusion(:default, [true])
     |> validate_archived_and_default
   end
 
@@ -41,12 +40,14 @@ defmodule Pomerol.OrganizationTaxRate do
     archived = get_field(changeset, :archived)
     default = get_field(changeset, :default)
 
-    cond do
-      archived == true && default == true ->
+    case [archived, default] do
+      [true, true] ->
         changeset
         |> add_error(:archived, "Cannot archive a default tax rate")
-      true ->
+      [_, false] ->
         changeset
+        |> add_error(:default, "Cannot set default to false.")
+      [_, _] -> changeset
     end
   end
 
