@@ -57,11 +57,14 @@ defmodule Pomerol.Router do
       put "/account/password", UserController, :change_password
       resources "/contacts", ContactController, only: [:show, :update]
 
+      resources "/tax-rates", OrganizationTaxRateController, only: [:update]
+
       resources "/organizations", OrganizationController, only: [:index, :show, :create, :update] do
         resources "/contacts", ContactController, only: [:index, :create]
         resources "/memberships", OrganizationMembershipController, only: [:update]
         resources "/invites", OrganizationInviteController, only: [:create, :update]
         resources "/quotes", QuoteController, only: [:create]
+        resources "/tax-rates", OrganizationTaxRateController, only: [:create]
       end
     end
 
