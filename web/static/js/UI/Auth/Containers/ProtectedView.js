@@ -43,14 +43,14 @@ class ProtectedView extends Component {
       return null
     }
 
-    console.log('🔥🔥🔥🔥🔥🔥🔥', this.state.initialRoad, this.context.router.location.pathname)
+    const { pathname } = this.props.location
 
     if (!isAuthenticated) {
-      browserHistory.push('/login')
+      return browserHistory.push(`/login${pathname}`)
     }
 
     const isOnboarding =
-      [ 'onboarding-one', 'onboarding-two' ].includes(this.props.location.pathname.split('/')[1])
+      [ 'onboarding-one', 'onboarding-two' ].includes(pathname.split('/')[1])
 
     if (!isOnboarding) {
       if (onboardingCompletedSteps === 0) {
@@ -81,7 +81,7 @@ class ProtectedView extends Component {
 
       if (onboardingCompletedSteps === 2) {
         // should not be onboarding anymore
-        browserHistory.push(this.state.initialRoad)
+        browserHistory.push(this.state.initialRoad || this.context.router.location.pathname)
       }
     }
   }

@@ -26,8 +26,10 @@ class ProtectedViewFromUser extends Component {
   }
 
   _checkAuth = (isAuthenticated: boolean = this.props.isAuthenticated) => {
+    const origin = this.props.params.origin || 'dashboard'
+
     if (isAuthenticated) {
-      browserHistory.push('/dashboard')
+      browserHistory.push(`/${origin}`)
     }
   }
 
@@ -73,6 +75,10 @@ class ProtectedViewFromUser extends Component {
       </div>
     )
   }
+}
+
+ProtectedViewFromUser.contextTypes = {
+  router: React.PropTypes.object.isRequired
 }
 
 const mapStateToProps = ({ startup, login }) => ({

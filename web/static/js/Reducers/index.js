@@ -12,8 +12,6 @@ const appReducer = combineReducers({
 })
 
 const rootReducer = (state: Object, action: Object) => {
-  console.log('💥💥💥💥💥💥💥💥💥', action.type)
-
   if (action.type === 'REHYDRATE') {
     const initialState = Immutable.from(appReducer(state, action))
 
@@ -27,6 +25,9 @@ const rootReducer = (state: Object, action: Object) => {
           attemptingUpdate: false,
           attemptingOrganization: false,
           attemptingUpdatePassword: false
+        }),
+        signup: initialState.ignup.merge({
+          attempting: false
         })
       })
 
