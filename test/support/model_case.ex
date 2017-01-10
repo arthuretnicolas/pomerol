@@ -23,6 +23,12 @@ defmodule Pomerol.ModelCase do
       import Ecto.Query
       import Pomerol.Factories
       import Pomerol.ModelCase
+
+      defp assert_error_message(changeset, field, expected_message) do
+        {actual_message, _} = changeset.errors[field]
+        assert actual_message == expected_message
+      end
+
     end
   end
 

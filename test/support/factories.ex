@@ -8,7 +8,7 @@ defmodule Pomerol.Factories do
     country_translation = build(:country_translation, country: country)
     %Pomerol.Organization{
       name: sequence(:name, &"Organization #{&1}"),
-      alias: sequence(:name, &"Organization #{&1}"),
+      alias: sequence(:alias, &"Organization #{&1}"),
       country_id: country.id
     }
   end
@@ -74,6 +74,16 @@ defmodule Pomerol.Factories do
       user: build(:user),
       organization: build(:organization),
       contact_type: "company"
+    }
+  end
+
+  def organization_tax_rate_factory do
+    %Pomerol.OrganizationTaxRate{
+      tax_rate_percent: 20,
+      name: sequence(:name, &"tax_rate#{&1}"),
+      organization: build(:organization),
+      default: false,
+      archived: false
     }
   end
 
