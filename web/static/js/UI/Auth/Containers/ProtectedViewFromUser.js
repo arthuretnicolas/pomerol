@@ -3,7 +3,6 @@
 import React, { Component } from 'react'
 import { browserHistory } from 'react-router'
 import { connect } from 'react-redux'
-import EmptyStateDashboard from '../../Shared/Components/EmptyStateDashboard'
 import EmptyStateAuth from '../../Shared/Components/EmptyStateAuth'
 
 type Props = {
@@ -33,31 +32,6 @@ class ProtectedViewFromUser extends Component {
     }
   }
 
-  _renderPlaceholder = () => {
-    const { origin } = this.props.params
-
-    const showLoginPlaceholder = ![
-      'contacts',
-      'dashboard',
-      'quotes',
-      'billing',
-      'profile',
-      'settings'
-    ].includes(origin)
-
-    // const showLoginPlaceholder = [ 'login', 'signup', 'reset-password' ].includes(this.props.location.pathname.split('/')[1])
-
-    if (showLoginPlaceholder) {
-      return (
-        <EmptyStateAuth />
-      )
-    }
-
-    return (
-      <EmptyStateDashboard />
-    )
-  }
-
   render () {
     const {
       children,
@@ -66,7 +40,9 @@ class ProtectedViewFromUser extends Component {
     } = this.props
 
     if (isAuthenticated || !isRehydrated) {
-      return this._renderPlaceholder()
+      return (
+        <EmptyStateAuth />
+      )
     }
 
     return (

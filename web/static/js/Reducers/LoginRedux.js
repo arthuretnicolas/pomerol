@@ -53,6 +53,7 @@ export const emptySession = {
 }
 
 export const INITIAL_STATE = Immutable({
+  rehydrated: false,
   attempting: false,
   error: null,
   jwt: '',

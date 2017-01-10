@@ -29,20 +29,6 @@ import DashboardBilling from '../UI/Dashboard/Containers/DashboardBilling'
 import DashboardProfile from '../UI/Dashboard/Containers/DashboardProfile'
 import DashboardSettings from '../UI/Dashboard/Containers/DashboardSettings'
 
-// TODO:
-/*
-  https://github.com/ReactTraining/react-router/blob/master/examples/auth-flow/app.js#L129
-  <Route path="dashboard" component={Dashboard} onEnter={requireAuth} />
-  function requireAuth(nextState, replace) {
-  if (!auth.loggedIn()) {
-    replace({
-      pathname: '/login',
-      state: { nextPathname: nextState.location.pathname }
-    })
-  }
-}
-*/
-
 export default (
   <Route path='/'>
     <IndexRoute component={Landing} />

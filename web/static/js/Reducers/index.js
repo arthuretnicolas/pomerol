@@ -12,12 +12,13 @@ const appReducer = combineReducers({
 })
 
 const rootReducer = (state: Object, action: Object) => {
-  if (action.type === 'REHYDRATE') {
-    const initialState = Immutable.from(appReducer(state, action))
+  const newState = Immutable.from(appReducer(state, action))
 
-    const initialStateCleaned =
-      initialState.merge({
-        login: initialState.login.merge({
+  if (action.type === 'REHYDRATE') {
+    const newStateCleaned =
+      newState.merge({
+        login: newState.login.merge({
+          rehydrated: true,
           attempting: false,
           attemptingSession: false,
           attemptingRequest: false,
@@ -26,15 +27,15 @@ const rootReducer = (state: Object, action: Object) => {
           attemptingOrganization: false,
           attemptingUpdatePassword: false
         }),
-        signup: initialState.signup.merge({
+        signup: newState.signup.merge({
           attempting: false
         })
       })
 
-    return initialStateCleaned
+    return newStateCleaned
   }
 
-  return appReducer(state, action)
+  return newState
 }
 
 export default rootReducer

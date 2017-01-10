@@ -8,6 +8,7 @@ import { getOnboardingCompletedSteps } from '../../../Helpers'
 
 type Props = {
   isAuthenticated: boolean,
+  isRehydrated: boolean,
   children: React<*>,
   onboardingCompletedSteps: number,
   location: Object
@@ -25,14 +26,16 @@ class ProtectedView extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    this._checkAuth(nextProps.isAuthenticated, nextProps.onboardingCompletedSteps)
+    this._checkAuth(nextProps.isAuthenticated, nextProps.isRehydrated, nextProps.onboardingCompletedSteps)
   }
 
   _checkAuth = (
     isAuthenticated: boolean = this.props.isAuthenticated,
+    isRehydrated: boolean = this.props.isRehydrated,
     onboardingCompletedSteps: number = this.props.onboardingCompletedSteps
   ) => {
-    if (!browserHistory) {
+    // debugger
+    if (!browserHistory || !isRehydrated) {
       return null
     }
 
@@ -91,7 +94,9 @@ class ProtectedView extends Component {
 }
 
 const mapStateToProps = ({ login }) => ({
+  login,
   isAuthenticated: !!(login.session && login.session.user),
+  isRehydrated: login.rehydrated,
   onboardingCompletedSteps: getOnboardingCompletedSteps(login.session)
 })
 
