@@ -30,6 +30,7 @@ defmodule Pomerol.OrganizationView do
       transactional_emails: render_many(organization.transactional_emails, Pomerol.OrganizationTransactionalEmailView, "show.json"),
       members: render_many(organization.organization_memberships, __MODULE__, "organization_membership.json", as: :organization_membership),
       contacts: [],
+      notification_emails: render_many(organization.notification_emails, Pomerol.NotificationEmailView, "show.json"),
       logo_large_url: Pomerol.OrganizationLogo.url({organization.logo, organization}, :large),
       logo_thumb_url: Pomerol.OrganizationLogo.url({organization.logo, organization}, :thumb),
       invites: render_many(organization.organization_invites, Pomerol.OrganizationInviteView, "organization_invite.json")
