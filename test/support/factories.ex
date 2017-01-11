@@ -108,4 +108,12 @@ defmodule Pomerol.Factories do
     }
   end
 
+  def notification_email_factory do
+    %Pomerol.NotificationEmail{
+      organization: build(:organization),
+      email: "email@email.com",
+      type: "new-quote"
+    }
+  end
+
 end
