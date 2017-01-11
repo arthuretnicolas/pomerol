@@ -4,4 +4,5 @@ defmodule Pomerol.SupportedEnums do
   def date_formats, do: ~w(US US24 UK UK24)
   def currency_locales, do: ~w(en_US de_DE fr_FR)
   def transactional_emails, do: ~w(new-quote accepted-quote first-follow-up second-follow-up)
+  def notification_emails, do: ~w(new-quote accepted-quote)
 end
