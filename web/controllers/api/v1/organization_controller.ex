@@ -26,9 +26,8 @@ defmodule Pomerol.V1.OrganizationController do
 
     changeset = Organization.create_changeset(%Organization{}, params)
 
-    case Repo.transaction(OrganizationService.insert(changeset, params)) do
+    case Repo.transaction(OrganizationService.insert(changeset, params, locale)) do
       {:ok, %{organization: organization}} ->
-        # TODO: to improve
         organization = Organization |> Organization.preload_all(locale) |> Repo.get!(organization.id)
         conn
         |> put_status(:created)
