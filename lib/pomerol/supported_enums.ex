@@ -3,4 +3,5 @@ defmodule Pomerol.SupportedEnums do
   def timezones, do: ~w(Pacific/Tarawa Pacific/Auckland Pacific/Norfolk Pacific/Noumea Australia/Sydney Australia/Queensland Australia/Adelaide Australia/North Asia/Tokyo Australia/West Asia/Hong_Kong Asia/Bangkok Asia/Jakarta Asia/Dhaka Asia/Calcutta Asia/Kabul Asia/Tashkent Asia/Dubai Europe/Moscow Asia/Tehran Africa/Djibouti Europe/Minsk Africa/Cairo EET CET WET Europe/Lisbon Europe/London GMT Iceland America/Scoresbysund America/Sao_Paulo America/Godthab America/Thule Canada/Newfoundland America/Buenos_Aires Atlantic/Bermuda Brazil/West VET US/Eastern US/East-Indiana US/Central America/Monterrey Canada/Saskatchewan US/Mountain US/Arizona US/Pacific US/Alaska US/Hawaii)
   def date_formats, do: ~w(US US24 UK UK24)
   def currency_locales, do: ~w(en_US de_DE fr_FR)
+  def transactional_emails, do: ~w(new-quote accepted-quote first-follow-up second-follow-up)
 end

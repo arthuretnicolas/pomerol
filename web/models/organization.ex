@@ -34,6 +34,8 @@ defmodule Pomerol.Organization do
     has_many :organization_invites, OrganizationInvite
     has_many :quotes, Pomerol.Quote
     has_many :tax_rates, Pomerol.OrganizationTaxRate
+    has_many :transactional_emails, Pomerol.OrganizationTransactionalEmail
+    has_many :sales_categories, Pomerol.OrganizationSalesCategory
 
     timestamps
   end
@@ -89,7 +91,7 @@ defmodule Pomerol.Organization do
 
   def preload_all(query, locale) do
     from query, preload: [
-      [:members, :contacts, :organization_memberships, {:organization_invites, :user}, :quotes, :tax_rates],
+      [:members, :contacts, :organization_memberships, {:organization_invites, :user}, :quotes, :tax_rates, :sales_categories, {:sales_categories, :organization_tax_rate}, :transactional_emails],
       country: [ translation: ^Pomerol.CountryTranslation.translation_query(locale) ]
     ]
   end
