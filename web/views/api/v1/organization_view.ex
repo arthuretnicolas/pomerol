@@ -26,7 +26,10 @@ defmodule Pomerol.OrganizationView do
       onboarding: organization.onboarding,
       timezone: organization.timezone,
       tax_rates: render_many(organization.tax_rates, Pomerol.OrganizationTaxRateView, "show.json"),
+      sales_categories: render_many(organization.sales_categories, Pomerol.OrganizationSalesCategoryView, "show.json"),
+      transactional_emails: render_many(organization.transactional_emails, Pomerol.OrganizationTransactionalEmailView, "show.json"),
       members: render_many(organization.organization_memberships, __MODULE__, "organization_membership.json", as: :organization_membership),
+      contacts: [],
       logo_large_url: Pomerol.OrganizationLogo.url({organization.logo, organization}, :large),
       logo_thumb_url: Pomerol.OrganizationLogo.url({organization.logo, organization}, :thumb),
       invites: render_many(organization.organization_invites, Pomerol.OrganizationInviteView, "organization_invite.json")

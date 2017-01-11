@@ -48,7 +48,6 @@ defmodule Pomerol.Router do
     scope "/v1", V1, as: :v1 do
       pipe_through [:api, :bearer_auth, :ensure_auth, :current_user]
 
-      resources "/countries", CountryController, only: [:index]
       get "/signout", SessionController, :delete
 
       get "/user", UserController, :current_user
@@ -58,6 +57,8 @@ defmodule Pomerol.Router do
       resources "/contacts", ContactController, only: [:show, :update]
 
       resources "/tax-rates", OrganizationTaxRateController, only: [:update]
+      resources "/transactional-emails", OrganizationTransactionalEmailController, only: [:update]
+      resources "/sales-categories", OrganizationSalesCategoryController, only: [:update]
 
       resources "/organizations", OrganizationController, only: [:index, :show, :create, :update] do
         resources "/contacts", ContactController, only: [:index, :create]
@@ -65,6 +66,7 @@ defmodule Pomerol.Router do
         resources "/invites", OrganizationInviteController, only: [:create, :update]
         resources "/quotes", QuoteController, only: [:create]
         resources "/tax-rates", OrganizationTaxRateController, only: [:create]
+        resources "/sales-categories", OrganizationSalesCategoryController, only: [:create]
       end
     end
 
