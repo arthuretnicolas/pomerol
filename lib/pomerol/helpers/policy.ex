@@ -6,7 +6,7 @@ defmodule Pomerol.Helpers.Policy do
 
   import Ecto.Query
 
-  alias Pomerol.{Organization, OrganizationMembership, OrganizationInvite, OrganizationTaxRate, Quote, Repo, User, Contact}
+  alias Pomerol.{Organization, OrganizationMembership, OrganizationInvite, OrganizationTaxRate, OrganizationTransactionalEmail, OrganizationSalesCategory, Quote, Repo, User, Contact}
   alias Ecto.Changeset
 
   @doc """
@@ -20,6 +20,8 @@ defmodule Pomerol.Helpers.Policy do
   def get_membership(%Changeset{changes: %{current_organization_id: current_organization_id}}, %User{id: user_id}), do: do_get_membership(current_organization_id, user_id)
   def get_membership(%OrganizationInvite{organization_id: organization_id}, %User{id: user_id}), do: do_get_membership(organization_id, user_id)
   def get_membership(%OrganizationTaxRate{organization_id: organization_id}, %User{id: user_id}), do: do_get_membership(organization_id, user_id)
+  def get_membership(%OrganizationSalesCategory{organization_id: organization_id}, %User{id: user_id}), do: do_get_membership(organization_id, user_id)
+  def get_membership(%OrganizationTransactionalEmail{organization_id: organization_id}, %User{id: user_id}), do: do_get_membership(organization_id, user_id)
   def get_membership(%Contact{organization_id: organization_id}, %User{id: user_id}), do: do_get_membership(organization_id, user_id)
   def get_membership(%Quote{organization_id: organization_id}, %User{id: user_id}), do: do_get_membership(organization_id, user_id)
   def get_membership(%Organization{id: organization_id}, %User{id: user_id}), do: do_get_membership(organization_id, user_id)
@@ -65,5 +67,13 @@ defmodule Pomerol.Helpers.Policy do
   def get_current_organization(%{current_organization_id: current_organization_id}), do: Organization |> Repo.get(current_organization_id)
   def get_current_organization(%Changeset{changes: %{current_organization_id: current_organization_id}}), do: Organization |> Repo.get(current_organization_id)
   def get_current_organization(_), do: nil
+
+  def get_organization_tax_rate(%{organization_tax_rate_id: organization_tax_rate_id}), do: OrganizationTaxRate |> Repo.get(organization_tax_rate_id)
+  def get_organization_tax_rate(%Changeset{changes: %{organization_tax_rate_id: organization_tax_rate_id}}), do: OrganizationTaxRate |> Repo.get(organization_tax_rate_id)
+  def get_organization_tax_rate(_), do: nil
+
+  def get_organization(%{organization_id: organization_id}), do: Organization |> Repo.get(organization_id)
+  def get_organization(%Changeset{changes: %{organization_id: organization_id}}), do: Organization |> Repo.get(organization_id)
+  def get_organization(_), do: nil
 
 end
