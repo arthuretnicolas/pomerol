@@ -87,4 +87,25 @@ defmodule Pomerol.Factories do
     }
   end
 
+  def organization_transactional_email_factory do
+    %Pomerol.OrganizationTransactionalEmail{
+      type: "new-quote",
+      subject: "Subject",
+      body: "Body",
+      footer: "Footer",
+      organization: build(:organization)
+    }
+  end
+
+  def organization_sales_category_factory do
+    %Pomerol.OrganizationSalesCategory{
+      organization: build(:organization),
+      organization_tax_rate: build(:organization_tax_rate),
+      name: "category",
+      description: "desc",
+      default: false,
+      archived: false
+    }
+  end
+
 end
