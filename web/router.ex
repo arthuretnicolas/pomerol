@@ -59,6 +59,7 @@ defmodule Pomerol.Router do
       resources "/tax-rates", OrganizationTaxRateController, only: [:update]
       resources "/transactional-emails", OrganizationTransactionalEmailController, only: [:update]
       resources "/sales-categories", OrganizationSalesCategoryController, only: [:update]
+      resources "/notification-emails", NotificationEmailController, only: [:update, :delete]
 
       resources "/organizations", OrganizationController, only: [:index, :show, :create, :update] do
         resources "/contacts", ContactController, only: [:index, :create]
@@ -67,6 +68,7 @@ defmodule Pomerol.Router do
         resources "/quotes", QuoteController, only: [:create]
         resources "/tax-rates", OrganizationTaxRateController, only: [:create]
         resources "/sales-categories", OrganizationSalesCategoryController, only: [:create]
+        resources "/notification-emails", NotificationEmailController, only: [:create]
       end
     end
 
