@@ -22,7 +22,6 @@ defmodule Pomerol.Services.Base64ImageUploaderService do
       image_content
       |> Base64ImageService.save_to_file()
       |> build_plug_upload
-    IO.inspect plug_upload
     changeset
     |> cast_attachments(%{destination_field => plug_upload}, [destination_field])
     |> validate_required([destination_field])
