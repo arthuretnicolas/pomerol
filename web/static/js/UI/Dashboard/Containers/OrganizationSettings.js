@@ -8,6 +8,7 @@ type Props = {
   // logout: () => void
 }
 
+// $FlowFixMe
 const Container = ({ children }) => (
   <div className='container'>
     {children}
@@ -43,16 +44,10 @@ class OrganizationSettings extends Component {
             'Notifications'
           ]}
           panels={[
-            <Container>
-              <div>Infos</div>
-            </Container>,
-            <Container>
-              <div>Members</div>
-            </Container>,
-            <Container>
-              <div>Notifications</div>
-            </Container>
-          ]}
+            <div>Infos</div>,
+            <div>Members</div>,
+            <div>Notifications</div>
+          ].map(Container)}
         />
       </div>
     )
