@@ -62,4 +62,6 @@ config :arc,
   virtual_host: false,
   arc_storage: Arc.Storage.S3
 
+config :pomerol, :analytics, Pomerol.Analytics.InMemoryAPI
+
 import_config "dev.secrets.exs"
