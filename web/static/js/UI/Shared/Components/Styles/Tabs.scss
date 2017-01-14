@@ -36,8 +36,10 @@
         font-size: $font-size-large;
         cursor: pointer;
         color: $black;
-        padding-left: $base-padding * 1.5;
-        padding-right: $base-padding * 1.5;
+        padding-left: $small-padding;
+        padding-right: $small-padding;
+        margin-left: $base-padding;
+        margin-right: $base-padding;
         border-bottom: 2px solid transparent;
         // hacky for alignment
         padding-top: 4px;
