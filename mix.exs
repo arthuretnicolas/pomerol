@@ -38,6 +38,7 @@ defmodule Pomerol.Mixfile do
         :phoenix_pubsub,
         :poison,
         :postgrex,
+        :segment,
         :std_json_io,
         :timex,
         :timex_ecto,
@@ -79,6 +80,7 @@ defmodule Pomerol.Mixfile do
       {:phoenix_pubsub, "~> 1.0"},
       {:postgrex, ">= 0.0.0"},
       {:poison, "~> 3.0", override: true},
+      {:segment, "~> 0.1"}, # Segment analytics
       {:std_json_io, "~> 0.1", override: true},
       {:timex, "~> 3.0"},
       {:timex_ecto, "~> 3.0"},
