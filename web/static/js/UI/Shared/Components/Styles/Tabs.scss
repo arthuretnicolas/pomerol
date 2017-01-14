@@ -43,7 +43,8 @@
         padding-top: 4px;
 
         &.selected {
-          border-color: $color-primary-medium;
+          color: $color-primary;
+          border-color: $color-primary;
         }
       }
     }

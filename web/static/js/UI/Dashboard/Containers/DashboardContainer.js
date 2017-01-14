@@ -13,11 +13,21 @@ type Props = {
   onboardingCompletedSteps: number,
   organizations: Array<Object>,
   updateOrganization: () => void,
+  logout: () => void,
   currentOrganizationId: string | null
 }
 
 class DashboardContainer extends Component {
   props: Props
+
+  _onLogout = () => {
+    const { logout } = this.props
+    const confirmation = window.confirm('Are you sure that you want to log out ?')
+
+    if (confirmation) {
+      logout()
+    }
+  }
 
   render () {
     const {
@@ -39,6 +49,7 @@ class DashboardContainer extends Component {
           selectedOrganizationId={currentOrganizationId}
           data={sidebarOptions}
           onChange={updateOrganization}
+          onClickLogout={this._onLogout}
         />
 
         <div className='container-content'>
@@ -57,7 +68,8 @@ const mapStateToProps = ({ login }) => ({
 
 const mapDispatchToProps = dispatch => ({
   updateOrganization: (id: number) =>
-    dispatch(LoginActions.updateUserAttempt({ current_organization_id: id }))
+    dispatch(LoginActions.updateUserAttempt({ current_organization_id: id })),
+  logout: () => dispatch(LoginActions.logout())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(DashboardContainer)
