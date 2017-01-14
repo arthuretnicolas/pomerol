@@ -1,5 +1,6 @@
 defmodule Pomerol.Contact do
   use Pomerol.Web, :model
+  import Pomerol.ValidationHelpers
 
   schema "contacts" do
     field :first_name, :string
@@ -7,6 +8,8 @@ defmodule Pomerol.Contact do
     field :email, :string
     field :contact_type, :string
     field :archived, :boolean, default: false
+
+    field :company_name, :string, virtual: true
 
     belongs_to :organization, Pomerol.Organization
     belongs_to :user, Pomerol.User
@@ -23,15 +26,16 @@ defmodule Pomerol.Contact do
 
   def changeset(contact, params \\ %{}) do
     contact
-    |> cast(params, [:first_name, :last_name, :email, :contact_type, :organization_id, :user_id])
+    |> cast(params, [:first_name, :last_name, :email, :contact_type, :organization_id, :user_id, :company_name])
     |> validate_required([:first_name, :email, :contact_type, :organization_id, :user_id])
+    |> update_change(:email, &String.downcase/1)
+    |> validate_email_format(:email)
     |> assoc_constraint(:user)
     |> assoc_constraint(:organization)
     |> validate_inclusion(:contact_type, contact_types)
     |> cast_assoc(:addresses, required: false, with: &Pomerol.ContactAddress.changeset/2)
     |> cast_assoc(:fields, required: false, with: &Pomerol.ContactField.changeset/2)
     |> validate_model()
-    # validate email
   end
 
   defp validate_model(changeset) do

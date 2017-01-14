@@ -27,6 +27,19 @@ defmodule Pomerol.Organization do
     field :country_code, :string, virtual: true
     belongs_to :country, Country
 
+    # Default template style fields
+    field :button_color, :string, default: "006699"
+    field :highlight_color, :string, default: "EEF4F8"
+    field :background_color, :string, default: "FFFFFF"
+    field :contact_inc_details, :boolean, default: false
+    field :contact_format, :string, default: "columns"
+    field :show_pdf, :boolean, default: false
+    field :pdf_page_size, :string
+    field :layout_aligned, :string, default: "left"
+    field :font_heading, :string, default: "helvetica"
+    field :font_weight, :string, default: "bold"
+    field :font_body, :string, default: "helvetica"
+
     has_many :organization_memberships, OrganizationMembership
     has_many :members, through: [:organization_memberships, :member]
 
@@ -37,6 +50,7 @@ defmodule Pomerol.Organization do
     has_many :transactional_emails, Pomerol.OrganizationTransactionalEmail
     has_many :sales_categories, Pomerol.OrganizationSalesCategory
     has_many :notification_emails, Pomerol.NotificationEmail
+    has_many :organization_items, Pomerol.OrganizationItem
 
     timestamps
   end
@@ -92,8 +106,8 @@ defmodule Pomerol.Organization do
 
   def preload_all(query, locale) do
     from query, preload: [
-      [:members, :contacts, :organization_memberships, {:organization_invites, :user}, :quotes, :tax_rates, :sales_categories, {:sales_categories, :organization_tax_rate}, :transactional_emails, :notification_emails],
-      country: [ translation: ^Pomerol.CountryTranslation.translation_query(locale) ]
+      [:members, :contacts, :organization_memberships, {:organization_invites, :user}, :quotes, :tax_rates, :sales_categories, {:sales_categories, :organization_tax_rate}, :transactional_emails, :notification_emails, :organization_items],
+      country: [translation: ^Pomerol.CountryTranslation.translation_query(locale)]
     ]
   end
 end
