@@ -82,6 +82,7 @@ export default class FormOnboardingTwo extends Component {
                 placeholder='Your organization name'
                 required
                 onChange={event => onChange('name', event && event.target.value)}
+                disabled={attempting}
               />
 
               <Grid>
@@ -91,6 +92,7 @@ export default class FormOnboardingTwo extends Component {
                   type='text'
                   placeholder='07 123 456 789'
                   onChange={event => onChange('phoneNumber', event && event.target.value)}
+                  disabled={attempting}
                 />
                 <Input
                   label='Organization website'
@@ -98,6 +100,7 @@ export default class FormOnboardingTwo extends Component {
                   type='url'
                   placeholder='https://example.com'
                   onChange={event => onChange('website', event && event.target.value)}
+                  disabled={attempting}
                 />
               </Grid>
 
@@ -107,6 +110,7 @@ export default class FormOnboardingTwo extends Component {
                 type='text'
                 placeholder='Address'
                 onChange={event => onChange('address1', event && event.target.value)}
+                disabled={attempting}
               />
 
               <Input
@@ -115,6 +119,7 @@ export default class FormOnboardingTwo extends Component {
                 type='text'
                 placeholder='Address 2'
                 onChange={event => onChange('address2', event && event.target.value)}
+                disabled={attempting}
               />
 
               <Grid>
@@ -124,6 +129,7 @@ export default class FormOnboardingTwo extends Component {
                   type='text'
                   placeholder='Zip / Postal code'
                   onChange={event => onChange('zip', event && event.target.value)}
+                  disabled={attempting}
                 />
                 <Input
                   label='City'
@@ -131,6 +137,7 @@ export default class FormOnboardingTwo extends Component {
                   type='text'
                   placeholder='City'
                   onChange={event => onChange('city', event && event.target.value)}
+                  disabled={attempting}
                 />
               </Grid>
 
@@ -142,6 +149,7 @@ export default class FormOnboardingTwo extends Component {
                 onChange={event => onChange('countryId', event && event.target.value)}
                 top={countries.top}
                 options={countries.list}
+                disabled={attempting}
               />
             </div>
           }

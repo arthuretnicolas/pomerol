@@ -58,6 +58,7 @@ export default class FormResetPassword extends Component {
                 required
                 minLength={5}
                 onChange={event => onChange('password', event && event.target.value)}
+                disabled={attempting}
               />
             </div>
           }

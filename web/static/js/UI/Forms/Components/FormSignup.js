@@ -61,6 +61,7 @@ export default class FormSignup extends Component {
                 placeholder='Your email'
                 required
                 onChange={event => onChange('email', event && event.target.value)}
+                disabled={attempting}
               />
               <Input
                 label='Password'
@@ -70,6 +71,7 @@ export default class FormSignup extends Component {
                 required
                 minLength={5}
                 onChange={event => onChange('password', event && event.target.value)}
+                disabled={attempting}
               />
             </div>
           }

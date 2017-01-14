@@ -71,6 +71,7 @@ export default class FormOnboardingOne extends Component {
                 placeholder='Your first name'
                 required
                 onChange={event => onChange('firstName', event && event.target.value)}
+                disabled={attempting}
               />
               <Input
                 label='Last name'
@@ -79,6 +80,7 @@ export default class FormOnboardingOne extends Component {
                 placeholder='Your last name'
                 required
                 onChange={event => onChange('lastName', event && event.target.value)}
+                disabled={attempting}
               />
               <Select
                 label='Country'
@@ -88,6 +90,7 @@ export default class FormOnboardingOne extends Component {
                 onChange={event => onChange('countryId', event && event.target.value)}
                 top={countries.top}
                 options={countries.list}
+                disabled={attempting}
               />
             </div>
           }

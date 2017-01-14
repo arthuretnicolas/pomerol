@@ -61,6 +61,7 @@ export default class FormLogin extends Component {
                 placeholder='Your email'
                 required
                 onChange={event => onChange('email', event && event.target.value)}
+                disabled={attempting}
               />
               <Input
                 label='Password'
@@ -69,6 +70,7 @@ export default class FormLogin extends Component {
                 placeholder='Your password'
                 required
                 onChange={event => onChange('password', event && event.target.value)}
+                disabled={attempting}
               />
             </div>
           }
