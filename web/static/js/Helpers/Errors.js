@@ -27,6 +27,11 @@ function parseErrors (errors: Object | Array): string {
 }
 
 export function handleErrors (data: Object): void {
+  // will happen for timeout errors for example
+  if (!data) {
+    return undefined
+  }
+
   const parsedErrors = parseErrors(data.errors || data.error || [])
 
   if (parsedErrors !== '') {

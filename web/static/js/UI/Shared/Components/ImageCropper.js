@@ -54,7 +54,6 @@ const Instructions = ({ onChange, imageMinSize }) => (
       className='button'
       accept='image/*'
       type='file'
-      required
       onChange={onChange}
       size='small'
     />
