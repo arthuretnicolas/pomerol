@@ -58,8 +58,11 @@ defmodule Pomerol.User do
 
   def update_changeset(user, params \\ %{}) do
     user
-    |> cast(params, [:first_name, :last_name, :locale, :country_code, :current_organization_id, :base64_photo_data])
+    |> cast(params, [:first_name, :last_name, :email, :locale, :country_code, :current_organization_id, :base64_photo_data])
     |> validate_inclusion(:locale, Pomerol.Gettext.supported_locales)
+    |> update_change(:email, &String.downcase/1)
+    |> validate_email_format(:email)
+    |> unique_constraint(:email, message: "Email already taken")
     |> foreign_key_constraint(:current_organization_id)
     |> assoc_constraint(:current_organization)
     |> validate_inclusion(:country_code, Pomerol.SupportedEnums.country_codes)
