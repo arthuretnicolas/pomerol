@@ -1,0 +1,22 @@
+.Dashboard-OrganizationSettings {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  // align-items: center;
+  // justify-content: center;
+  font-size: 24px;
+  color: $gray;
+
+  > .content {
+    padding-left: $double-padding * 1.5;
+    padding-right: $double-padding * 1.5;
+
+    > .container {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}

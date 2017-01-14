@@ -1,8 +1,8 @@
 .Dashboard-Header {
   display: flex;
   align-items: center;
-  padding-left: $base-padding;
-  padding-right: $base-padding;
+  padding-left: $double-padding * 1.5;
+  padding-right: $double-padding * 1.5;
   min-height: $header-height;
   font-size: $font-size-large;
   border-bottom: 2px solid $gray-xlight;

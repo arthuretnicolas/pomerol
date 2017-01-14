@@ -24,6 +24,10 @@
     flex-direction: column;
     justify-content: space-between;
 
+    > .warning {
+      max-width: 256px;
+    }
+
     > .button {
       align-self: flex-start;
       margin-top: $base-padding;

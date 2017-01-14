@@ -44,7 +44,7 @@ const SaveOrCancel = ({ onCancel, onSave, isAttempting }) => (
 const Instructions = ({ onChange, imageMinSize }) => (
   <div className='container-instructions'>
     {
-      imageMinSize && imageMinSize > 0 && <div>
+      imageMinSize && imageMinSize > 0 && <div className='warning'>
         Photo should be at least {imageMinSize}px × {imageMinSize}px
       </div>
     }
