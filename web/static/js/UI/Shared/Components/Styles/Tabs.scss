@@ -38,6 +38,8 @@
         color: $black;
         padding-left: $base-padding * 1.5;
         padding-right: $base-padding * 1.5;
+        // hacky for alignment
+        padding-top: 3px;
 
         &.selected {
           border-bottom: 2px solid $color-primary-medium;
