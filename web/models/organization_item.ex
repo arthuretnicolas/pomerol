@@ -26,4 +26,16 @@ defmodule Pomerol.OrganizationItem do
 
     timestamps
   end
+
+  def create_changeset(struct, params \\ %{}) do
+    struct
+    |> cast(params, [:title, :description, :organization_id])
+    |> validate_required([:title, :description, :organization_id])
+  end
+
+  def update_changeset(struct, params \\ %{}) do
+    struct
+    |> cast(params, [:title, :description, :organization_id])
+    |> validate_required([:title, :description, :organization_id])
+  end
 end

@@ -116,4 +116,14 @@ defmodule Pomerol.Factories do
     }
   end
 
+  def organization_item_factory do
+    %Pomerol.OrganizationItem{
+      organization: build(:organization),
+      organization_sales_category: build(:organization_sales_category),
+      organization_tax_rate: build(:organization_tax_rate),
+      title: "SUPER ITEM",
+      description: "SUPER DESC"
+    }
+  end
+
 end
