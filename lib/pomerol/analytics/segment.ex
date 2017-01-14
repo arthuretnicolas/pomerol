@@ -51,7 +51,6 @@ defmodule Pomerol.Analytics.Segment do
   @spec track({:ok, Ecto.Schema.t} | {:error, Ecto.Changeset.t}, atom, Plug.Conn.t) :: any
   def track({:ok, record}, action, %Plug.Conn{} = conn) when action in @actions_without_properties do
     action_name = get_event_name(action, record)
-    IO.inspect action_name
     do_track(conn, action_name)
     {:ok, record}
   end
