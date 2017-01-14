@@ -33,7 +33,19 @@ defmodule Pomerol.OrganizationView do
       notification_emails: render_many(organization.notification_emails, Pomerol.NotificationEmailView, "show.json"),
       logo_large_url: Pomerol.OrganizationLogo.url({organization.logo, organization}, :large),
       logo_thumb_url: Pomerol.OrganizationLogo.url({organization.logo, organization}, :thumb),
-      invites: render_many(organization.organization_invites, Pomerol.OrganizationInviteView, "organization_invite.json")
+      invites: render_many(organization.organization_invites, Pomerol.OrganizationInviteView, "organization_invite.json"),
+      button_color: organization.button_color,
+      highlight_color: organization.highlight_color,
+      background_color: organization.background_color,
+      contact_inc_details: organization.contact_inc_details,
+      contact_format: organization.contact_format,
+      show_pdf: organization.show_pdf,
+      pdf_page_size: organization.pdf_page_size,
+      layout_aligned: organization.layout_aligned,
+      font_heading: organization.font_heading,
+      font_weight: organization.font_weight,
+      font_body: organization.font_body,
+      organization_items: render_many(organization.organization_items, Pomerol.OrganizationItemView, "organization_item.json")
     }
   end
 
