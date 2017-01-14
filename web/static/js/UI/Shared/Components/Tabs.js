@@ -4,11 +4,12 @@ import React from 'react'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 
 type Props = {
-  onSelect: () => void,
+  onSelect: (currentIndex: number, previousIndex: number) => void,
   tabs: Array<string>,
   panels: Array<any>,
   selectedIndex: number,
-  className?: string
+  className?: string,
+  title?: string
 }
 
 const _Tabs = ({
@@ -16,45 +17,56 @@ const _Tabs = ({
   tabs,
   panels,
   selectedIndex = 0,
-  className = ''
+  className = '',
+  title = ''
 }: Props) => {
   Tabs.setUseDefaultStyles(false)
 
   return (
-    <Tabs
+    <div
       className={`
         Shared-Tabs
         ${className}
       `}
-      onSelect={onSelect}
-      selectedIndex={selectedIndex}
     >
-      <TabList className='tab-list'>
+      {
+        title !== '' && <div className='title'>
+          {title}
+        </div>
+      }
+
+      <Tabs
+        className='main'
+        onSelect={onSelect}
+        selectedIndex={selectedIndex}
+      >
+        <TabList className='tab-list'>
+          {
+            tabs.map((tab, index) => (
+              <Tab
+                key={index}
+                className={`
+                  tab
+                  ${selectedIndex === index ? 'selected' : ''}
+                `}
+              >
+                {tab}
+              </Tab>
+            ))
+          }
+        </TabList>
+
         {
-          tabs.map((tab, index) => (
-            <Tab
+          panels.map((Panel, index) => (
+            <TabPanel
               key={index}
-              className={`
-                tab
-                ${selectedIndex === index ? 'selected' : ''}
-              `}
-            >
-              {tab}
-            </Tab>
+              className='tab-panel'
+              children={Panel}
+            />
           ))
         }
-      </TabList>
-
-      {
-        panels.map((Panel, index) => (
-          <TabPanel
-            key={index}
-            className='tab-panel'
-            children={Panel}
-          />
-        ))
-      }
-    </Tabs>
+      </Tabs>
+    </div>
   )
 }
 

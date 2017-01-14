@@ -21,7 +21,7 @@ class OrganizationSettings extends Component {
     selectedIndex: 0
   }
 
-  _handleSelect = (selectedIndex, last) => {
+  _handleSelect = (selectedIndex: number, previousIndex: number) => {
     this.setState({
       selectedIndex
     })
@@ -34,6 +34,7 @@ class OrganizationSettings extends Component {
       <div className='Dashboard-OrganizationSettings'>
         <Tabs
           className='content'
+          title='Organization'
           selectedIndex={selectedIndex}
           onSelect={this._handleSelect}
           tabs={[
@@ -43,13 +44,13 @@ class OrganizationSettings extends Component {
           ]}
           panels={[
             <Container>
-              <div>Panel #0</div>
+              <div>Infos</div>
             </Container>,
             <Container>
-              <div>Panel #1</div>
+              <div>Members</div>
             </Container>,
             <Container>
-              <div>Panel #2</div>
+              <div>Notifications</div>
             </Container>
           ]}
         />
