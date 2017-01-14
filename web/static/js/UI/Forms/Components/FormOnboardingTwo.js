@@ -3,7 +3,6 @@
 import React, { Component } from 'react'
 import Form from './Form'
 import Input from './Input'
-import Textarea from './Textarea'
 import Select from './Select'
 import Grid from '../../Shared/Components/Grid'
 import {
@@ -23,7 +22,10 @@ type Props = {
     name: string,
     phoneNumber: string,
     website: string,
-    address: string,
+    address1: string,
+    address2: string,
+    zip: string,
+    city: string,
     countryId: string | null
   },
   attempting: boolean
@@ -50,7 +52,10 @@ export default class FormOnboardingTwo extends Component {
       name,
       phoneNumber,
       website,
-      address,
+      address1,
+      address2,
+      zip,
+      city,
       countryId
     } = values
 
@@ -95,14 +100,40 @@ export default class FormOnboardingTwo extends Component {
                   onChange={event => onChange('website', event && event.target.value)}
                 />
               </Grid>
-              <Textarea
-                label='Organization address'
-                value={address || ''}
+
+              <Input
+                label='Address'
+                value={address1}
                 type='text'
-                resize={false}
-                placeholder='Your organization address'
-                onChange={event => onChange('address', event && event.target.value)}
+                placeholder='Address'
+                onChange={event => onChange('address1', event && event.target.value)}
               />
+
+              <Input
+                label='Address 2'
+                value={address2}
+                type='text'
+                placeholder='Address 2'
+                onChange={event => onChange('address2', event && event.target.value)}
+              />
+
+              <Grid>
+                <Input
+                  label='Zip / Postal code'
+                  value={zip}
+                  type='text'
+                  placeholder='Zip / Postal code'
+                  onChange={event => onChange('zip', event && event.target.value)}
+                />
+                <Input
+                  label='City'
+                  value={city}
+                  type='text'
+                  placeholder='City'
+                  onChange={event => onChange('city', event && event.target.value)}
+                />
+              </Grid>
+
               <Select
                 label='Country'
                 selected={countryId}

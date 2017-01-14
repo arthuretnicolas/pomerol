@@ -18,7 +18,10 @@ class OnboardingTwo extends Component {
     name: '',
     phoneNumber: '',
     website: '',
-    address: '',
+    address1: '',
+    address2: '',
+    zip: '',
+    city: '',
     countryId: this.props.user.countryId
   }
 
@@ -34,7 +37,10 @@ class OnboardingTwo extends Component {
       name,
       phoneNumber,
       website,
-      address,
+      address1,
+      address2,
+      zip,
+      city,
       countryId
     } = this.state
 
@@ -42,7 +48,10 @@ class OnboardingTwo extends Component {
       name,
       phone: phoneNumber,
       website,
-      address,
+      address1,
+      address2,
+      zip,
+      city,
       country_code: countryId
     })
   }
@@ -55,7 +64,10 @@ class OnboardingTwo extends Component {
       name,
       phoneNumber,
       website,
-      address,
+      address1,
+      address2,
+      zip,
+      city,
       countryId
     } = this.state
 
@@ -65,7 +77,16 @@ class OnboardingTwo extends Component {
           <FormOnboardingTwo
             onChange={this._onChange}
             onSubmit={this._submit}
-            values={{ name, phoneNumber, website, address, countryId }}
+            values={{
+              name,
+              phoneNumber,
+              website,
+              address1,
+              address2,
+              zip,
+              city,
+              countryId
+            }}
             attempting={attemptingOrganization}
           />
         </div>
