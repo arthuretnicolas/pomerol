@@ -16,6 +16,8 @@ defmodule Pomerol.V1.UserController  do
 
     case Repo.transaction(UserService.insert(conn, changeset, params, locale)) do
       {:ok, %{user: user}} ->
+        conn = login(user, conn)
+        Pomerol.Analytics.Segment.track({:ok, user}, :signed_up, conn)
         {:ok, jwt, _full_claims} = user |> Guardian.encode_and_sign(:token)
 
         conn
@@ -28,6 +30,8 @@ defmodule Pomerol.V1.UserController  do
         |> render(Pomerol.UserView, "error.json", changeset: failed_value)
     end
   end
+
+  defp login(user, conn), do: Plug.Conn.assign(conn, :current_user, user)
 
   def update(conn, user_params) do
     locale = conn.assigns[:locale]
