@@ -89,6 +89,27 @@ defmodule Pomerol.V1.ContactControllerTest do
       assert json["user_id"] == current_user.id
     end
 
+    @tag :authenticated
+    test "doesnt create contact when data is invalid", %{conn: conn, current_user: current_user} do
+      organization = insert(:organization)
+      membership = insert(:organization_membership, organization: organization, member: current_user, role: "owner")
+
+      conn = post conn, "/api/v1/organizations/#{organization.id}/contacts", %{first_name: "JOJO", email: "email@email.com"}
+
+      json = conn |> json_response(422)
+    end
+
+    @tag :authenticated
+    test "doesnt create contact when email is already used", %{conn: conn, current_user: current_user} do
+      organization = insert(:organization)
+      membership = insert(:organization_membership, organization: organization, member: current_user, role: "owner")
+      contact = insert(:contact, organization: organization)
+
+      conn = post conn, "/api/v1/organizations/#{organization.id}/contacts", %{email: contact.email, first_name: "Firstname", contact_type: "person"}
+
+      json = conn |> json_response(422)
+    end
+
   end
 
 end
