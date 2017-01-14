@@ -11,7 +11,7 @@
     min-height: $min-height;
     box-shadow: none;
     line-height: $line-height-input;
-    font-size: $font-size-large;
+    font-size: $font-size-small;
     letter-spacing: $letter-spacing-spaced;
     border-radius: $border-radius-button;
     border: 2px solid $color-border-input;
@@ -27,6 +27,12 @@
 
     &:focus, &:active {
       border-color: $color-primary-semi-light;
+    }
+  }
+
+  &.small {
+    > .textarea {
+      font-size: $font-size-smaller;
     }
   }
 }

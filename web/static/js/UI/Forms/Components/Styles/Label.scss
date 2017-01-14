@@ -1,4 +1,14 @@
 .Forms-Label {
   padding-bottom: $small-padding;
   color: $gray-dark;
+
+  &.required {
+    color: red;
+  }
+
+  > .required-star {
+    color: $color-danger;
+    padding-left: $tiny-padding;
+    font-family: $font-family-semibold;
+  }
 }

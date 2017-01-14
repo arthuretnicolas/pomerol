@@ -60,9 +60,9 @@ export default class FormOnboardingTwo extends Component {
         onSubmit={this._onSubmit}
       >
         <Form
-          header='Onboarding two'
+          header='Organization'
           text={{
-            label: 'Blablabla'
+            label: 'Let\'s create your first organization'
           }}
           buttonSubmit='Next'
           contentLoading='Next...'

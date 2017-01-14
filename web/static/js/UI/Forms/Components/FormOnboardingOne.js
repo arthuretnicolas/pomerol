@@ -54,9 +54,9 @@ export default class FormOnboardingOne extends Component {
         onSubmit={this._onSubmit}
       >
         <Form
-          header='Onboarding one'
+          header='Personal infos'
           text={{
-            label: 'Blablabla'
+            label: 'Let\'s get to know you'
           }}
           buttonSubmit='Next'
           contentLoading='Next...'

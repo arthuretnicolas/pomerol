@@ -32,7 +32,11 @@ const Textarea = ({
   resize = true
 }: Props) => (
   <div className='Forms-Textarea'>
-    <Label name={name} label={label} />
+    <Label
+      name={name}
+      label={label}
+      required={required}
+    />
 
     <textarea
       className={`textarea ${resize ? '' : 'no-resize'}`}

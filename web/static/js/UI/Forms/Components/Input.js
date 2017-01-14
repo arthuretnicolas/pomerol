@@ -38,6 +38,7 @@ const Input = ({
         name={name}
         label={label}
         className={type === 'file' ? 'label-file' : ''}
+        required={required}
       />
     }
 

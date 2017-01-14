@@ -51,7 +51,11 @@ const Select = ({
     </div>
 
     {
-      !!label && <Label name={name} label={label} />
+      !!label && <Label
+        name={name}
+        label={label}
+        required={required}
+      />
     }
 
     <select
