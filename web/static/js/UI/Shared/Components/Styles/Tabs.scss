@@ -38,11 +38,12 @@
         color: $black;
         padding-left: $base-padding * 1.5;
         padding-right: $base-padding * 1.5;
+        border-bottom: 2px solid transparent;
         // hacky for alignment
-        padding-top: 3px;
+        padding-top: 4px;
 
         &.selected {
-          border-bottom: 2px solid $color-primary-medium;
+          border-color: $color-primary-medium;
         }
       }
     }
