@@ -5,4 +5,5 @@ defmodule Pomerol.SupportedEnums do
   def currency_locales, do: ~w(en_US de_DE fr_FR)
   def transactional_emails, do: ~w(new-quote accepted-quote first-follow-up second-follow-up)
   def notification_emails, do: ~w(new-quote accepted-quote)
+  def fonts, do: ~w(helvetica tahoma georgia times)
 end
