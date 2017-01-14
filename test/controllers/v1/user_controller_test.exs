@@ -79,7 +79,6 @@ defmodule Pomerol.V1.UserControllerTest do
   end
 
   describe "current user" do
-
     test "GET /api/v1/user when user is not logguedin", %{conn: conn} do
       conn = get conn, "/api/v1/user"
       assert conn |> json_response(401)
@@ -176,6 +175,35 @@ defmodule Pomerol.V1.UserControllerTest do
       assert String.contains? large_url, "/users/#{user.id}/large"
       thumb_url = data["photo_thumb_url"]
       assert String.contains? thumb_url, "/users/#{user.id}/thumb"
+    end
+
+    @tag :authenticated
+    test "does update user's email", %{conn: conn, current_user: current_user} do
+      conn =
+        conn
+        |> put("/api/v1/users/#{current_user.id}", %{email: "newemail@email.com"})
+
+      json = conn |> json_response(200)
+      assert json["email"] == "newemail@email.com"
+
+      user =
+        User
+        |> Repo.get(current_user.id)
+
+      assert user.email == "newemail@email.com"
+    end
+
+    @tag :authenticated
+    test "does not update user's email coz already taken", %{conn: conn, current_user: current_user} do
+
+      another_user = insert(:user)
+
+      conn =
+        conn
+        |> put("/api/v1/users/#{current_user.id}", %{email: another_user.email})
+
+      json = conn |> json_response(422)
+      assert json["errors"] != %{}
     end
   end
 end
