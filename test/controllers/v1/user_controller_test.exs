@@ -29,6 +29,14 @@ defmodule Pomerol.V1.UserControllerTest do
       conn = post conn, "/api/v1/signup", %{email: user.email, password: "password"}
       assert conn |> json_response(422)
     end
+
+    test "calls segment tracking after user is created", %{conn: conn} do
+      attrs = Map.put(@valid_attrs, :password, "password")
+      conn = post conn, "/api/v1/signup", attrs
+      json = conn |> json_response(201)
+      id = json["user_id"]
+      assert_received {:track, ^id, "Signed Up", %{}}
+    end
   end
 
   describe "password reset request" do
