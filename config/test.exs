@@ -24,3 +24,12 @@ config :comeonin, :pbkdf2_rounds, 1
 
 config :pomerol, Pomerol.Mailer,
   adapter: Bamboo.TestAdapter
+
+config :arc,
+  bucket: "pomerol",
+  virtual_host: false,
+  arc_storage: Arc.Storage.S3
+
+config :pomerol, :analytics, Pomerol.Analytics.TestAPI
+
+import_config "test.secrets.exs"

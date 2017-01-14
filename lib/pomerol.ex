@@ -15,7 +15,8 @@ defmodule Pomerol do
       # Start your own worker by calling: Pomerol.Worker.start_link(arg1, arg2, arg3)
       # worker(Pomerol.Worker, [arg1, arg2, arg3]),
       # SSR
-      supervisor(Pomerol.ReactIO, [])
+      supervisor(Pomerol.ReactIO, []),
+      worker(Segment, [Application.get_env(:segment, :write_key)])
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
