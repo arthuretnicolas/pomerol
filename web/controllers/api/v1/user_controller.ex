@@ -83,7 +83,7 @@ defmodule Pomerol.V1.UserController  do
       {:error, _reason} ->
         conn
         |> put_status(:bad_request)
-        |> render(ErrorView, "error.json", errors: ["invalid or expired token"])
+        |> render(Pomerol.ErrorView, "error.json", errors: ["invalid or expired token"])
     end
   end
 

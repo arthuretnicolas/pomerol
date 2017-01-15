@@ -44,6 +44,9 @@ defmodule Pomerol.V1.UserControllerTest do
       user = insert(:user, email: "original@mail.com")
       conn = post conn, "/api/v1/password/request", %{email: "original@mail.com"}
       assert conn |> json_response(200)
+
+      user = Repo.get_by!(Pomerol.User, email: "original@mail.com")
+      assert_delivered_email Pomerol.Email.password_reset_request_email(user)
     end
 
     test "Cannot recover password when user is not found", %{conn: conn} do
@@ -54,7 +57,23 @@ defmodule Pomerol.V1.UserControllerTest do
 
   describe "password reset" do
     test "POST /api/v1/password/reset when data is valid", %{conn: conn} do
-      assert 1 == 1
+      user = insert(:user, email: "original@mail.com")
+      # ask for a token
+      conn = post conn, "/api/v1/password/request", %{email: "original@mail.com"}
+      # get the password_reset_token
+      user = Repo.get_by!(Pomerol.User, email: "original@mail.com")
+
+      conn = post conn, "/api/v1/password/reset", %{token: user.password_reset_token, password: "new-password"}
+      json = conn |> json_response(200)
+
+      assert json["user_id"] == user.id
+      assert json["jwt"]
+    end
+
+    test "POST /api/v1/password/reset when token is invalid", %{conn: conn} do
+      user = insert(:user, email: "original@mail.com")
+      conn = post conn, "/api/v1/password/reset", %{token: "token", password: "new-password"}
+      assert conn |> json_response(400)
     end
   end
 
