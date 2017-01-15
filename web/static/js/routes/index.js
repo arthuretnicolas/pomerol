@@ -27,7 +27,7 @@ import DashboardQuotes from '../UI/Dashboard/Containers/DashboardQuotes'
 import DashboardContacts from '../UI/Dashboard/Containers/DashboardContacts'
 import DashboardBilling from '../UI/Dashboard/Containers/DashboardBilling'
 import DashboardProfile from '../UI/Dashboard/Containers/DashboardProfile'
-import DashboardSettings from '../UI/Dashboard/Containers/DashboardSettings'
+import OrganizationSettings from '../UI/Dashboard/Containers/OrganizationSettings'
 
 export default (
   <Route path='/'>
@@ -52,7 +52,7 @@ export default (
         <Route path='/quotes' component={DashboardQuotes} />
         <Route path='/billing' component={DashboardBilling} />
         <Route path='/profile' component={DashboardProfile} />
-        <Route path='/settings' component={DashboardSettings} />
+        <Route path='/organization-settings(/:selectedIndex)' component={OrganizationSettings} />
       </Route>
 
       <Route path='*' component={() => <h1>Not found!</h1>} />

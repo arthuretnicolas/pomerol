@@ -24,4 +24,44 @@
 
     }
   }
+
+  > .container-bottom {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    justify-content: flex-end;
+    padding: $small-padding $small-padding $small-padding $base-padding;
+
+    > .content-bottom {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+
+      > .brand {
+        color: $color-primary;
+        text-transform: uppercase;
+        font-size: $font-size-small;
+        color: $gray;
+        font-family: $font-family-semibold;
+        letter-spacing: 0.82px;
+      }
+
+      > .button-logout {
+        padding: $small-padding;
+        cursor: pointer;
+
+        .icon-logout {
+          width: $base-padding;
+          height: $base-padding;
+          // dirty
+          margin-bottom: -2px;
+        }
+
+        path {
+          fill: $color-primary;
+        }
+      }
+    }
+  }
 }

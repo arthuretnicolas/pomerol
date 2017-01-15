@@ -1,0 +1,27 @@
+.Shared-Tabs {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  height: 100%;
+
+  > .tab {
+    display: flex;
+    align-items: center;
+    height: calc(100% + 1px);
+    font-size: $font-size-small;
+    cursor: pointer;
+    color: $black;
+    padding-left: $small-padding;
+    padding-right: $small-padding;
+    margin-left: $base-padding;
+    margin-right: $base-padding;
+    border-bottom: 2px solid transparent;
+    // hacky for alignment
+    padding-top: 4px;
+
+    &.selected {
+      color: $color-primary;
+      border-color: $color-primary;
+    }
+  }
+}

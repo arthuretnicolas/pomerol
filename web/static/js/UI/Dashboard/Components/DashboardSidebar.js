@@ -4,6 +4,7 @@ import React from 'react'
 import { browserHistory } from 'react-router'
 import Infos from '../../Shared/Components/Infos'
 import Select from '../../Forms/Components/Select'
+import Icon from '../../Shared/Components/Icon'
 import { getShortString } from '../../../Helpers'
 
 const ORGANIZATION_MAX_LETTERS = 15
@@ -32,10 +33,11 @@ type Props = {
   }>,
   organizations: Array<Object>,
   onChange: () => void,
+  onClickLogout: () => void,
   selectedOrganizationId: string | null
 }
 
-const OrganisationPicker = ({
+const OrganizationPicker = ({
   organizations,
   onChange,
   selectedOrganizationId
@@ -55,8 +57,8 @@ const OrganisationPicker = ({
         placeholder='Your organization'
         onChange={event => onChange(event && event.target.value)}
         options={organizations.map(org => ({
-          id: org.id,
-          name: getShortString(org.alias)
+          id: org && org.id || '',
+          name: getShortString(org && org.alias || '')
         }))}
       />
     }
@@ -67,13 +69,14 @@ const DashboardSidebar = ({
   data,
   organizations,
   onChange,
+  onClickLogout,
   selectedOrganizationId
 }: Props) => {
   const pathname = browserHistory && browserHistory.getCurrentLocation().pathname
 
   return (
     <div className='Dashboard-DashboardSidebar'>
-      <OrganisationPicker
+      <OrganizationPicker
         organizations={organizations}
         selectedOrganizationId={selectedOrganizationId}
         onChange={onChange}
@@ -97,6 +100,24 @@ const DashboardSidebar = ({
           />
         ))
       }
+
+      <div className='container-bottom'>
+        <div className='content-bottom'>
+          <div className='brand'>
+            Pomerol
+          </div>
+
+          <div
+            className='button-logout'
+            onClick={onClickLogout}
+          >
+            <Icon
+              name='switch-off'
+              className='icon-logout'
+            />
+          </div>
+        </div>
+      </div>
     </div>
   )
 }

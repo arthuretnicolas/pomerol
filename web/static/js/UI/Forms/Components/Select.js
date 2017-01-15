@@ -68,7 +68,7 @@ const Select = ({
       required={required}
       placeholder={placeholder}
       onChange={onChange}
-      defaultValue={selected || ''}
+      value={selected || ''}
     >
       {
         placeholder && <option value='' disabled>

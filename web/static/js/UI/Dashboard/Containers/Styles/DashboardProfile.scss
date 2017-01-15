@@ -1,24 +1,53 @@
 .Dashboard-DashboardProfile {
   display: flex;
   flex-direction: column;
-  padding: $base-padding * 1.5 $triple-padding;
   flex: 1;
 
-  .title {
-    color: $gray-dark;
-    font-size: $font-size-larger;
-    padding-bottom: $tiny-padding;
-    font-family: $font-family-semibold;
-  }
-
-  .column {
+  > .container {
     display: flex;
     flex-direction: column;
-    max-width: 424px;
-    padding-bottom: $triple-padding;
+    padding: $base-padding * 1.5 $triple-padding;
 
-    &.last {
-      padding-bottom: $double-padding;
+    .title {
+      color: $gray-dark;
+      font-size: $font-size-large;
+      padding-bottom: $tiny-padding;
+      font-family: $font-family-semibold;
+    }
+
+    .column {
+      display: flex;
+      flex-direction: column;
+      max-width: 424px;
+      padding-bottom: $triple-padding;
+      flex: 1;
+
+      &.last {
+        padding-bottom: $double-padding;
+      }
+    }
+  }
+
+  @media (min-width: $break-point-desktop) {
+    > .container {
+      flex-direction: row;
+
+      .column {
+        max-width: 360px;
+        padding: 0 $base-padding * 1.5;
+
+        &.photo {
+          max-width: #{256 + $base-padding * 1.5};
+        }
+
+        &.first {
+          padding-left: 0;
+        }
+
+        &.last {
+          padding-right: 0;
+        }
+      }
     }
   }
 }

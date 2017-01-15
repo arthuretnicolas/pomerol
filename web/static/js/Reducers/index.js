@@ -8,7 +8,8 @@ const appReducer = combineReducers({
   counter: require('./CounterRedux').reducer,
   github: require('./GithubRedux').reducer,
   login: require('./LoginRedux').reducer,
-  signup: require('./SignupRedux').reducer
+  signup: require('./SignupRedux').reducer,
+  organizations: require('./OrganizationRedux').reducer
 })
 
 const rootReducer = (state: Object, action: Object) => {
@@ -28,6 +29,9 @@ const rootReducer = (state: Object, action: Object) => {
           attemptingUpdatePassword: false
         }),
         signup: newState.signup.merge({
+          attempting: false
+        }),
+        organizations: newState.organizations.merge({
           attempting: false
         })
       })

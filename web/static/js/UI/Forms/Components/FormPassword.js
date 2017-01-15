@@ -66,6 +66,7 @@ export default class FormPassword extends Component {
                 required
                 onChange={event => onChange('password', event && event.target.value)}
                 size='small'
+                disabled={attempting}
               />
 
               <Input
@@ -75,6 +76,7 @@ export default class FormPassword extends Component {
                 required
                 onChange={event => onChange('newPassword1', event && event.target.value)}
                 size='small'
+                disabled={attempting}
               />
 
               <Input
@@ -84,6 +86,7 @@ export default class FormPassword extends Component {
                 required
                 onChange={event => onChange('newPassword2', event && event.target.value)}
                 size='small'
+                disabled={attempting}
               />
             </div>
           }

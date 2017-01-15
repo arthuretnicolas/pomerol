@@ -2,6 +2,7 @@
 
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import Header from '../Components/Header'
 import FormUser from '../../Forms/Components/FormUser'
 import FormPassword from '../../Forms/Components/FormPassword'
 import ImageCropper from '../../Shared/Components/ImageCropper'
@@ -173,47 +174,51 @@ class DashboardProfile extends Component {
 
     return (
       <div className='Dashboard-DashboardProfile'>
-        <div className='column'>
-          <div className='title'>
-            Profile photo
+        <Header name='Profile' />
+
+        <div className='container'>
+          <div className='column first photo'>
+            <div className='title'>
+              Profile photo
+            </div>
+
+            <ImageCropper
+              source={photo}
+              onChange={this._onChangePhoto}
+              isCropping={isCropping}
+              onSave={this._onSavePicture}
+              onCancel={this._onCancelPicture}
+              imageMinSize={IMAGE_MIN_SIZE}
+              isAttempting={isAttemptingPhoto}
+            />
           </div>
 
-          <ImageCropper
-            source={photo}
-            onChange={this._onChangePhoto}
-            isCropping={isCropping}
-            onSave={this._onSavePicture}
-            onCancel={this._onCancelPicture}
-            imageMinSize={IMAGE_MIN_SIZE}
-            isAttempting={isAttemptingPhoto}
-          />
-        </div>
+          <div className='column'>
+            <div className='title'>
+              Basic information
+            </div>
 
-        <div className='column'>
-          <div className='title'>
-            Basic information
+            <FormUser
+              onChange={this._onChange}
+              onSubmit={this._onSubmitUser}
+              values={{ firstName, lastName, email, countryId, languageId }}
+              attempting={attemptingUpdateUser}
+            />
           </div>
 
-          <FormUser
-            onChange={this._onChange}
-            onSubmit={this._onSubmitUser}
-            values={{ firstName, lastName, email, countryId, languageId }}
-            attempting={attemptingUpdateUser}
-          />
-        </div>
+          <div className='column last'>
+            <div className='title'>
+              Change password
+            </div>
 
-        <div className='column last'>
-          <div className='title'>
-            Change password
+            <FormPassword
+              onChange={this._onChange}
+              onSubmit={this._onSubmitPassword}
+              values={{ password, newPassword1, newPassword2 }}
+              attempting={attemptingUpdatePassword}
+              disabled={passwordIsDisabled}
+            />
           </div>
-
-          <FormPassword
-            onChange={this._onChange}
-            onSubmit={this._onSubmitPassword}
-            values={{ password, newPassword1, newPassword2 }}
-            attempting={attemptingUpdatePassword}
-            disabled={passwordIsDisabled}
-          />
         </div>
       </div>
     )

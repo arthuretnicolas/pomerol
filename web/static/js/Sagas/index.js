@@ -10,6 +10,7 @@ import { CounterTypes } from '../Reducers/CounterRedux'
 import { GithubTypes } from '../Reducers/GithubRedux'
 import { LoginTypes } from '../Reducers/LoginRedux'
 import { SignupTypes } from '../Reducers/SignupRedux'
+import { OrganizationTypes } from '../Reducers/OrganizationRedux'
 
 /* ------------- Sagas ------------- */
 
@@ -25,9 +26,11 @@ import {
   resetPassword,
   updateUser,
   createOrganization,
+  updateOrganization,
   updatePassword
 } from './LoginSaga'
 import { signup } from './SignupSaga'
+import { fetchOrganization } from './OrganizationSaga'
 
 /* ------------- API ------------- */
 
@@ -47,9 +50,11 @@ export default function * root () {
     takeLatest(LoginTypes.FETCH_SESSION_ATTEMPT, fetchSession, api),
     takeLatest(LoginTypes.UPDATE_USER_ATTEMPT, updateUser, api),
     takeLatest(LoginTypes.CREATE_ORGANIZATION_ATTEMPT, createOrganization, api),
+    takeLatest(LoginTypes.UPDATE_ORGANIZATION_ATTEMPT, updateOrganization, api),
     takeLatest(LoginTypes.REQUEST_PASSWORD_ATTEMPT, requestPassword, api),
     takeLatest(LoginTypes.RESET_PASSWORD_ATTEMPT, resetPassword, api),
     takeLatest(LoginTypes.UPDATE_PASSWORD_ATTEMPT, updatePassword, api),
-    takeLatest(SignupTypes.SIGNUP_ATTEMPT, signup, api)
+    takeLatest(SignupTypes.SIGNUP_ATTEMPT, signup, api),
+    takeLatest(OrganizationTypes.ORGANIZATION_ATTEMPT, fetchOrganization, api)
   ]
 }

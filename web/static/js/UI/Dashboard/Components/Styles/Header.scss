@@ -1,15 +1,16 @@
 .Dashboard-Header {
   display: flex;
   align-items: center;
-  padding-left: $base-padding;
-  padding-right: $base-padding;
-  min-height: $header-height;
+  padding-left: $double-padding * 1.5;
+  padding-right: $double-padding * 1.5;
+  height: $header-height;
   font-size: $font-size-large;
   border-bottom: 2px solid $gray-xlight;
 
   > .title {
     font-family: $font-family-semibold;
     font-size: $font-size-larger;
+    color: $black;
   }
 
   > .button {

@@ -1,7 +1,10 @@
 import { put, select } from 'redux-saga/effects'
 import StartupActions from '../Reducers/StartupRedux'
 import LoginActions from '../Reducers/LoginRedux'
-import { jwtSelector, userIdSelector } from '../Services/Selectors'
+import {
+  jwtSelector,
+  userIdSelector
+} from '../Services/Selectors'
 
 const isDev = process.env.NODE_ENV === 'development'
 

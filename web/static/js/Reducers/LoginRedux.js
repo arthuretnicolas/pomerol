@@ -34,6 +34,10 @@ const { Types, Creators } = createActions({
   createOrganizationFailure: [ 'error' ],
   createOrganizationSuccess: [ 'organization' ],
   // ******
+  updateOrganizationAttempt: [ 'organizationId', 'organization' ],
+  updateOrganizationFailure: [ 'error' ],
+  updateOrganizationSuccess: [ 'organization' ],
+  // ******
   setCurrentOrganization: [ 'id' ],
   // ******
   updatePasswordAttempt: [ 'password', 'newPassword' ],
@@ -229,6 +233,44 @@ export const createOrganizationSuccess = (state: Object, { organization }: { org
   })
 }
 
+export const updateOrganizationAttempt = (state: Object, { organization }: { organization: Object }) =>
+  state.merge({
+    attemptingOrganization: true
+  })
+
+export const updateOrganizationFailure = (state: Object, { error }: { error: string }) =>
+state.merge({
+  attemptingOrganization: false,
+  errorOrganisation: error
+})
+
+export const updateOrganizationSuccess = (
+  state: Object,
+  { organization }: { organization: Object }
+) => {
+  const existingOrganization =
+    state.session.organizations.find(org => org.id === organization.id)
+
+  const updatedOrganization =
+    existingOrganization && existingOrganization.merge(organization)
+
+  const listOrganizations =
+    state.session.organizations
+      .filter(org => org.id !== organization.id)
+      .concat(updatedOrganization)
+
+  return state.merge({
+    attemptingOrganization: false,
+    errorOrganisation: null,
+    session: state.session.merge({
+      organizations: listOrganizations,
+      user: state.session.user.merge({
+        current_organization_id: organization.id
+      })
+    })
+  })
+}
+
 export const setCurrentOrganization = (state: Object, { id }: { id: string }) =>
   state.setIn([ 'session', 'user', 'current_organization_id' ], id)
 
@@ -279,6 +321,10 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.CREATE_ORGANIZATION_ATTEMPT]: createOrganizationAttempt,
   [Types.CREATE_ORGANIZATION_SUCCESS]: createOrganizationSuccess,
   [Types.CREATE_ORGANIZATION_FAILURE]: createOrganizationFailure,
+  // ******
+  [Types.UPDATE_ORGANIZATION_ATTEMPT]: updateOrganizationAttempt,
+  [Types.UPDATE_ORGANIZATION_SUCCESS]: updateOrganizationSuccess,
+  [Types.UPDATE_ORGANIZATION_FAILURE]: updateOrganizationFailure,
   // ******
   [Types.SET_CURRENT_ORGANIZATION]: setCurrentOrganization,
   // ******

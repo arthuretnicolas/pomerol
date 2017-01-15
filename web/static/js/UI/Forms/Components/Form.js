@@ -17,7 +17,7 @@ type Props = {
   alternativeCta?: React.Element<any>,
   fullWidthCta?: boolean,
   contentLoading?: string | React.Element<*>,
-  buttonSize?: 'small' | 'large',
+  buttonSize?: 'small' | 'base' | 'large',
   disabled?: boolean
 }
 

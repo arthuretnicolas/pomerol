@@ -1,7 +1,12 @@
 import { call, put, select } from 'redux-saga/effects'
 import LoginActions from '../Reducers/LoginRedux'
+import OrganizationActions from '../Reducers/OrganizationRedux'
 import { handleErrors } from '../Helpers'
-import { jwtSelector, userIdSelector } from '../Services/Selectors'
+import {
+  jwtSelector,
+  userIdSelector,
+  currentOrganizationIdSelector
+} from '../Services/Selectors'
 
 export function * login (api, action) {
   const { email, password } = action
@@ -28,6 +33,9 @@ export function * fetchSession (api, action) {
 
   if (response.ok) {
     yield put(LoginActions.fetchSessionSuccess(response.data))
+
+    const organizationId = yield select(currentOrganizationIdSelector)
+    yield put(OrganizationActions.organizationAttempt(organizationId))
   } else {
     yield put(LoginActions.fetchSessionFailure())
   }
@@ -80,12 +88,18 @@ export function * updateUser (api, action) {
   const { user } = action
   const jwt = yield select(jwtSelector)
   const userId = yield select(userIdSelector)
+  const previousOrganizationId = yield select(currentOrganizationIdSelector)
 
   const response = yield call(api.updateUser, jwt, userId, user)
   const { data } = response
 
   if (response.ok) {
     yield put(LoginActions.updateUserSuccess(data))
+
+    const currentOrganizationId = data.current_organization_id
+    if (previousOrganizationId !== currentOrganizationId) {
+      yield put(OrganizationActions.organizationAttempt(currentOrganizationId))
+    }
   } else {
     yield put(LoginActions.updateUserFailure(data))
     handleErrors(data)
@@ -103,9 +117,24 @@ export function * createOrganization (api, action) {
   if (response.ok) {
     yield put(LoginActions.createOrganizationSuccess(data))
     yield put(LoginActions.setCurrentOrganization(data.country.id))
-    window.alert('Your organisation has been created successfully !') // TODO: do something better
+    window.alert('Your organization has been created successfully !') // TODO: do something better
   } else {
     yield put(LoginActions.createOrganizationFailure(data))
+    handleErrors(data)
+  }
+}
+
+export function * updateOrganization (api, action) {
+  const { organizationId, organization } = action
+  const jwt = yield select(jwtSelector)
+
+  const response = yield call(api.updateOrganization, jwt, organizationId, organization)
+  const { data } = response
+
+  if (response.ok) {
+    yield put(LoginActions.updateOrganizationSuccess(data))
+  } else {
+    yield put(LoginActions.updateOrganizationFailure(data))
     handleErrors(data)
   }
 }

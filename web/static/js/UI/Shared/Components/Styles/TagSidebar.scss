@@ -9,13 +9,13 @@
     text-transform: uppercase;
     font-family: $font-family-semibold;
     font-size: $font-size-tiny;
-    padding: $base-padding;
+    padding: $base-padding $double-padding * 1.5;
   }
 
   > .option {
     display: flex;
     font-size: $font-size-small;
-    padding: $tiny-padding $base-padding;
+    padding: $tiny-padding $double-padding $tiny-padding $double-padding * 1.5;
     margin-top: $tiny-padding;
     margin-bottom: $tiny-padding;
     text-decoration: none;

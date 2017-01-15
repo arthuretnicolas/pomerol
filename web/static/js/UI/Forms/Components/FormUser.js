@@ -76,6 +76,7 @@ export default class FormUser extends Component {
                 required
                 onChange={event => onChange('firstName', event && event.target.value)}
                 size='small'
+                disabled={attempting}
               />
               <Input
                 label='Last name'
@@ -85,6 +86,7 @@ export default class FormUser extends Component {
                 required
                 onChange={event => onChange('lastName', event && event.target.value)}
                 size='small'
+                disabled={attempting}
               />
               <Input
                 label='Email'
@@ -94,6 +96,7 @@ export default class FormUser extends Component {
                 required
                 onChange={event => onChange('email', event && event.target.value)}
                 size='small'
+                disabled={attempting}
               />
               <Select
                 label='Country'
@@ -107,6 +110,7 @@ export default class FormUser extends Component {
                   name: getShortString(name, SELECT_MAX_LETTERS)
                 }))}
                 size='small'
+                disabled={attempting}
               />
               <Select
                 label='Language'
@@ -119,6 +123,7 @@ export default class FormUser extends Component {
                   name: getShortString(name, SELECT_MAX_LETTERS)
                 }))}
                 size='small'
+                disabled={attempting}
               />
             </div>
           }

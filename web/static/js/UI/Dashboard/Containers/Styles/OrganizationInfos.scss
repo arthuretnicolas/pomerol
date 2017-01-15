@@ -1,0 +1,9 @@
+.Dashboard-OrganizationInfos {
+  display: flex;
+  flex: 1;
+  padding-bottom: $triple-padding;
+
+  .form-container {
+    flex-basis: $flex-basis-form;
+  }
+}

@@ -30,7 +30,7 @@ export const sidebarOptions = [
       {
         label: 'Organization',
         iconName: 'suitcase',
-        link: '/settings'
+        link: '/organization-settings'
       },
       {
         label: 'Billing',

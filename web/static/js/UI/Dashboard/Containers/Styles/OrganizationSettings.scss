@@ -1,0 +1,12 @@
+.Dashboard-OrganizationSettings {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+
+  > .container {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    padding: $small-padding $double-padding * 1.5;
+  }
+}

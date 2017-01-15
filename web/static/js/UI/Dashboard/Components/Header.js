@@ -9,14 +9,21 @@ type Props = {
   callToAction?: {
     name: string,
     onClick: () => void
-  }
+  },
+  tabs?: React.Element<*>
 }
 
-const Header = ({ name, callToAction }: Props) => (
+const Header = ({
+  name,
+  callToAction,
+  tabs
+}: Props) => (
   <div className='Dashboard-Header'>
     <div className='title'>
       {name}
     </div>
+
+    { tabs }
 
     {
       callToAction && <Button
