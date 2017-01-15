@@ -263,7 +263,10 @@ export const updateOrganizationSuccess = (
     attemptingOrganization: false,
     errorOrganisation: null,
     session: state.session.merge({
-      organizations: listOrganizations
+      organizations: listOrganizations,
+      user: state.session.user.merge({
+        current_organization_id: organization.id
+      })
     })
   })
 }

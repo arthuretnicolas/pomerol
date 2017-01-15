@@ -8,7 +8,8 @@ import LoginActions from '../../../Reducers/LoginRedux'
 type Props = {
   updateOrganizationAttempt: () => void,
   organization: Object,
-  attemptingOrganization: boolean
+  attemptingOrganization: boolean,
+  currentOrganizationId: string | null
 }
 
 class OrganizationInfos extends Component {
@@ -27,12 +28,11 @@ class OrganizationInfos extends Component {
 
   componentWillReceiveProps (nextProps) {
     const { organization } = nextProps
-    const hasUpdated =
+    const shouldUpdate =
       organization &&
-      organization.id &&
-      !this.props.organization
+      (!this.props.organization || (nextProps.currentOrganizationId !== this.props.currentOrganizationId))
 
-    if (hasUpdated) {
+    if (shouldUpdate) {
       const {
         name,
         phone,
@@ -132,13 +132,13 @@ class OrganizationInfos extends Component {
 
 const organizationSelector = (login, organizations) => {
   const { current_organization_id } = login.session.user
-
   return organizations.list.find(org => org.id === current_organization_id) // eslint-disable-line
 }
 
 const mapStateToProps = ({ login, organizations }) => ({
   user: login.session.user,
   attemptingOrganization: login.attemptingOrganization,
+  currentOrganizationId: login.session.user.current_organization_id,
   organization: organizationSelector(login, organizations)
 })
 
