@@ -110,6 +110,21 @@ export function * createOrganization (api, action) {
   }
 }
 
+export function * updateOrganization (api, action) {
+  const { organizationId, organization } = action
+  const jwt = yield select(jwtSelector)
+
+  const response = yield call(api.updateOrganization, jwt, organizationId, organization)
+  const { data } = response
+
+  if (response.ok) {
+    yield put(LoginActions.updateOrganizationSuccess(data))
+  } else {
+    yield put(LoginActions.updateOrganizationFailure(data))
+    handleErrors(data)
+  }
+}
+
 export function * updatePassword (api, action) {
   const { password, newPassword } = action
   const jwt = yield select(jwtSelector)

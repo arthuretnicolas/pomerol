@@ -4,6 +4,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Tabs from '../../Shared/Components/Tabs'
 import Header from '../Components/Header'
+import OrganizationInfos from './OrganizationInfos'
 
 const tabs = [
   {
@@ -21,14 +22,16 @@ const tabs = [
 ]
 
 type Props = {
-  // logout: () => void
+  params: {
+    selectedIndex?: string
+  }
 }
 
 class OrganizationSettings extends Component {
   props: Props
 
   state = {
-    selectedIndex: 0
+    selectedIndex: parseInt(this.props.params.selectedIndex) || 0
   }
 
   _handleSelect = (selectedIndex: number) => {
@@ -58,9 +61,7 @@ class OrganizationSettings extends Component {
 
         <div className='container'>
           {
-            selectedIndex === 0 && <div>
-              Infos
-            </div>
+            selectedIndex === 0 && <OrganizationInfos />
           }
 
           {

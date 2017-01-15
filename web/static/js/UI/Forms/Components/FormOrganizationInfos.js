@@ -26,12 +26,12 @@ type Props = {
     address2: string,
     zip: string,
     city: string,
-    countryId: string | null
+    country: string | null
   },
   attempting: boolean
 }
 
-export default class FormOnboardingTwo extends Component {
+export default class FormOrganizationInfos extends Component {
   props: Props
 
   _onSubmit = (event: Event) => { // eslint-disable-line
@@ -56,23 +56,19 @@ export default class FormOnboardingTwo extends Component {
       address2,
       zip,
       city,
-      countryId
+      country
     } = values
 
     return (
       <form
-        className='Form-FormOnboardingTwo'
+        className='Form-FormOrganizationInfos'
         onSubmit={this._onSubmit}
       >
         <Form
-          header='Organization'
-          text={{
-            label: 'Let\'s create your first organization'
-          }}
-          buttonSubmit='Next'
-          contentLoading='Next...'
+          buttonSubmit='Update'
+          contentLoading='Updating...'
           attempting={attempting}
-          fullWidthCta
+          buttonSize='small'
           children={
             <div>
               <Input
@@ -82,6 +78,7 @@ export default class FormOnboardingTwo extends Component {
                 placeholder='Your organization name'
                 required
                 onChange={event => onChange('name', event && event.target.value)}
+                size='small'
                 disabled={attempting}
               />
 
@@ -92,6 +89,7 @@ export default class FormOnboardingTwo extends Component {
                   type='text'
                   placeholder='07 123 456 789'
                   onChange={event => onChange('phoneNumber', event && event.target.value)}
+                  size='small'
                   disabled={attempting}
                 />
                 <Input
@@ -100,6 +98,7 @@ export default class FormOnboardingTwo extends Component {
                   type='url'
                   placeholder='https://example.com'
                   onChange={event => onChange('website', event && event.target.value)}
+                  size='small'
                   disabled={attempting}
                 />
               </Grid>
@@ -110,6 +109,7 @@ export default class FormOnboardingTwo extends Component {
                 type='text'
                 placeholder='Address'
                 onChange={event => onChange('address1', event && event.target.value)}
+                size='small'
                 disabled={attempting}
               />
 
@@ -119,6 +119,7 @@ export default class FormOnboardingTwo extends Component {
                 type='text'
                 placeholder='Address 2'
                 onChange={event => onChange('address2', event && event.target.value)}
+                size='small'
                 disabled={attempting}
               />
 
@@ -129,6 +130,7 @@ export default class FormOnboardingTwo extends Component {
                   type='text'
                   placeholder='Zip / Postal code'
                   onChange={event => onChange('zip', event && event.target.value)}
+                  size='small'
                   disabled={attempting}
                 />
                 <Input
@@ -137,18 +139,20 @@ export default class FormOnboardingTwo extends Component {
                   type='text'
                   placeholder='City'
                   onChange={event => onChange('city', event && event.target.value)}
+                  size='small'
                   disabled={attempting}
                 />
               </Grid>
 
               <Select
                 label='Country'
-                selected={countryId}
+                selected={country}
                 placeholder='Organization country'
                 required
-                onChange={event => onChange('countryId', event && event.target.value)}
+                onChange={event => onChange('country', event && event.target.value)}
                 top={countries.top}
                 options={countries.list}
+                size='small'
                 disabled={attempting}
               />
             </div>

@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Component } from 'react'
+import React from 'react'
 import Form from './Form'
 import Input from './Input'
 
@@ -11,71 +11,72 @@ type Props = {
     email: string,
     password: string
   },
-  attempting: boolean
+  attempting: boolean,
+  size?: 'small' | 'base' | 'large'
 }
 
-export default class FormLogin extends Component {
-  props: Props
+function _onSubmit (event: Event, onSubmit) { // eslint-disable-line
+  event.preventDefault()
 
-  _onSubmit = (event: Event) => { // eslint-disable-line
-    const { onSubmit } = this.props
-    event.preventDefault()
-
-    onSubmit()
-  }
-
-  render () {
-    const {
-      onChange,
-      values,
-      attempting
-    } = this.props
-
-    const {
-      email,
-      password
-    } = values
-
-    return (
-      <form
-        className='Form-FormLogin'
-        onSubmit={this._onSubmit}
-      >
-        <Form
-          header='Login in'
-          text={{
-            label: 'Need a Pomerol account?',
-            linkLabel: 'Create an account',
-            to: '/signup'
-          }}
-          buttonSubmit='Log in'
-          contentLoading='Logging in...'
-          attempting={attempting}
-          fullWidthCta
-          children={
-            <div>
-              <Input
-                label='Email'
-                value={email}
-                type='email'
-                placeholder='Your email'
-                required
-                onChange={event => onChange('email', event && event.target.value)}
-                disabled={attempting}
-              />
-              <Input
-                label='Password'
-                value={password}
-                type='password'
-                placeholder='Your password'
-                required
-                onChange={event => onChange('password', event && event.target.value)}
-                disabled={attempting}
-              />
-            </div>
-          }
-        />
-      </form>
-    )
-  }
+  onSubmit()
 }
+
+const FormLogin = ({
+  onChange,
+  onSubmit,
+  values,
+  attempting,
+  size = 'base'
+}: Props) => {
+  const {
+    email,
+    password
+  } = values
+
+  return (
+    <form
+      className='Form-FormLogin'
+      onSubmit={event => _onSubmit(event, onSubmit)}
+    >
+      <Form
+        header='Login in'
+        text={{
+          label: 'Need a Pomerol account?',
+          linkLabel: 'Create an account',
+          to: '/signup'
+        }}
+        buttonSubmit='Log in'
+        contentLoading='Logging in...'
+        attempting={attempting}
+        fullWidthCta
+        buttonSize={size}
+        children={
+          <div>
+            <Input
+              label='Email'
+              value={email}
+              type='email'
+              placeholder='Your email'
+              required
+              onChange={event => onChange('email', event && event.target.value)}
+              size={size}
+              disabled={attempting}
+            />
+            <Input
+              label='Password'
+              value={password}
+              type='password'
+              placeholder='Your password'
+              required
+              onChange={event => onChange('password', event && event.target.value)}
+              size={size}
+              disabled={attempting}
+            />
+          </div>
+        }
+      />
+    </form>
+  )
+}
+
+export default FormLogin

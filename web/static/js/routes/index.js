@@ -52,7 +52,7 @@ export default (
         <Route path='/quotes' component={DashboardQuotes} />
         <Route path='/billing' component={DashboardBilling} />
         <Route path='/profile' component={DashboardProfile} />
-        <Route path='/organization-settings' component={OrganizationSettings} />
+        <Route path='/organization-settings(/:selectedIndex)' component={OrganizationSettings} />
       </Route>
 
       <Route path='*' component={() => <h1>Not found!</h1>} />

@@ -37,7 +37,7 @@ type Props = {
   selectedOrganizationId: string | null
 }
 
-const OrganisationPicker = ({
+const OrganizationPicker = ({
   organizations,
   onChange,
   selectedOrganizationId
@@ -57,8 +57,8 @@ const OrganisationPicker = ({
         placeholder='Your organization'
         onChange={event => onChange(event && event.target.value)}
         options={organizations.map(org => ({
-          id: org.id,
-          name: getShortString(org.alias)
+          id: org && org.id || '',
+          name: getShortString(org && org.alias || '')
         }))}
       />
     }
@@ -76,7 +76,7 @@ const DashboardSidebar = ({
 
   return (
     <div className='Dashboard-DashboardSidebar'>
-      <OrganisationPicker
+      <OrganizationPicker
         organizations={organizations}
         selectedOrganizationId={selectedOrganizationId}
         onChange={onChange}
