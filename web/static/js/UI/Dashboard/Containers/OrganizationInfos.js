@@ -15,14 +15,14 @@ class OrganizationInfos extends Component {
   props: Props
 
   state = {
-    name: '',
-    phone: '',
-    website: '',
-    address1: '',
-    address2: '',
-    zip: '',
-    city: '',
-    country: ''
+    name: (this.props.organization && this.props.organization.name) || '',
+    phone: (this.props.organization && this.props.organization.phone) || '',
+    website: (this.props.organization && this.props.organization.website) || '',
+    address1: (this.props.organization && this.props.organization.address1) || '',
+    address2: (this.props.organization && this.props.organization.address2) || '',
+    zip: (this.props.organization && this.props.organization.zip) || '',
+    city: (this.props.organization && this.props.organization.city) || '',
+    country: (this.props.organization && this.props.organization.country) || ''
   }
 
   componentWillReceiveProps (nextProps) {

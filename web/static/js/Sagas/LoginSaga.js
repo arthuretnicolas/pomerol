@@ -127,6 +127,7 @@ export function * updateOrganization (api, action) {
 
   if (response.ok) {
     yield put(LoginActions.updateOrganizationSuccess(data))
+    yield put(OrganizationActions.organizationAttempt(organizationId))
   } else {
     yield put(LoginActions.updateOrganizationFailure(data))
     handleErrors(data)
