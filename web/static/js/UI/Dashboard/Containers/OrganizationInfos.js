@@ -15,14 +15,46 @@ class OrganizationInfos extends Component {
   props: Props
 
   state = {
-    name: this.props.organization.name || '',
-    phoneNumber: this.props.organization.phone || '',
-    website: this.props.organization.website || '',
-    address1: this.props.organization.address1 || '',
-    address2: this.props.organization.address2 || '',
-    zip: this.props.organization.zip || '',
-    city: this.props.organization.city || '',
-    country: this.props.organization.country || ''
+    name: '',
+    phone: '',
+    website: '',
+    address1: '',
+    address2: '',
+    zip: '',
+    city: '',
+    country: ''
+  }
+
+  componentWillReceiveProps (nextProps) {
+    const { organization } = nextProps
+    const hasUpdated =
+      organization &&
+      organization.id &&
+      !this.props.organization
+
+    if (hasUpdated) {
+      const {
+        name,
+        phone,
+        website,
+        address1,
+        address2,
+        zip,
+        city,
+        country
+      } = organization
+
+      this.setState({
+        name: name || '',
+        phone: phone || '',
+        website: website || '',
+        address1: address1 || '',
+        address2: address2 || '',
+        zip: zip || '',
+        city: city || '',
+        country: country || ''
+      })
+    }
   }
 
   _onChange = (key, value: string | number) => {
@@ -38,7 +70,7 @@ class OrganizationInfos extends Component {
     } = this.props
     const {
       name,
-      phoneNumber,
+      phone,
       website,
       address1,
       address2,
@@ -49,7 +81,7 @@ class OrganizationInfos extends Component {
 
     updateOrganizationAttempt(organization && organization.id, {
       name,
-      phone: phoneNumber,
+      phone,
       website,
       address1,
       address2,
@@ -65,7 +97,7 @@ class OrganizationInfos extends Component {
     } = this.props
     const {
       name,
-      phoneNumber,
+      phone,
       website,
       address1,
       address2,
@@ -82,7 +114,7 @@ class OrganizationInfos extends Component {
             onSubmit={this._submit}
             values={{
               name,
-              phoneNumber,
+              phone,
               website,
               address1,
               address2,
@@ -98,17 +130,16 @@ class OrganizationInfos extends Component {
   }
 }
 
-const organizationSelector = login => {
-  const { organizations, user } = login.session
-  const { current_organization_id } = user
+const organizationSelector = (login, organizations) => {
+  const { current_organization_id } = login.session.user
 
-  return organizations.find(org => org.id === current_organization_id) // eslint-disable-line
+  return organizations.list.find(org => org.id === current_organization_id) // eslint-disable-line
 }
 
-const mapStateToProps = ({ login }) => ({
+const mapStateToProps = ({ login, organizations }) => ({
   user: login.session.user,
   attemptingOrganization: login.attemptingOrganization,
-  organization: organizationSelector(login)
+  organization: organizationSelector(login, organizations)
 })
 
 const mapDispatchToProps = dispatch => ({

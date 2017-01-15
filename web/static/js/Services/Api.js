@@ -87,6 +87,13 @@ const create = (baseURL: string = 'http://localhost:4000/api/v1/') => {
       }
     })
 
+  const fetchOrganization = (jwt: string, organizationId: string) =>
+    api.get(`organizations/${organizationId}`, {}, {
+      headers: {
+        'Authorization': `Bearer ${jwt}`
+      }
+    })
+
   const naviMonitor = response => console.log('%cAPI response', 'background-color: purple; color: white; font-weight: 500; padding: 5px', response)
   if (isDev) {
     api.addMonitor(naviMonitor)
@@ -103,7 +110,8 @@ const create = (baseURL: string = 'http://localhost:4000/api/v1/') => {
     updatePassword,
     updateUser,
     createOrganization,
-    updateOrganization
+    updateOrganization,
+    fetchOrganization
   }
 }
 

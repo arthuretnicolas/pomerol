@@ -1,7 +1,12 @@
 import { call, put, select } from 'redux-saga/effects'
 import LoginActions from '../Reducers/LoginRedux'
+import OrganizationActions from '../Reducers/OrganizationRedux'
 import { handleErrors } from '../Helpers'
-import { jwtSelector, userIdSelector } from '../Services/Selectors'
+import {
+  jwtSelector,
+  userIdSelector,
+  currentOrganizationIdSelector
+} from '../Services/Selectors'
 
 export function * login (api, action) {
   const { email, password } = action
@@ -28,6 +33,9 @@ export function * fetchSession (api, action) {
 
   if (response.ok) {
     yield put(LoginActions.fetchSessionSuccess(response.data))
+
+    const organizationId = yield select(currentOrganizationIdSelector)
+    yield put(OrganizationActions.organizationAttempt(organizationId))
   } else {
     yield put(LoginActions.fetchSessionFailure())
   }

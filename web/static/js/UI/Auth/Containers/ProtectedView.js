@@ -34,7 +34,6 @@ class ProtectedView extends Component {
     isRehydrated: boolean = this.props.isRehydrated,
     onboardingCompletedSteps: number = this.props.onboardingCompletedSteps
   ) => {
-    // debugger
     if (!browserHistory || !isRehydrated) {
       return null
     }

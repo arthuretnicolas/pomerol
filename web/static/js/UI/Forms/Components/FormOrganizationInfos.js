@@ -20,7 +20,7 @@ type Props = {
   onSubmit: () => void,
   values: {
     name: string,
-    phoneNumber: string,
+    phone: string,
     website: string,
     address1: string,
     address2: string,
@@ -50,7 +50,7 @@ export default class FormOrganizationInfos extends Component {
 
     const {
       name,
-      phoneNumber,
+      phone,
       website,
       address1,
       address2,
@@ -85,10 +85,10 @@ export default class FormOrganizationInfos extends Component {
               <Grid>
                 <Input
                   label='Organization phone number'
-                  value={phoneNumber || ''}
+                  value={phone || ''}
                   type='text'
                   placeholder='07 123 456 789'
-                  onChange={event => onChange('phoneNumber', event && event.target.value)}
+                  onChange={event => onChange('phone', event && event.target.value)}
                   size='small'
                   disabled={attempting}
                 />
