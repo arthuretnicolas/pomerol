@@ -76,9 +76,22 @@ defmodule Pomerol.Organization do
 
   def update_changeset(organization, params \\ %{}) do
     organization
-    |> cast(params, [:name, :timezone, :base64_logo_data, :alias])
+    |> cast(params, [:name, :timezone, :base64_logo_data, :alias, :address1, :address2, :city, :zip, :state, :website, :phone, :country_code])
     |> validate_inclusion(:timezone, Pomerol.SupportedEnums.timezones)
+    |> validate_inclusion(:country_code, Pomerol.SupportedEnums.country_codes)
+    |> put_country
     |> upload_image(:base64_logo_data, :logo)
+  end
+
+  defp put_country(current_changeset) do
+    case current_changeset do
+      %Ecto.Changeset{valid?: true, changes: %{country_code: country_code}} ->
+        country = CountryService.by(country_code: country_code)
+        current_changeset
+        |> put_change(:country_id, country.id)
+      _ ->
+        current_changeset
+    end
   end
 
   defp put_default_settings(current_changeset) do
