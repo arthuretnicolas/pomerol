@@ -3,13 +3,14 @@
   align-items: center;
   padding-left: $double-padding * 1.5;
   padding-right: $double-padding * 1.5;
-  min-height: $header-height;
+  height: $header-height;
   font-size: $font-size-large;
   border-bottom: 2px solid $gray-xlight;
 
   > .title {
     font-family: $font-family-semibold;
     font-size: $font-size-larger;
+    color: $black;
   }
 
   > .button {

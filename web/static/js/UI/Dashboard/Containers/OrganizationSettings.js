@@ -3,17 +3,26 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Tabs from '../../Shared/Components/Tabs'
+import Header from '../Components/Header'
+
+const tabs = [
+  {
+    id: 0,
+    label: 'Infos'
+  },
+  {
+    id: 1,
+    label: 'Members'
+  },
+  {
+    id: 2,
+    label: 'Notifications'
+  }
+]
 
 type Props = {
   // logout: () => void
 }
-
-// $FlowFixMe
-const Container = ({ children }) => (
-  <div className='container'>
-    {children}
-  </div>
-)
 
 class OrganizationSettings extends Component {
   props: Props
@@ -22,7 +31,7 @@ class OrganizationSettings extends Component {
     selectedIndex: 0
   }
 
-  _handleSelect = (selectedIndex: number, previousIndex: number) => {
+  _handleSelect = (selectedIndex: number) => {
     this.setState({
       selectedIndex
     })
@@ -33,22 +42,39 @@ class OrganizationSettings extends Component {
 
     return (
       <div className='Dashboard-OrganizationSettings'>
-        <Tabs
-          className='content'
-          title='Organization'
-          selectedIndex={selectedIndex}
-          onSelect={this._handleSelect}
-          tabs={[
-            'Infos',
-            'Members',
-            'Notifications'
-          ]}
-          panels={[
-            <div>Infos</div>,
-            <div>Members</div>,
-            <div>Notifications</div>
-          ].map(Container)}
+        <Header
+          name='Organization'
+          tabs={(
+            <Tabs
+              containerStyle={{
+                marginLeft: 16
+              }}
+              selectedIndex={selectedIndex}
+              onSelect={this._handleSelect}
+              tabs={tabs}
+            />
+          )}
         />
+
+        <div className='container'>
+          {
+            selectedIndex === 0 && <div>
+              Infos
+            </div>
+          }
+
+          {
+            selectedIndex === 1 && <div>
+              Members
+            </div>
+          }
+
+          {
+            selectedIndex === 2 && <div>
+              Notifications
+            </div>
+          }
+        </div>
       </div>
     )
   }

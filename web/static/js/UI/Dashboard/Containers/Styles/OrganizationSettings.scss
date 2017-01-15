@@ -5,21 +5,13 @@
   font-size: 24px;
   color: $gray;
 
-  > .content {
-    // using global variables, but hey...
-    > .title {
-      padding-left: $double-padding * 1.5;
-      padding-right: $base-padding;
-    }
-
-    .container {
-      display: flex;
-      flex: 1;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding-left: $double-padding * 1.5;
-      padding-right: $double-padding * 1.5;
-    }
+  > .container {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-left: $double-padding * 1.5;
+    padding-right: $double-padding * 1.5;
   }
 }
