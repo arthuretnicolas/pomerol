@@ -22,8 +22,12 @@ defmodule Pomerol.V1.SessionControllerTest do
       user = build(:user, %{password: "password"}) |> set_password("password") |> insert
       conn = post conn, "/api/v1/signin", create_payload(user.email, user.password)
 
+      user_id = user.id
       response = json_response(conn, 201)
       assert response["jwt"]
+      assert response["user_id"] == user_id
+
+      assert_received {:track, ^user_id, "Signed In", %{}}
     end
 
     test "does not authenticate and renders errors when the password is wrong", %{conn: conn} do
@@ -35,6 +39,7 @@ defmodule Pomerol.V1.SessionControllerTest do
       assert error["detail"] == "Your password doesn't match the email #{user.email}."
       assert renders_401_unauthorized?(error)
       refute response["jwt"]
+      refute response["user_id"]
     end
 
     test "does not authenticate and renders errors when the user doesn't exist", %{conn: conn} do
@@ -45,6 +50,7 @@ defmodule Pomerol.V1.SessionControllerTest do
       assert error["detail"] == "We couldn't find a user with the email notauser@test.com."
       assert renders_401_unauthorized?(error)
       refute response["jwt"]
+      refute response["user_id"]
     end
   end
 

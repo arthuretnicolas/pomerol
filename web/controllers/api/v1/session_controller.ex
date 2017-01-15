@@ -12,6 +12,7 @@ defmodule Pomerol.V1.SessionController do
 
         conn
         |> Plug.Conn.assign(:current_user, user)
+        |> Pomerol.Analytics.Segment.track_sign_in
         |> put_status(:created)
         |> render(Pomerol.SessionView, "show.json", jwt: jwt, user_id: user.id)
 

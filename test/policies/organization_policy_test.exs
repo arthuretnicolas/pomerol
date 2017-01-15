@@ -17,10 +17,11 @@ defmodule Pomerol.OrganizationPolicyTest do
       assert create?(user)
     end
 
-    # test "returns false when user is not an admin" do
-    #   user = build(:user, admin: false)
-    #   refute create?(user)
-    # end
+    test "returns true when user exists" do
+      user = build(:user)
+      assert create?(user)
+    end
+
   end
 
   describe "update" do
@@ -36,10 +37,10 @@ defmodule Pomerol.OrganizationPolicyTest do
       refute update?(user, organization)
     end
 
-    # test "returns false when user is pending member of organization" do
-    #   [user, organization] = setup_user_organization_by_role("pending")
-    #   refute update?(user, organization)
-    # end
+    test "returns true when user is author of organization" do
+      [user, organization] = setup_user_organization_by_role("author")
+      assert update?(user, organization)
+    end
 
     test "returns false when user is viewer of organization" do
       [user, organization] = setup_user_organization_by_role("viewer")
