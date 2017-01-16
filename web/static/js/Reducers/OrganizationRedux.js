@@ -6,9 +6,13 @@ import Immutable from 'seamless-immutable'
 /* ------------- Types and Action Creators ------------- */
 
 const { Types, Creators } = createActions({
-  organizationAttempt: [ 'organizationId' ],
+  fetchOrganizationAttempt: [ 'organizationId' ],
   organizationFailure: [ 'error' ],
-  organizationSuccess: [ 'organization' ]
+  organizationSuccess: [ 'organization' ],
+  // ******
+  updateOrganizationAttempt: [ 'organizationId', 'organization' ],
+  updateOrganizationFailure: [ 'error' ],
+  updateOrganizationSuccess: [ 'organization' ]
 })
 
 export const OrganizationTypes = Types
@@ -20,7 +24,7 @@ export const INITIAL_STATE = Immutable({
   list: []
 })
 
-export const organizationAttempt = (state: Object, { organizationId } : { organizationId: string}) =>
+export const fetchOrganizationAttempt = (state: Object, { organizationId } : { organizationId: string}) =>
   state.merge({
     attempting: true
   })
@@ -48,8 +52,44 @@ export const organizationSuccess = (state: Object, { organization } : { organiza
   })
 }
 
+export const updateOrganizationAttempt = (state: Object, { organizationId, organization }: {organizationId: string, organization: Object }) =>
+  state.merge({
+    attempting: true
+  })
+
+export const updateOrganizationFailure = (state: Object, { error }: { error: string }) =>
+state.merge({
+  attempting: false,
+  error: error
+})
+
+export const updateOrganizationSuccess = (
+  state: Object,
+  { organization }: { organization: Object }
+) => {
+  const existingOrganization =
+    state.list.find(org => org.id === organization.id)
+
+  const updatedOrganization =
+    existingOrganization && existingOrganization.merge(organization)
+
+  const list =
+    state.list
+      .filter(org => org.id !== organization.id)
+      .concat(updatedOrganization)
+
+  return state.merge({
+    attempting: false,
+    error: null,
+    list
+  })
+}
+
 export const reducer = createReducer(INITIAL_STATE, {
-  [Types.ORGANIZATION_ATTEMPT]: organizationAttempt,
+  [Types.FETCH_ORGANIZATION_ATTEMPT]: fetchOrganizationAttempt,
   [Types.ORGANIZATION_FAILURE]: organizationFailure,
-  [Types.ORGANIZATION_SUCCESS]: organizationSuccess
+  [Types.ORGANIZATION_SUCCESS]: organizationSuccess,
+  [Types.UPDATE_ORGANIZATION_ATTEMPT]: updateOrganizationAttempt,
+  [Types.UPDATE_ORGANIZATION_ERROR]: updateOrganizationFailure,
+  [Types.UPDATE_ORGANIZATION_SUCCESS]: updateOrganizationSuccess
 })

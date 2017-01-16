@@ -17,3 +17,18 @@ export function * fetchOrganization (api, action) {
     handleErrors(data)
   }
 }
+
+export function * updateOrganization (api, action) {
+  const { organizationId, organization } = action
+  const jwt = yield select(jwtSelector)
+
+  const response = yield call(api.updateOrganization, jwt, organizationId, organization)
+  const { data } = response
+
+  if (response.ok) {
+    yield put(OrganizationActions.updateOrganizationSuccess(data))
+  } else {
+    yield put(OrganizationActions.updateOrganizationFailure(data))
+    handleErrors(data)
+  }
+}
