@@ -110,6 +110,10 @@ config :pomerol, Pomerol.Repo,
 config :guardian, Guardian,
   secret_key: System.get_env("GUARDIAN_SECRET_KEY")
 
+config :ueberauth, Ueberauth.Strategy.Google.OAuth,
+  client_id: System.get_env("GOOGLE_AUTH_CLIENT_ID"),
+  client_secret: System.get_env("GOOGLE_AUTH_CLIENT_SECRET")
+
 # Finally import the config/prod.secret.exs
 # which should be versioned separately.
 # import_config "prod.secrets.exs"
