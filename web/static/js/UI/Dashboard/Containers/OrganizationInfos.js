@@ -3,7 +3,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import FormOrganizationInfos from '../../Forms/Components/FormOrganizationInfos'
-import LoginActions from '../../../Reducers/LoginRedux'
+import OrganizationActions from '../../../Reducers/OrganizationRedux'
 
 type Props = {
   updateOrganizationAttempt: () => void,
@@ -144,7 +144,7 @@ const mapStateToProps = ({ login, organizations }) => ({
 
 const mapDispatchToProps = dispatch => ({
   updateOrganizationAttempt: (organizationId: string, organization: Object) =>
-    dispatch(LoginActions.updateOrganizationAttempt(organizationId, organization))
+    dispatch(OrganizationActions.updateOrganizationAttempt(organizationId, organization))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(OrganizationInfos)

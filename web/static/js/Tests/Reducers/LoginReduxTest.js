@@ -35,10 +35,6 @@ const FAKE_ORGANIZATION_INPUT = {
   name: 'Big corpo',
   countryId: 1
 }
-const FAKE_ORGANIZATION_OUTPUT_2 = {
-  name: 'Big corpo 2',
-  countryId: 1
-}
 const FAKE_ORGANIZATION_OUTPUT = {
   id: 666,
   name: 'Big corpo',
@@ -225,34 +221,6 @@ test('createOrganizationSuccess', t => {
   t.false(state.attemptingOrganization)
   t.is(state.errorOrganisation, null)
   t.true(listOrganizationIds.includes(FAKE_ORGANIZATION_OUTPUT.id))
-})
-
-// update organization
-test('updateOrganizationAttempt', t => {
-  const stateLogged = reducer(INITIAL_STATE, Actions.loginSuccess('joe@yopmail.com', 'yala1234'))
-  const stateLoggedWithSession = reducer(stateLogged, Actions.fetchSessionSuccess(FAKE_SESSION))
-  const state = reducer(stateLoggedWithSession, Actions.updateOrganizationAttempt(FAKE_ORGANIZATION_INPUT))
-
-  t.true(state.attemptingOrganization)
-})
-
-test('updateOrganizationFailure', t => {
-  const stateAttempt = reducer(INITIAL_STATE, Actions.updateOrganizationAttempt(FAKE_ORGANIZATION_INPUT))
-  const state = reducer(stateAttempt, Actions.updateOrganizationFailure(FAKE_ERROR))
-
-  t.false(state.attemptingOrganization)
-  t.is(state.errorOrganisation, FAKE_ERROR)
-})
-
-test('updateOrganizationSuccess', t => {
-  const stateWithOrganization = reducer(INITIAL_STATE, Actions.createOrganizationSuccess(FAKE_ORGANIZATION_INPUT))
-  const state = reducer(stateWithOrganization, Actions.updateOrganizationSuccess(FAKE_ORGANIZATION_OUTPUT_2))
-
-  const organization = state.session.organizations.find(org => org.id === FAKE_ORGANIZATION_INPUT.id)
-
-  t.false(state.attemptingOrganization)
-  t.is(state.errorOrganisation, null)
-  t.is(organization.name, FAKE_ORGANIZATION_OUTPUT_2.name)
 })
 
 // set current organization

@@ -35,7 +35,9 @@ export function * fetchSession (api, action) {
     yield put(LoginActions.fetchSessionSuccess(response.data))
 
     const organizationId = yield select(currentOrganizationIdSelector)
-    yield put(OrganizationActions.organizationAttempt(organizationId))
+    if (organizationId) {
+      yield put(OrganizationActions.fetchOrganizationAttempt(organizationId))
+    }
   } else {
     yield put(LoginActions.fetchSessionFailure())
   }
@@ -98,7 +100,7 @@ export function * updateUser (api, action) {
 
     const currentOrganizationId = data.current_organization_id
     if (previousOrganizationId !== currentOrganizationId) {
-      yield put(OrganizationActions.organizationAttempt(currentOrganizationId))
+      yield put(OrganizationActions.fetchOrganizationAttempt(currentOrganizationId))
     }
   } else {
     yield put(LoginActions.updateUserFailure(data))
@@ -115,26 +117,13 @@ export function * createOrganization (api, action) {
   const { data } = response
 
   if (response.ok) {
+    const organizationId = data.id
     yield put(LoginActions.createOrganizationSuccess(data))
-    yield put(LoginActions.setCurrentOrganization(data.country.id))
+    yield put(LoginActions.setCurrentOrganization(organizationId))
+    yield put(OrganizationActions.fetchOrganizationAttempt(organizationId))
     window.alert('Your organization has been created successfully !') // TODO: do something better
   } else {
     yield put(LoginActions.createOrganizationFailure(data))
-    handleErrors(data)
-  }
-}
-
-export function * updateOrganization (api, action) {
-  const { organizationId, organization } = action
-  const jwt = yield select(jwtSelector)
-
-  const response = yield call(api.updateOrganization, jwt, organizationId, organization)
-  const { data } = response
-
-  if (response.ok) {
-    yield put(LoginActions.updateOrganizationSuccess(data))
-  } else {
-    yield put(LoginActions.updateOrganizationFailure(data))
     handleErrors(data)
   }
 }
