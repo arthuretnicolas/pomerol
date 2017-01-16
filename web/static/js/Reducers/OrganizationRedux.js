@@ -58,10 +58,10 @@ export const updateOrganizationAttempt = (state: Object, { organizationId, organ
   })
 
 export const updateOrganizationFailure = (state: Object, { error }: { error: string }) =>
-state.merge({
-  attempting: false,
-  error: error
-})
+  state.merge({
+    attempting: false,
+    error: error
+  })
 
 export const updateOrganizationSuccess = (
   state: Object,
@@ -71,7 +71,9 @@ export const updateOrganizationSuccess = (
     state.list.find(org => org.id === organization.id)
 
   const updatedOrganization =
-    existingOrganization && existingOrganization.merge(organization)
+    typeof existingOrganization === 'undefined'
+      ? organization
+      : existingOrganization.merge(organization)
 
   const list =
     state.list
@@ -90,6 +92,6 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.ORGANIZATION_FAILURE]: organizationFailure,
   [Types.ORGANIZATION_SUCCESS]: organizationSuccess,
   [Types.UPDATE_ORGANIZATION_ATTEMPT]: updateOrganizationAttempt,
-  [Types.UPDATE_ORGANIZATION_ERROR]: updateOrganizationFailure,
+  [Types.UPDATE_ORGANIZATION_FAILURE]: updateOrganizationFailure,
   [Types.UPDATE_ORGANIZATION_SUCCESS]: updateOrganizationSuccess
 })

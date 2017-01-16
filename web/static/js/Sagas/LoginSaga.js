@@ -35,7 +35,9 @@ export function * fetchSession (api, action) {
     yield put(LoginActions.fetchSessionSuccess(response.data))
 
     const organizationId = yield select(currentOrganizationIdSelector)
-    yield put(OrganizationActions.fetchOrganizationAttempt(organizationId))
+    if (organizationId) {
+      yield put(OrganizationActions.fetchOrganizationAttempt(organizationId))
+    }
   } else {
     yield put(LoginActions.fetchSessionFailure())
   }
@@ -115,8 +117,10 @@ export function * createOrganization (api, action) {
   const { data } = response
 
   if (response.ok) {
+    const organizationId = data.id
     yield put(LoginActions.createOrganizationSuccess(data))
-    yield put(LoginActions.setCurrentOrganization(data.country.id))
+    yield put(LoginActions.setCurrentOrganization(organizationId))
+    yield put(OrganizationActions.fetchOrganizationAttempt(organizationId))
     window.alert('Your organization has been created successfully !') // TODO: do something better
   } else {
     yield put(LoginActions.createOrganizationFailure(data))
