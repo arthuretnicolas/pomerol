@@ -1,6 +1,8 @@
 defmodule Pomerol.V1.OrganizationControllerTest do
   use Pomerol.ApiCase, resource_name: :user
 
+  alias Pomerol.{Repo, OrganizationTaxRate, OrganizationSalesCategory, OrganizationTransactionalEmail}
+
   @valid_attrs %{name: "POMEROL ORG"}
   @invalid_attrs %{name: ""}
 
@@ -12,10 +14,6 @@ defmodule Pomerol.V1.OrganizationControllerTest do
 
     @tag :authenticated
     test "create and renders resource when data is valid", %{conn: conn, current_user: current_user} do
-      # country = insert(:country, name: "Australia", default_currency_code: "AUD", country_code: "AUS", default_currency_locale: "en_US", default_date_format: "US")
-      # country_translation = insert(:country_translation, country: country, name: "Australia", locale: "en")
-      # country_translation = insert(:country_translation, country: country, name: "Australie", locale: "fr")
-
       conn = post conn, "/api/v1/organizations", %{name: "POMEROL ORG", country_code: "AUS"}
 
       json = conn |> json_response(201)
@@ -25,6 +23,29 @@ defmodule Pomerol.V1.OrganizationControllerTest do
       assert json["currency_code"] == "AUD"
       assert json["currency_locale"] == "en_US"
       assert json["date_format"] == "US"
+
+      organization_id = json["id"]
+
+      # verify we inserted 4 transactional_emails
+      query = (from o in OrganizationTransactionalEmail, where: o.organization_id == ^organization_id)
+      assert Repo.aggregate(query, :count, :id) == 4
+
+      # verify we inserted 2 tax_rates
+      query = (from o in OrganizationTaxRate, where: o.organization_id == ^organization_id)
+      assert Repo.aggregate(query, :count, :id) == 2
+
+      #verify we inserted a default_tax_rate
+      query = (from o in OrganizationTaxRate, where: o.organization_id == ^organization_id and o.default == true)
+      assert Repo.aggregate(query, :count, :id) == 1
+
+      # verify we inserted 1 sales_category
+      query = (from o in OrganizationSalesCategory, where: o.organization_id == ^organization_id)
+      assert Repo.aggregate(query, :count, :id) == 1
+
+      #verify we inserted a default_sales_category
+      query = (from o in OrganizationSalesCategory, where: o.organization_id == ^organization_id and o.default == true)
+      assert Repo.aggregate(query, :count, :id) == 1
+
     end
 
     @tag :authenticated
