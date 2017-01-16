@@ -2,7 +2,7 @@ defmodule Pomerol.Organization do
   use Arc.Ecto.Schema
   use Pomerol.Web, :model
   import Pomerol.Services.Base64ImageUploaderService
-  alias Pomerol.{Country, OrganizationMembership, OrganizationInvite, Quote, CountryService}
+  alias Pomerol.{Country, OrganizationMembership, OrganizationInvite, Quote, CountryService, OrganizationTaxRate, OrganizationTransactionalEmail}
   import Pomerol.ModelUtil
 
   schema "organizations" do
@@ -72,6 +72,8 @@ defmodule Pomerol.Organization do
     |> validate_length(:name, min: 1)
     |> prefix_url(:website)
     |> put_default_settings
+    |> put_assoc(:tax_rates, OrganizationTaxRate.default_organization_tax_rates())
+    |> put_assoc(:transactional_emails, OrganizationTransactionalEmail.default_organization_transactional_emails())
   end
 
   def update_changeset(organization, params \\ %{}) do

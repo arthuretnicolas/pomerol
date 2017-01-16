@@ -1,6 +1,8 @@
 defmodule Pomerol.OrganizationTaxRate do
   use Pomerol.Web, :model
 
+  alias Pomerol.OrganizationTaxRate
+
   schema "organization_tax_rates" do
     field :name, :string
     field :tax_rate_percent, :integer
@@ -9,6 +11,26 @@ defmodule Pomerol.OrganizationTaxRate do
     belongs_to :organization, Pomerol.Organization
 
     timestamps
+  end
+
+  def default_organization_tax_rates() do
+    [
+      %{
+        name: "No Tax",
+        tax_rate_percent: 0,
+        default: false
+      }, %{
+        name: "20% TAX",
+        tax_rate_percent: 20,
+        default: true
+      }
+    ] |> Enum.map(fn (params) -> changeset(%OrganizationTaxRate{}, params) end)
+  end
+
+  def changeset(struct, params \\ %{}) do
+    struct
+    |> cast(params, [:name, :tax_rate_percent, :default])
+    |> validate_required([:name, :tax_rate_percent, :default])
   end
 
   def create_changeset(struct, params \\ %{}) do
