@@ -85,9 +85,12 @@ config :logger, level: :info
 #
 
 config :pomerol, Pomerol.Mailer,
-  adapter: Bamboo.MailgunAdapter,
-  api_key: System.get_env("MAILGUN_API_KEY"),
-  domain: System.get_env("MAILGUN_DOMAIN")
+  adapter: Bamboo.LocalAdapter
+
+# config :pomerol, Pomerol.Mailer,
+#   adapter: Bamboo.MailgunAdapter,
+#   api_key: System.get_env("MAILGUN_API_KEY"),
+#   domain: System.get_env("MAILGUN_DOMAIN")
 
 # Configure your database
 config :pomerol, Pomerol.Repo,
