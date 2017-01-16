@@ -13,8 +13,35 @@ use Mix.Config
 # which you typically run after static files are built.
 config :pomerol, Pomerol.Endpoint,
   http: [port: {:system, "PORT"}],
-  url: [host: "example.com", port: 80],
-  cache_static_manifest: "priv/static/manifest.json"
+  url: [scheme: "https", host: "pomerol-dev.herokuapp.com", port: 443],
+  cache_static_manifest: "priv/static/manifest.json",
+  secret_key_base: System.get_env("SECRET_KEY_BASE"),
+  watchers: [
+    {"node", [
+      "node_modules/webpack/bin/webpack.js",
+      "--watch-stdin",
+      "--colors"
+    ]},
+    {"node", [
+      "node_modules/webpack/bin/webpack.js",
+      "--watch-stdin",
+      "--colors",
+      "--config",
+      "webpack.server.config.js"
+    ]}
+  ]
+
+# Watch static and templates for browser reloading.
+config :pomerol, Pomerol.Endpoint,
+  live_reload: [
+    patterns: [
+      ~r{priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$},
+      ~r{priv/gettext/.*(po)$},
+      ~r{web/views/.*(ex)$},
+      ~r{web/templates/.*(eex)$}
+    ]
+  ]
+
 
 # Do not print debug messages in production
 config :logger, level: :info
@@ -56,11 +83,21 @@ config :logger, level: :info
 #     config :pomerol, Pomerol.Endpoint, server: true
 #
 
-# Finally import the config/prod.secret.exs
-# which should be versioned separately.
-import_config "prod.secret.exs"
-
 config :pomerol, Pomerol.Mailer,
   adapter: Bamboo.MailgunAdapter,
   api_key: System.get_env("MAILGUN_API_KEY"),
   domain: System.get_env("MAILGUN_DOMAIN")
+
+# Configure your database
+config :pomerol, Pomerol.Repo,
+  adapter: Ecto.Adapters.Postgres,
+  url: System.get_env("DATABASE_URL"),
+  pool_size: 20
+
+# Configure guardian
+config :guardian, Guardian,
+  secret_key: System.get_env("GUARDIAN_SECRET_KEY")
+
+# Finally import the config/prod.secret.exs
+# which should be versioned separately.
+# import_config "prod.secrets.exs"
