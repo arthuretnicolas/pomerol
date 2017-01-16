@@ -9,6 +9,9 @@ import {
   countries as listCountries,
   topCountries
 } from '../../../Data/Countries'
+import { getShortString } from '../../../Helpers'
+
+const SELECT_MAX_LETTERS = 25
 
 const countries = {
   top: topCountries,
@@ -151,7 +154,10 @@ export default class FormOrganizationInfos extends Component {
                 required
                 onChange={event => onChange('country', event && event.target.value)}
                 top={countries.top}
-                options={countries.list}
+                options={countries.list.map(({id, name}) => ({
+                  id,
+                  name: getShortString(name, SELECT_MAX_LETTERS)
+                }))}
                 size='small'
                 disabled={attempting}
               />
