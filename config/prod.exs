@@ -92,6 +92,13 @@ config :pomerol, Pomerol.Mailer,
 #   api_key: System.get_env("MAILGUN_API_KEY"),
 #   domain: System.get_env("MAILGUN_DOMAIN")
 
+config :arc,
+  bucket: "pomerol",
+  virtual_host: false,
+  arc_storage: Arc.Storage.S3
+
+config :pomerol, :analytics, Pomerol.Analytics.TestAPI
+
 # Configure your database
 config :pomerol, Pomerol.Repo,
   adapter: Ecto.Adapters.Postgres,
