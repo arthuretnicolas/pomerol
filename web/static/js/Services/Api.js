@@ -3,8 +3,9 @@
 import apisauce from 'apisauce'
 
 const isDev = process.env.NODE_ENV === 'development'
+const url = isDev ? 'http://localhost:4000/api/v1/' : 'https://pomerol-dev.herokuapp.com/api/v1'
 
-const create = (baseURL: string = 'http://localhost:4000/api/v1/') => {
+const create = (baseURL: string = url) => {
   const api = apisauce.create({
     baseURL,
     headers: {
