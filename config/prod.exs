@@ -14,6 +14,7 @@ use Mix.Config
 config :pomerol, Pomerol.Endpoint,
   http: [port: {:system, "PORT"}],
   url: [scheme: "https", host: "pomerol-dev.herokuapp.com", port: 443],
+  force_ssl: [rewrite_on: [:x_forwarded_proto]],
   cache_static_manifest: "priv/static/manifest.json",
   secret_key_base: System.get_env("SECRET_KEY_BASE"),
   watchers: [
@@ -92,7 +93,8 @@ config :pomerol, Pomerol.Mailer,
 config :pomerol, Pomerol.Repo,
   adapter: Ecto.Adapters.Postgres,
   url: System.get_env("DATABASE_URL"),
-  pool_size: 20
+  pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
+  ssl: true
 
 # Configure guardian
 config :guardian, Guardian,
