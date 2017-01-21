@@ -3,7 +3,7 @@
   background-image: -webkit-linear-gradient(darken($color, 1%), darken($color, 2%));
 
   &:hover, &:focus {
-    background: darken($color, $button-hover-darken);
+    background: darken($color, $button-darken);
   }
 }
 
@@ -11,16 +11,16 @@
   color: $color;
 
   &:hover, &:focus {
-    color: darken($color, $button-hover-darken);
+    color: darken($color, $button-darken);
 
     // beginning of dirty...
     .Shared-Icon {
       path, polygon, rect {
-        fill: darken($color, $button-hover-darken);
+        fill: darken($color, $button-darken);
       }
 
       circle {
-        stroke: darken($color, $button-hover-darken);
+        stroke: darken($color, $button-darken);
       }
     }
     // end of dirty
@@ -45,6 +45,8 @@
   font-size: $font-size-large;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.15);
   letter-spacing: $letter-spacing-spaced;
+  transition: background-color ease-in-out 100ms;
+  user-select: none;
 
   &:disabled {
     opacity: 0.4;

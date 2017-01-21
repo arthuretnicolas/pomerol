@@ -9,11 +9,11 @@
 
   &:hover {
     path, polygon, rect {
-      fill: darken($color, $button-hover-darken);
+      fill: darken($color, $button-darken);
     }
 
     circle {
-      stroke: darken($color, $button-hover-darken);
+      stroke: darken($color, $button-darken);
     }
   }
 }

@@ -16,6 +16,7 @@
     margin-left: $base-padding;
     margin-right: $base-padding;
     border-bottom: 2px solid transparent;
+    user-select: none;
     // hacky for alignment
     padding-top: 4px;
 

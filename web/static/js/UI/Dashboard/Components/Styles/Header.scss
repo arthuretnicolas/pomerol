@@ -12,6 +12,7 @@
     font-size: $font-size-larger;
     color: $black;
     letter-spacing: $letter-spacing-narrow;
+    user-select: none;
   }
 
   > .button {

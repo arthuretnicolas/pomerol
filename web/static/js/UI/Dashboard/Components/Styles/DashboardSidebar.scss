@@ -45,6 +45,7 @@
         color: $gray;
         font-family: $font-family-semibold;
         letter-spacing: $letter-spacing-spaced * 2;
+        user-select: none;
       }
 
       > .button-logout {

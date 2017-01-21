@@ -6,15 +6,16 @@ $gray-light: #d0d0d0;
 $gray-xlight: #f9fafb;
 
 $color-primary: #176FD4;
-$color-primary-medium: lighten($color-primary, 14%);
-$color-primary-semi-light: lighten($color-primary, 28%);
-$color-primary-light: lighten($color-primary, 42%);
-$color-primary-lighter: lighten($color-primary, 53.3%);
+// $color-primary-medium: #46B1EB;
+// $color-primary-semi-light: #64BFED;
+$color-primary-semi-light: #46B1EB;
+$color-primary-lighter: #F5FFFE;
 
-$color-success: rgb(0, 199, 6);
+// $color-success: #22D417;
+$color-success: adjust-hue($color-primary, -90%);
 $color-snow: #fff;
 $color-frost: lighten($color-primary, 50%);
-$color-placeholder: $color-primary-light;
+$color-placeholder: #D2F1FA;
 $color-border-input: $gray-light;
 $color-danger: #F40033;
 $color-warning: #FFA42F;
@@ -26,3 +27,5 @@ $sidebar-background: #f0f6fc;
 $color-body: $gray-dark;
 
 $color-hover-primary: $color-primary-lighter;
+
+$button-darken: 6%;

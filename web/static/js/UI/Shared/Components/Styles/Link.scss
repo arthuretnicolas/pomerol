@@ -11,8 +11,8 @@
   text-overflow: ellipsis;
 
   &:hover, &:focus, &:active {
-    color: $color-primary-medium;
-    border-color: $color-primary-medium;
+    color: $color-primary-semi-light;
+    border-color: $color-primary-semi-light;
   }
 
   &.no-border {

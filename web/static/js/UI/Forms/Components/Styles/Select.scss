@@ -28,7 +28,7 @@
     }
 
     &:focus, &:active {
-      border-color: $color-primary-semi-light;
+      border-color: rgba($color-primary, $opacity-border-color);
     }
 
     &.showing-placeholder {
