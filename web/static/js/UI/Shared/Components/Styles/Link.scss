@@ -4,6 +4,11 @@
   border-bottom: 1px solid $color-primary;
   white-space: nowrap;
   padding-bottom: 2px;
+  line-height: 25px;
+  max-height: 28px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 
   &:hover, &:focus, &:active {
     color: $color-primary-medium;

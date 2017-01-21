@@ -44,7 +44,7 @@
         font-size: $font-size-small;
         color: $gray;
         font-family: $font-family-semibold;
-        letter-spacing: 0.82px;
+        letter-spacing: $letter-spacing-spaced * 2;
       }
 
       > .button-logout {

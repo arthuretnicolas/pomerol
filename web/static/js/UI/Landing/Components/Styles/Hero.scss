@@ -5,13 +5,6 @@
   flex-direction: column;
   background-color: #e3eefc;
 
-  .overlay {
-    display: flex;
-    flex-direction: column;
-    background-image: -webkit-linear-gradient(rgba(#000, 0.5), rgba(#000, 0.2));
-    min-height: calc(100vh - 200px);
-  }
-
   .masthead {
     display: flex;
     flex-direction: column;
@@ -22,6 +15,12 @@
   .title {
     max-width: 500px;
     font-size: $font-size-main-header;
+    letter-spacing: $letter-spacing-main-header;
+
+    @media (max-width: $break-point-phone - 1) {
+      font-size: $font-size-main-header-small;
+    }
+
   }
 
   .value-proposition {

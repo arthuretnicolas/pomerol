@@ -2,40 +2,55 @@
   background-color: $background-dark;
   padding: $base-padding $double-padding;
 
-  .container {
+  > .container {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-  }
 
-  .header {
-    color: #fff;
-    font-family: $font-family-semibold;
-    font-size: $font-size-large;
-    line-height: $line-height-spaced;
-  }
+    .header {
+      color: #fff;
+      font-family: $font-family-semibold;
+      font-size: $font-size-large;
+      line-height: $line-height-spaced;
+    }
 
-  .value-proposition {
-    color: #fff;
-    font-size: $font-size-large;
-    font-style: italic;
-  }
+    .value-proposition {
+      color: #fff;
+      font-size: $font-size-large;
+      font-style: italic;
+    }
 
-  .container-button {
-    margin-left: $base-padding;
-  }
+    .container-text {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      padding-bottom: $base-padding;
+    }
 
-  @media (min-width: $break-point-desktop) {
-    .masthead {
-      width: $break-point-desktop;
-      margin: 0 auto;
+    .container-button {
+      margin-left: $base-padding;
     }
   }
 
   @media (min-width: $break-point-desktop) {
-    .container {
+    > .container {
       justify-content: flex-end;
+    }
+  }
+
+  @media (min-width: $break-point-phone) {
+    > .container {
+      flex-direction: row;
+
+      .container-text {
+        text-align: inherit;
+        padding-bottom: 0;
+      }
+
+      .container-button {
+        padding-left: $base-padding;
+      }
     }
   }
 }

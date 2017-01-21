@@ -20,7 +20,10 @@ $font-size-body: 1.2rem;
 $font-size-large: 1.3rem;
 $font-size-larger: 1.7rem;
 $font-size-header: 2.5rem;
-$font-size-main-header: 3.3rem;
+
+$font-size-main-header: 4rem;
+$font-size-main-header-small: 3.3rem;
+$letter-spacing-main-header: -1.23px;
 
 $button-hover-darken: 7%;
 
@@ -28,7 +31,8 @@ $line-height-spaced: 1.41;
 $line-height-xspaced: 1.82;
 $line-height-input: $line-height-xspaced;
 
-$letter-spacing-spaced: 0.41px;
+$letter-spacing-spaced: 0.025rem;
+$letter-spacing-narrow: -0.025rem;
 
 $min-height: 52px;
 $min-height-small: 40px;

@@ -1,16 +1,26 @@
 .Forms-Form {
   flex-direction: column;
 
-  .header {
+  > .header {
     padding-bottom: $base-padding * 1.5;
     display: flex;
     flex: 1;
+    letter-spacing: $letter-spacing-narrow;
   }
 
-  .subheader {
+  > .subheader {
     display: flex;
     flex: 1;
+    align-items: baseline;
     padding-bottom: $base-padding;
+
+    @media (max-width: $break-point-phone - 1) {
+      font-size: $font-size-small;
+    }
+
+    .link-label {
+      display: flex;
+    }
   }
 
   .container-input {

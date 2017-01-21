@@ -10,7 +10,7 @@ const Link = (props: Object) => (
     className={`
       Shared-Link
       ${props.noBorder ? 'no-border' : ''}
-      ${props.className}
+      ${props.className || ''}
     `}
   />
 )
