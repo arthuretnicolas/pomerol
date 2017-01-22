@@ -7,7 +7,6 @@ const REDUX_PERSIST = {
       'startup',
       'onboarding',
       'organizations',
-      'login',
       'form'
     ],
     transforms: [ immutablePersistenceTransform ]

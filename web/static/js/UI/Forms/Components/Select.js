@@ -2,6 +2,7 @@
 
 import React from 'react'
 import Label from './Label'
+import { shouldShowError } from '../../../Helpers'
 
 type Props = {
   label?: string,
@@ -19,7 +20,16 @@ type Props = {
   name?: string,
   theme?: 'plain',
   maxWidthSelect?: number,
-  size?: 'small' | 'base' | 'large'
+  size?: 'small' | 'base' | 'large',
+  meta?: {
+    touched: boolean,
+    error: string,
+    warning: string,
+    active: boolean,
+    visited: boolean
+  },
+  onFocus?: () => void,
+  onBlur?: () => void
 }
 
 const Select = ({
@@ -35,7 +45,10 @@ const Select = ({
   top = top || [],
   theme = '',
   maxWidthSelect,
-  size = ''
+  size = 'base',
+  meta,
+  onFocus = () => undefined,
+  onBlur = () => undefined
 }: Props) => (
   <div className={`Forms-Select ${theme} ${size}`}>
     <div className='arrow-down'>
@@ -55,6 +68,7 @@ const Select = ({
         name={name}
         label={label}
         required={required}
+        meta={meta}
       />
     }
 
@@ -63,12 +77,19 @@ const Select = ({
         maxWidth: maxWidthSelect
       }}
       name={name}
-      className={`select ${placeholder && !selected ? 'showing-placeholder' : ''}`}
+      className={`
+        select
+        ${placeholder && !selected ? 'showing-placeholder' : ''}
+        ${shouldShowError(meta) && meta && meta.error ? 'error' : ''}
+        ${shouldShowError(meta) && meta && meta.warning ? 'warning' : ''}
+      `}
       disabled={disabled}
       required={required}
       placeholder={placeholder}
       onChange={onChange}
       value={selected || ''}
+      onFocus={onFocus}
+      onBlur={onBlur}
     >
       {
         placeholder && <option value='' disabled>

@@ -38,7 +38,7 @@ const Input = ({
   minLength,
   onChange,
   value,
-  size = '',
+  size = 'base',
   src = '',
   accept = '',
   meta,

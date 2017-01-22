@@ -3,7 +3,8 @@ import { getOnboardingCompletedSteps } from './User'
 import { getShortString } from './String'
 import {
   shouldShowError,
-  renderField
+  renderField,
+  getSelectContent
 } from './Forms'
 
 export {
@@ -14,5 +15,6 @@ export {
   getShortString,
 
   shouldShowError,
-  renderField
+  renderField,
+  getSelectContent
 }

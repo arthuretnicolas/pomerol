@@ -26,13 +26,13 @@ class OnboardingOne extends Component {
     })
   }
 
-  _submit = () => {
+  _onSubmit = (values: { email: string, password: string }) => {
     const { updateUserAttempt } = this.props
     const {
       firstName,
       lastName,
       countryId
-    } = this.state
+    } = values
 
     updateUserAttempt({
       first_name: firstName,
@@ -45,20 +45,14 @@ class OnboardingOne extends Component {
     const {
       attemptingUpdate
     } = this.props
-    const {
-      firstName,
-      lastName,
-      countryId
-    } = this.state
 
     return (
       <div className='Auth-OnboardingOne'>
         <div className='form-container'>
           <FormOnboardingOne
-            onChange={this._onChange}
-            onSubmit={this._submit}
-            values={{ firstName, lastName, countryId }}
+            onSubmit={this._onSubmit}
             attempting={attemptingUpdate}
+            size='base'
           />
         </div>
       </div>

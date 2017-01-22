@@ -55,7 +55,12 @@ type TypeRenderField = {
     warning: string,
     active: boolean,
     visited: boolean
-  }
+  },
+  top: Array<string>,
+  options: Array<{
+    id: string,
+    name: string
+  }>
 }
 
 export const renderField = ({
@@ -88,4 +93,41 @@ export const renderField = ({
     default:
       return null
   }
+}
+
+export function getSelectContent (
+  placeholder: string,
+  options: Array<{
+    id: string,
+    name: string
+  }>,
+  top: Array<string> = []
+) {
+  const selectPlaceholder = (
+    <option key='placeholder' value='' disabled>
+      {placeholder}
+    </option>
+  )
+
+  const getSelectOptions = (options, top, isTop: boolean) =>
+    options
+      .filter(opt => top.includes(opt.id) === isTop)
+      .map(opt => (
+        <option key={opt.id} value={opt.id}>
+          {opt.name}
+        </option>
+      ))
+
+  const selectSeparator =
+    top.length
+      ? <option key='separator' disabled>──────────</option>
+      : null
+
+  const selectContent =
+    [ selectPlaceholder ]
+      .concat(getSelectOptions(options, top, true))
+      .concat(selectSeparator)
+      .concat(getSelectOptions(options, top, false))
+
+  return selectContent
 }
