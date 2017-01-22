@@ -19,13 +19,13 @@ type Props = {
 class Login extends Component {
   props: Props
 
-  _preloginWithGoogleSuccess = response =>
+  _preloginWithGoogleSuccess = (response: Object) =>
     this.props.preloginWithGoogleSuccess(response.code)
 
   _preloginWithGoogleFailure = error =>
     this.props.preloginWithGoogleFailure(error)
 
-  _onSubmit = values => {
+  _onSubmit = (values: { email: string, password: string }) => {
     const { loginAttempt } = this.props
     const {
       email,

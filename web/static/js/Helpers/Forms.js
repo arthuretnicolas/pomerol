@@ -12,6 +12,10 @@ type MetaType = {
 }
 
 export function shouldShowError (meta: MetaType): boolean {
+  if (!meta || typeof meta.active === 'undefined') {
+    return false
+  }
+
   const {
     active,
     error,
