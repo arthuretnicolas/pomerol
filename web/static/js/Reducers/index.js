@@ -1,6 +1,7 @@
 // @flow
 
 import { combineReducers } from 'redux'
+import { reducer as formReducer } from 'redux-form'
 import Immutable from 'seamless-immutable'
 
 const appReducer = combineReducers({
@@ -9,7 +10,8 @@ const appReducer = combineReducers({
   github: require('./GithubRedux').reducer,
   login: require('./LoginRedux').reducer,
   signup: require('./SignupRedux').reducer,
-  organizations: require('./OrganizationRedux').reducer
+  organizations: require('./OrganizationRedux').reducer,
+  form: formReducer
 })
 
 const rootReducer = (state: Object, action: Object) => {

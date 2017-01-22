@@ -1,15 +1,28 @@
 .Forms-Label {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   padding-bottom: $small-padding;
   color: $gray-dark;
   white-space: nowrap;
 
-  &.required {
-    color: red;
-  }
-
-  > .required-star {
+  > span > .required-star {
     color: $color-danger;
     padding-left: $tiny-padding;
     font-family: $font-family-semibold;
+  }
+
+  > .error-or-warning {
+    font-size: $font-size-small;
+    letter-spacing: $letter-spacing-narrow;
+
+    &.warning {
+      color: $color-warning;
+    }
+
+    &.error {
+      color: $color-danger;
+    }
   }
 }
