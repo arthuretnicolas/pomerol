@@ -3,13 +3,21 @@
 import React from 'react'
 import Label from './Label'
 
+import { getSelectContent } from '../../../Helpers'
+
 type Props = {
   label?: string,
   required?: bool,
   name?: string,
   theme?: 'plain',
   size?: 'small' | 'base' | 'large',
-  children?: React<any>
+  children?: React.Element<any>,
+  placeholder?: string,
+  options: Array<{
+    id: string,
+    name: string
+  }>,
+  top: Array<string>
 }
 
 const Select = ({
@@ -19,7 +27,10 @@ const Select = ({
   name = Math.random().toFixed(10),
   theme = '',
   size = 'base',
-  children
+  children,
+  placeholder,
+  options,
+  top
 }: Props) => (
   <div className={`Forms-Select ${theme} ${size}`}>
     <div className='arrow-down'>
@@ -41,8 +52,12 @@ const Select = ({
         required={required}
       />
     }
-
-    {children}
+    {
+      // $FlowFixMe
+      React.cloneElement(children, {
+        children: getSelectContent(placeholder, options, top)
+      })
+    }
   </div>
 )
 

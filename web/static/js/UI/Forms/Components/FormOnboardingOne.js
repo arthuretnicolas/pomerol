@@ -4,17 +4,12 @@ import React from 'react'
 import Form from './Form'
 import Select from './SelectBeta'
 import { Field, reduxForm } from 'redux-form'
-import {
-  renderField,
-  getSelectContent
-} from '../../../Helpers'
+import { renderField } from '../../../Helpers'
 
 import {
   countries as listCountries,
   topCountries
 } from '../../../Data/Countries'
-
-const selectContent = getSelectContent('Your country', listCountries, topCountries)
 
 const required = value => value ? undefined : 'Required'
 
@@ -83,6 +78,9 @@ const FormOnboardingOne = ({
             required
             disabled={submitting || attempting}
             name='countryId'
+            placeholder='Your country'
+            options={listCountries}
+            top={topCountries}
           >
             <Field
               name='countryId'
@@ -91,9 +89,7 @@ const FormOnboardingOne = ({
               component='select'
               validate={[ required ]}
               disabled={submitting || attempting}
-            >
-              {selectContent}
-            </Field>
+            />
           </Select>
         </div>
       }
