@@ -45,7 +45,7 @@ config :ueberauth, Ueberauth,
     google: {Ueberauth.Strategy.Google, [
       callback_methods: ["POST"],
       callback_path: "/api/v1/auth/google/callback",
-      callback_url: "http://localhost:4000" # Where my Brunch app is running
+      callback_url: System.get_env("GOOGLE_AUTH_CALLBACK_URL") || "http://localhost:4000" # Where my Brunch app is running
     ]}
   ]
 # Import environment specific config. This must remain at the bottom
