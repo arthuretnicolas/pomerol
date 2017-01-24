@@ -5,6 +5,7 @@ defmodule Pomerol.V1.AuthController do
   alias Pomerol.UserAuthService
 
   def callback(%Plug.Conn{assigns: %{ueberauth_failure: fails}} = conn, _params) do
+    IO.inspect conn
     conn
     |> put_status(:unauthorized)
     |> render(Pomerol.SessionView, "401.json", message: hd(fails.errors).message)
