@@ -9,6 +9,7 @@ defmodule Canary.Abilities do
   alias Pomerol.OrganizationTransactionalEmail
   alias Pomerol.OrganizationSalesCategory
   alias Pomerol.NotificationEmail
+  alias Pomerol.OrganizationItem
 
   alias Pomerol.UserPolicy
   alias Pomerol.OrganizationPolicy
@@ -20,6 +21,7 @@ defmodule Canary.Abilities do
   alias Pomerol.OrganizationTransactionalEmailPolicy
   alias Pomerol.OrganizationSalesCategoryPolicy
   alias Pomerol.NotificationEmailPolicy
+  alias Pomerol.OrganizationItemPolicy
 
   alias Ecto.Changeset
 
@@ -66,6 +68,9 @@ defmodule Canary.Abilities do
     def can?(%User{} = user, :create, %Changeset{data: %NotificationEmail{}} = changeset), do: NotificationEmailPolicy.create?(user, changeset)
     def can?(%User{} = user, :update, %NotificationEmail{} = notification_email), do: NotificationEmailPolicy.update?(user, notification_email)
     def can?(%User{} = user, :delete, %NotificationEmail{} = notification_email), do: NotificationEmailPolicy.delete?(user, notification_email)
+
+    def can?(%User{} = user, :create, %Changeset{data: %OrganizationItem{}} = changeset), do: OrganizationItemPolicy.create?(user, changeset)
+    def can?(%User{} = user, :update, %Changeset{data: %OrganizationItem{}} = changeset), do: OrganizationItemPolicy.update?(user, changeset)
 
   end
 end

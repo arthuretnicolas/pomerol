@@ -8,8 +8,6 @@ defmodule Pomerol.OrganizationItemMedia do
 
   @acl :public_read
 
-  # @icon_color_generator Application.get_env(:pomerol, :icon_color_generator)
-
   # Whitelist file extensions:
   def validate({file, _}) do
     ~w(.jpg .jpeg .gif .png) |> Enum.member?(Path.extname(file.file_name))
@@ -32,7 +30,8 @@ defmodule Pomerol.OrganizationItemMedia do
 
   # Override the storage directory:
   def storage_dir(_, {_, scope}) do
-    "attachments/#{scope.id}"
+    # "attachments/#{scope.id}"
+    "attachments/#{scope.storage_uuid}"
   end
 
   # Provide a default URL if there hasn't been a file uploaded

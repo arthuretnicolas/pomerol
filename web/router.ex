@@ -43,6 +43,8 @@ defmodule Pomerol.Router do
       post "/password/reset", UserController, :password_reset, as: :reset
 
       get "/invites/:token", OrganizationInviteController, :show
+
+      get "/track-email/:identifier", TrackingController, :track_email
     end
 
     scope "/v1", V1, as: :v1 do
@@ -60,12 +62,14 @@ defmodule Pomerol.Router do
       resources "/transactional-emails", OrganizationTransactionalEmailController, only: [:update]
       resources "/sales-categories", OrganizationSalesCategoryController, only: [:update]
       resources "/notification-emails", NotificationEmailController, only: [:update, :delete]
+      resources "/items", OrganizationItemController, only: [:update]
 
       resources "/organizations", OrganizationController, only: [:index, :show, :create, :update] do
         resources "/contacts", ContactController, only: [:index, :create]
         resources "/memberships", OrganizationMembershipController, only: [:update]
         resources "/invites", OrganizationInviteController, only: [:create, :update]
         resources "/quotes", QuoteController, only: [:create]
+        resources "/items", OrganizationItemController, only: [:create]
         resources "/tax-rates", OrganizationTaxRateController, only: [:create]
         resources "/sales-categories", OrganizationSalesCategoryController, only: [:create]
         resources "/notification-emails", NotificationEmailController, only: [:create]
