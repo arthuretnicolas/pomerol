@@ -64,6 +64,7 @@ defmodule Pomerol.Mixfile do
       {:canary, "~> 1.1.0"}, # Authorization
       {:comeonin, "~> 2.5"},
       {:corsica, "~> 0.5"},
+      {:countries, github: "SebastianSzturo/countries"},
       {:cowboy, "~> 1.0"},
       {:credo, "~> 0.5", only: [:dev, :test]}, # Code style suggestions
       {:ex_aws, "~> 0.4"}, # Amazon AWS

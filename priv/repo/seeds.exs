@@ -12,11 +12,7 @@
 
 alias Pomerol.{Repo, Country, CountryTranslation}
 
+Repo.update_all(Pomerol.User, set: [country_id: nil])
+Repo.update_all(Pomerol.Organization, set: [country_id: nil])
 Repo.delete_all Country
-
-country_changeset = Country.changeset(%Country{}, %{name: "Australia", default_currency_code: "AUD", country_code: "AUS", default_date_format: "US", default_currency_locale: "en_US"})
-country = Repo.insert!(country_changeset)
-ct_changeset_en = CountryTranslation.changeset(%CountryTranslation{},%{name: "Australia", country_id: country.id, locale: "en"})
-Repo.insert!(ct_changeset_en)
-ct_changeset_fr = CountryTranslation.changeset(%CountryTranslation{},%{name: "Australie", country_id: country.id, locale: "fr"})
-Repo.insert!(ct_changeset_fr)
+Seed.LoadCountry.seed!
