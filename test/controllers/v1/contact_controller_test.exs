@@ -109,7 +109,5 @@ defmodule Pomerol.V1.ContactControllerTest do
 
       json = conn |> json_response(422)
     end
-
   end
-
 end
