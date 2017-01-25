@@ -67,6 +67,7 @@ defmodule Pomerol.Mixfile do
       {:countries, github: "SebastianSzturo/countries"},
       {:cowboy, "~> 1.0"},
       {:credo, "~> 0.5", only: [:dev, :test]}, # Code style suggestions
+      {:distillery, "~> 1.0"},
       {:ex_aws, "~> 0.4"}, # Amazon AWS
       {:excoveralls, "~> 0.5", only: :test}, # Test coverage
       {:ex_machina, "~> 1.0", only: :test}, # test factories
