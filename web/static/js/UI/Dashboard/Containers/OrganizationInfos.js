@@ -8,7 +8,7 @@ import OrganizationActions from '../../../Reducers/OrganizationRedux'
 type Props = {
   updateOrganizationAttempt: () => void,
   organization: Object,
-  attemptingOrganization: boolean,
+  attempting: boolean,
   currentOrganizationId: string | null
 }
 
@@ -93,7 +93,7 @@ class OrganizationInfos extends Component {
 
   render () {
     const {
-      attemptingOrganization
+      attempting
     } = this.props
     const {
       name,
@@ -122,7 +122,7 @@ class OrganizationInfos extends Component {
               city,
               country
             }}
-            attempting={attemptingOrganization}
+            attempting={attempting}
           />
         </div>
       </div>
@@ -137,7 +137,7 @@ const organizationSelector = (login, organizations) => {
 
 const mapStateToProps = ({ login, organizations }) => ({
   user: login.session.user,
-  attemptingOrganization: login.attemptingOrganization,
+  attempting: organizations.attempting,
   currentOrganizationId: login.session.user.current_organization_id,
   organization: organizationSelector(login, organizations)
 })
