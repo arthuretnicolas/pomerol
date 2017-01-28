@@ -81,6 +81,7 @@ const FormOnboardingOne = ({
             placeholder='Your country'
             options={listCountries}
             top={topCountries}
+            maxLetters={30}
           >
             <Field
               name='countryId'

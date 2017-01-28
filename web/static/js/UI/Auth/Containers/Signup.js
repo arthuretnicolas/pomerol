@@ -10,10 +10,15 @@ type Props = {
   attempting: boolean
 }
 
+type ValueProps = {
+  email: string,
+  password: string
+}
+
 class Signup extends Component {
   props: Props
 
-  _onSubmit = (values: { email: string, password: string }) => {
+  _onSubmit = (values: ValueProps) => {
     const { signupAttempt } = this.props
     const {
       email,

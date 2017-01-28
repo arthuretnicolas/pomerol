@@ -16,6 +16,11 @@ type Props = {
   attemptingGoogle: boolean
 }
 
+type ValueProps = {
+  email: string,
+  password: string
+}
+
 class Login extends Component {
   props: Props
 
@@ -25,7 +30,7 @@ class Login extends Component {
   _preloginWithGoogleFailure = error =>
     this.props.preloginWithGoogleFailure(error)
 
-  _onSubmit = (values: { email: string, password: string }) => {
+  _onSubmit = (values: ValueProps) => {
     const { loginAttempt } = this.props
     const {
       email,

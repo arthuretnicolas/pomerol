@@ -11,22 +11,16 @@ type Props = {
   attemptingUpdate: boolean
 }
 
+type ValueProps = {
+  firstName: string,
+  lastName: string,
+  countryId: string
+}
+
 class OnboardingOne extends Component {
   props: Props
 
-  state = {
-    firstName: this.props.user.first_name,
-    lastName: this.props.user.last_name,
-    countryId: this.props.user.countryId
-  }
-
-  _onChange = (key, value: string | number) => {
-    this.setState({
-      [key]: value
-    })
-  }
-
-  _onSubmit = (values: { email: string, password: string }) => {
+  _onSubmit = (values: ValueProps) => {
     const { updateUserAttempt } = this.props
     const {
       firstName,
@@ -42,9 +36,7 @@ class OnboardingOne extends Component {
   }
 
   render () {
-    const {
-      attemptingUpdate
-    } = this.props
+    const { attemptingUpdate } = this.props
 
     return (
       <div className='Auth-OnboardingOne'>
