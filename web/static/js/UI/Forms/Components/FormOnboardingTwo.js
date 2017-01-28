@@ -2,7 +2,7 @@
 
 import React from 'react'
 import Form from './Form'
-import Select from './Select'
+import Select from './SelectBeta'
 import Grid from '../../Shared/Components/Grid'
 import { Field, reduxForm } from 'redux-form'
 import { renderField } from '../../../Helpers'
