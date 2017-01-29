@@ -172,9 +172,14 @@ class DashboardProfile extends Component {
       !newPassword1 ||
       newPassword1 !== newPassword2
 
+    const isLoading = attemptingUpdateUser || attemptingUpdatePassword
+
     return (
       <div className='Dashboard-DashboardProfile'>
-        <Header name='Profile' />
+        <Header
+          name='Profile'
+          isLoading={isLoading}
+        />
 
         <div className='container'>
           <div className='column first photo'>

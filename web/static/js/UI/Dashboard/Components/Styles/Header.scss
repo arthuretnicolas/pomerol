@@ -1,6 +1,7 @@
 .Dashboard-Header {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   padding-left: $double-padding * 1.5;
   padding-right: $double-padding * 1.5;
   height: $header-height;
