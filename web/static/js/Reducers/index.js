@@ -28,7 +28,8 @@ const rootReducer = (state: Object, action: Object) => {
           attemptingGoogle: false,
           attemptingUpdate: false,
           attemptingOrganization: false,
-          attemptingUpdatePassword: false
+          attemptingUpdatePassword: false,
+          attemptingReset: false
         }),
         signup: newState.signup.merge({
           attempting: false

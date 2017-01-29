@@ -78,6 +78,7 @@ export function * resetPassword (api, action) {
 
   if (response.ok) {
     const { jwt } = data
+    yield put(LoginActions.setJwt(jwt))
     yield put(LoginActions.fetchSessionAttempt(jwt))
     yield put(LoginActions.resetPasswordSuccess())
   } else {
