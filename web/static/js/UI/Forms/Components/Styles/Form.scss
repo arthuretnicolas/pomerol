@@ -39,8 +39,4 @@
     padding-left: $base-padding;
     font-size: $font-size-smaller;
   }
-
-  @media (min-width: $break-point-phone) {
-    min-width: $flex-basis-form;
-  }
 }
