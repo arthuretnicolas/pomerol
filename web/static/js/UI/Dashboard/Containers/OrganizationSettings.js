@@ -24,7 +24,8 @@ const tabs = [
 type Props = {
   params: {
     selectedIndex?: string
-  }
+  },
+  attemptingOrganization: boolean
 }
 
 class OrganizationSettings extends Component {
@@ -41,7 +42,9 @@ class OrganizationSettings extends Component {
   }
 
   render () {
+    const { attemptingOrganization } = this.props
     const { selectedIndex } = this.state
+    const isLoading = selectedIndex === 0 && attemptingOrganization
 
     return (
       <div className='Dashboard-OrganizationSettings'>
@@ -57,6 +60,7 @@ class OrganizationSettings extends Component {
               tabs={tabs}
             />
           )}
+          isLoading={isLoading}
         />
 
         <div className='container'>
@@ -81,11 +85,11 @@ class OrganizationSettings extends Component {
   }
 }
 
-const mapStateToProps = ({ counter }) => ({
+const mapStateToProps = ({ organizations }) => ({
+  attemptingOrganization: organizations.attempting
 })
 
 const mapDispatchToProps = dispatch => ({
-  // logout: () => dispatch(LoginActions.logout())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(OrganizationSettings)
