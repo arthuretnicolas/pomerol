@@ -44,6 +44,7 @@ const FormForgotPassword = ({
         contentLoading='Reset password...'
         attempting={attempting}
         buttonSize={size}
+        fullWidthCta
         children={(
           <div>
             <Input

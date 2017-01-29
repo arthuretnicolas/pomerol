@@ -1,69 +1,61 @@
 // @flow
 
-import React, { Component } from 'react'
+import React from 'react'
 import Form from './Form'
-import Input from './Input'
+import { Field, reduxForm } from 'redux-form'
+import { renderField } from '../../../Helpers'
 
 type Props = {
-  onChange: (key: string, value: any) => void,
+  size?: 'small' | 'base' | 'large',
   onSubmit: () => void,
-  values: {
-    password: string
-  },
-  attempting: boolean
+  handleSubmit: () => void,
+  submitting: boolean,
+  attempting: boolean,
+  valid: boolean
 }
 
-export default class FormResetPassword extends Component {
-  props: Props
+const required = value => value ? undefined : 'Required'
 
-  _onSubmit = (event: Event) => { // eslint-disable-line
-    const { onSubmit } = this.props
-    event.preventDefault()
+const FormResetPassword = ({
+  onSubmit,
+  handleSubmit,
+  submitting,
+  attempting,
+  valid,
+  size = 'base'
+}: Props) => (
+  <form
+    className='Form-FormResetPassword'
+    onSubmit={handleSubmit}
+  >
+    <Form
+      header='Reset password'
+      text={{
+        label: 'Password must be at least 5 character long'
+      }}
+      buttonSubmit='Reset password'
+      contentLoading='Resetting password...'
+      attempting={attempting}
+      children={
+        <div>
+          <Field
+            name='password'
+            type='password'
+            fieldType='input'
+            required
+            component={renderField}
+            label='Password'
+            placeholder='Your new password'
+            validate={[ required ]}
+            size={size}
+            disabled={submitting || attempting}
+          />
+        </div>
+      }
+    />
+  </form>
+)
 
-    onSubmit()
-  }
-
-  render () {
-    const {
-      onChange,
-      values,
-      attempting
-    } = this.props
-
-    const {
-      password
-    } = values
-
-    return (
-      <form
-        className='Form-FormResetPassword'
-        onSubmit={this._onSubmit}
-      >
-        <Form
-          header='Reset password'
-          buttonSubmit='Reset password'
-          contentLoading='Resetting password...'
-          attempting={attempting}
-          children={
-            <div>
-              <div>
-                Password must be at least 5 character long
-              </div>
-
-              <Input
-                label='Password'
-                value={password}
-                type='password'
-                placeholder='Your new password'
-                required
-                minLength={5}
-                onChange={event => onChange('password', event && event.target.value)}
-                disabled={attempting}
-              />
-            </div>
-          }
-        />
-      </form>
-    )
-  }
-}
+export default reduxForm({
+  form: 'formResetPassword'
+})(FormResetPassword)

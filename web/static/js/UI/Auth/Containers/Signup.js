@@ -33,17 +33,11 @@ class Signup extends Component {
 
     return (
       <div className='Auth-Signup'>
-        <div className='form-container'>
-          <FormSignup
-            onSubmit={this._onSubmit}
-            attempting={attempting}
-            size='base'
-          />
-        </div>
-
-        <div className='illustration'>
-          <div className='image-container' />
-        </div>
+        <FormSignup
+          onSubmit={this._onSubmit}
+          attempting={attempting}
+          size='base'
+        />
       </div>
     )
   }
