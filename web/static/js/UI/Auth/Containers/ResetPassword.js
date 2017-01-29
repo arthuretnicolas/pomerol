@@ -13,42 +13,30 @@ type Props = {
   attemptingReset: boolean
 }
 
+type ValueProps = {
+  password: string
+}
+
 class ResetPassword extends Component {
   props: Props
 
-  state = {
-    password: ''
-  }
+  _onSubmit = (values: ValueProps) => {
+    const { resetPasswordAttempt, params } = this.props
+    const { password } = values
 
-  _onChange = (key, value: string) => {
-    this.setState({
-      [key]: value
-    })
-  }
-
-  _resetPassword = () => {
-    const { resetPasswordAttempt } = this.props
-    const { token } = this.props.params
-    const { password } = this.state
-    console.log(password, token)
-
-    resetPasswordAttempt(token, password)
+    resetPasswordAttempt(params.token, password)
   }
 
   render () {
     const { attemptingReset } = this.props
-    const { password } = this.state
 
     return (
       <div className='Auth-ResetPassword'>
-        <div className='form-container'>
-          <FormResetPassword
-            onChange={this._onChange}
-            onSubmit={this._resetPassword}
-            values={{ password }}
-            attempting={attemptingReset}
-          />
-        </div>
+        <FormResetPassword
+          onSubmit={this._onSubmit}
+          attempting={attemptingReset}
+          size='base'
+        />
       </div>
     )
   }

@@ -11,28 +11,22 @@ type Props = {
   attemptingUpdate: boolean
 }
 
+type ValueProps = {
+  firstName: string,
+  lastName: string,
+  countryId: string
+}
+
 class OnboardingOne extends Component {
   props: Props
 
-  state = {
-    firstName: this.props.user.first_name,
-    lastName: this.props.user.last_name,
-    countryId: this.props.user.countryId
-  }
-
-  _onChange = (key, value: string | number) => {
-    this.setState({
-      [key]: value
-    })
-  }
-
-  _submit = () => {
+  _onSubmit = (values: ValueProps) => {
     const { updateUserAttempt } = this.props
     const {
       firstName,
       lastName,
       countryId
-    } = this.state
+    } = values
 
     updateUserAttempt({
       first_name: firstName,
@@ -42,23 +36,15 @@ class OnboardingOne extends Component {
   }
 
   render () {
-    const {
-      attemptingUpdate
-    } = this.props
-    const {
-      firstName,
-      lastName,
-      countryId
-    } = this.state
+    const { attemptingUpdate } = this.props
 
     return (
       <div className='Auth-OnboardingOne'>
         <div className='form-container'>
           <FormOnboardingOne
-            onChange={this._onChange}
-            onSubmit={this._submit}
-            values={{ firstName, lastName, countryId }}
+            onSubmit={this._onSubmit}
             attempting={attemptingUpdate}
+            size='base'
           />
         </div>
       </div>

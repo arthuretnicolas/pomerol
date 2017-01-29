@@ -2,81 +2,90 @@
 
 import React from 'react'
 import Form from './Form'
-import Input from './Input'
+import { Field, reduxForm } from 'redux-form'
+import { renderField } from '../../../Helpers'
 
 type Props = {
-  onChange: (key: string, value: any) => void,
+  size?: 'small' | 'base' | 'large',
   onSubmit: () => void,
-  values: {
-    email: string,
-    password: string
-  },
+  handleSubmit: () => void,
+  submitting: boolean,
   attempting: boolean,
-  size?: 'small' | 'base' | 'large'
+  valid: boolean
 }
 
-function _onSubmit (event: Event, onSubmit) { // eslint-disable-line
-  event.preventDefault()
-
-  onSubmit()
-}
+const required = value => value ? undefined : 'Required'
+const minLength = min => value =>
+  value && value.length < min ? `Must be ${min} characters or more` : undefined
+const minLength6 = minLength(6)
+const email = value =>
+  value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)
+    ? 'Invalid email address'
+    : undefined
+const yopmail = value =>
+  value && /.+@yopmail/.test(value)
+    ? 'An actual email is better :)'
+    : undefined
 
 const FormLogin = ({
-  onChange,
   onSubmit,
-  values,
+  handleSubmit,
+  submitting,
   attempting,
+  valid,
   size = 'base'
-}: Props) => {
-  const {
-    email,
-    password
-  } = values
+}: Props) => (
+  <form
+    className='Form-FormLogin'
+    onSubmit={handleSubmit}
+  >
+    <Form
+      header='Login in'
+      text={{
+        label: 'Need a Pomerol account?',
+        linkLabel: 'Create an account',
+        to: '/signup'
+      }}
+      buttonSubmit='Log in'
+      contentLoading='Logging in...'
+      attempting={submitting || attempting}
+      isValid={valid}
+      fullWidthCta
+      buttonSize={size}
+      children={
+        <div>
+          <Field
+            name='email'
+            type='text'
+            fieldType='input'
+            required
+            component={renderField}
+            label='Email'
+            placeholder='Your email'
+            validate={[ required, email ]}
+            warn={yopmail}
+            size={size}
+            disabled={submitting || attempting}
+          />
 
-  return (
-    <form
-      className='Form-FormLogin'
-      onSubmit={event => _onSubmit(event, onSubmit)}
-    >
-      <Form
-        header='Login in'
-        text={{
-          label: 'Need a Pomerol account?',
-          linkLabel: 'Create an account',
-          to: '/signup'
-        }}
-        buttonSubmit='Log in'
-        contentLoading='Logging in...'
-        attempting={attempting}
-        fullWidthCta
-        buttonSize={size}
-        children={
-          <div>
-            <Input
-              label='Email'
-              value={email}
-              type='email'
-              placeholder='Your email'
-              required
-              onChange={event => onChange('email', event && event.target.value)}
-              size={size}
-              disabled={attempting}
-            />
-            <Input
-              label='Password'
-              value={password}
-              type='password'
-              placeholder='Your password'
-              required
-              onChange={event => onChange('password', event && event.target.value)}
-              size={size}
-              disabled={attempting}
-            />
-          </div>
-        }
-      />
-    </form>
-  )
-}
+          <Field
+            name='password'
+            type='password'
+            fieldType='input'
+            required
+            component={renderField}
+            label='Password'
+            placeholder='Your password'
+            validate={[ required, minLength6 ]}
+            size={size}
+            disabled={submitting || attempting}
+          />
+        </div>
+      }
+    />
+  </form>
+)
 
-export default FormLogin
+export default reduxForm({
+  form: 'formLogin'
+})(FormLogin)

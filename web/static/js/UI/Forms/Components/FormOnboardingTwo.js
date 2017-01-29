@@ -1,160 +1,160 @@
 // @flow
 
-import React, { Component } from 'react'
+import React from 'react'
 import Form from './Form'
-import Input from './Input'
-import Select from './Select'
+import Select from './SelectBeta'
 import Grid from '../../Shared/Components/Grid'
+import { Field, reduxForm } from 'redux-form'
+import { renderField } from '../../../Helpers'
+
 import {
   countries as listCountries,
   topCountries
 } from '../../../Data/Countries'
 
-const countries = {
-  top: topCountries,
-  list: listCountries
-}
+const required = value => value ? undefined : 'Required'
 
 type Props = {
-  onChange: (key: string, value: any) => void,
+  size?: 'small' | 'base' | 'large',
   onSubmit: () => void,
-  values: {
-    name: string,
-    phoneNumber: string,
-    website: string,
-    address1: string,
-    address2: string,
-    zip: string,
-    city: string,
-    countryId: string | null
-  },
-  attempting: boolean
+  handleSubmit: () => void,
+  submitting: boolean,
+  attempting: boolean,
+  valid: boolean
 }
 
-export default class FormOnboardingTwo extends Component {
-  props: Props
+const FormOnboardingTwo = ({
+  onSubmit,
+  handleSubmit,
+  submitting,
+  attempting,
+  valid,
+  size = 'base'
+}: Props) => (
+  <form
+    className='Form-FormOnboardingTwo'
+    onSubmit={handleSubmit}
+  >
+    <Form
+      header='Organization'
+      text={{
+        label: 'Let\'s create your first organization'
+      }}
+      buttonSubmit='Next'
+      contentLoading='Next...'
+      attempting={attempting}
+      fullWidthCta
+      children={
+        <div>
+          <Field
+            name='name'
+            type='text'
+            fieldType='input'
+            required
+            component={renderField}
+            label='Organization name'
+            placeholder='Your organization name'
+            validate={[ required ]}
+            size={size}
+            disabled={submitting || attempting}
+          />
 
-  _onSubmit = (event: Event) => { // eslint-disable-line
-    const { onSubmit } = this.props
-    event.preventDefault()
+          <Grid>
+            <Field
+              name='phone'
+              type='text'
+              fieldType='input'
+              component={renderField}
+              label='Organization phone number'
+              placeholder='07 123 456 789'
+              size={size}
+              disabled={submitting || attempting}
+            />
 
-    onSubmit()
-  }
+            <Field
+              name='website'
+              type='text'
+              fieldType='input'
+              component={renderField}
+              label='Organization website'
+              placeholder='https://example.com'
+              size={size}
+              disabled={submitting || attempting}
+            />
+          </Grid>
 
-  render () {
-    const {
-      onChange,
-      values,
-      attempting
-    } = this.props
+          <Field
+            name='address1'
+            type='text'
+            fieldType='input'
+            component={renderField}
+            label='Address'
+            placeholder='Address'
+            size={size}
+            disabled={submitting || attempting}
+          />
 
-    const {
-      name,
-      phoneNumber,
-      website,
-      address1,
-      address2,
-      zip,
-      city,
-      countryId
-    } = values
+          <Field
+            name='address2'
+            type='text'
+            fieldType='input'
+            component={renderField}
+            label='Address 2'
+            placeholder='Address 2'
+            size={size}
+            disabled={submitting || attempting}
+          />
 
-    return (
-      <form
-        className='Form-FormOnboardingTwo'
-        onSubmit={this._onSubmit}
-      >
-        <Form
-          header='Organization'
-          text={{
-            label: 'Let\'s create your first organization'
-          }}
-          buttonSubmit='Next'
-          contentLoading='Next...'
-          attempting={attempting}
-          fullWidthCta
-          children={
-            <div>
-              <Input
-                label='Organization name'
-                value={name || ''}
-                type='text'
-                placeholder='Your organization name'
-                required
-                onChange={event => onChange('name', event && event.target.value)}
-                disabled={attempting}
-              />
+          <Grid>
+            <Field
+              name='zip'
+              type='text'
+              fieldType='input'
+              component={renderField}
+              label='Zip / Postal code'
+              placeholder='Zip / Postal code'
+              size={size}
+              disabled={submitting || attempting}
+            />
 
-              <Grid>
-                <Input
-                  label='Organization phone number'
-                  value={phoneNumber || ''}
-                  type='text'
-                  placeholder='07 123 456 789'
-                  onChange={event => onChange('phoneNumber', event && event.target.value)}
-                  disabled={attempting}
-                />
-                <Input
-                  label='Organization website'
-                  value={website || ''}
-                  type='url'
-                  placeholder='https://example.com'
-                  onChange={event => onChange('website', event && event.target.value)}
-                  disabled={attempting}
-                />
-              </Grid>
+            <Field
+              name='city'
+              type='text'
+              fieldType='input'
+              component={renderField}
+              label='City'
+              placeholder='City'
+              size={size}
+              disabled={submitting || attempting}
+            />
+          </Grid>
 
-              <Input
-                label='Address'
-                value={address1}
-                type='text'
-                placeholder='Address'
-                onChange={event => onChange('address1', event && event.target.value)}
-                disabled={attempting}
-              />
+          <Select
+            label='Organization country'
+            size={size}
+            required
+            disabled={submitting || attempting}
+            name='country'
+            placeholder='Organization country'
+            options={listCountries}
+            top={topCountries}
+            maxLetters={30}
+          >
+            <Field
+              name='country'
+              type='text'
+              required
+              component='select'
+              validate={[ required ]}
+              disabled={submitting || attempting}
+            />
+          </Select>
+        </div>
+      }
+    />
+  </form>
+)
 
-              <Input
-                label='Address 2'
-                value={address2}
-                type='text'
-                placeholder='Address 2'
-                onChange={event => onChange('address2', event && event.target.value)}
-                disabled={attempting}
-              />
-
-              <Grid>
-                <Input
-                  label='Zip / Postal code'
-                  value={zip}
-                  type='text'
-                  placeholder='Zip / Postal code'
-                  onChange={event => onChange('zip', event && event.target.value)}
-                  disabled={attempting}
-                />
-                <Input
-                  label='City'
-                  value={city}
-                  type='text'
-                  placeholder='City'
-                  onChange={event => onChange('city', event && event.target.value)}
-                  disabled={attempting}
-                />
-              </Grid>
-
-              <Select
-                label='Country'
-                selected={countryId}
-                placeholder='Organization country'
-                required
-                onChange={event => onChange('countryId', event && event.target.value)}
-                top={countries.top}
-                options={countries.list}
-                disabled={attempting}
-              />
-            </div>
-          }
-        />
-      </form>
-    )
-  }
-}
+export default reduxForm({
+  form: 'formOnboardingTwo'
+})(FormOnboardingTwo)

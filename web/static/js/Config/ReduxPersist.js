@@ -3,7 +3,12 @@ import immutablePersistenceTransform from '../Services/ImmutablePersistenceTrans
 const REDUX_PERSIST = {
   active: true,
   storeConfig: {
-    blacklist: [ 'startup', 'onboarding', 'organizations' ],
+    blacklist: [
+      'startup',
+      'onboarding',
+      'organizations',
+      'form'
+    ],
     transforms: [ immutablePersistenceTransform ]
   }
 }

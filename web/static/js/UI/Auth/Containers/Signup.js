@@ -10,41 +10,34 @@ type Props = {
   attempting: boolean
 }
 
+type ValueProps = {
+  email: string,
+  password: string
+}
+
 class Signup extends Component {
   props: Props
 
-  state = {
-    email: '',
-    password: ''
-  }
+  _onSubmit = (values: ValueProps) => {
+    const { signupAttempt } = this.props
+    const {
+      email,
+      password
+    } = values
 
-  _onChange = (key, value) => {
-    this.setState({
-      [key]: value
-    })
+    signupAttempt(email, password)
   }
 
   render () {
-    const { signupAttempt, attempting } = this.props
-    const { email, password } = this.state
+    const { attempting } = this.props
 
     return (
       <div className='Auth-Signup'>
-        <div className='form-container'>
-          <FormSignup
-            onChange={this._onChange}
-            onSubmit={() => signupAttempt(email, password)}
-            values={{
-              email,
-              password
-            }}
-            attempting={attempting}
-          />
-        </div>
-
-        <div className='illustration'>
-          <div className='image-container' />
-        </div>
+        <FormSignup
+          onSubmit={this._onSubmit}
+          attempting={attempting}
+          size='base'
+        />
       </div>
     )
   }

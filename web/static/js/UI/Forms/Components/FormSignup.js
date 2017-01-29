@@ -1,82 +1,84 @@
 // @flow
 
-import React, { Component } from 'react'
+import React from 'react'
 import Form from './Form'
-import Input from './Input'
+import { Field, reduxForm } from 'redux-form'
+import { renderField } from '../../../Helpers'
 
 type Props = {
-  onChange: (key: string, value: any) => void,
+  size?: 'small' | 'base' | 'large',
   onSubmit: () => void,
-  values: {
-    email: string,
-    password: string
-  },
-  attempting: boolean
+  handleSubmit: () => void,
+  submitting: boolean,
+  attempting: boolean,
+  valid: boolean
 }
 
-export default class FormSignup extends Component {
-  props: Props
+const required = value => value ? undefined : 'Required'
+const minLength = min => value =>
+  value && value.length < min ? `Must be ${min} characters or more` : undefined
+const minLength6 = minLength(6)
+const email = value =>
+  value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)
+    ? 'Invalid email address'
+    : undefined
 
-  _onSubmit = (event: Event) => { // eslint-disable-line
-    const { onSubmit } = this.props
-    event.preventDefault()
+const FormSignup = ({
+  onSubmit,
+  handleSubmit,
+  submitting,
+  attempting,
+  valid,
+  size = 'base'
+}: Props) => (
+  <form
+    className='Form-FormSignup'
+    onSubmit={handleSubmit}
+  >
+    <Form
+      header='Get started with a free account'
+      text={{
+        label: 'Already have a Pomerol account?',
+        linkLabel: 'Log in',
+        to: '/login'
+      }}
+      buttonSubmit='Sign up'
+      contentLoading='Signing up...'
+      attempting={attempting}
+      fullWidthCta
+      children={
+        <div>
+          <Field
+            name='email'
+            type='text'
+            fieldType='input'
+            required
+            component={renderField}
+            label='Email'
+            placeholder='Your email'
+            validate={[ required, email ]}
+            size={size}
+            disabled={submitting || attempting}
+          />
 
-    onSubmit()
-  }
+          <Field
+            name='password'
+            type='password'
+            fieldType='input'
+            required
+            component={renderField}
+            label='Password'
+            placeholder='Your password'
+            validate={[ required, minLength6 ]}
+            size={size}
+            disabled={submitting || attempting}
+          />
+        </div>
+      }
+    />
+  </form>
+)
 
-  render () {
-    const {
-      onChange,
-      values,
-      attempting
-    } = this.props
-
-    const {
-      email,
-      password
-    } = values
-
-    return (
-      <form
-        className='Form-FormSignup'
-        onSubmit={this._onSubmit}
-      >
-        <Form
-          header='Get started with a free account'
-          text={{
-            label: 'Already have a Pomerol account?',
-            linkLabel: 'Log in',
-            to: '/login'
-          }}
-          buttonSubmit='Sign up'
-          contentLoading='Signing up...'
-          attempting={attempting}
-          fullWidthCta
-          children={
-            <div>
-              <Input
-                label='Email'
-                value={email}
-                type='email'
-                placeholder='Your email'
-                required
-                onChange={event => onChange('email', event && event.target.value)}
-                disabled={attempting}
-              />
-              <Input
-                label='Password'
-                value={password}
-                type='password'
-                placeholder='Your password'
-                required
-                minLength={5}
-                onChange={event => onChange('password', event && event.target.value)}
-                disabled={attempting}
-              />
-            </div>
-          }
-        />
-      </form>
-    )
-  }
-}
+export default reduxForm({
+  form: 'formSignup'
+})(FormSignup)

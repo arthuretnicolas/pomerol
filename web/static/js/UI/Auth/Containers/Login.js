@@ -16,45 +16,43 @@ type Props = {
   attemptingGoogle: boolean
 }
 
+type ValueProps = {
+  email: string,
+  password: string
+}
+
 class Login extends Component {
   props: Props
 
-  state = {
-    email: '',
-    password: ''
-  }
-
-  _onChange = (key, value) => {
-    this.setState({
-      [key]: value
-    })
-  }
-
-  _preloginWithGoogleSuccess = response =>
+  _preloginWithGoogleSuccess = (response: Object) =>
     this.props.preloginWithGoogleSuccess(response.code)
 
   _preloginWithGoogleFailure = error =>
     this.props.preloginWithGoogleFailure(error)
 
+  _onSubmit = (values: ValueProps) => {
+    const { loginAttempt } = this.props
+    const {
+      email,
+      password
+    } = values
+
+    loginAttempt(email, password)
+  }
+
   render () {
     const {
-      loginAttempt,
-      attempting,
-      attemptingGoogle
+      attemptingGoogle,
+      attempting
     } = this.props
-    const { email, password } = this.state
 
     return (
       <div className='Auth-Login'>
         <div className='form-container'>
           <FormLogin
-            onChange={this._onChange}
-            onSubmit={() => loginAttempt(email, password)}
-            values={{
-              email,
-              password
-            }}
+            onSubmit={this._onSubmit}
             attempting={attempting}
+            size='base'
           />
 
           <Button

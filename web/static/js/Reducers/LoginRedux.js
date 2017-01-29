@@ -11,6 +11,7 @@ const { Types, Creators } = createActions({
   loginFailure: [ 'error' ],
   loginCancel: [],
   logout: [],
+  setJwt: [ 'jwt' ],
   // ******
   fetchSessionSuccess: [ 'session' ],
   fetchSessionFailure: [ 'error' ],
@@ -113,6 +114,11 @@ export const logout = (state: Object, action: Object) =>
   state.merge({
     jwt: '',
     session: emptySession
+  })
+
+export const setJwt = (state: Object, { jwt }: { jwt: string }) =>
+  state.merge({
+    jwt
   })
 
 export const fetchSessionAttempt = (state: Object, action: Object) =>
@@ -257,6 +263,7 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.LOGIN_FAILURE]: failure,
   [Types.LOGIN_CANCEL]: cancel,
   [Types.LOGOUT]: logout,
+  [Types.SET_JWT]: setJwt,
   // ******
   [Types.FETCH_SESSION_ATTEMPT]: fetchSessionAttempt,
   [Types.FETCH_SESSION_SUCCESS]: fetchSessionSuccess,

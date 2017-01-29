@@ -4,7 +4,7 @@
   margin-bottom: $base-padding;
   position: relative;
 
-  > .select {
+  > select {
     display: flex;
     flex: 1;
     background-color: #fff;
@@ -29,6 +29,14 @@
 
     &:focus, &:active {
       border-color: rgba($color-primary, $opacity-border-color);
+    }
+
+    &.warning {
+      border-color: rgba($color-warning, $opacity-border-color);
+    }
+
+    &.error {
+      border-color: rgba($color-danger, $opacity-border-color);
     }
 
     &.showing-placeholder {
@@ -67,6 +75,12 @@
   }
 
   &.small {
+    &.beta > select {
+      height: $min-height-small;
+      min-height: $min-height-small;
+      font-size: $font-size-smaller;
+    }
+
     > .select {
       height: $min-height-small;
       min-height: $min-height-small;

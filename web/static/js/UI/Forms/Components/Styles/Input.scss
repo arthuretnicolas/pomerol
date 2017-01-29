@@ -24,6 +24,14 @@
     &:focus, &:active {
       border-color: rgba($color-primary, $opacity-border-color);
     }
+
+    &.warning {
+      border-color: rgba($color-warning, $opacity-border-color);
+    }
+
+    &.error {
+      border-color: rgba($color-danger, $opacity-border-color);
+    }
   }
 
   &.small {

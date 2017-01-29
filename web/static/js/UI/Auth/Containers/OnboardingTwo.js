@@ -11,83 +11,55 @@ type Props = {
   attemptingOrganization: boolean
 }
 
+type ValueProps = {
+  name: string,
+  phone: string,
+  website: string,
+  address1: string,
+  address2: string,
+  zip: string,
+  city: string,
+  country: string
+}
+
 class OnboardingTwo extends Component {
   props: Props
 
-  state = {
-    name: '',
-    phoneNumber: '',
-    website: '',
-    address1: '',
-    address2: '',
-    zip: '',
-    city: '',
-    countryId: this.props.user.countryId
-  }
-
-  _onChange = (key, value: string | number) => {
-    this.setState({
-      [key]: value
-    })
-  }
-
-  _submit = () => {
+  _onSubmit = (values: ValueProps) => {
     const { createOrganizationAttempt } = this.props
     const {
       name,
-      phoneNumber,
+      phone,
       website,
       address1,
       address2,
       zip,
       city,
-      countryId
-    } = this.state
+      country
+    } = values
 
     createOrganizationAttempt({
       name,
-      phone: phoneNumber,
+      phone,
       website,
       address1,
       address2,
       zip,
       city,
-      country_code: countryId
+      country_code: country
     })
   }
 
   render () {
-    const {
-      attemptingOrganization
-    } = this.props
-    const {
-      name,
-      phoneNumber,
-      website,
-      address1,
-      address2,
-      zip,
-      city,
-      countryId
-    } = this.state
+    const { attemptingOrganization } = this.props
 
     return (
       <div className='Auth-OnboardingTwo'>
         <div className='form-container'>
           <FormOnboardingTwo
-            onChange={this._onChange}
-            onSubmit={this._submit}
-            values={{
-              name,
-              phoneNumber,
-              website,
-              address1,
-              address2,
-              zip,
-              city,
-              countryId
-            }}
+            onSubmit={this._onSubmit}
             attempting={attemptingOrganization}
+            size='base'
           />
         </div>
       </div>
