@@ -10,40 +10,30 @@ type Props = {
   attemptingRequest: boolean
 }
 
+type ValueProps = {
+  email: string
+}
+
 class ForgotPassword extends Component {
   props: Props
 
-  state = {
-    email: ''
-  }
-
-  _onChange = (key, value: string) => {
-    this.setState({
-      [key]: value
-    })
-  }
-
-  _requestPassword = () => {
+  _onSubmit = (values: ValueProps) => {
     const { requestPasswordAttempt } = this.props
-    const { email } = this.state
+    const { email } = values
 
     requestPasswordAttempt(email)
   }
 
   render () {
     const { attemptingRequest } = this.props
-    const { email } = this.state
 
     return (
       <div className='Auth-ForgotPassword'>
-        <div className='form-container'>
-          <FormForgotPassword
-            onChange={this._onChange}
-            onSubmit={this._requestPassword}
-            values={{ email }}
-            attempting={attemptingRequest}
-          />
-        </div>
+        <FormForgotPassword
+          onSubmit={this._onSubmit}
+          attempting={attemptingRequest}
+          size='base'
+        />
       </div>
     )
   }
