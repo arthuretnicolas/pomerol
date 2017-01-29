@@ -19,4 +19,10 @@
     padding: 5px 0 0 0;
     margin-left: $base-padding;
   }
+
+  > .container-animation {
+    display: flex;
+    align-items: center;
+    height: 100%;
+  }
 }

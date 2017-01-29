@@ -3,6 +3,7 @@
 import React from 'react'
 import Button from '../../Shared/Components/Button'
 import Icon from '../../Shared/Components/Icon'
+import FancyAnimation from '../../Shared/Components/FancyAnimation'
 
 type Props = {
   name: string,
@@ -10,13 +11,15 @@ type Props = {
     name: string,
     onClick: () => void
   },
-  tabs?: React.Element<*>
+  tabs?: React.Element<*>,
+  isLoading?: boolean
 }
 
 const Header = ({
   name,
   callToAction,
-  tabs
+  tabs,
+  isLoading = false
 }: Props) => (
   <div className='Dashboard-Header'>
     <div className='title'>
@@ -51,6 +54,10 @@ const Header = ({
         theme='plain plain-success'
       />
     }
+
+    <div className='container-animation'>
+      <FancyAnimation isLoading={isLoading} />
+    </div>
   </div>
 )
 
