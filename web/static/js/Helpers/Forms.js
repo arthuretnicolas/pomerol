@@ -60,7 +60,8 @@ type TypeRenderField = {
   options: Array<{
     id: string,
     name: string
-  }>
+  }>,
+  size?: 'small' | 'base' | 'large'
 }
 
 export const renderField = ({
@@ -72,7 +73,8 @@ export const renderField = ({
   disabled,
   attempting,
   type,
-  meta
+  meta,
+  size
 }: TypeRenderField) => {
   switch (fieldType) {
     case 'input':
@@ -88,6 +90,7 @@ export const renderField = ({
           onFocus={input.onFocus}
           onBlur={input.onBlur}
           required={required}
+          size={size}
         />
       )
     default:

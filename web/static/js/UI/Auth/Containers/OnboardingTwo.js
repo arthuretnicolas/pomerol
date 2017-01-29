@@ -13,13 +13,13 @@ type Props = {
 
 type ValueProps = {
   name: string,
-  phoneNumber: string,
+  phone: string,
   website: string,
   address1: string,
   address2: string,
   zip: string,
   city: string,
-  countryId: string
+  country: string
 }
 
 class OnboardingTwo extends Component {
@@ -29,24 +29,24 @@ class OnboardingTwo extends Component {
     const { createOrganizationAttempt } = this.props
     const {
       name,
-      phoneNumber,
+      phone,
       website,
       address1,
       address2,
       zip,
       city,
-      countryId
+      country
     } = values
 
     createOrganizationAttempt({
       name,
-      phone: phoneNumber,
+      phone,
       website,
       address1,
       address2,
       zip,
       city,
-      country_code: countryId
+      country_code: country
     })
   }
 

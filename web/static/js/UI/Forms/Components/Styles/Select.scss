@@ -75,6 +75,12 @@
   }
 
   &.small {
+    &.beta > select {
+      height: $min-height-small;
+      min-height: $min-height-small;
+      font-size: $font-size-smaller;
+    }
+
     > .select {
       height: $min-height-small;
       min-height: $min-height-small;

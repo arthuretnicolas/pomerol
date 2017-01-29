@@ -46,7 +46,7 @@ const Select = ({
       : options
 
   return (
-    <div className={`Forms-Select ${theme} ${size}`}>
+    <div className={`Forms-Select ${theme} ${size} beta`}>
       <div className='arrow-down'>
         <svg
           viewBox='0 0 18 18'

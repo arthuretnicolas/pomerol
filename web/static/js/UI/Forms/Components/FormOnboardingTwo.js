@@ -61,7 +61,7 @@ const FormOnboardingTwo = ({
 
           <Grid>
             <Field
-              name='phoneNumber'
+              name='phone'
               type='text'
               fieldType='input'
               component={renderField}
@@ -134,14 +134,14 @@ const FormOnboardingTwo = ({
             size={size}
             required
             disabled={submitting || attempting}
-            name='countryId'
+            name='country'
             placeholder='Organization country'
             options={listCountries}
             top={topCountries}
             maxLetters={30}
           >
             <Field
-              name='countryId'
+              name='country'
               type='text'
               required
               component='select'

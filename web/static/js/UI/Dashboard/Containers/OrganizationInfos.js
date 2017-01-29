@@ -7,68 +7,28 @@ import OrganizationActions from '../../../Reducers/OrganizationRedux'
 
 type Props = {
   updateOrganizationAttempt: () => void,
-  organization: Object,
-  attempting: boolean,
-  currentOrganizationId: string | null
+  attempting: boolean
+}
+
+type ValueProps = {
+  name: string,
+  phone: string,
+  website: string,
+  address1: string,
+  address2: string,
+  zip: string,
+  city: string,
+  country: string,
+  id: string
 }
 
 class OrganizationInfos extends Component {
   props: Props
 
-  state = {
-    name: (this.props.organization && this.props.organization.name) || '',
-    phone: (this.props.organization && this.props.organization.phone) || '',
-    website: (this.props.organization && this.props.organization.website) || '',
-    address1: (this.props.organization && this.props.organization.address1) || '',
-    address2: (this.props.organization && this.props.organization.address2) || '',
-    zip: (this.props.organization && this.props.organization.zip) || '',
-    city: (this.props.organization && this.props.organization.city) || '',
-    country: (this.props.organization && this.props.organization.country) || ''
-  }
-
-  componentWillReceiveProps (nextProps) {
-    const { organization } = nextProps
-    const shouldUpdate =
-      organization &&
-      (!this.props.organization || (nextProps.currentOrganizationId !== this.props.currentOrganizationId))
-
-    if (shouldUpdate) {
-      const {
-        name,
-        phone,
-        website,
-        address1,
-        address2,
-        zip,
-        city,
-        country
-      } = organization
-
-      this.setState({
-        name: name || '',
-        phone: phone || '',
-        website: website || '',
-        address1: address1 || '',
-        address2: address2 || '',
-        zip: zip || '',
-        city: city || '',
-        country: country || ''
-      })
-    }
-  }
-
-  _onChange = (key, value: string | number) => {
-    this.setState({
-      [key]: value
-    })
-  }
-
-  _submit = () => {
+  _onSubmit = (values: ValueProps) => {
+    const { updateOrganizationAttempt } = this.props
     const {
-      updateOrganizationAttempt,
-      organization
-    } = this.props
-    const {
+      id,
       name,
       phone,
       website,
@@ -77,9 +37,9 @@ class OrganizationInfos extends Component {
       zip,
       city,
       country
-    } = this.state
+    } = values
 
-    updateOrganizationAttempt(organization && organization.id, {
+    updateOrganizationAttempt(id, {
       name,
       phone,
       website,
@@ -95,34 +55,14 @@ class OrganizationInfos extends Component {
     const {
       attempting
     } = this.props
-    const {
-      name,
-      phone,
-      website,
-      address1,
-      address2,
-      zip,
-      city,
-      country
-    } = this.state
 
     return (
       <div className='Dashboard-OrganizationInfos'>
         <div className='form-container'>
           <FormOrganizationInfos
-            onChange={this._onChange}
-            onSubmit={this._submit}
-            values={{
-              name,
-              phone,
-              website,
-              address1,
-              address2,
-              zip,
-              city,
-              country
-            }}
+            onSubmit={this._onSubmit}
             attempting={attempting}
+            size='small'
           />
         </div>
       </div>
@@ -130,16 +70,8 @@ class OrganizationInfos extends Component {
   }
 }
 
-const organizationSelector = (login, organizations) => {
-  const { current_organization_id } = login.session.user
-  return organizations.list.find(org => org.id === current_organization_id) // eslint-disable-line
-}
-
-const mapStateToProps = ({ login, organizations }) => ({
-  user: login.session.user,
-  attempting: organizations.attempting,
-  currentOrganizationId: login.session.user.current_organization_id,
-  organization: organizationSelector(login, organizations)
+const mapStateToProps = ({ organizations }) => ({
+  attempting: organizations.attempting
 })
 
 const mapDispatchToProps = dispatch => ({
