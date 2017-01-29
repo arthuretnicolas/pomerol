@@ -8,17 +8,24 @@
   font-size: $font-size-large;
   border-bottom: 2px solid $gray-xlight;
 
-  > .title {
-    font-family: $font-family-semibold;
-    font-size: $font-size-larger;
-    color: $black;
-    letter-spacing: $letter-spacing-narrow;
-    user-select: none;
-  }
+  > .container-left {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    align-items: center;
 
-  > .button {
-    padding: 5px 0 0 0;
-    margin-left: $base-padding;
+    > .title {
+      font-family: $font-family-semibold;
+      font-size: $font-size-larger;
+      color: $black;
+      letter-spacing: $letter-spacing-narrow;
+      user-select: none;
+    }
+
+    > .button {
+      padding: 5px 0 0 0;
+      margin-left: $base-padding;
+    }
   }
 
   > .container-animation {
