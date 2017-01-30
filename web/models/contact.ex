@@ -28,8 +28,8 @@ defmodule Pomerol.Contact do
 
   def changeset(contact, params \\ %{}) do
     contact
-    |> cast(params, [:email, :contact_type, :organization_id, :user_id])
-    |> validate_required([:email, :contact_type, :organization_id, :user_id])
+    |> cast(params, [:email, :contact_type])
+    |> validate_required([:email, :contact_type])
     |> update_change(:email, &String.downcase/1)
     |> validate_email_format(:email)
     |> assoc_constraint(:user)
@@ -92,6 +92,13 @@ defmodule Pomerol.Contact do
   end
 
   def create_changeset(contact, params) do
+    contact
+    |> cast(params, [:organization_id, :user_id])
+    |> validate_required([:organization_id, :user_id])
+    |> changeset(params)
+  end
+
+  def update_changeset(contact, params) do
     contact
     |> changeset(params)
   end

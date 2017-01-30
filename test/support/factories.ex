@@ -66,13 +66,24 @@ defmodule Pomerol.Factories do
     }
   end
 
-  def contact_factory do
+  def contact_person_type_factory do
     %Pomerol.Contact{
       first_name: sequence(:first_name, &"fn#{&1}"),
       last_name: sequence(:last_name, &"ln#{&1}"),
       email: sequence(:email, &"email#{&1}"),
       user: build(:user),
       organization: build(:organization),
+      company: build(:contact_company),
+      contact_type: "person"
+    }
+  end
+
+  def contact_company_type_factory do
+    %Pomerol.Contact{
+      email: sequence(:email, &"email#{&1}"),
+      user: build(:user),
+      organization: build(:organization),
+      company: build(:contact_company),
       contact_type: "company"
     }
   end

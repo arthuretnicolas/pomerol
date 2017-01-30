@@ -11,7 +11,7 @@ defmodule Pomerol.V1.ContactControllerTest do
       organization = insert(:organization)
       membership = insert(:organization_membership, organization: organization, member: current_user, role: "owner")
 
-      [contact_1, contact_2] = insert_pair(:contact, organization: organization, user: current_user)
+      [contact_1, contact_2] = insert_pair(:contact_company_type, organization: organization, user: current_user)
 
       json = conn |> get("/api/v1/organizations/#{organization.id}/contacts") |> json_response(200)
 
@@ -21,7 +21,7 @@ defmodule Pomerol.V1.ContactControllerTest do
 
     test "returns unauthorized when user is not authenticated", %{conn: conn} do
       organization = insert(:organization)
-      [contact_1, contact_2] = insert_pair(:contact, organization: organization)
+      [contact_1, contact_2] = insert_pair(:contact_company_type, organization: organization)
 
       json = conn |> get("/api/v1/organizations/#{organization.id}/contacts") |> json_response(401)
     end
@@ -29,7 +29,7 @@ defmodule Pomerol.V1.ContactControllerTest do
     @tag :authenticated
     test "returns 403 when user is not member", %{conn: conn, current_user: current_user} do
       organization = insert(:organization)
-      [contact_1, contact_2] = insert_pair(:contact, organization: organization)
+      [contact_1, contact_2] = insert_pair(:contact_company_type, organization: organization)
 
       json = conn |> get("/api/v1/organizations/#{organization.id}/contacts") |> json_response(403)
     end
@@ -40,7 +40,7 @@ defmodule Pomerol.V1.ContactControllerTest do
     @tag :authenticated
     test "returns 403 when user is not member", %{conn: conn, current_user: current_user} do
       organization = insert(:organization)
-      contact = insert(:contact, organization: organization)
+      contact = insert(:contact_person_type, organization: organization)
 
       conn |> get("/api/v1/contacts/#{contact.id}") |> json_response(403)
     end
@@ -49,14 +49,14 @@ defmodule Pomerol.V1.ContactControllerTest do
     test "returns 200 when user is member of the org", %{conn: conn, current_user: current_user} do
       organization = insert(:organization)
       membership = insert(:organization_membership, organization: organization, member: current_user, role: "owner")
-      contact = insert(:contact, organization: organization, user: current_user)
+      contact = insert(:contact_person_type, organization: organization, user: current_user)
 
       conn |> get("/api/v1/contacts/#{contact.id}") |> json_response(200) |> assert_result_id(contact.id)
     end
 
     test "returns unauthorized when user is not authenticated", %{conn: conn} do
       organization = insert(:organization)
-      contact = insert(:contact, organization: organization)
+      contact = insert(:contact_person_type, organization: organization)
 
       conn |> get("/api/v1/contacts/#{contact.id}") |> json_response(401)
     end
@@ -104,7 +104,7 @@ defmodule Pomerol.V1.ContactControllerTest do
     test "doesnt create contact when email is already used", %{conn: conn, current_user: current_user} do
       organization = insert(:organization)
       membership = insert(:organization_membership, organization: organization, member: current_user, role: "owner")
-      contact = insert(:contact, organization: organization)
+      contact = insert(:contact_person_type, organization: organization)
 
       conn = post conn, "/api/v1/organizations/#{organization.id}/contacts", %{email: contact.email, first_name: "Firstname", contact_type: "person"}
 
@@ -149,6 +149,58 @@ defmodule Pomerol.V1.ContactControllerTest do
 
       json = conn |> json_response(201)
       assert json["company"]["id"] == contact_company.id
+    end
+  end
+
+  describe "update" do
+    test "doesnt update if user is not authenticated" do
+      contact = insert(:contact_person_type)
+
+      conn = put conn, "/api/v1/contacts/#{contact.id}", %{first_name: "FN"}
+      assert conn |> json_response(401)
+    end
+
+    @tag :authenticated
+    test "cannot update if user is not member of the org", %{conn: conn, current_user: current_user} do
+      organization = insert(:organization)
+      contact = insert(:contact_person_type, organization: organization)
+
+      conn = put conn, "/api/v1/contacts/#{contact.id}", %{first_name: "FN"}
+      assert conn |> json_response(403)
+    end
+
+    @tag :authenticated
+    test "cannot update if user is viewer of the org", %{conn: conn, current_user: current_user} do
+      organization = insert(:organization)
+      membership = insert(:organization_membership, organization: organization, member: current_user, role: "viewer")
+      contact = insert(:contact_person_type, organization: organization)
+
+      conn = put conn, "/api/v1/contacts/#{contact.id}", %{first_name: "FN"}
+      assert conn |> json_response(403)
+    end
+  end
+
+  describe "update contact person" do
+    @tag :authenticated
+    test "can update if user is owner of the org", %{conn: conn, current_user: current_user} do
+      organization = insert(:organization)
+      membership = insert(:organization_membership, organization: organization, member: current_user, role: "owner")
+      contact = insert(:contact_person_type, organization: organization)
+
+      conn = put conn, "/api/v1/contacts/#{contact.id}", %{first_name: "FN"}
+      json = conn |> json_response(200)
+      assert json["first_name"] == "FN"
+    end
+
+    @tag :authenticated
+    test "cannot update with a contact_company that dont belongs to the org", %{conn: conn, current_user: current_user} do
+      organization = insert(:organization)
+      membership = insert(:organization_membership, organization: organization, member: current_user, role: "owner")
+      contact = insert(:contact_person_type, organization: organization)
+      contact_company = insert(:contact_company)
+
+      conn = put conn, "/api/v1/contacts/#{contact.id}", %{company_id: contact_company.id}
+      json = conn |> json_response(403)
     end
   end
 end

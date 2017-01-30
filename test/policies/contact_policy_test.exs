@@ -76,7 +76,7 @@ defmodule Pomerol.ContactPolicyTest do
   describe "show?" do
     test "returns true when user is an admin" do
       user = build(:user, admin: true)
-      contact = build(:contact)
+      contact = build(:contact_person_type)
 
       assert show?(user, contact)
     end
@@ -84,7 +84,7 @@ defmodule Pomerol.ContactPolicyTest do
     test "returns false when user is not member of organization" do
       [user, another_user] = insert_pair(:user)
       organization = insert(:organization)
-      contact = insert(:contact, organization: organization, user: another_user)
+      contact = insert(:contact_person_type, organization: organization, user: another_user)
 
       refute show?(user, contact)
     end
@@ -92,7 +92,7 @@ defmodule Pomerol.ContactPolicyTest do
     test "returns true when user is owner of organization" do
       [user, another_user] = insert_pair(:user)
       organization = insert(:organization)
-      contact = insert(:contact, organization: organization, user: another_user)
+      contact = insert(:contact_person_type, organization: organization, user: another_user)
       organization_membership = insert(:organization_membership, member: user, organization: organization, role: "owner")
 
       assert show?(user, contact)
@@ -101,7 +101,7 @@ defmodule Pomerol.ContactPolicyTest do
     test "returns true when user is admin of organization" do
       [user, another_user] = insert_pair(:user)
       organization = insert(:organization)
-      contact = insert(:contact, organization: organization, user: another_user)
+      contact = insert(:contact_person_type, organization: organization, user: another_user)
       organization_membership = insert(:organization_membership, member: user, organization: organization, role: "admin")
 
       assert show?(user, contact)
@@ -110,7 +110,7 @@ defmodule Pomerol.ContactPolicyTest do
     test "returns true when user is manager of organization" do
       [user, another_user] = insert_pair(:user)
       organization = insert(:organization)
-      contact = insert(:contact, organization: organization, user: another_user)
+      contact = insert(:contact_person_type, organization: organization, user: another_user)
       organization_membership = insert(:organization_membership, member: user, organization: organization, role: "manager")
 
       assert show?(user, contact)
@@ -119,7 +119,7 @@ defmodule Pomerol.ContactPolicyTest do
     test "returns true when user is author of organization" do
       [user, another_user] = insert_pair(:user)
       organization = insert(:organization)
-      contact = insert(:contact, organization: organization, user: another_user)
+      contact = insert(:contact_person_type, organization: organization, user: another_user)
       organization_membership = insert(:organization_membership, member: user, organization: organization, role: "author")
 
       assert show?(user, contact)
@@ -128,7 +128,7 @@ defmodule Pomerol.ContactPolicyTest do
     test "returns false when user is viewer of organization" do
       [user, another_user] = insert_pair(:user)
       organization = insert(:organization)
-      contact = insert(:contact, organization: organization, user: another_user)
+      contact = insert(:contact_person_type, organization: organization, user: another_user)
       organization_membership = insert(:organization_membership, member: user, organization: organization, role: "viewer")
 
       refute show?(user, contact)

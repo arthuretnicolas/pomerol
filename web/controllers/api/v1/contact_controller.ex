@@ -45,10 +45,20 @@ defmodule Pomerol.V1.ContactController do
     end
   end
 
-  def update(conn, _params) do
-    current_user = conn.assigns |> Map.get(:current_user)
-    conn
-    |> json("not implemented")
+  def update(conn, contact_params) do
+    locale = conn.assigns[:locale]
+    contact = Contact |> Contact.preload_all(locale) |> Repo.get!(contact_params["id"])
+    changeset = Contact.update_changeset(contact, contact_params)
+
+    case Repo.update(changeset) do
+      {:ok, contact} ->
+        contact = Contact |> Contact.preload_all(locale) |> Repo.get!(contact.id)
+        render(conn, Pomerol.ContactView, "contact.json", contact: contact)
+      {:error, changeset} ->
+        conn
+        |> put_status(:unprocessable_entity)
+        |> render(Pomerol.ErrorView, "422.json", changeset: changeset)
+    end
   end
 
   def show(conn, %{"id" => contact_id}) do
