@@ -10,7 +10,7 @@ defmodule Pomerol.ContactAddressView do
       zip: contact_address.zip,
       state: contact_address.state,
       type: contact_address.type,
-      country: render_one(contact_address.country, Pomerol.CountryView, "country.json")
+      country: contact_address.country.country_code
     }
   end
 

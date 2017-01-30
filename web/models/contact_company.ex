@@ -4,6 +4,7 @@ defmodule Pomerol.ContactCompany do
   schema "contact_companies" do
     field :name, :string
 
+    belongs_to :organization, Pomerol.Organization
     has_many :contacts, Pomerol.Contact
 
     timestamps
@@ -11,7 +12,7 @@ defmodule Pomerol.ContactCompany do
 
   def changeset(contact, params \\ %{}) do
     contact
-    |> cast(params, [:name])
-    |> validate_required([:name])
+    |> cast(params, [:name, :organization_id])
+    |> validate_required([:name, :organization_id])
   end
 end

@@ -126,4 +126,11 @@ defmodule Pomerol.Factories do
     }
   end
 
+  def contact_company_factory do
+    %Pomerol.ContactCompany{
+      organization: build(:organization),
+      name: "Great Corp"
+    }
+  end
+
 end

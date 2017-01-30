@@ -1,5 +1,6 @@
 defmodule Pomerol.V1.ContactControllerTest do
   use Pomerol.ApiCase
+  alias Pomerol.{Repo, ContactCompany}
 
   @valid_attrs %{email: "email@email.com", first_name: "Firstname", contact_type: "person"}
 
@@ -108,6 +109,46 @@ defmodule Pomerol.V1.ContactControllerTest do
       conn = post conn, "/api/v1/organizations/#{organization.id}/contacts", %{email: contact.email, first_name: "Firstname", contact_type: "person"}
 
       json = conn |> json_response(422)
+    end
+
+    @tag :authenticated
+    test "does create contact with contact_company", %{conn: conn, current_user: current_user} do
+      organization = insert(:organization)
+      membership = insert(:organization_membership, organization: organization, member: current_user, role: "owner")
+
+      conn = post conn, "/api/v1/organizations/#{organization.id}/contacts", %{email: "super@email.com", first_name: "Firstname", contact_type: "person", company_name: "SUPER CORP"}
+
+      json = conn |> json_response(201)
+      assert json["company"]["name"] == "SUPER CORP"
+      assert json["organization_id"] == organization.id
+
+      # verify that contact_company has been created and attached to current_organization
+      contact_company =
+        ContactCompany
+        |> Repo.get(json["company"]["id"])
+
+      assert contact_company.organization_id == organization.id
+    end
+
+    @tag :authenticated
+    test "doesnt create contact with company_id when contact_company doesnt belongs to current org", %{conn: conn, current_user: current_user} do
+      organization = insert(:organization)
+      membership = insert(:organization_membership, organization: organization, member: current_user, role: "owner")
+      contact_company = insert(:contact_company)
+      conn = post conn, "/api/v1/organizations/#{organization.id}/contacts", %{email: "great@email.com", first_name: "Firstname", contact_type: "person", company_id: contact_company.id}
+
+      json = conn |> json_response(403)
+    end
+
+    @tag :authenticated
+    test "does create contact with company_id when contact_company belongs to current org", %{conn: conn, current_user: current_user} do
+      organization = insert(:organization)
+      membership = insert(:organization_membership, organization: organization, member: current_user, role: "owner")
+      contact_company = insert(:contact_company, organization: organization)
+      conn = post conn, "/api/v1/organizations/#{organization.id}/contacts", %{email: "great@email.com", first_name: "Firstname", contact_type: "person", company_id: contact_company.id}
+
+      json = conn |> json_response(201)
+      assert json["company"]["id"] == contact_company.id
     end
   end
 end

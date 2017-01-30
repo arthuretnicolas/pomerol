@@ -1,6 +1,5 @@
 defmodule Pomerol.V1.NotificationEmailControllerTest do
   use Pomerol.ApiCase
-  alias Pomerol.Repo
   alias Pomerol.NotificationEmail
 
   describe "create" do

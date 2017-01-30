@@ -6,7 +6,7 @@ defmodule Pomerol.Helpers.Policy do
 
   import Ecto.Query
 
-  alias Pomerol.{Organization, OrganizationMembership, OrganizationInvite, OrganizationTaxRate, OrganizationTransactionalEmail, OrganizationSalesCategory, Quote, Repo, User, Contact, NotificationEmail, OrganizationItem}
+  alias Pomerol.{Organization, OrganizationMembership, OrganizationInvite, OrganizationTaxRate, OrganizationTransactionalEmail, OrganizationSalesCategory, Quote, Repo, User, Contact, ContactCompany, NotificationEmail, OrganizationItem}
   alias Ecto.Changeset
 
   @doc """
@@ -32,6 +32,10 @@ defmodule Pomerol.Helpers.Policy do
     |> where([m], m.member_id == ^user_id and m.organization_id == ^organization_id)
     |> Repo.one
   end
+
+  def get_contact_company(%{company_id: contact_company_id}), do: ContactCompany |> Repo.get(contact_company_id)
+  def get_contact_company(%Changeset{changes: %{company_id: contact_company_id}}), do: ContactCompany |> Repo.get(contact_company_id)
+  def get_contact_company(_), do: nil
 
   @doc """
   Retrieves the role field, from a `Pomerol.OrganizationMembership` struct or an `Ecto.Changeset`
