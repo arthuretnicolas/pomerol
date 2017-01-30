@@ -7,6 +7,7 @@ import EmptyStateDashboard from '../../Shared/Components/EmptyStateDashboard'
 import { sidebarOptions } from '../../../Data/index'
 import { getOnboardingCompletedSteps } from '../../../Helpers'
 import LoginActions from '../../../Reducers/LoginRedux'
+import ModalContainer from './ModalContainer'
 
 type Props = {
   children: React.Element<*>,
@@ -53,6 +54,7 @@ class DashboardContainer extends Component {
         />
 
         <div className='container-content'>
+          <ModalContainer />
           {children}
         </div>
       </div>

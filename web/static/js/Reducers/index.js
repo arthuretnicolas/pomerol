@@ -11,6 +11,7 @@ const appReducer = combineReducers({
   login: require('./LoginRedux').reducer,
   signup: require('./SignupRedux').reducer,
   organizations: require('./OrganizationRedux').reducer,
+  modal: require('./ModalRedux').reducer,
   form: formReducer
 })
 
