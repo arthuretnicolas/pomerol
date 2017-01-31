@@ -8,7 +8,7 @@ type Props = {
   onRequestClose: () => void
 }
 
-const Modal = ({ isOpen, onRequestClose, children }: Props) => (
+const ModalOLD = ({ isOpen, onRequestClose, children }: Props) => (
   <ReactModal
     isOpen={isOpen}
     // onAfterOpen={afterOpenFn}
@@ -21,4 +21,4 @@ const Modal = ({ isOpen, onRequestClose, children }: Props) => (
   </ReactModal>
 )
 
-export default Modal
+export default ModalOLD

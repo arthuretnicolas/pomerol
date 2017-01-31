@@ -6,7 +6,7 @@ import Immutable from 'seamless-immutable'
 /* ------------- Types and Action Creators ------------- */
 
 const { Types, Creators } = createActions({
-  showModal: [],
+  showModal: [ 'modalType', 'modalProps' ],
   hideModal: []
 })
 
@@ -16,19 +16,22 @@ export default Creators
 /* ------------- Initial State ------------- */
 
 export const INITIAL_STATE = Immutable({
-  isOpen: false
+  modalType: null,
+  modalProps: {}
 })
 
 /* ------------- Reducers ------------- */
 
 export const showModal = (state: Object, action: Object) =>
   state.merge({
-    isOpen: true
+    modalType: action.modalType,
+    modalProps: action.modalProps
   })
 
 export const hideModal = (state: Object, action: Object) =>
   state.merge({
-    isOpen: false
+    modalType: null,
+    modalProps: {}
   })
 
 /* ------------- Hookup Reducers To Types ------------- */
