@@ -4,12 +4,11 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Button from '../../Shared/Components/Button'
 import ModalActions from '../../../Reducers/ModalRedux'
-// import OrganizationActions from '../../../Reducers/OrganizationRedux'
 
 type Props = {
   user: Object,
   organization: Object,
-  showModal: () => void
+  triggerModal: () => void
 }
 
 class OrganizationMembers extends Component {
@@ -33,13 +32,13 @@ class OrganizationMembers extends Component {
                 }
                 <Button
                   className='button-upgrade'
-                  onClick={() => this.props.showModal('EDIT_MEMBERSHIP', {})}
+                  onClick={() => this.props.triggerModal('EDIT_MEMBERSHIP', true, {})}
                   content='Edit'
                   size='small'
                 />
                 <Button
                   className='button-upgrade'
-                  onClick={() => this.props.showModal('INVITE_USER', {})}
+                  onClick={() => this.props.triggerModal('EDIT_MEMBERSHIP', true, {})}
                   disabled={user.email === member.email}
                   content='Revoke Access'
                   size='small'
@@ -58,13 +57,13 @@ class OrganizationMembers extends Component {
                     {invite.email} - {invite.role} - date
                     <Button
                       className='button-upgrade'
-                      onClick={() => this.props.showModal('INVITE_USER', {})}
+                      onClick={() => this.props.triggerModal('EDIT_MEMBERSHIP', true, {})}
                       content='Resend'
                       size='small'
                     />
                     <Button
                       className='button-upgrade'
-                      onClick={() => this.props.showModal('INVITE_USER', {})}
+                      onClick={() => this.props.triggerModal('EDIT_MEMBERSHIP', true, {})}
                       content='Cancel Invitation'
                       size='small'
                     />
@@ -76,7 +75,7 @@ class OrganizationMembers extends Component {
 
           <Button
             className='button-upgrade'
-            onClick={() => this.props.showModal('INVITE_USER', {})}
+            onClick={() => this.props.triggerModal('INVITE_USER', true, {})}
             content='Invite A User'
             size='small'
           />
@@ -92,9 +91,8 @@ const mapStateToProps = ({ login, organizations }) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  // showInviteModal: () => dispatch(ModalActions.showModal()),
-  showModal: (modalType: string, modalProps: Object) =>
-    dispatch(ModalActions.showModal(modalType, modalProps))
+  triggerModal: (modalType: string, isVisible: boolean, modalProps: Object) =>
+    dispatch(ModalActions.triggerModal(modalType, isVisible, modalProps))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(OrganizationMembers)

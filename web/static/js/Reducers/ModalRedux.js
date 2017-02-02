@@ -6,8 +6,7 @@ import Immutable from 'seamless-immutable'
 /* ------------- Types and Action Creators ------------- */
 
 const { Types, Creators } = createActions({
-  showModal: [ 'modalType', 'modalProps' ],
-  hideModal: []
+  triggerModal: [ 'modalType', 'isVisible', 'modalProps' ]
 })
 
 export const ModalTypes = Types
@@ -22,21 +21,25 @@ export const INITIAL_STATE = Immutable({
 
 /* ------------- Reducers ------------- */
 
-export const showModal = (state: Object, action: Object) =>
-  state.merge({
-    modalType: action.modalType,
-    modalProps: action.modalProps
-  })
-
-export const hideModal = (state: Object, action: Object) =>
-  state.merge({
-    modalType: null,
-    modalProps: {}
-  })
+export const triggerModal = (state: Object, action: Object) => {
+  switch (action.isVisible) {
+    case true:
+      return state.merge({
+        modalType: action.modalType,
+        modalProps: action.modalProps
+      })
+    case false:
+      return state.merge({
+        modalType: null,
+        modalProps: {}
+      })
+    default:
+      return state
+  }
+}
 
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
-  [Types.SHOW_MODAL]: showModal,
-  [Types.HIDE_MODAL]: hideModal
+  [Types.TRIGGER_MODAL]: triggerModal
 })

@@ -2,28 +2,24 @@
 
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import ReactModal from 'react-modal'
-import ModalActions from '../../Reducers/ModalRedux'
+import Modal from '../Shared/Components/Modal'
 
 type Props = {
+  onRequestClose: () => void
 }
 
 class ModalEditMembership extends Component {
   props: Props
 
   render () {
-    const isOpen = true
+    const isVisible = true
     return (
-      <ReactModal
-        isOpen={isOpen}
-        // onAfterOpen={afterOpenFn}
-        onRequestClose={() => this.props.hideModal()}
-        // closeTimeoutMS={n}
-        // style={customStyle}
-        contentLabel='Modal'
+      <Modal
+        isVisible={isVisible}
+        onClose={() => this.props.onRequestClose()}
       >
         <div>Edit membership</div>
-      </ReactModal>
+      </Modal>
     )
   }
 }
@@ -32,7 +28,6 @@ const mapStateToProps = ({ modal }) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  hideModal: () => dispatch(ModalActions.hideModal())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ModalEditMembership)

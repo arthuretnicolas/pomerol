@@ -1,5 +1,6 @@
 import { call, put, select } from 'redux-saga/effects'
 import OrganizationActions from '../Reducers/OrganizationRedux'
+import ModalActions from '../Reducers/ModalRedux'
 import { handleErrors } from '../Helpers'
 import { jwtSelector, currentOrganizationIdSelector } from '../Services/Selectors'
 
@@ -42,7 +43,8 @@ export function * createOrganizationInvite (api, action) {
   const { data } = response
 
   if (response.ok) {
-    window.alert('Your invitation has been sent successfully !') // TODO: do something better
+    yield put(OrganizationActions.createOrganizationInviteSuccess(data))
+    yield put(ModalActions.triggerModal('INVITE_USER', false, {}))
   } else {
     yield put(OrganizationActions.createOrganizationInviteFailure(data))
     handleErrors(data)

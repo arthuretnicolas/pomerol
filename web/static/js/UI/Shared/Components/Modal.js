@@ -4,21 +4,20 @@ import React from 'react'
 import ReactModal from 'react-modal'
 
 type Props = {
-  isOpen?: boolean,
-  onRequestClose: () => void
+  isVisible?: boolean,
+  style?: Object,
+  children?: React<*>,
+  onClose: () => void,
 }
-
-const ModalOLD = ({ isOpen, onRequestClose, children }: Props) => (
+const Modal = ({ style, children, onClose, isVisible }: Props) => (
   <ReactModal
-    isOpen={isOpen}
-    // onAfterOpen={afterOpenFn}
-    onRequestClose={onRequestClose}
-    // closeTimeoutMS={n}
-    // style={customStyle}
+    isOpen={isVisible}
+    style={style}
+    onRequestClose={onClose}
     contentLabel='Modal'
   >
     {children}
   </ReactModal>
 )
 
-export default ModalOLD
+export default Modal
