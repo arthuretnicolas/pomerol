@@ -2,6 +2,7 @@
 
 import React from 'react'
 import ReactModal from 'react-modal'
+import Icon from './Icon'
 
 type Props = {
   isVisible?: boolean,
@@ -9,6 +10,7 @@ type Props = {
   children?: React<*>,
   onClose: () => void,
 }
+
 const Modal = ({ style, children, onClose, isVisible }: Props) => (
   <ReactModal
     isOpen={isVisible}
@@ -16,6 +18,13 @@ const Modal = ({ style, children, onClose, isVisible }: Props) => (
     onRequestClose={onClose}
     contentLabel='Modal'
   >
+    <div onClick={onClose}>
+      <Icon
+        className='icon-close'
+        name='close'
+      />
+    </div>
+
     {children}
   </ReactModal>
 )
