@@ -8,7 +8,7 @@ import ModalActions from '../../../Reducers/ModalRedux'
 type Props = {
   user: Object,
   organization: Object,
-  triggerModal: () => void
+  triggerModal: (modalType: string, isVisible: boolean, modalProps: Object) => void
 }
 
 class OrganizationMembers extends Component {
@@ -16,6 +16,10 @@ class OrganizationMembers extends Component {
 
   render () {
     const { user, organization } = this.props
+    if (!organization) {
+      return null
+    }
+
     const { members, invites } = organization
 
     return (
@@ -24,8 +28,8 @@ class OrganizationMembers extends Component {
 
           <b>Members</b>
           {
-            members.map((member, index) =>
-              <div key={index}>
+            members.map(member => (
+              <div key={member.id}>
                 {member.first_name} {member.last_name} - {member.email} - {member.role}
                 {
                   (user.email === member.email) && <span>YOU</span>
@@ -44,7 +48,7 @@ class OrganizationMembers extends Component {
                   size='small'
                 />
               </div>
-            )
+            ))
           }
 
           {
@@ -52,8 +56,8 @@ class OrganizationMembers extends Component {
             <div>
               <b>Pending invites</b>
               {
-                invites.map((invite, index) =>
-                  <div key={index}>
+                invites.map(invite => (
+                  <div key={invite.id}>
                     {invite.email} - {invite.role} - date
                     <Button
                       className='button-upgrade'
@@ -68,7 +72,7 @@ class OrganizationMembers extends Component {
                       size='small'
                     />
                   </div>
-                )
+                ))
               }
             </div>
           }
@@ -91,7 +95,7 @@ const mapStateToProps = ({ login, organizations }) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  triggerModal: (modalType: string, isVisible: boolean, modalProps: Object) =>
+  triggerModal: (modalType, isVisible, modalProps) =>
     dispatch(ModalActions.triggerModal(modalType, isVisible, modalProps))
 })
 
