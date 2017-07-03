@@ -1,0 +1,30 @@
+.ReactModalPortal {
+  .ReactModal__Content {
+    padding: $base-padding !important;
+
+    .icon-close {
+      position: absolute;
+      right: $base-padding;
+      top: $base-padding;
+      cursor: pointer;
+    }
+  }
+
+  @media (min-width: $break-point-tablet) {
+    .ReactModal__Content {
+      bottom: auto !important;
+      max-width: 550px;
+      min-height: 150px;
+      margin: 0 auto;
+    }
+  }
+
+  @media (max-width: $break-point-tablet - 1px) {
+    .ReactModal__Content {
+      top: 0 !important;
+      bottom: 0 !important;
+      left: 0 !important;
+      right: 0 !important;
+    }
+  }
+}

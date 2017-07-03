@@ -81,7 +81,7 @@ const create = (baseURL: string = url) => {
       }
     })
 
-  const updateOrganization = (jwt: string, organizationId:string, organization: Object) =>
+  const updateOrganization = (jwt: string, organizationId: string, organization: Object) =>
     api.put(`organizations/${organizationId}`, organization, {
       headers: {
         'Authorization': `Bearer ${jwt}`
@@ -90,6 +90,13 @@ const create = (baseURL: string = url) => {
 
   const fetchOrganization = (jwt: string, organizationId: string) =>
     api.get(`organizations/${organizationId}`, {}, {
+      headers: {
+        'Authorization': `Bearer ${jwt}`
+      }
+    })
+
+  const createOrganizationInvite = (jwt: string, organizationId: string, organizationInvite: Object) =>
+    api.post(`organizations/${organizationId}/invites`, organizationInvite, {
       headers: {
         'Authorization': `Bearer ${jwt}`
       }
@@ -112,7 +119,8 @@ const create = (baseURL: string = url) => {
     updateUser,
     createOrganization,
     updateOrganization,
-    fetchOrganization
+    fetchOrganization,
+    createOrganizationInvite
   }
 }
 

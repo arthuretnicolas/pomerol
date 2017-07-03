@@ -12,7 +12,11 @@ const { Types, Creators } = createActions({
   // ******
   updateOrganizationAttempt: [ 'organizationId', 'organization' ],
   updateOrganizationFailure: [ 'error' ],
-  updateOrganizationSuccess: [ 'organization' ]
+  updateOrganizationSuccess: [ 'organization' ],
+  // ******
+  createOrganizationInviteAttempt: [ 'organizationInvite' ],
+  createOrganizationInviteFailure: [ 'error' ],
+  createOrganizationInviteSuccess: [ 'organizationInvite' ]
 })
 
 export const OrganizationTypes = Types
@@ -87,11 +91,37 @@ export const updateOrganizationSuccess = (
   })
 }
 
+export const createOrganizationInviteAttempt = (state: Object, { organizationInvite }: { organizationInvite: Object }) =>
+  state.merge({
+    attempting: true
+  })
+
+export const createOrganizationInviteFailure = (state: Object, { error }: { error: string }) =>
+  state.merge({
+    attempting: false,
+    error: error
+  })
+
+export const createOrganizationInviteSuccess = (
+  state: Object,
+  { organizationInvite }: { organizationInvite: Object }
+) => {
+  // TODO : add response to list
+
+  return state.merge({
+    attempting: false,
+    error: null
+  })
+}
+
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.FETCH_ORGANIZATION_ATTEMPT]: fetchOrganizationAttempt,
   [Types.ORGANIZATION_FAILURE]: organizationFailure,
   [Types.ORGANIZATION_SUCCESS]: organizationSuccess,
   [Types.UPDATE_ORGANIZATION_ATTEMPT]: updateOrganizationAttempt,
   [Types.UPDATE_ORGANIZATION_FAILURE]: updateOrganizationFailure,
-  [Types.UPDATE_ORGANIZATION_SUCCESS]: updateOrganizationSuccess
+  [Types.UPDATE_ORGANIZATION_SUCCESS]: updateOrganizationSuccess,
+  [Types.CREATE_ORGANIZATION_INVITE_ATTEMPT]: createOrganizationInviteAttempt,
+  [Types.CREATE_ORGANIZATION_INVITE_FAILURE]: createOrganizationInviteFailure,
+  [Types.CREATE_ORGANIZATION_INVITE_SUCCESS]: createOrganizationInviteSuccess
 })

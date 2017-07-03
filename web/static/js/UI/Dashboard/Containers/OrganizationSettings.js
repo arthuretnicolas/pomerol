@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import Tabs from '../../Shared/Components/Tabs'
 import Header from '../Components/Header'
 import OrganizationInfos from './OrganizationInfos'
+import OrganizationMembers from './OrganizationMembers'
 
 const tabs = [
   {
@@ -69,9 +70,7 @@ class OrganizationSettings extends Component {
           }
 
           {
-            selectedIndex === 1 && <div>
-              Members
-            </div>
+            selectedIndex === 1 && <OrganizationMembers />
           }
 
           {

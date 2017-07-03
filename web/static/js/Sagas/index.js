@@ -31,7 +31,8 @@ import {
 import { signup } from './SignupSaga'
 import {
   fetchOrganization,
-  updateOrganization
+  updateOrganization,
+  createOrganizationInvite
 } from './OrganizationSaga'
 
 /* ------------- API ------------- */
@@ -57,6 +58,7 @@ export default function * root () {
     takeLatest(LoginTypes.UPDATE_PASSWORD_ATTEMPT, updatePassword, api),
     takeLatest(SignupTypes.SIGNUP_ATTEMPT, signup, api),
     takeLatest(OrganizationTypes.FETCH_ORGANIZATION_ATTEMPT, fetchOrganization, api),
-    takeLatest(OrganizationTypes.UPDATE_ORGANIZATION_ATTEMPT, updateOrganization, api)
+    takeLatest(OrganizationTypes.UPDATE_ORGANIZATION_ATTEMPT, updateOrganization, api),
+    takeLatest(OrganizationTypes.CREATE_ORGANIZATION_INVITE_ATTEMPT, createOrganizationInvite, api)
   ]
 }
