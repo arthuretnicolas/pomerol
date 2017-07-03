@@ -8,3 +8,10 @@ To start your Phoenix app:
   * Start Phoenix endpoint with `mix phoenix.server`
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+
+# Demo
+
+[Heroku free dyno](https://pomerol-dev.herokuapp.com/)
+
+You might need to reload a couple times before getting a response.
+
